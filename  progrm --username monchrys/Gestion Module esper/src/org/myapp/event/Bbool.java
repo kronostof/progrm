@@ -28,17 +28,11 @@ public class Bbool extends Information{
 		return temps;
 	}
 	
-	/**
-	 * setter
-	 * 
-	 * @param oki
-	 */
-	
+	/* setter	 */
 	public void set(boolean value) {
 		if(this.value != value){
 			this.value = value;
 		}
-			
 	}
 	
 	public void setOki(boolean value) {
@@ -46,9 +40,7 @@ public class Bbool extends Information{
 	}
 	
 	
-	/**
-	 * to string
-	 */
+	/* to string	 */
 	@Override
 	public String toString() {
 		return value + " " + temps;

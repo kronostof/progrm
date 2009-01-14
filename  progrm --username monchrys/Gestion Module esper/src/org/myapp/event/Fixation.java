@@ -65,6 +65,4 @@ public class Fixation extends Information {
 	}
 
 	@Override	public Fixation get() {	return this;	}
-
-
 }
