@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/Silex/Mes documents/TER/esper lib/esper-2.3.0.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/Silex/Mes documents/TER/esper lib/antlr-runtime-3.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/Silex/Mes documents/TER/esper lib/cglib-nodep-2.1_3.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/Silex/Mes documents/TER/esper lib/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
