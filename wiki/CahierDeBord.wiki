@@ -1,0 +1,39 @@
+#summary Cahier de bord.
+
+
+
+= Pour demain =
+
++Enchaîner une dizaine de module avec une traitement représentatif.<br>
++Rajouter les dates au cahier de bord et le compéter.<br>
++Ajouter l'interface graphique.<br>
+
+= Hitorique=
+
+===Esper===
+Passage a Esper, parce que jamais tu désEspere.<br>
+La phrase <br>_Esper and NEsper enable rapid development of applications that process large volumes of incoming messages or events. Esper and NEsper filter and analyze events in various ways, and respond to conditions of interest in real-time_<br>
+A Quelque chose de rassurant,non?<br>
+<br>
+L'utilisation du langage java n'est finalement pas un frein pour la conception d'un programme a haute charge par unitée de temps =>c'est parti pour du java.
+
+<a href=http://esper.codehaus.org>site officiel</a>
+
+===NEsper===
+Le développement du projet début en c#. A la recherche de code, d'info et de ressource sur les CEP et ESP, On s'orriente vers NEsper... jusqu'a se rendre compte que 
+<li><a href="http://esper.codehaus.org/tutorials/faq_nesper/faq.html#multithread-safety">Le support du multithread était assez récent pour ne pas en parler possitivement</a>
+<li><a href="http://esper.codehaus.org/tutorials/faq_nesper/faq.html#tested_on_OS">l'espace d'expression était assez réduit</a>
+
+
+=== open-esb ===
+Un site désesperément lent peu nuir!<br>
+Apparement se qu'il nous faut ( si on avait beaucoup, beaucoup, de temps) Mais en java.
+<a href=https://open-esb.dev.java.net/AboutOpenEsb.html> si vous avez du temps </a>
+
+=== tripatouillage ===
+
+<li> On va pouvoir commencer a travailler.
+<li> joujou avec l'interface graphique on affiche un truc moche :p
+<li> joujou avec bout de code N°2 modification interface on commande la machine a distance.
+<li> joujou avec bout de code fourni par le fournisseur de l occulo qui ne fait pas grand chose,en c++ et c# On part sur du c#.
+<li> joujou avec l'occulomètre (sans le casser) configuration,test,comment ça marche ...
