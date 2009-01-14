@@ -1,5 +1,7 @@
 package org.myapp.module;
 
+import java.util.Map;
+
 import org.myapp.event.Fixation;
 import org.myapp.event.Position;
 
@@ -90,5 +92,14 @@ public class moduleFixation extends module<Position ,Fixation > implements Updat
     public float getlastposY() {
         return lastpos.getPosY();
     }
+
+
+	@Override
+	public int setup(Map<String, Object> conf) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
 
 }

@@ -1,6 +1,8 @@
 
 package org.myapp.module;
 
+import java.util.Map;
+
 import org.myapp.event.Fixation;
 import org.myapp.event.Bbool;
 
@@ -62,7 +64,13 @@ public class moduleFixationCentre  extends module<Fixation ,Bbool > implements U
 	        return fluxEntrant.data.getPosX();
 	    }
 	    
-	    public float getPosY() {
-	    	return fluxEntrant.data.getPosY();
-	    }
+    public float getPosY() {
+    	return fluxEntrant.data.getPosY();
+    }
+
+	@Override
+	public int setup(Map<String, Object> conf) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

@@ -1,6 +1,6 @@
 package org.myapp.module;
 
-
+import java.util.Map;
 
 import org.myapp.event.Information;
 
@@ -36,4 +36,15 @@ public abstract class module<E extends Information,F extends Information> extend
 	//abstract public UpdateListener getListener();
 	
 	abstract public void init(EPServiceProvider nepService);
+	
+	/**
+	 * 
+	 * Toutes les classe dérivant de module devrons proposer un fonction setup 
+	 * prenant en parametre les argument propre au module.
+	 * TODO On peut pas faire mieux ???
+	 *  
+	 * @return
+	 */
+	
+	abstract public int setup(Map<String, Object> conf);
 }

@@ -1,7 +1,6 @@
 package org.myapp.module;
 
 import org.myapp.event.Bbool;
-import org.myapp.event.Position;
 import org.myapp.module.Flux;
 
 public class FluxBool extends Flux<Bbool> {
@@ -17,15 +16,9 @@ public class FluxBool extends Flux<Bbool> {
 		return null;
 	}
 
-	public void set(Position fe) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
+	@Override
 	public void set(Bbool fe) {
 		// TODO Auto-generated method stub
 		
 	}
-
 }

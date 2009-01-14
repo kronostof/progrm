@@ -1,6 +1,8 @@
 
 package org.myapp.module;
 
+import java.util.Map;
+
 import org.myapp.event.Bbool;
 import org.myapp.event.Position;
 import com.espertech.esper.client.EPServiceProvider;
@@ -65,9 +67,30 @@ public class moduleBas  extends module<Position ,Bbool > implements UpdateListen
 
 	 public float getPosX() {
 	        return fluxEntrant.data.getPosX();
-	    }
-	    
-	    public float getPosY() {
-	    	return fluxEntrant.data.getPosY();
-	    }
+    }
+    
+    public float getPosY() {
+    	return fluxEntrant.data.getPosY();
+    }
+
+	
+	/**
+	 * @param borneSup: valeur représantant ce que l on considere 
+	 * comme region basse de l'écrant en pourcentage de la surfaces totale. 
+	 * 
+	 * @return
+	 */
+	public int setup(int borneSup) {
+		expression =  new String("select posY from org.myapp.module.moduleBas"+
+								 " where posY>"+borneSup
+								);
+		return 0;		}
+	
+	
+
+	@Override
+	public int setup(Map<String, Object> conf) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

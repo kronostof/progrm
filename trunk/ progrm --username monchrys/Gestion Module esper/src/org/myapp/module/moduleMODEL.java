@@ -1,6 +1,8 @@
 package org.myapp.module;
 
 
+import java.util.Map;
+
 import org.myapp.event.Information;
 
 import com.espertech.esper.client.EPServiceProvider;
@@ -100,4 +102,11 @@ public class moduleMODEL  extends module<Information ,Information > implements U
 	 public Information getXXX() {
 	        return fluxEntrant.get();
 	    }
+
+
+	@Override
+	public int setup(Map<String, Object> conf) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }
