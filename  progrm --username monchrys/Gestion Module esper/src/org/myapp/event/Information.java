@@ -1,10 +1,10 @@
 package org.myapp.event;
 
 /**
- * upToDate : Indique que l'information contenue ds le flux est à jour.</br>
- * release :  Indique la date de créeation de l'information.</br>
+ * @param upToDate : Indique que l'information contenue ds le flux est à jour.</br>
+ * @param release :  Indique la date de créeation de l'information.</br>
  * </br>
- * Toutes recuperation d'information devra être faite en passant par les methodes </br>
+ * Toutes recuperation d'information devrons être faite en passant par les methodes </br>
  * getNOM_PARAMETRE()</br>
  * sous peine de recuperer des informations erronnéees
  * 
@@ -13,21 +13,41 @@ package org.myapp.event;
  */
 public abstract class Information {
 
-	public boolean upToDate;
-	public long release;
+	protected long upToDate;
+	protected long release;
+	
 	
 	public Information() {
 		release = System.currentTimeMillis();
-		upToDate=true;
+		upToDate= System.currentTimeMillis();;
 	}
 	
-	abstract public void init();
-  
+	
 	abstract public Information get();
-	// TODO ça devrai marcher,non ???
-	// abstract void set( Information fe);
   
 	@Override
 	abstract public String toString();
-
+	
+	public void resetTemps() {
+		release = System.currentTimeMillis();	
+	}
+	
+	// Depuis combien de temps cette info est disponible
+	public long getTemps() {
+		return System.currentTimeMillis() - release;	
+	}
+	
+	// La date de publication de cette information
+	public long getDate() {
+		return release;
+	}
+	
+	
+	public void upDate(){
+		upToDate = System.currentTimeMillis();
+	}
+	
+	public boolean isFresh(long marge){
+		return ((System.currentTimeMillis() - upToDate) < marge);
+	}
 }

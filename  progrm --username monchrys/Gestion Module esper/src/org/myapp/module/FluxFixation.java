@@ -11,29 +11,28 @@ public class FluxFixation extends Flux<Fixation> {
 		data = new Fixation();
 	}
 	
-	@Override
-	public Fixation get() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	 
-	
 	public void set(Position fe) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** setter 
+	 * c est principalement par cette methode que le flux sera modifié
+	 * @param info : l'information represante ce que l'on veut inserer dans le flux sous forme d'un element du même type que MODEL<br>
+	 * la pertinance de l information est traitée ici.<br>
+	 *
+	 * ¤  si les position de fixation sont differante on les modifie on indique quand on les a modifié
+	 */
 	@Override
 	public void set(Fixation fe) {
-		// TODO Auto-generated method stub
-		
+		if(data.setPosition(fe.getPosition())) 
+			data.resetTemps();
+		data.upDate();
 	}
+
+	public long getTemps() {
+		return data.getTemps();
+	}
+
 
 }

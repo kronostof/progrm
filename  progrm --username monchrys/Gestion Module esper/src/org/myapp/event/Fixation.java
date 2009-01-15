@@ -21,10 +21,12 @@ public class Fixation extends Information {
 		temps = 0;
 	}
 	
-	public void init(){
-		position.init();
-		temps = 0;
+	public Fixation(Fixation f){
+		super();
+		position = new Position(f.getPosition());
+		release = f.release;
 	}
+
 	
 	/*  getter	 */
 	public float getPosX(){
@@ -50,19 +52,27 @@ public class Fixation extends Information {
 	 * @param y :Position en y
 	 */
 	public void set(float x,float y){
-		upToDate = true;
+		//upToDate = true;
 
-		if((position.posX != x ) | (position.posY != y )){
+		//if((position.posX != x ) | (position.posY != y )){
 			position.posX = x;
 			position.posY = y;
-			this.release = System.currentTimeMillis();
-		}
+		//	this.release = System.currentTimeMillis();
+		//}
 	}
 
 	/* To string */
 	@Override	public String toString() {	
-		return position.toString() + " temps:" + getTemps()+ " millisecondes";
+		return position.toString() + " temps:" + getTemps()+ " millisecondes \t" + "date : " + getDate();
 	}
 
 	@Override	public Fixation get() {	return this;	}
+
+
+	public boolean setPosition(Position position2) {
+		boolean T = ((this.getPosX() != position2.getPosX()) | (this.getPosY() != position2.getPosY()));
+		if (T) this.set(position2.getPosX(), position2.getPosY());
+		return T;
+	}
+
 }

@@ -10,17 +10,31 @@ import org.myapp.event.Information;
  *
  * @param <E extends Information> de type Data, contient les donnée composant le flux.
  */
-abstract class Flux<E extends Information> extends Thread{
+abstract class Flux<E extends Information>{
 	
 
 	public E data ;
 	
+	public E get(){
+		return data;
+	}
 	
-	/** @return renvoi l'élément courant du flux	 */
-	abstract public E get();
 	abstract public void set(E fe);
 	
-	public void init(){
-		data.init();
+	
+	public long getDate(){
+		return data.getDate();
+	}
+	
+	public long getTemps(){
+		return data.getTemps();
+	}
+	
+	public void resetTemps() {
+		data.resetTemps();	
+	}
+	
+	public boolean isFresh(long marge){
+		return data.isFresh(marge);
 	}
 }

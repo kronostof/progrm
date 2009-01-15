@@ -3,22 +3,33 @@ package org.myapp.module;
 import org.myapp.event.Bbool;
 import org.myapp.module.Flux;
 
+
 public class FluxBool extends Flux<Bbool> {
 
 	
 	public FluxBool(){
 		data = new Bbool();
 	}
-	
-	@Override
-	public Bbool get() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
+	/** setter 
+	 * c est principalement par cette methode que le flux sera modifiée
+	 * on veut que le flux conserve en memoire la date la plus ancienne du passage a l'état de la valeur boolenne.
+	 */
 	@Override
-	public void set(Bbool fe) {
-		// TODO Auto-generated method stub
-		
+	public void set(Bbool b) {
+		if(!data.isFresh(40))
+			data.resetTemps();
+		data.setValue(b.getValue());
+		data.upDate();
+	}
+	
+	public void set(boolean b) {
+		//data.resetTemps();
+		data.setValue(b);
+		data.upDate();
+	}
+	
+	public long getDate(){
+		return data.getDate();
 	}
 }

@@ -2,40 +2,32 @@
 package org.myapp.module;
 
 import java.util.Map;
-
-import org.myapp.event.Fixation;
 import org.myapp.event.Bbool;
-
 import com.espertech.esper.client.EPServiceProvider;
 import com.espertech.esper.client.UpdateListener;
 import com.espertech.esper.event.EventBean;
 
-public class moduleFixationCentre  extends module<Fixation ,Bbool > implements UpdateListener{
+
+public class moduleFixationCentre  extends module<FluxFixation ,FluxBool > implements UpdateListener{
 
 	
 	
     EPServiceProvider epService;
-	private long lasttemps;
-    
-    
-	public moduleFixationCentre(String string, int i, Flux<Fixation> fluxe, Flux<Bbool> fluxs) {
+	
+	public moduleFixationCentre(String string, int i, FluxFixation fluxe, FluxBool fluxs) {
 
 
 		fluxEntrant = fluxe;
         fluxSortant = fluxs;
         expression =  new String("select posX,posY from org.myapp.module.moduleFixationCentre.win:time(30 sec) "+
-        						" where posX < 600 and posX > 400 and posY< 450 and posY>350");
+        						" where posX < 1248 and posX > 212 and posY< 492 and posY>105");
 	}
 
 	@Override
 	public void update(EventBean[] newEvents, EventBean[] oldEvents) {
-		//EventBean event = newEvents[0];
-		if (fluxEntrant.data.getTemps() != lasttemps){
-			lasttemps = fluxEntrant.data.getTemps();
-			System.out.println("\t module Fixation Centre => "+ fluxSortant.data.toString());
-	        // ici est cree le flux ! ! !
-	        this.fluxSortant.data.setOki(true);
-		}
+		
+	        fluxSortant.set(new Bbool());
+	        System.out.println("\t module Fixation Centre => "+ fluxSortant.data.toString());
 	}
 
 	@Override
@@ -47,16 +39,13 @@ public class moduleFixationCentre  extends module<Fixation ,Bbool > implements U
 	public void run(){
 		while(true){
 	    	try {
-
-	    		//System.out.println(pos.getPosX()+ " " + lastpos.getPosX());
-	    		this.fluxSortant.data.setOki(true);
+	    		// on verifie la fraicheur de l info
+	    		if(fluxEntrant.isFresh(20))
 	    		epService.getEPRuntime().sendEvent(this);
-	    		//if (this.fluxSortant.data.oki == true) 
-	    			this.fluxSortant.data.temps = fluxEntrant.data.getTemps();
 	    		sleep(20);
-	    		} catch (InterruptedException e) { e.printStackTrace();	}
-			}
-		
+	    	}
+	    	catch (InterruptedException e) { e.printStackTrace();	}
+		}
 	}
 
 

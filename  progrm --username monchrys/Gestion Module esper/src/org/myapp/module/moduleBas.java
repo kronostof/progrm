@@ -4,23 +4,15 @@ package org.myapp.module;
 import java.util.Map;
 
 import org.myapp.event.Bbool;
-import org.myapp.event.Position;
 import com.espertech.esper.client.EPServiceProvider;
 import com.espertech.esper.client.UpdateListener;
 import com.espertech.esper.event.EventBean;
 
-public class moduleBas  extends module<Position ,Bbool > implements UpdateListener{
+public class moduleBas  extends module<FluxPosition ,FluxBool > implements UpdateListener{
 
 	
-	
     EPServiceProvider epService;
-	//private long lasttemps;
-    
-    
-	
 	/**
-	 * 
-	 * 
 	 * Indique si l'utilisateur regarde en bas !
 	 * 
 	 * @param string
@@ -33,16 +25,15 @@ public class moduleBas  extends module<Position ,Bbool > implements UpdateListen
 
 		fluxEntrant = fluxe;
         fluxSortant = fluxs;
-        expression =  new String("select posY from org.myapp.module.moduleBas.win:time(30 sec) "+
-        						" where posY>350");
-	}
+        
+        expression =  new String("select posY from org.myapp.module.moduleBas "+
+        						" where posY>500");
+    }
 
 	@Override
 	public void update(EventBean[] newEvents, EventBean[] oldEvents) {
-		//EventBean event = newEvents[0];
-			System.out.println("\t module Bas => "+ fluxSortant.data.toString());
-	        // ici est cree le flux ! ! !
-	        this.fluxSortant.data.set(true);
+	        this.fluxSortant.set(new Bbool());
+	        System.out.println("\t module Bas => "+ fluxSortant.data.toString() );
 	}
 
 	@Override
@@ -54,14 +45,11 @@ public class moduleBas  extends module<Position ,Bbool > implements UpdateListen
 	public void run(){
 		while(true){
 	    	try {
-
-	    		//System.out.println(pos.getPosX()+ " " + lastpos.getPosX());
-	    		this.fluxSortant.data.set(false);
+	    		if (fluxEntrant.isFresh(40))
 	    		epService.getEPRuntime().sendEvent(this);
 	    		sleep(20);
-	    		} catch (InterruptedException e) { e.printStackTrace();	}
-			}
-		
+	    	} catch (InterruptedException e) { e.printStackTrace();	}
+		}
 	}
 
 
@@ -84,13 +72,16 @@ public class moduleBas  extends module<Position ,Bbool > implements UpdateListen
 		expression =  new String("select posY from org.myapp.module.moduleBas"+
 								 " where posY>"+borneSup
 								);
-		return 0;		}
+		return 0;		
+	}
 	
 	
 
 	@Override
 	public int setup(Map<String, Object> conf) {
 		// TODO Auto-generated method stub
+		// expression
+		// delai
 		return 0;
 	}
 }
