@@ -4,13 +4,14 @@
 
 
 = Pour demain =
-
++compulser la doc sérieusement.<br>
++chaînage en série.<br>
 ++Rajouter les dates au cahier de bord et le compéter.<br>
 ++Ajouter l'interface graphique.<br>
 
 = Hitorique=
 
-
+=Jeudi 15 Janvier=
 +Enchaîner une dizaine de module avec une traitement représentatif.<br>
 
 Grosse frayeur avec cinq module le processeur dérouille.En cherchant l'origine du probleme on en optimise le code.
@@ -36,7 +37,7 @@ Si pour cinq module on sens la différence...
 Comme en c# c'est l'affichage qui  coince, sans afficher a chaque nouvel element ds le fulx ça passe En même temps 5*toString a 50hz fallait s'y attendre,non?<br>
 oki: 30 module en parallèles les module déterminent si on regarde ou non une région ( chaque forme aura son module).
 
-On introduit la notion de upToDate pour le chainnage en série de demain ( ou comment faire la différance entre une donnée et une donnée périmer.Il faudra faire passer ça dans la partie recevant le flux pour que plusieurs mod travaillant sur le même flux puissent le percevoir différement.
+On introduit la notion de _upToDate_ pour le chainnage en série de demain ( ou comment faire la différance entre une donnée et une donnée périmer.Il faudra faire passer ça dans la partie recevant le flux pour que plusieurs mod travaillant sur le même flux puissent le percevoir différement.
 
 === Grosse mise a plat ===
 
@@ -45,16 +46,28 @@ Notion de UpToDate a cristalliser ds les commentaire et la doc.<br>
 La classe lecteur se spécialise dans la récuperation des coordonnée par souris(socket plus tard), la classe Fluxposition retourne a qlq ch de plus rationnel ( plus de lireMouse 8O, Flux n'est plus _runnable_)<br>
 Élagage de code en masse<br>
 
+=Mercerdi 14 Janvier=
+
+Code.Google.com<br>
+svn<br>
+~~sourceforge~~
+
+=Mardi 13 Janvier=
+
 ===Mise a plat===
 On repare sur de bonne base. Un module sera une classe et non trois 8O<br>
 En plus ça marche ! ! !
+
+=Lundi 12 Janvier=
 ===Esper plusieurs modules===
 premier jet de code, ça marche mais c'est vachement flou tout ça !<br>
-On a 
+On a :
 -une classe pour un évenement<br>
 -une classe qui écoute<br>
 -une classe qui envoie tout les événement <br>
+=Vendredi 9 Janvier=
 ===J'Esper que ça marche===
+Validation de l'utilisation d'Esper.
 ===Esper utilisation===
 
 ===Esper===
@@ -62,7 +75,7 @@ Passage a Esper, parce que jamais tu désEspere.<br>
 La phrase <br>_Esper and NEsper enable rapid development of applications that process large volumes of incoming messages or events. Esper and NEsper filter and analyze events in various ways, and respond to conditions of interest in real-time_<br>
 A Quelque chose de rassurant,non?<br>
 <br>
-L'utilisation du langage java n'est finalement pas un frein pour la conception d'un programme a haute charge par unitée de temps =>c'est parti pour du java.
+L'utilisation du langage java n'est finalement pas un frein pour la conception d'un programme a haute charge par unitée de temps =>c'est parti pour du java?
 
 <a href=http://esper.codehaus.org>site officiel</a>
 
@@ -71,6 +84,7 @@ Le développement du projet début en c#. A la recherche de code, d'info et de r
 <li><a href="http://esper.codehaus.org/tutorials/faq_nesper/faq.html#multithread-safety">Le support du multithread était assez récent pour ne pas en parler possitivement</a>
 <li><a href="http://esper.codehaus.org/tutorials/faq_nesper/faq.html#tested_on_OS">l'espace d'expression était assez réduit</a>
 
+=Avant 7 Janvier=
 
 === open-esb ===
 Un site désesperément lent peu nuir!<br>
