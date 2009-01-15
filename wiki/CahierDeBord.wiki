@@ -5,14 +5,56 @@
 
 = Pour demain =
 
-+Enchaîner une dizaine de module avec une traitement représentatif.<br>
-+Rajouter les dates au cahier de bord et le compéter.<br>
-+Ajouter l'interface graphique.<br>
+++Rajouter les dates au cahier de bord et le compéter.<br>
+++Ajouter l'interface graphique.<br>
 
 = Hitorique=
-===mise a plat===
+
+
++Enchaîner une dizaine de module avec une traitement représentatif.<br>
+
+Grosse frayeur avec cinq module le processeur dérouille.En cherchant l'origine du probleme on en optimise le code.
+la partie 
+{{{
+
+abstract class Flux<E extends Information> extends Thread`*`(
+	...
+	abstract public void set(E fe);
+	...
+}}}
+Est un non sens.on ne recree pas un obj pour l'inserer ds le flux destionnataire.
+Ce sera	
+{{{
+
+abstract class Flux<E extends Information> extends Thread`*`(
+	...
+        abstract public void set(_liste dargument qui va bien pour modifier le champs data du flux_);
+	...
+}}}
+Si pour cinq module on sens la différence...
+
+Comme en c# c'est l'affichage qui  coince, sans afficher a chaque nouvel element ds le fulx ça passe En même temps 5*toString a 50hz fallait s'y attendre,non?<br>
+oki: 30 module en parallèles les module déterminent si on regarde ou non une région ( chaque forme aura son module).
+
+On introduit la notion de upToDate pour le chainnage en série de demain ( ou comment faire la différance entre une donnée et une donnée périmer.Il faudra faire passer ça dans la partie recevant le flux pour que plusieurs mod travaillant sur le même flux puissent le percevoir différement.
+
+=== Grosse mise a plat ===
+
+On réfléchit, on respire, on ce détend.<br>
+Notion de UpToDate a cristalliser ds les commentaire et la doc.<br>
+La classe lecteur se spécialise dans la récuperation des coordonnée par souris(socket plus tard), la classe Fluxposition retourne a qlq ch de plus rationnel ( plus de lireMouse 8O, Flux n'est plus _runnable_)<br>
+Élagage de code en masse<br>
+
+===Mise a plat===
+On repare sur de bonne base. Un module sera une classe et non trois 8O<br>
+En plus ça marche ! ! !
 ===Esper plusieurs modules===
-===Esper ça marche===
+premier jet de code, ça marche mais c'est vachement flou tout ça !<br>
+On a 
+-une classe pour un évenement<br>
+-une classe qui écoute<br>
+-une classe qui envoie tout les événement <br>
+===J'Esper que ça marche===
 ===Esper utilisation===
 
 ===Esper===
