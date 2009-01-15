@@ -9,7 +9,7 @@ import com.espertech.esper.client.EPServiceProvider;
 import com.espertech.esper.client.UpdateListener;
 import com.espertech.esper.event.EventBean;
 
-public class moduleMODEL  extends module<Information ,Information > implements UpdateListener{
+public class moduleMODEL  extends module<FluxPosition ,FluxPosition> implements UpdateListener{
 
 	
 	
@@ -25,7 +25,7 @@ public class moduleMODEL  extends module<Information ,Information > implements U
 	 * @param fluxEntrant
 	 * @param fluxSortant
 	 */
-	public moduleMODEL(String string, int i, Flux<Information> fluxEntrant, Flux<Information> fluxSortant) {
+	public moduleMODEL(String string, int i, FluxPosition fluxEntrant, FluxPosition fluxSortant) {
 
 
 		this.fluxEntrant = fluxEntrant;

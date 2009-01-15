@@ -5,45 +5,56 @@ public class Bbool extends Information{
 
 	/**
 	 * value	:oui ou non on fixe le milieu.
-	 * temps 	: combien de temps a fixer le milieu.
+	 * temps 	: combien de temps cette information est dans cet état.
 	 */
-	public boolean value;
-	public long temps;
+	protected boolean value;
+	protected long temps;
 	
-	@Override
-	public void init() {
-		
+	/* constructeur */
+	
+	public Bbool() {
+		super();
+		value = true;
+		temps = 0;
 	}
 	
-	/**
-	 * getter
-	 * 
-	 * @return
-	 */
+	public Bbool(Bbool b) {
+		super();
+		value = b.getValue();
+		temps = b.getTemps();
+	}
+	
+	/* getter  */
 	public boolean getValue() {
 		return value;
 	}
 
 	public long getTemps(){
+		temps = System.currentTimeMillis() - release;
 		return temps;
 	}
 	
+	public long getDate(){
+		return release;
+	}
+	
 	/* setter	 */
-	public void set(boolean value) {
-		if(this.value != value){
-			this.value = value;
-		}
+	/**@param b 
+	 * @return true si la valeur est changée en une autre.
+	 */
+	public boolean setValue(boolean b) {
+		boolean T = (this.value != b);
+		if (T)	{
+			this.value = b;
+			this.release = System.currentTimeMillis();
+			}
+		return T;
 	}
-	
-	public void setOki(boolean value) {
-		this.value = value;
-	}
-	
 	
 	/* to string	 */
 	@Override
 	public String toString() {
-		return value + " " + temps;
+		return value + " temps:" + getTemps()+ " millisecondes \t" + "date : " + getDate();
 	}
 
 	@Override

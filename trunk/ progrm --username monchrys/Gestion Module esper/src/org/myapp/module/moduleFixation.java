@@ -9,7 +9,7 @@ import com.espertech.esper.client.EPServiceProvider;
 import com.espertech.esper.client.UpdateListener;
 import com.espertech.esper.event.EventBean;
 
-public class moduleFixation extends module<Position ,Fixation > implements UpdateListener{
+public class moduleFixation extends module<FluxPosition ,FluxFixation > implements UpdateListener{
 
 	/**
 	 * parametre
@@ -21,15 +21,14 @@ public class moduleFixation extends module<Position ,Fixation > implements Updat
 
     /**
 	 * partie faiant l'update
+	 * on ne rajoute ds le flux que de nouvelle information
 	 */
 	@Override
 	 public void update(EventBean[] newEvents, EventBean[] oldEvents) {
-        EventBean event = newEvents[0];
-        System.out.println("\t module Fixation => "  + this.fluxSortant.data.toString() );
-        // ici est cree le flux ! ! !
-        this.fluxSortant.data.set(((Float) event.get("posX")).floatValue(),((Float) event.get("posY")).floatValue());
-    }
-
+        
+        this.fluxSortant.set(new Fixation(new Position(this.fluxEntrant.getPosX(),this.fluxEntrant.getPosY())));
+        System.out.println("\t\t module Fixation => "  + this.fluxSortant.data.toString());
+	}
 
     public void init(EPServiceProvider epService){
     	this.epService=epService;
@@ -41,7 +40,7 @@ public class moduleFixation extends module<Position ,Fixation > implements Updat
      * @param position
      * @param fixation
      */
-    public moduleFixation(String nom, int i, Flux<Position> position,Flux<Fixation> fixation) {
+    public moduleFixation(String nom, int i, FluxPosition position,FluxFixation fixation) {
         super();
         pos = new Position();
         lastpos = new Position();
@@ -52,7 +51,7 @@ public class moduleFixation extends module<Position ,Fixation > implements Updat
         				" and  posY < (lastposY+2) and posY > (lastposY-2)";
 	}
     
-    public moduleFixation(String string, int i, Flux<Position> position) {
+    public moduleFixation(String string, int i, FluxPosition position) {
         super();
         pos = new Position();
         lastpos = new Position();
@@ -66,24 +65,23 @@ public class moduleFixation extends module<Position ,Fixation > implements Updat
 
 	public void run(){
     	while(true){
-	    	try {
-
-	    		//System.out.println(this.fluxSortant.data.toString());
-	    		//this.fluxSortant.data.set(-1,-1);
-	    		epService.getEPRuntime().sendEvent(this);
-	    		lastpos.set(pos);
-	    		pos.set(fluxEntrant.data.getPosX(),fluxEntrant.data.getPosY());
-	    		sleep(40);
+	    	try {   
+	    		if (fluxEntrant.isFresh(40)){
+		    		epService.getEPRuntime().sendEvent(this);
+		    		lastpos.set(pos);
+		    		pos.set(fluxEntrant.data);
+	    		}
+	    		sleep(20);
 	    		} catch (InterruptedException e) { e.printStackTrace();	}
 			}
     }
  
     public float getPosX() {
-        return pos.getPosX();
+        return fluxEntrant.getPosX();
     }
     
     public float getPosY() {
-        return pos.getPosY();
+        return fluxEntrant.getPosY();
     }
     
     public float getlastposX() {
