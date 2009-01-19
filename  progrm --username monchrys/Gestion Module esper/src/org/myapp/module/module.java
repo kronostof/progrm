@@ -1,6 +1,9 @@
 package org.myapp.module;
 
-import java.util.Map;
+import java.util.HashMap;
+
+import org.myapp.flux.Flux;
+
 import com.espertech.esper.client.EPServiceProvider;
 import com.espertech.esper.client.EPStatement;
 import com.espertech.esper.client.UpdateListener;
@@ -43,5 +46,5 @@ public abstract class module<E extends Flux,F extends Flux> extends Thread imple
 	 * @return
 	 */
 	
-	abstract public int setup(Map<String, Object> conf);
+	abstract public int setup(HashMap<String, Object> conf);
 }

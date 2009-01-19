@@ -1,4 +1,4 @@
-package org.myapp.module;
+package org.myapp.flux;
 
 import org.myapp.event.Fixation;
 import org.myapp.event.Position;

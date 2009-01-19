@@ -1,7 +1,7 @@
-package org.myapp.module;
+package org.myapp.flux;
 
 import org.myapp.event.Information;
-import org.myapp.module.Flux;
+import org.myapp.flux.Flux;
 
 
 public class FluxMODEL extends Flux<Information> {

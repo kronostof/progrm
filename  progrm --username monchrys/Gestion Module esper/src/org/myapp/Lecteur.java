@@ -1,7 +1,6 @@
-
+package org.myapp;
 import java.awt.MouseInfo;
-import org.myapp.event.Position;
-import org.myapp.module.FluxPosition;
+import org.myapp.flux.FluxPosition;
 
 import com.espertech.esper.client.EPServiceProvider;
 import com.espertech.esper.client.EPServiceProviderManager;

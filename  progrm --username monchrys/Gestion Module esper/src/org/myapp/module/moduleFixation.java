@@ -1,9 +1,11 @@
 package org.myapp.module;
 
-import java.util.Map;
+import java.util.HashMap;
 
 import org.myapp.event.Fixation;
 import org.myapp.event.Position;
+import org.myapp.flux.FluxFixation;
+import org.myapp.flux.FluxPosition;
 
 import com.espertech.esper.client.EPServiceProvider;
 import com.espertech.esper.client.UpdateListener;
@@ -93,7 +95,7 @@ public class moduleFixation extends module<FluxPosition ,FluxFixation > implemen
 
 
 	@Override
-	public int setup(Map<String, Object> conf) {
+	public int setup(HashMap<String, Object> conf) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

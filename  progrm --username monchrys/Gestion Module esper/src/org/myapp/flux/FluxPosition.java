@@ -1,4 +1,4 @@
-package org.myapp.module;
+package org.myapp.flux;
 
 //import java.awt.MouseInfo;
 import org.myapp.event.Position;
