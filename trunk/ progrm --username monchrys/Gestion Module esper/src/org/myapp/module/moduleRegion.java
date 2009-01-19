@@ -1,9 +1,9 @@
 package org.myapp.module;
 
 
-import java.util.Map;
-
-import org.myapp.event.Bbool;
+import java.util.HashMap;
+import org.myapp.flux.FluxBool;
+import org.myapp.flux.FluxPosition;
 
 import com.espertech.esper.client.EPServiceProvider;
 import com.espertech.esper.client.UpdateListener;
@@ -42,9 +42,8 @@ public class moduleRegion extends module<FluxPosition ,FluxBool> implements Upda
 	public void update(EventBean[] newEvents, EventBean[] oldEvents) {
 
 		fluxSortant.set(true);
-		if (fluxEntrant.getPosX()>500) System.out.println(nom + " " + fluxSortant.data.getValue());
-		//System.out.println(" module Region " +nom +" => "+fluxEntrant.data.toString() + " =>" + fluxSortant.data.toString());
-		
+		//if (fluxEntrant.getPosX()>500) System.out.println(nom + " " + fluxSortant.data.getValue());
+		System.out.println(" module Region " +nom +" => "+fluxEntrant.data.toString() + " =>" + fluxSortant.data.toString());
 	}
 
 	@Override
@@ -78,7 +77,7 @@ public class moduleRegion extends module<FluxPosition ,FluxBool> implements Upda
     
 
 	@Override
-	public int setup(Map<String, Object> conf) {
+	public int setup(HashMap<String, Object> conf) {
 		expression =  new String((String)conf.get("expression"));
 		return 0;
 	}

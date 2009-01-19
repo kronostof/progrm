@@ -1,4 +1,4 @@
-package org.myapp.module;
+package org.myapp.flux;
 
 import org.myapp.event.Information;
 
@@ -10,7 +10,7 @@ import org.myapp.event.Information;
  *
  * @param <E extends Information> de type Data, contient les donnée composant le flux.
  */
-abstract class Flux<E extends Information>{
+public abstract class Flux<E extends Information>{
 	
 
 	public E data ;

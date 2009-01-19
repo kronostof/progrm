@@ -1,7 +1,10 @@
-
+package org.myapp;
 
 import java.util.ArrayList;
 
+import org.myapp.flux.FluxBool;
+import org.myapp.flux.FluxFixation;
+import org.myapp.flux.FluxPosition;
 import org.myapp.module.*;
 
 import com.espertech.esper.client.EPServiceProvider;
@@ -58,10 +61,10 @@ public class MainTest  extends Thread{
 		ArrayList<FluxBool> ListeFluxBool= new ArrayList<FluxBool>();
 		ArrayList<moduleRegion> ListModuleRegion = new ArrayList<moduleRegion>();
 		ArrayList<EPStatement> ListStatement = new ArrayList<EPStatement>();
-	
+
 		moduleRegion mR;
 		FluxBool Fb;
-		for( int i=0;i<30;i++){
+		for( int i=0;i<3;i++){
 			Fb = new FluxBool();
 			mR = new moduleRegion(new String("numero"+i),i,position,Fb);
 			
@@ -76,8 +79,6 @@ public class MainTest  extends Thread{
 			ListeFluxBool.add(Fb);
 			ListModuleRegion.add(mR);
 			ListStatement.add(St);
-			
-		//"select posX,posY from org.myapp.module.moduleFixationCentre.win:time(30 sec) where posX < 1248 and posX > 212 and posY< 492 and posY>105"
 		}
 		
 	}

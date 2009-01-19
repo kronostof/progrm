@@ -1,9 +1,12 @@
 
 package org.myapp.module;
 
-import java.util.Map;
+import java.util.HashMap;
 
 import org.myapp.event.Bbool;
+import org.myapp.flux.FluxBool;
+import org.myapp.flux.FluxPosition;
+
 import com.espertech.esper.client.EPServiceProvider;
 import com.espertech.esper.client.UpdateListener;
 import com.espertech.esper.event.EventBean;
@@ -78,7 +81,7 @@ public class moduleBas  extends module<FluxPosition ,FluxBool > implements Updat
 	
 
 	@Override
-	public int setup(Map<String, Object> conf) {
+	public int setup(HashMap<String, Object> conf) {
 		// TODO Auto-generated method stub
 		// expression
 		// delai
