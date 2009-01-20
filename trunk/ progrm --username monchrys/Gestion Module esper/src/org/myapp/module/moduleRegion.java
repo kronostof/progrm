@@ -43,6 +43,7 @@ public class moduleRegion extends module<FluxPosition ,FluxBool> implements Upda
 
 		fluxSortant.set(true);
 		//if (fluxEntrant.getPosX()>500) System.out.println(nom + " " + fluxSortant.data.getValue());
+		if(fluxEntrant.isFresh(20));
 		System.out.println(" module Region " +nom +" => "+fluxEntrant.data.toString() + " =>" + fluxSortant.data.toString());
 	}
 
@@ -66,7 +67,7 @@ public class moduleRegion extends module<FluxPosition ,FluxBool> implements Upda
 				//System.out.println(fluxEntrant.data.toString());
 	    		//if(fluxEntrant.isFresh(20))
 	    		epService.getEPRuntime().sendEvent(this);
-	    		sleep(2000);
+	    		sleep(200);
 	    	}
 	    	catch (InterruptedException e) { e.printStackTrace();	}
 			}

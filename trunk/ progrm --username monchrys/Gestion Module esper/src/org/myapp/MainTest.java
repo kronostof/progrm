@@ -1,6 +1,7 @@
 package org.myapp;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.myapp.flux.FluxBool;
 import org.myapp.flux.FluxFixation;
@@ -67,7 +68,11 @@ public class MainTest  extends Thread{
 		for( int i=0;i<3;i++){
 			Fb = new FluxBool();
 			mR = new moduleRegion(new String("numero"+i),i,position,Fb);
-			
+			HashMap<String, Object> conf = new HashMap<String, Object>();
+			 String str = new String("select posX from org.myapp.module.moduleRegion where posX<"+100*(i+1)+" and posX>"+100*i);
+			 System.out.println(str);
+			conf.put("expression",str);
+			mR.setup(conf);
 			EPStatement St;
 			ListeFluxBool.add(Fb);
 			ListModuleRegion.add(mR);
@@ -80,6 +85,5 @@ public class MainTest  extends Thread{
 			ListModuleRegion.add(mR);
 			ListStatement.add(St);
 		}
-		
 	}
 }
