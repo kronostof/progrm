@@ -1,3 +1,21 @@
+package org.lamia.src;
+
+import org.myapp.event.Position;
+
+public class Lecteur {
+
+	float x,y;
+	
+	public void accroche(Position pos){
+		pos.set(x, y);
+	}
+	
+}
+
+
+
+/********************
+
 package org.myapp;
 import java.awt.MouseInfo;
 import org.myapp.flux.FluxPosition;
@@ -5,7 +23,7 @@ import org.myapp.flux.FluxPosition;
 import com.espertech.esper.client.EPServiceProvider;
 import com.espertech.esper.client.EPServiceProviderManager;
 
-/**
+/ **
  *
  * Cette classe constitue le pré-lecteur du flux elle offre le "EPServiceProvider"
  * sa conception modulaire permet l'ajout de nouveau module de comprehention du flux
@@ -15,22 +33,20 @@ import com.espertech.esper.client.EPServiceProviderManager;
  * la vitesse de lecture est celle a laquel on considere qu'une nouvelle info est arrivé
  * elle rythme l'envoie de la requete de mise a jour des listener
  * @author Moncy christophe
- */
+ * /
 class Lecteur extends Thread{
 
-	static public EPServiceProvider epService;
+	
 	private long vitesseDelecture;
-	private FluxPosition fluxdata;
+	float x,y;
 	
 	
-	public Lecteur(FluxPosition position) {
-		vitesseDelecture = 200;
-		epService = EPServiceProviderManager.getDefaultProvider();
-		fluxdata = position;
+	public Lecteur() {
+		
 	}
 
-	public void accroche(FluxPosition f){
-		fluxdata = f;
+	public void accroche(Position pos){
+		pos.set(this.x,this.y);
 	}
 	
 
@@ -40,7 +56,7 @@ class Lecteur extends Thread{
 	public void run() {
 		while(true){
 			try {
-				liremouse();
+				//TODO
 				sleep(vitesseDelecture);
 			} catch (InterruptedException e) {	e.printStackTrace();	}
 		}
@@ -51,3 +67,4 @@ class Lecteur extends Thread{
 		fluxdata.data.upDate();
 	}
 }
+*/
