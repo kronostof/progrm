@@ -1,4 +1,4 @@
-/* licence GPL kjxdchvkxjchvkxch jxkcv */
+/* licence GPL 2*/
 package org.asma;
 import java.awt.Color;
 import java.awt.Dimension;
