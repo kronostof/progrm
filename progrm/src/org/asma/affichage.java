@@ -30,14 +30,18 @@ public class affichage extends JFrame implements ActionListener,MouseMotionListe
 
 	
 	public affichage(){
-		super();
+		super("Suivi moi");
 		build();//On initialise notre fenêtre
 		}
+	
 		private void build(){
-		this.setTitle("Suivi moi"); //On donne un titre à l'application
-		this.setSize(500,350); //On donne une taille à notre fenêtre
-		this.setLocationRelativeTo(null); //On centre la fenêtre sur l'écran
-		this.setResizable(false) ; //On interdit la redimensionnement de la fenêtre
+		//this.setTitle("Suivi moi"); //On donne un titre à l'application
+		this.setDefaultLookAndFeelDecorated(true);
+		this.setUndecorated(true);
+		this.setExtendedState(this.MAXIMIZED_BOTH);
+		//this.setSize(500,350); //On donne une taille à notre fenêtre
+		//this.setLocationRelativeTo(null); //On centre la fenêtre sur l'écran
+		//this.setResizable(false) ; //On interdit la redimensionnement de la fenêtre
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //On dit à l'application de sefermer
 		//lors du clic sur la croix
 		this.setContentPane(getContainer());
@@ -68,7 +72,7 @@ public class affichage extends JFrame implements ActionListener,MouseMotionListe
 			container.add(bouton3);//On l'ajoute à la fenêtre
 			tableau = new JPanel();
 			tableau.setBackground(Color.WHITE);
-			tableau.setPreferredSize(new Dimension(450,320));
+			tableau.setPreferredSize(container.getMaximumSize());
 			tableau.addMouseMotionListener(this);
 			container.add(tableau);
 			return container ;
