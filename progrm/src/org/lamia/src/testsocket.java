@@ -30,15 +30,14 @@ public class testsocket
 	Lecteur loc = new Lecteur();
 	float posX = 0;
 	float posY = 0;
-	pos.set(posX, posY); 
-	loc.accroche(pos);
-	
 	String[] results = ch.split( "#\\s*" );
     
 	String[] right = results[1].split( " \\s*" );
 	String[] left = results[2].split( " \\s*" );
 	posX = Float.valueOf(right[0]).floatValue();  
 	posY = Float.valueOf(left[0]).floatValue();
+	pos.set(posX, posY); 
+	loc.accroche(pos);
 	System.out.println("Paquet recu : message = " + ch + 
 	"position X = " + posX +
 	" position Y = " + posY +		
