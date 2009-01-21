@@ -27,7 +27,7 @@ public class affichage extends JFrame implements ActionListener,MouseMotionListe
 	private int X = 0, Y = 0; //Déclaration du chiffre
 	private String shape = "";
 	private Graphics g;
-
+	cercle cercercle;
 	
 	public affichage(){
 		super("Suivi moi");
@@ -75,6 +75,9 @@ public class affichage extends JFrame implements ActionListener,MouseMotionListe
 			tableau.setPreferredSize(container.getMaximumSize());
 			tableau.addMouseMotionListener(this);
 			container.add(tableau);
+			
+			
+			cercercle = new cercle(5,5,5,5,container);
 			return container ;
 			}
 		public void actionPerformed(ActionEvent e) {
@@ -111,9 +114,9 @@ public class affichage extends JFrame implements ActionListener,MouseMotionListe
 				
 			}
 		    else if ( shape.equals(bouton2.getText()) ){
-		    	g = e.getComponent().getGraphics();
-		    	g.setColor(Color.CYAN);
-		    	g.drawOval(X, Y, 40, 40);
+		    	cercercle.setcomponent(e.getComponent().getGraphics());
+		    	cercercle.setPosition(X,Y);
+				cercercle.draw();
 		    }
 		    else if ( shape.equals(bouton3.getText()) ){
 		    	g = e.getComponent().getGraphics();
