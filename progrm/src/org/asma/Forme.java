@@ -1,22 +1,29 @@
 package org.asma;
+import java.awt.Graphics;
+import java.awt.Panel;
+
 import javax.swing.JPanel;
 
 
 public class Forme {
-	int position_x	= 10;
-	int position_y = 10;
-	int longueur = 10;
-	int largeur = 10;
+	int position_x;
+	int position_y;
+	int longueur;
+	int largeur;
+	JPanel panel;
 	
 	public Forme(){
 	
 	}
-    public Forme(int position_x,int position_y, int longueur, int largeur){
+    public Forme(int position_x,int position_y, int longueur, int largeur,JPanel panel){
     	this.position_x = position_x; 
     	this.position_y = position_y;
     	this.longueur = longueur;
     	this.largeur = largeur;
+    	this.panel = panel;
     }
+    
+    
     public void setPositionX(int position_x){
         this.position_x = position_x;
     }
