@@ -37,7 +37,7 @@ public class affichage extends JFrame implements ActionListener,MouseMotionListe
 		private void build(){
 		//this.setTitle("Suivi moi"); //On donne un titre à l'application
 		this.setDefaultLookAndFeelDecorated(true);
-		this.setUndecorated(true);
+		this.setUndecorated(false);
 		this.setExtendedState(this.MAXIMIZED_BOTH);
 		//this.setSize(500,350); //On donne une taille à notre fenêtre
 		//this.setLocationRelativeTo(null); //On centre la fenêtre sur l'écran
