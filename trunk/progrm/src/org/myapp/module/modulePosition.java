@@ -21,7 +21,7 @@ public class modulePosition  extends module<FluxPosition ,FluxBool> implements U
 	 * La principale utilisation est : déterminer si l'utilisateur regarde vers la position Focus
 	 * @param string
 	 * @param i
-	 * @param flux du gaze
+	 * @param position la position que l on va considérer
 	 * @param fluxEntrant
 	 * @param fluxSortant
 	 */
@@ -31,8 +31,8 @@ public class modulePosition  extends module<FluxPosition ,FluxBool> implements U
 		this.fluxEntrant = fluxEntrant;
         this.fluxSortant = fluxSortant;
         expression =  new String("select posX,posY,gposX,gposY from org.myapp.module.modulePosition where "+
-        						"(gposX - "+20+" ) < posX and posX < (gposX - "+20+" ) and "+
-        						"(gposY - "+20+" ) < posY and posY < (gposY - "+20+" )");
+        						"(gposX - "+20+" ) < posX and posX < (gposX + "+20+" ) and "+
+        						"(gposY - "+20+" ) < posY and posY < (gposY + "+20+" )");
 	
 	}
 
@@ -52,7 +52,7 @@ public class modulePosition  extends module<FluxPosition ,FluxBool> implements U
 		 * /!\ il faut que la methodes getXXX existe dans l'objet envoiyer par send donc dans le module.
 		 */
 		fluxSortant.set(true);
-		System.out.println("\t module Position => "+ fluxSortant.data.toString());
+		System.out.println("\t module Position => "+ fluxSortant.data.toString() +"on regarde vers" + getgposX() + " | " + getgposY()) ;
 		// * * * this.fluxSortant.data...
 	}
 
@@ -63,15 +63,13 @@ public class modulePosition  extends module<FluxPosition ,FluxBool> implements U
 
 
 	public void run(){
-		while(true){	    	
-	    		
-	    		    		 
-	    		 epService.getEPRuntime().sendEvent(this);
+		while(true){
+			if(fluxEntrant.isFresh(20))
+				epService.getEPRuntime().sendEvent(this);
 	    			    		
 	    		 try {
 	    		 sleep(vitesseDeTraitement);
 	    		 } catch (InterruptedException e) { e.printStackTrace();	}
-	    		 
 			}
 	}
 

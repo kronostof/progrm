@@ -10,6 +10,11 @@ public class FluxPosition extends Flux<Position>{
 	public FluxPosition(){
 		data = new Position();
 	}
+	
+	public FluxPosition(Position position){
+		data = position;
+	}
+	
 	/*
 	public void run(){
 		while(true){

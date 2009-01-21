@@ -16,7 +16,7 @@ import com.espertech.esper.client.EPServiceProviderManager;
  * elle rythme l'envoie de la requete de mise a jour des listener
  * @author Moncy christophe
  */
-class Lecteur extends Thread{
+public class Lecteur extends Thread{
 
 	static public EPServiceProvider epService;
 	private long vitesseDelecture;
@@ -29,8 +29,12 @@ class Lecteur extends Thread{
 		fluxdata = position;
 	}
 
+	/**
+	 * le flux de position passé sera le même flux de position fournie par Lecteur.
+	 * @param f
+	 */
 	public void accroche(FluxPosition f){
-		fluxdata = f;
+		f.data = fluxdata.data ;
 	}
 	
 

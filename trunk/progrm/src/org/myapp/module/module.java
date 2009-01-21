@@ -23,7 +23,7 @@ public abstract class module<E extends Flux,F extends Flux> extends Thread imple
 	public String expression;
 	public E fluxEntrant;
 	public F fluxSortant;
-	public int vitesseDeTraitement = 20;
+	public int vitesseDeTraitement = 30;
 	public EPStatement statement;
 	static public EPServiceProvider epService;
 	
