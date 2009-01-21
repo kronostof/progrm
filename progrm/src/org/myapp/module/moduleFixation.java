@@ -29,7 +29,7 @@ public class moduleFixation extends module<FluxPosition ,FluxFixation > implemen
 	 public void update(EventBean[] newEvents, EventBean[] oldEvents) {
         
         this.fluxSortant.set(new Fixation(new Position(this.fluxEntrant.getPosX(),this.fluxEntrant.getPosY())));
-        System.out.println("\t\t module Fixation => "  + this.fluxSortant.data.toString());
+        System.out.println("\t"+nom+"\t module Fixation => "  + this.fluxSortant.data.toString());
 	}
 
     public void init(EPServiceProvider epService){
@@ -44,6 +44,7 @@ public class moduleFixation extends module<FluxPosition ,FluxFixation > implemen
      */
     public moduleFixation(String nom, int i, FluxPosition position,FluxFixation fixation) {
         super();
+        this.nom = nom;
         pos = new Position();
         lastpos = new Position();
         fluxEntrant = position;
