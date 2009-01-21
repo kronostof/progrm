@@ -25,18 +25,21 @@ public class fenetre extends JFrame implements ActionListener,MouseMotionListene
 	private JTextField zone_affichage;
 	private JButton start;
 	private JButton stop;
+	private JButton start_calibration;
+	private JButton stop_calibration;;
 	private JButton start_streaming;
 	private JButton stop_streaming;
+	private JButton output;
 	private FlowLayout layout = null ;
 	private OuvrirSocket socket;
 	private Send send;
-	
+	private RecevoirData RD; 
 	
 	public  fenetre(OuvrirSocket socket){
 		super();
 		build();
 		this.socket = socket;
-		
+		RD = new RecevoirData(socket);
 	}
 	
 	public void build(){
@@ -54,26 +57,49 @@ public class fenetre extends JFrame implements ActionListener,MouseMotionListene
 		layout.setAlignment(FlowLayout.CENTER);
 		container = new JPanel() ; 
 		container.setLayout(layout); 
+		
+		start_calibration = new JButton () ;
+		start_calibration.setPreferredSize(new Dimension(125,25)) ;
+		start_calibration.setText("Start calibration") ;
+		start_calibration.addActionListener(this);
+		container.add(start_calibration);
+		
+		stop_calibration = new JButton () ;
+		stop_calibration.setPreferredSize(new Dimension(125,25)) ;
+		stop_calibration.setText("Stop calibration") ;
+		stop_calibration.addActionListener(this);
+		container.add(stop_calibration);
+		
 		start = new JButton () ;
 		start.setPreferredSize(new Dimension(125,25)) ;
 		start.setText("Start recording") ;
 		start.addActionListener(this);
 		container.add(start);
+		
 		stop = new JButton () ;
 		stop.setPreferredSize(new Dimension(125,25)) ;
 		stop.setText("Stop recording") ;
 		stop.addActionListener(this);
 		container.add(stop);
+		
 		start_streaming = new JButton () ;
 		start_streaming.setPreferredSize(new Dimension(125,25)) ;
 		start_streaming.setText("Start streaming") ;
 		start_streaming.addActionListener(this);
 		container.add(start_streaming);
+		
 		stop_streaming = new JButton () ;
 		stop_streaming.setPreferredSize(new Dimension(125,25)) ;
 		stop_streaming.setText("Stop streaming") ;
 		stop_streaming.addActionListener(this);
 		container.add(stop_streaming);
+		
+		output = new JButton () ;
+		output.setPreferredSize(new Dimension(125,25)) ;
+		output.setText("output") ;
+		output.addActionListener(this);
+		container.add(output);
+		
 		zone_affichage = new JTextField();
 		zone_affichage.setPreferredSize(new Dimension(450,320));
 		zone_affichage.addMouseMotionListener(this);
@@ -82,7 +108,35 @@ public class fenetre extends JFrame implements ActionListener,MouseMotionListene
 
 	}
 	public void actionPerformed(ActionEvent e) {
-
+        
+		if(e.getSource() == start_calibration){
+			try {
+				send = new Send("ET_CAL" +"\n" + "\r", socket);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			try {
+				send.sending();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			}
+		if(e.getSource() == stop_calibration){
+			try {
+				send = new Send("ET_BRK" +"\n" + "\r", socket);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			try {
+				send.sending();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			}
 		if(e.getSource() == start){
 			try {
 				send = new Send("ET_REC" +"\n" + "\r", socket);
@@ -115,6 +169,7 @@ public class fenetre extends JFrame implements ActionListener,MouseMotionListene
 		if(e.getSource() == start_streaming){
 			try {
 				send = new Send("ET_STR" +"\n" + "\r", socket);
+				
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -125,10 +180,13 @@ public class fenetre extends JFrame implements ActionListener,MouseMotionListene
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			}
+						
+			
+		    }
 		if(e.getSource() == stop_streaming){
+			
 			try {
-				send = new Send("ET_EST" +"\n" + "\r", socket);
+				send = new Send("ET_EST" +"\n" + "\r", socket);				
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -139,6 +197,23 @@ public class fenetre extends JFrame implements ActionListener,MouseMotionListene
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+			
+			}
+         if(e.getSource() == output){
+			
+			try {
+				send = new Send("ET_FRM \"#%SX#%SY\"" +"\n" + "\r", socket);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			try {
+				send.sending();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
 			}
 		
 	
