@@ -25,7 +25,7 @@ public class affichage extends JFrame implements ActionListener,MouseMotionListe
 	private JButton bouton3 = null;//Déclaration du bouton
 	private int nombre = 0; //Déclaration du chiffre
 	private int X = 0, Y = 0; //Déclaration du chiffre
-	private String shape = null;
+	private String shape = "";
 	private Graphics g;
 
 	
