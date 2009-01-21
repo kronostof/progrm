@@ -3,6 +3,7 @@ package org.myapp;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.myapp.event.Position;
 import org.myapp.flux.FluxBool;
 import org.myapp.flux.FluxFixation;
 import org.myapp.flux.FluxPosition;
@@ -23,9 +24,9 @@ public class MainTest  extends Thread{
 		
 
 		FluxPosition position = new FluxPosition();
-		FluxFixation fixation= new FluxFixation();
-		FluxBool fixeCentre= new FluxBool();
-	//	FluxBool versBas= new FluxBool();
+		//FluxFixation fixation= new FluxFixation();
+		//FluxBool fixeCentre= new FluxBool();
+		//FluxBool versBas= new FluxBool();
 		
 		Lecteur lecteur = new Lecteur(position);
 		
@@ -35,42 +36,43 @@ public class MainTest  extends Thread{
 		EPServiceProvider epService = EPServiceProviderManager.getDefaultProvider();
 
 		
-		moduleFixation listener =  new moduleFixation("tset", 33,position,fixation);
+		//moduleFixation listener =  new moduleFixation("tset", 33,position,fixation);
 		//moduleFixationCentre listener2 =  new moduleFixationCentre("tset", 33,fixation,fixeCentre);
 		//moduleBas listener3 =  new moduleBas("tset", 33,position,versBas);
 		
 		
-		listener.init(epService);
+		//listener.init(epService);
 		//listener2.init(epService);
 		//listener3.init(epService);
-		
-		EPStatement statement = epService.getEPAdministrator().createEPL(listener.expression);
+
+		//EPStatement statement = epService.getEPAdministrator().createEPL(listener.expression);
 		//EPStatement statement2 = epService.getEPAdministrator().createEPL(listener2.expression);
 		//EPStatement statement3 = epService.getEPAdministrator().createEPL(listener3.expression);
 		
-		statement.addListener(listener);
+		//statement.addListener(listener);
 		//statement2.addListener(listener2);
 		//statement3.addListener(listener3);
 		
-		listener.start();
+		//listener.start();
 		//listener2.start();
 		//listener3.start();	
-		
-		
+
+
 // les dix modules 
-		
+
 		ArrayList<FluxBool> ListeFluxBool= new ArrayList<FluxBool>();
-		ArrayList<moduleRegion> ListModuleRegion = new ArrayList<moduleRegion>();
+		ArrayList<modulePosition> ListModuleRegion = new ArrayList<modulePosition>();
 		ArrayList<EPStatement> ListStatement = new ArrayList<EPStatement>();
 
-		moduleRegion mR;
+		modulePosition mR;
 		FluxBool Fb;
-		for( int i=0;i<3;i++){
+		for( int i=0;i<10;i++){
 			Fb = new FluxBool();
-			mR = new moduleRegion(new String("numero"+i),i,position,Fb);
+			mR = new modulePosition(new String("numero"+i),i,new Position(0,0),position,Fb);
 			HashMap<String, Object> conf = new HashMap<String, Object>();
-			 String str = new String("select posX from org.myapp.module.moduleRegion where posX<"+100*(i+1)+" and posX>"+100*i);
-			 System.out.println(str);
+			String str = new String("select posX from org.myapp.module.moduleRegion where "+100*i+"<posX and posX<"+100*(i+1));
+			 
+			System.out.println(str);
 			conf.put("expression",str);
 			mR.setup(conf);
 			EPStatement St;

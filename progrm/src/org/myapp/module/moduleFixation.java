@@ -74,7 +74,7 @@ public class moduleFixation extends module<FluxPosition ,FluxFixation > implemen
 		    		lastpos.set(pos);
 		    		pos.set(fluxEntrant.data);
 	    		}
-	    		sleep(20);
+	    		sleep(30);
 	    		} catch (InterruptedException e) { e.printStackTrace();	}
 			}
     }
