@@ -4,7 +4,7 @@ import org.myapp.event.Position;
 
 public class Lecteur {
 
-	float x,y;
+	int x,y;
 	
 	public void accroche(Position pos){
 		pos.set(x, y);

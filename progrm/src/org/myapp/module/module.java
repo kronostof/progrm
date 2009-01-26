@@ -17,7 +17,7 @@ import com.espertech.esper.event.EventBean;
  * @param <Type de flux entrant, Type de flux Sortant>
  *
  */
-public abstract class module<E extends Flux,F extends Flux> extends Thread implements UpdateListener {
+public abstract class module<E extends Flux<?>,F extends Flux<?>> extends Thread implements UpdateListener {
 
 	public String nom;
 	public String expression;

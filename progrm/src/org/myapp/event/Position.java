@@ -9,8 +9,8 @@ package org.myapp.event;
  */
 public class Position extends Information {
 
-	protected float posX;
-	protected float posY;
+	protected int posX;
+	protected int posY;
 
 	/* constructeur */
 	
@@ -20,7 +20,7 @@ public class Position extends Information {
 		posY = 0;
 	}
 
-	public Position(float posX,float posY){
+	public Position(int posX,int posY){
 		super();
 		this.posX = posX;
 		this.posY = posY;
@@ -33,8 +33,8 @@ public class Position extends Information {
 	}
 
 	/*  getter	 */
-	public float getPosX(){	    	return posX;    }
-    public float getPosY(){	    	return posY;    }
+	public int getPosX(){	    	return posX;    }
+    public int getPosY(){	    	return posY;    }
     
     /*  setter */
     
@@ -42,7 +42,7 @@ public class Position extends Information {
 	 * @param posX : position en x.</br>
 	 * @param posY :  position en y.</br>
 	 */
- 	public void set(float x,float y){
+ 	public void set(int x,int y){
     	posX = x;
     	posY = y;
     }

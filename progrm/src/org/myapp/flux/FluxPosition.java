@@ -31,11 +31,11 @@ public class FluxPosition extends Flux<Position>{
     	sleep(20);
 	}
     */
-    public float getPosX(){
+    public int getPosX(){
     	return data.getPosX();
     }
 
-    public float getPosY(){
+    public int getPosY(){
     	return data.getPosY();
     	
     }

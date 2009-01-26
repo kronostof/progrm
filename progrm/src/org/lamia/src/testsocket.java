@@ -28,14 +28,14 @@ public class testsocket
 	socket.receive(p); 
 	ch = new String(buffer, 0,0, p.getLength()); 
 	Lecteur loc = new Lecteur();
-	float posX = 0;
-	float posY = 0;
+	int posX = 0;
+	int posY = 0;
 	String[] results = ch.split( "#\\s*" );
     
 	String[] right = results[1].split( " \\s*" );
 	String[] left = results[2].split( " \\s*" );
-	posX = Float.valueOf(right[0]).floatValue();  
-	posY = Float.valueOf(left[0]).floatValue();
+	posX = (int)Float.valueOf(right[0]).floatValue();  
+	posY = (int)Float.valueOf(left[0]).floatValue();
 	pos.set(posX, posY); 
 	loc.accroche(pos);
 	System.out.println("Paquet recu : message = " + ch + 
