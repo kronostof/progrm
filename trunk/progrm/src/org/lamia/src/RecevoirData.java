@@ -21,8 +21,8 @@ public class RecevoirData {
 	socket.receive(p); 
 	ch = new String(buffer, 0, p.getLength()); 
 	Lecteur loc = new Lecteur();
-	float posX = 0;
-	float posY = 0;
+	int posX = 0;
+	int posY = 0;
 	pos.set(posX, posY); 
 	loc.accroche(pos);
 	

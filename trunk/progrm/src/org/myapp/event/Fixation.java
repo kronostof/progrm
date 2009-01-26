@@ -51,7 +51,7 @@ public class Fixation extends Information {
 	 * @param x :Position en x
 	 * @param y :Position en y
 	 */
-	public void set(float x,float y){
+	public void set(int x,int y){
 		//upToDate = true;
 
 		//if((position.posX != x ) | (position.posY != y )){
