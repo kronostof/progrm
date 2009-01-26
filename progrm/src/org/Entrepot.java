@@ -1,21 +1,20 @@
 package org;
 
 import java.util.HashMap;
-
-import org.myapp.FormeModel;
+import org.myapp.ModelForme;
 
 public class Entrepot {
 
-	HashMap<String, FormeModel> stock;
+	HashMap<String, ModelForme> stock;
 	
 	
 	public Entrepot() {
-		stock = new HashMap<String, FormeModel>();
+		stock = new HashMap<String, ModelForme>();
 		
 	}
 	
 	
-	public void put(String key,FormeModel value){
+	public void put(String key,ModelForme value){
 		stock.put(key, value);
 	}
 }

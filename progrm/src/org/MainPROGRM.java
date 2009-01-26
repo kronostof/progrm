@@ -1,14 +1,18 @@
 package org;
 
+import drawing.CircleDrawable;
+import drawing.JCanvas;
+
 public class MainPROGRM {
 
 	/**
 	 * Classe principale du progrm PROGRM
 	 */
 	public static void main(String[] args) {
-		
-		MondeDesFormeModel model = new MondeDesFormeModel();
-		MondeDesFormeController controller = new MondeDesFormeController(model);
-		controller.displayView();
+		JCanvas Vue = new JCanvas();
+			CircleDrawable.set(Vue);
+		MondeDesFormeModel model = new MondeDesFormeModel();		
+		new MondeDesFormeController(model,Vue);
+		model.build();
 	}
 }

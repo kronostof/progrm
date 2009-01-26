@@ -1,22 +1,52 @@
 package org;
 
-import org.asma.affichage;
+import java.awt.Color;
+import drawing.GUIHelper;
+import drawing.IDrawable;
+import drawing.JCanvas;
 
-public class MondeDesFormeController {
+
+import javax.xml.bind.Marshaller.Listener;
+
+import org.myapp.ModelForme;
+
+public class MondeDesFormeController implements MondeDesFormeControllerListener{
 
 	public MondeDesFormeModel model;
-	public affichage vue;
+	private JCanvas Vue;
 	
-	public MondeDesFormeController(MondeDesFormeModel model) {
+	public MondeDesFormeController(MondeDesFormeModel model,JCanvas Vue) {
+		//super(Vue);
 		this.model = model;
+		this.Vue = Vue;
 		
-		// creeation de la vue
-		vue = new affichage();
-		vue.setVisible(true);
+		// On enregistre le controlleur auprès de la vue et du model
+		model.addControlleurListner(this);
+		Vue.addControlleurListner(this);
+		
+		Vue.setBackground(Color.WHITE);
+		Vue.setPreferredSize(Vue.getMaximumSize());
+		GUIHelper.showOnFrame(Vue,"Monde des formes");
 	}
 
-	public void displayView() {
 	
-		vue.setVisible(true);
+	
+	
+	
+	@Override
+	public void addFormeListener(FormeListener forme) {
+		
+		Vue.addDrawable(new VueForme(forme));
+		
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

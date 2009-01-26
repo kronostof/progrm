@@ -3,7 +3,7 @@ package org;
 
 import javax.swing.event.EventListenerList;
 import org.myapp.Lecteur;
-import org.myapp.FormeModel;
+import org.myapp.ModelForme;
 import org.myapp.flux.FluxPosition;
 
 
@@ -11,10 +11,11 @@ public class MondeDesFormeModel {
 
 
 	private EventListenerList listeners;
-	// stockage des données
 	Entrepot entrepotDeForme;
 
 	Lecteur lecteur;		// afin de tester j utilise ma propre classe lecteur.
+	
+	private MondeDesFormeControllerListener Controleur;
 
 	public MondeDesFormeModel() {
 		// 
@@ -26,9 +27,15 @@ public class MondeDesFormeModel {
 		FluxPosition fluxgaze = new FluxPosition();
 		Lecteur lecteur = new Lecteur(fluxgaze);
 		lecteur.start();
+	}
+	
+	
+	public void build(){
 		for (int i=0;i<3;i++){
 			// creeation des forme
-			FormeModel forme = new FormeModel("forme n°"+i,lecteur);
+			ModelForme forme = new ModelForme("forme n°"+i,lecteur);
+			// on averti le truc 
+			Controleur.addFormeListener(forme);
 			entrepotDeForme.put(new String("forme n°"+i), forme);
 		}
 		// juste pour tester
@@ -38,8 +45,16 @@ public class MondeDesFormeModel {
 	public void addModelListener(ModelListener listener){
 		listeners.add(ModelListener.class, listener);
 	}
+	
+
 
 	public void removeModelListener(ModelListener l){
 		 listeners.remove(ModelListener.class, l);
+	}
+
+
+	public void addControlleurListner(MondeDesFormeControllerListener Controller) {
+		this.Controleur = Controleur;
+		
 	}
 }
