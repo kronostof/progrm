@@ -1,8 +1,6 @@
 package org.myapp;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Point;
+import javax.swing.event.EventListenerList;
 
 import org.FormeListener;
 import org.myapp.event.Position;
@@ -11,10 +9,11 @@ import org.myapp.flux.FluxFixation;
 import org.myapp.flux.FluxPosition;
 import org.myapp.module.moduleFixation;
 import org.myapp.module.modulePosition;
+
 import com.espertech.esper.client.EPServiceProvider;
 import com.espertech.esper.client.EPStatement;
 
-import drawing.CircleDrawable;
+	import drawing.CircleDrawable; //=*
 import drawing.IDrawable;
 
 
@@ -23,9 +22,11 @@ public class ModelForme extends Thread implements FormeListener{
 	
 	EPServiceProvider epService;
 	
+	private EventListenerList listeners;
+	
 	private String nom;
 	private Position position;
-	CircleDrawable VueForme;
+		CircleDrawable VueForme;  	//=*
 	
 	//FormeListener VueForme;
 	FluxPosition Gaze = new FluxPosition();
@@ -42,7 +43,7 @@ public class ModelForme extends Thread implements FormeListener{
 		// on rajoute les listener et tout ça ! ! ! 
 		position = new Position((int)(Math.random()*1200),(int)(Math.random()*700));
 		System.out.println(position.getPosX()+ " " + position.getPosY() + " " +(int)Math.random() );
-		//VueForme. = new CircleDrawable(Color.BLUE,new Point(position.getPosX(),position.getPosY()),new Dimension(40,40));
+		//VueForme = new CircleDrawable(Color.BLUE,position,new Dimension(40,40));
 		// postion hazardeuse
 		
 		
@@ -81,11 +82,17 @@ public class ModelForme extends Thread implements FormeListener{
 		this.start();
 	}
 	
-	public void addFormeListener(FormeListener listener){
-	//	listeners.add(FormeListener.class, listener);
-	}
 	
+    public void addFormeListener(FormeListener listener) {
+        listeners.add(FormeListener.class, listener);
+    }
 	
+    
+    public FormeListener[] getFormeListeners() {
+        return listeners.getListeners(FormeListener.class);
+    }
+    
+    
 	@Override
 	public void run(){
 		//
@@ -94,13 +101,22 @@ public class ModelForme extends Thread implements FormeListener{
 		while(true){
 			try {
 				sleep(500);
-				position.set(position.getPosX()+1,position.getPosY());
+				position.set(position.getPosX()+1,position.getPosY());		firePositionChangee();
+				
 				System.out.println(position);
+				
 				
 			} catch (InterruptedException e) {
 				
 				e.printStackTrace();
 			}
+		}
+	}
+	
+	public void firePositionChangee() {
+		//on avertit tous les listener
+        for(FormeListener listener : getFormeListeners()) {
+            listener.positionChangee();
 		}
 	}
 
