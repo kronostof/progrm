@@ -10,12 +10,16 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
+import org.MondeDesFormeController;
+import org.MondeDesFormeControllerListener;
+
 /**
  * @author duj
  */
 public class JCanvas extends JPanel {
 
     private List drawables = new LinkedList();
+	private MondeDesFormeControllerListener Controleur;
 
     /**
      * @pre: d != null
@@ -81,5 +85,12 @@ public class JCanvas extends JPanel {
         }
         return true;
     }
+
+	public void addControlleurListner(MondeDesFormeControllerListener Controller) {
+		this.Controleur = Controleur;
+		
+		// TODO Auto-generated method stub
+		
+	}
 
 }

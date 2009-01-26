@@ -32,8 +32,6 @@ public abstract class FormDrawable implements IMovableDrawable {
 		return (Rectangle) rect.clone();
 	}
 	
-
-	
 	
 
 	public Point getPosition() {
