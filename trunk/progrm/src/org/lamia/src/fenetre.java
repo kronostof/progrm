@@ -27,9 +27,11 @@ public class fenetre extends JFrame implements ActionListener,MouseMotionListene
 	private JButton stop;
 	private JButton start_calibration;
 	private JButton stop_calibration;;
+	private JButton accepte_calibration;;
 	private JButton start_streaming;
 	private JButton stop_streaming;
 	private JButton output;
+	private JButton test;
 	private FlowLayout layout = null ;
 	private OuvrirSocket socket;
 	private Send send;
@@ -49,9 +51,13 @@ public class fenetre extends JFrame implements ActionListener,MouseMotionListene
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setContentPane(getContainer());
+		this.setVisible(true);
 	}
 		
 	public JPanel getContainer(){
+		
+		fenetreCalibration fen = new fenetreCalibration(socket);
+		fen.setVisible(true);
 		
 		layout = new FlowLayout(); 
 		layout.setAlignment(FlowLayout.CENTER);
@@ -69,6 +75,12 @@ public class fenetre extends JFrame implements ActionListener,MouseMotionListene
 		stop_calibration.setText("Stop calibration") ;
 		stop_calibration.addActionListener(this);
 		container.add(stop_calibration);
+		
+		accepte_calibration = new JButton () ;
+		accepte_calibration.setPreferredSize(new Dimension(125,25)) ;
+		accepte_calibration.setText("accepte calibration") ;
+		accepte_calibration.addActionListener(this);
+		container.add(accepte_calibration);
 		
 		start = new JButton () ;
 		start.setPreferredSize(new Dimension(125,25)) ;
@@ -99,6 +111,12 @@ public class fenetre extends JFrame implements ActionListener,MouseMotionListene
 		output.setText("output") ;
 		output.addActionListener(this);
 		container.add(output);
+		
+		test = new JButton () ;
+		test.setPreferredSize(new Dimension(125,25)) ;
+		test.setText("test") ;
+		test.addActionListener(this);
+		container.add(test);
 		
 		zone_affichage = new JTextField();
 		zone_affichage.setPreferredSize(new Dimension(450,320));
@@ -215,6 +233,23 @@ public class fenetre extends JFrame implements ActionListener,MouseMotionListene
 			}
 			
 			}
+         
+         if(e.getSource() == test){
+ 			
+ 			try {
+ 				send = new Send("ET_PNT 3 1216	51" +"\n" + "\r", socket);
+ 			} catch (IOException e1) {
+ 				// TODO Auto-generated catch block
+ 				e1.printStackTrace();
+ 			}
+ 			try {
+ 				send.sending();
+ 			} catch (IOException e1) {
+ 				// TODO Auto-generated catch block
+ 				e1.printStackTrace();
+ 			}
+ 			
+ 			}
 		
 	
 			
@@ -222,8 +257,6 @@ public class fenetre extends JFrame implements ActionListener,MouseMotionListene
 		}
 	
 	public void mouseMoved(MouseEvent e) {
-	
-
 		
 		 
 	}
