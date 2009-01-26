@@ -1,35 +1,113 @@
 package org.myapp;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Point;
+
+import org.FormeListener;
 import org.myapp.event.Position;
+import org.myapp.flux.FluxBool;
+import org.myapp.flux.FluxFixation;
 import org.myapp.flux.FluxPosition;
+import org.myapp.module.moduleFixation;
+import org.myapp.module.modulePosition;
+import com.espertech.esper.client.EPServiceProvider;
+import com.espertech.esper.client.EPStatement;
 
-public class ModelForme extends Thread{
+import drawing.CircleDrawable;
+import drawing.IDrawable;
 
-	// la position de la forme a chq instant
+
+public class ModelForme extends Thread implements FormeListener{
+
+	
+	EPServiceProvider epService;
+	
+	private String nom;
 	private Position position;
-	// le flux d'in formation fourni par le ptsAttention
-	private FluxPosition fluxPosition;
+	CircleDrawable VueForme;
 	
+	//FormeListener VueForme;
+	FluxPosition Gaze = new FluxPosition();
 	
+	//cercle vueForme;
+	// Angle angle
+	//public void avancer(){ ... 
 	
-	
-	public ModelForme(Lecteur lecteur) {
-		lecteur.accroche(fluxPosition);
+	public ModelForme(String nom ,Lecteur lecteur) {
+		// random de 0 a 1200 CRADE pas de controle !!!
+		this.nom = nom;
+		lecteur.accroche(Gaze);
+		epService = lecteur.epService;
+		// on rajoute les listener et tout ça ! ! ! 
+		position = new Position((int)(Math.random()*1200),(int)(Math.random()*700));
+		System.out.println(position.getPosX()+ " " + position.getPosY() + " " +(int)Math.random() );
+		//VueForme. = new CircleDrawable(Color.BLUE,new Point(position.getPosX(),position.getPosY()),new Dimension(40,40));
+		// postion hazardeuse
+		
+		
+		
+		// Gestionnaire de module()
+		// a la main pr l instant.
+		FluxFixation fixation = new FluxFixation();
+		FluxPosition fposition = new FluxPosition();
+		FluxBool fbool = new FluxBool();
+		moduleFixation listener =  new moduleFixation(nom, 33,Gaze,fixation);
+		modulePosition listener2 =  new modulePosition(nom, 33,position,new FluxPosition(fixation.data.getPosition()),fbool);
+		
+		
+		listener.init(epService);
+		listener2.init(epService);
+		//listener3.init(epService);
+
+		EPStatement statement = epService.getEPAdministrator().createEPL(listener.expression);
+		EPStatement statement2 = epService.getEPAdministrator().createEPL(listener2.expression);
+		//EPStatement statement3 = epService.getEPAdministrator().createEPL(listener3.expression);
+		
+		statement.addListener(listener);
+		statement2.addListener(listener2);
+		//statement3.addListener(listener3);
+		
+		listener.start();
+		listener2.start();
+		//listener3.start();	
+		
+		
+		// creeation des module de base.
+		
+		
+		//addFormeListener(VueForme);
+		
+		this.start();
 	}
 	
-	
-	/**
-	 * gestion des déplacement des formes
-	 */
-	public void GestionnaireDeplacement(){
-		// choissir un angle
-		// avancer
-		// si on sort du cadre changer d angle
+	public void addFormeListener(FormeListener listener){
+	//	listeners.add(FormeListener.class, listener);
 	}
 	
 	
 	@Override
-	public void run() {
+	public void run(){
+		//
+		//
+		// une forme se gere elle même.
+		while(true){
+			try {
+				sleep(500);
+				position.set(position.getPosX()+1,position.getPosY());
+				System.out.println(position);
+				
+			} catch (InterruptedException e) {
+				
+				e.printStackTrace();
+			}
+		}
+	}
+
+
+	@Override
+	public void positionChangee() {
 		// TODO Auto-generated method stub
+		
 	}
 }

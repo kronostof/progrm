@@ -23,9 +23,7 @@ public class ModelMondeDesFormes {
 	public void inittest(){
 
 		for(int i=0;i<10;i++){
-			// on cree les forme en leur
-			ModelForme c = new ModelForme(lecteur);
-
+			new ModelForme("nom"+i, lecteur);
 		}
 
 	}
