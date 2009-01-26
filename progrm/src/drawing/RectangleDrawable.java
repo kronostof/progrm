@@ -29,4 +29,10 @@ public class RectangleDrawable extends FormDrawable{
 		g.setColor(c);
 	}
 
+	@Override
+	public void positionChangee() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
