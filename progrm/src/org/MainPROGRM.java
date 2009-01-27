@@ -12,7 +12,7 @@ public class MainPROGRM {
 		JCanvas Vue = new JCanvas();
 			CircleDrawable.set(Vue);
 		MondeDesFormeModel model = new MondeDesFormeModel();		
-		new MondeDesFormeController(model,Vue);
-		model.build();
+		MondeDesFormeController Controleur = new MondeDesFormeController(model,Vue);
+		model.build(Controleur );
 	}
 }
