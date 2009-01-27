@@ -30,22 +30,31 @@ public class MondeDesFormeModel {
 		// juste por tester
 		entrepotDeForme = new Entrepot();
 		FluxPosition fluxgaze = new FluxPosition();
-		lecteur = new Lecteur(fluxgaze);
+		lecteur = new Lecteur();
 		lecteur.start();
 	}
-	
+
 	public void build(MondeDesFormeController Controleur){
 		this.Controleur = Controleur;
-		for (int i=0;i<1;i++){
+		
+		/*
+		 * for (int i=0;i<12;i++){
+		 
 			// creeation des forme
 			ModelForme forme = new ModelForme("forme n°"+i,lecteur);
+			CircleDrawable c = new CircleDrawable(Color.BLUE,forme.getPosition(),new Dimension(40,40));
 			// on averti le truc 
 		 
-			Controleur.addFormeListener(forme);
+			//Controleur.addFormeListener(forme);
 			//forme.addFormeListener(new CircleDrawable(Color.BLUE,forme.getPosition(),new Dimension(40,40)));
-			forme.addMonFormeListener(new CircleDrawable(Color.BLUE,forme.getPosition(),new Dimension(40,40)));
-			entrepotDeForme.put(new String("forme n°"+i), forme);
+			forme.addMonFormeListener(c);
+			//entrepotDeForme.put(new String("forme n°"+i), forme);
 		}
+	*/
+		// TEMP moche il ns faut un gestionnaire de module ! ! !
+		GazeModelForme gaze = new GazeModelForme("forme GAZE",lecteur);
+		CircleDrawable c = new CircleDrawable(Color.RED,gaze.getPosition(),new Dimension(40,40));
+		gaze.addMonFormeListener(c);
 		// juste pour tester
 	}
 
