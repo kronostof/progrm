@@ -35,9 +35,9 @@ public class MondeDesFormeController implements MondeDesFormeControllerListener{
 	
 	@Override
 	public void addFormeListener(FormeListener forme) {
-		
+		VueForme nv = new VueForme(forme);
 		Vue.addDrawable(new VueForme(forme));
-		
+		//((ModelForme)forme).addFormeListener(nv);
 	}
 	
 	

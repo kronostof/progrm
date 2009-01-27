@@ -6,7 +6,7 @@ import java.awt.Rectangle;
 
 import drawing.IDrawable;
 
-public class VueForme implements IDrawable {
+public class VueForme implements IDrawable,FormeListener {
 
 	public VueForme(FormeListener forme) {
 		// TODO Auto-generated constructor stub
@@ -31,9 +31,9 @@ public class VueForme implements IDrawable {
 	}
 
 	@Override
-	public void positionChangee() {
-		// TODO Auto-generated method stub
-
+	public void positionChangee(FormeListener FL) {
+		System.out.println("TEST positionChangee() :public class VueForme");
+		
 	}
 
 }
