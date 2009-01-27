@@ -27,9 +27,10 @@ public class moduleFixation extends module<FluxPosition ,FluxFixation > implemen
 	 */
 	@Override
 	 public void update(EventBean[] newEvents, EventBean[] oldEvents) {
-        
-        this.fluxSortant.set(new Fixation(new Position(this.fluxEntrant.getPosX(),this.fluxEntrant.getPosY())));
-        System.out.println("\t"+nom+"\t module Fixation => "  + this.fluxSortant.data.toString());
+        this.fluxSortant.set(this.fluxEntrant.getPosX(),this.fluxEntrant.getPosY());
+        //System.out.println("\t"+nom+"\t module Fixation => "  + this.fluxEntrant.data.toString());
+        //System.out.println("\t"+nom+"\t module Fixation FXS:=> "  + this.fluxSortant.data.toString());
+        //System.out.println(" ICI " + this.fluxEntrant.getPosX()+ " | " +this.fluxEntrant.getPosY());
 	}
 
     public void init(EPServiceProvider epService){
@@ -69,11 +70,15 @@ public class moduleFixation extends module<FluxPosition ,FluxFixation > implemen
 	public void run(){
     	while(true){
 	    	try {   
-	    		if (fluxEntrant.isFresh(40)){
-		    		epService.getEPRuntime().sendEvent(this);
+	    		if(fluxEntrant.isFresh(20)){
+					epService.getEPRuntime().sendEvent(this);
 		    		lastpos.set(pos);
 		    		pos.set(fluxEntrant.data);
-	    		}
+					//System.out.println("new info MFixation");
+					}
+				else{
+					System.out.println("old info MFixation ! ! ! ");
+				}
 	    		sleep(30);
 	    		} catch (InterruptedException e) { e.printStackTrace();	}
 			}

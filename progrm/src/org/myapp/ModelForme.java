@@ -1,5 +1,8 @@
 package org.myapp;
 
+import java.awt.Color;
+import java.awt.Dimension;
+
 import javax.swing.event.EventListenerList;
 
 import org.FormeListener;
@@ -24,12 +27,17 @@ public class ModelForme extends Thread implements FormeListener{
 	
 	private EventListenerList listeners;
 	
-	private String nom;
-	private Position position;
-		CircleDrawable VueForme;  	//=*
+	private String nom;			// Un identifiant- utilisé pour la sortie console.
+	private Position position;	// la position dans le monde.
+
+
 	
 	//FormeListener VueForme;
 	FluxPosition Gaze = new FluxPosition();
+	FluxBool fbool;
+
+	
+	private FormeListener monlistener;
 	
 	//cercle vueForme;
 	// Angle angle
@@ -38,11 +46,11 @@ public class ModelForme extends Thread implements FormeListener{
 	public ModelForme(String nom ,Lecteur lecteur) {
 		// random de 0 a 1200 CRADE pas de controle !!!
 		this.nom = nom;
-		lecteur.accroche(Gaze);
+		lecteur.accroche(Gaze);									
 		epService = lecteur.epService;
 		// on rajoute les listener et tout ça ! ! ! 
-		position = new Position((int)(Math.random()*1200),(int)(Math.random()*700));
-		System.out.println(position.getPosX()+ " " + position.getPosY() + " " +(int)Math.random() );
+		position = new Position((int)(Math.random()*600),(int)(Math.random()*700));
+		System.out.println("creation de " + nom + ": " +position.getPosX()+ " " + position.getPosY() + " " +(int)Math.random() );
 		//VueForme = new CircleDrawable(Color.BLUE,position,new Dimension(40,40));
 		// postion hazardeuse
 		
@@ -52,7 +60,7 @@ public class ModelForme extends Thread implements FormeListener{
 		// a la main pr l instant.
 		FluxFixation fixation = new FluxFixation();
 		FluxPosition fposition = new FluxPosition();
-		FluxBool fbool = new FluxBool();
+		fbool = new FluxBool();
 		moduleFixation listener =  new moduleFixation(nom, 33,Gaze,fixation);
 		modulePosition listener2 =  new modulePosition(nom, 33,position,new FluxPosition(fixation.data.getPosition()),fbool);
 		
@@ -83,27 +91,46 @@ public class ModelForme extends Thread implements FormeListener{
 	}
 	
 	
-    public void addFormeListener(FormeListener listener) {
-        listeners.add(FormeListener.class, listener);
-    }
+	public Position getPosition(){
+		return position;
+	}
 	
+	  public void addFormeListener(FormeListener listener) {
+	    	listeners.add(FormeListener.class, listener);
+	}
+	  
     
     public FormeListener[] getFormeListeners() {
         return listeners.getListeners(FormeListener.class);
+        
     }
+
+    public void addMonFormeListener(FormeListener listener) {
+    	System.out.println("ICI");
+    	monlistener = listener;
+    }
+	  
+    public FormeListener getMonFormeListener() {
+    	return monlistener;
+        
+    }
+    
+    
     
     
 	@Override
 	public void run(){
-		//
-		//
-		// une forme se gere elle même.
 		while(true){
 			try {
-				sleep(500);
-				position.set(position.getPosX()+1,position.getPosY());		firePositionChangee();
+				sleep(50);
+				 if (fbool.data.getValue()){
+					 // on déplace la forme en fonction de qlq chose
+					 position.set(position.getPosX()+1,position.getPosY()+1);
+					 // on crie sur ts les toit q l on a changer qlq chose ! ! !
+				 	 firePositionChangee();
+			}
 				
-				System.out.println(position);
+				//System.out.println(position + " " + fbool.data.toString());
 				
 				
 			} catch (InterruptedException e) {
@@ -115,15 +142,15 @@ public class ModelForme extends Thread implements FormeListener{
 	
 	public void firePositionChangee() {
 		//on avertit tous les listener
-        for(FormeListener listener : getFormeListeners()) {
-            listener.positionChangee();
-		}
+        //for(FormeListener listener : getFormeListeners())    listener.positionChangee();
+		getMonFormeListener().positionChangee(this);
 	}
+
+
 
 
 	@Override
-	public void positionChangee() {
+	public void positionChangee(FormeListener Fl) {
 		// TODO Auto-generated method stub
 		
-	}
-}
+	}}

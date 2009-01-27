@@ -69,10 +69,22 @@ public class Fixation extends Information {
 	@Override	public Fixation get() {	return this;	}
 
 
+	/**
+	 * repond vrai si les position passer en parametre sont diff de celle presentes
+	 * @param position2
+	 * @return
+	 */
 	public boolean setPosition(Position position2) {
 		boolean T = ((this.getPosX() != position2.getPosX()) | (this.getPosY() != position2.getPosY()));
 		if (T) this.set(position2.getPosX(), position2.getPosY());
 		return T;
 	}
+	
+	public boolean setPosition(int x, int y) {
+		boolean T = ((this.getPosX() != x) | (this.getPosY() != y));
+		if (T) this.set(x, y);
+		return T;
+	}
+	
 
 }

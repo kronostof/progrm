@@ -60,6 +60,6 @@ public class Position extends Information {
 	}
 	
     /** To string   */
-    @Override	public String toString() {		return "X="+posX+" Y="+posY;	}
+    @Override	public String toString() {		return "X="+posX+" Y="+posY ;/* + " " + this.upToDate + " " + this.release;*/ 	}
 
 }

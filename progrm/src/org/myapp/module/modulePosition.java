@@ -27,6 +27,7 @@ public class modulePosition  extends module<FluxPosition ,FluxBool> implements U
 	 */
 	public modulePosition(String string, int i,Position position, FluxPosition fluxEntrant, FluxBool fluxSortant) {
 
+		this.nom = string;
 		this.position = position;
 		this.fluxEntrant = fluxEntrant;
         this.fluxSortant = fluxSortant;
@@ -52,7 +53,9 @@ public class modulePosition  extends module<FluxPosition ,FluxBool> implements U
 		 * /!\ il faut que la methodes getXXX existe dans l'objet envoiyer par send donc dans le module.
 		 */
 		fluxSortant.set(true);
-		System.out.println("\t module Position => "+ fluxSortant.data.toString() +"on regarde vers" + getgposX() + " | " + getgposY()) ;
+		//System.out.println("\t module Position => FE"+ fluxEntrant.data.toString());
+		//System.out.println("\t module Position => "+ fluxSortant.data.toString() +"on regarde vers" + getgposX() + " | " + getgposY()) ;
+		
 		// * * * this.fluxSortant.data...
 	}
 
@@ -64,13 +67,20 @@ public class modulePosition  extends module<FluxPosition ,FluxBool> implements U
 
 	public void run(){
 		while(true){
-			if(fluxEntrant.isFresh(20))
+			if(fluxEntrant.isFresh(20)){
 				epService.getEPRuntime().sendEvent(this);
-	    			    		
-	    		 try {
-	    		 sleep(vitesseDeTraitement);
-	    		 } catch (InterruptedException e) { e.printStackTrace();	}
+				System.out.println("new info MPosition");
+				}
+			else{
+				fluxSortant.data.setValue(false);
+	    		//System.out.println(nom + " \t On regarde vers => " + fluxEntrant.data.toString());
+				System.out.println("old info Mposition" + " FXE = " + fluxEntrant.data.toString());
+				
 			}
+    		 try {
+    		 sleep(vitesseDeTraitement);
+    		 } catch (InterruptedException e) { e.printStackTrace();	}
+		}
 	}
 
 
