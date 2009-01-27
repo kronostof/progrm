@@ -1,13 +1,19 @@
 package org.lamia.src;
 
 import org.myapp.event.Position;
+import org.myapp.flux.FluxPosition;
 
 public class Lecteur {
 
 	int x,y;
+	private FluxPosition fluxdata;
 	
 	public void accroche(Position pos){
 		pos.set(x, y);
+	}
+	
+	public void accroche(FluxPosition f){
+		f.data = fluxdata.data ;
 	}
 	
 }
