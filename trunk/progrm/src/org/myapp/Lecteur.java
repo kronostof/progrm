@@ -24,7 +24,7 @@ public class Lecteur extends Thread{
 	
 	
 	public Lecteur(FluxPosition position) {
-		vitesseDelecture = 200;
+		vitesseDelecture = 20;
 		epService = EPServiceProviderManager.getDefaultProvider();
 		fluxdata = position;
 	}

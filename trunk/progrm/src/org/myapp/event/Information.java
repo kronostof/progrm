@@ -16,7 +16,9 @@ public abstract class Information {
 	protected long upToDate;
 	protected long release;
 	
-	
+	// reset le tmp indiquant depuis combien de temps cette nvll info est disponible
+	// nvll ds le sens " l information préc. était diff.
+	// @param release
 	public Information() {
 		release = System.currentTimeMillis();
 		upToDate= System.currentTimeMillis();;
@@ -28,6 +30,10 @@ public abstract class Information {
 	@Override
 	abstract public String toString();
 	
+
+	/**
+	 * fixe la date de réalisation a l'heure courante.
+	 */
 	public void resetTemps() {
 		release = System.currentTimeMillis();	
 	}
