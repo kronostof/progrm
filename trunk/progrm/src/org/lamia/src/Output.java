@@ -6,7 +6,7 @@ public class Output extends Thread{
 	     
 	      try {
 	       
-	        Thread.sleep(0);
+	        Thread.sleep(20);
 	      }
 	      catch (InterruptedException ex) {}
 	    }

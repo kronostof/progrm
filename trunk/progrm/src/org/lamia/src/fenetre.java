@@ -26,7 +26,7 @@ public class fenetre extends JFrame implements ActionListener,MouseMotionListene
 	private JButton start;
 	private JButton stop;
 	private JButton start_calibration;
-	private JButton stop_calibration;;
+	private JButton stop_calibration;
 	private JButton accepte_calibration;;
 	private JButton start_streaming;
 	private JButton stop_streaming;
@@ -35,13 +35,13 @@ public class fenetre extends JFrame implements ActionListener,MouseMotionListene
 	private FlowLayout layout = null ;
 	private OuvrirSocket socket;
 	private Send send;
-	private RecevoirData RD; 
+	//private RecevoirData RD; 
 	
 	public  fenetre(OuvrirSocket socket){
 		super();
 		build();
 		this.socket = socket;
-		RD = new RecevoirData(socket);
+		//RD = new RecevoirData(socket);
 	}
 	
 	public void build(){
@@ -56,8 +56,8 @@ public class fenetre extends JFrame implements ActionListener,MouseMotionListene
 		
 	public JPanel getContainer(){
 		
-		fenetreCalibration fen = new fenetreCalibration(socket);
-		fen.setVisible(true);
+		//fenetreCalibration fen = new fenetreCalibration(socket);
+		//fen.setVisible(true);
 		
 		layout = new FlowLayout(); 
 		layout.setAlignment(FlowLayout.CENTER);

@@ -14,7 +14,7 @@ public class testsocket
     OuvrirSocket socket = new OuvrirSocket();
     fenetre f = new fenetre(socket);
     f.setVisible(true);
-    RecevoirData  m = new RecevoirData (socket);
+   /// RecevoirData  m = new RecevoirData (socket);
 
  		
  }
