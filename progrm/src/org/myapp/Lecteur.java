@@ -1,5 +1,11 @@
 package org.myapp;
 import java.awt.MouseInfo;
+import java.net.SocketException;
+
+import org.lamia.src.OuvrirSocket;
+import org.lamia.src.RecevoirData;
+import org.lamia.src.fenetre;
+import org.myapp.event.Position;
 import org.myapp.flux.FluxPosition;
 
 import com.espertech.esper.client.EPServiceProvider;
@@ -27,6 +33,24 @@ public class Lecteur extends Thread{
 		vitesseDelecture = 20;
 		epService = EPServiceProviderManager.getDefaultProvider();
 		fluxdata = position;
+		
+	   
+	}
+		public Lecteur() {
+			vitesseDelecture = 100;
+			epService = EPServiceProviderManager.getDefaultProvider();
+			fluxdata = new FluxPosition();
+			OuvrirSocket socket;
+			try {
+				socket = new OuvrirSocket();
+				fenetre f = new fenetre(socket);
+			    f.setVisible(true);
+			    RecevoirData  m = new RecevoirData (socket,fluxdata);
+			    m.start();
+			} catch (SocketException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	}
 
 	/**
@@ -34,17 +58,18 @@ public class Lecteur extends Thread{
 	 * @param f
 	 */
 	public void accroche(FluxPosition f){
+		System.out.println("ICI");
 		f.data = fluxdata.data ;
 	}
 	
-
+//	public void accroche(Position pos){	}
 	
 	
 	@Override
 	public void run() {
 		while(true){
 			try {
-				liremouse();
+				//liremouse();
 				sleep(vitesseDelecture);
 			} catch (InterruptedException e) {	e.printStackTrace();	}
 		}

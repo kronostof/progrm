@@ -49,8 +49,8 @@ public class ModelForme extends Thread implements FormeListener{
 		lecteur.accroche(Gaze);									
 		epService = lecteur.epService;
 		// on rajoute les listener et tout ça ! ! ! 
-		position = new Position((int)(Math.random()*600),(int)(Math.random()*700));
-		System.out.println("creation de " + nom + ": " +position.getPosX()+ " " + position.getPosY() + " " +(int)Math.random() );
+		position = new Position((int)(Math.random()*2200),(int)(Math.random()*700));
+		//System.out.println("creation de " + nom + ": " +position.getPosX()+ " " + position.getPosY() + " " +(int)Math.random() );
 		//VueForme = new CircleDrawable(Color.BLUE,position,new Dimension(40,40));
 		// postion hazardeuse
 		
@@ -106,7 +106,7 @@ public class ModelForme extends Thread implements FormeListener{
     }
 
     public void addMonFormeListener(FormeListener listener) {
-    	System.out.println("ICI");
+    //	System.out.println("ICI");
     	monlistener = listener;
     }
 	  
@@ -115,17 +115,20 @@ public class ModelForme extends Thread implements FormeListener{
         
     }
     
-    
-    
-    
 	@Override
 	public void run(){
 		while(true){
 			try {
-				sleep(50);
-				 if (fbool.data.getValue()){
+				sleep(100);
+				 //if (!fbool.data.getValue())
+				 {
 					 // on déplace la forme en fonction de qlq chose
-					 position.set(position.getPosX()+1,position.getPosY()+1);
+					// System.out.println("GAZE " +Gaze.data.getPosX() + " " + Gaze.data.getPosY());
+					 //position.set(Gaze.data.getPosX()+1,position.getPosY()+1);
+					 //position.set(Gaze.data);
+					 // la position de la forme se rapporche de la position du Gaze
+					 FonctionTemp1();
+					// FonctionTemp2();
 					 // on crie sur ts les toit q l on a changer qlq chose ! ! !
 				 	 firePositionChangee();
 			}
@@ -140,6 +143,38 @@ public class ModelForme extends Thread implements FormeListener{
 		}
 	}
 	
+	
+	
+	private void FonctionTemp2() {
+		if ((position.getPosX() - Gaze.getPosX()) > 5) 
+			position.set(position.getPosX()+1,position.getPosY()); 
+		else
+			position.set(position.getPosX()-1,position.getPosY()); 
+		if ((position.getPosY()- Gaze.getPosY()) > 5) 
+			position.set(position.getPosX(),position.getPosY()+1); 
+		else 
+			position.set(position.getPosX(),position.getPosY()-1); 
+		
+	}
+
+
+	/**
+	 * la position de la forme se rapporche de la position du Gaze
+	 */
+	private void FonctionTemp1() {
+		if (position.getPosX()< Gaze.getPosX()) 
+			position.set(position.getPosX()+3,position.getPosY()); 
+		else
+			position.set(position.getPosX()-3,position.getPosY()); 
+		if (position.getPosY()< Gaze.getPosY()) 
+			position.set(position.getPosX(),position.getPosY()+3); 
+		else 
+			position.set(position.getPosX(),position.getPosY()-3); 
+			
+		
+	}
+
+
 	public void firePositionChangee() {
 		//on avertit tous les listener
         //for(FormeListener listener : getFormeListeners())    listener.positionChangee();
