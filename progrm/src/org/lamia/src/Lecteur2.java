@@ -3,7 +3,7 @@ package org.lamia.src;
 import org.myapp.event.Position;
 import org.myapp.flux.FluxPosition;
 
-public class Lecteur {
+public class Lecteur2 {
 
 	int x,y;
 	private FluxPosition fluxdata;
