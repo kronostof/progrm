@@ -11,6 +11,13 @@
 
 = Hitorique=
 
+= mardi 27 Janvier=
+Interface Graphique OK
+
+= lundi 26 Janvier=
+Reprise de l'interface graphique.
+
+
 =Jeudi 15 Janvier=
 +Enchaîner une dizaine de module avec une traitement représentatif.<br>
 
