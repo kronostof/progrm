@@ -49,11 +49,10 @@ public class CircleDrawable extends FormDrawable{
 
 	@Override
 	public void positionChangee(FormeListener FL) {
-		System.out.println("public class CircleDrawable extends FormDrawable");
+		//System.out.println("public class CircleDrawable extends FormDrawable");
 		
 		this.setPosition(new Point(((ModelForme)FL).getPosition().getPosX(),((ModelForme)FL).getPosition().getPosY()));
 		// on fait un repaint de tt la vue et c est moche ! ! !
 		this.Vue.repaint();
 	}
-
 }
