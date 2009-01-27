@@ -28,7 +28,7 @@ public class moduleFixation extends module<FluxPosition ,FluxFixation > implemen
 	@Override
 	 public void update(EventBean[] newEvents, EventBean[] oldEvents) {
         this.fluxSortant.set(this.fluxEntrant.getPosX(),this.fluxEntrant.getPosY());
-        //System.out.println("\t"+nom+"\t module Fixation => "  + this.fluxEntrant.data.toString());
+        System.out.println("\t"+nom+"\t module Fixation => "  + this.fluxEntrant.data.toString());
         //System.out.println("\t"+nom+"\t module Fixation FXS:=> "  + this.fluxSortant.data.toString());
         //System.out.println(" ICI " + this.fluxEntrant.getPosX()+ " | " +this.fluxEntrant.getPosY());
 	}
@@ -51,8 +51,8 @@ public class moduleFixation extends module<FluxPosition ,FluxFixation > implemen
         fluxEntrant = position;
         fluxSortant = fixation;
         expression =  "select posX,posY,lastposX,lastposY from org.myapp.module.moduleFixation.win:time(5 sec) "+
-        				"where posX < (lastposX+2) and  posX > (lastposX-2)" +
-        				" and  posY < (lastposY+2) and posY > (lastposY-2)";
+        				"where posX < (lastposX+30) and  posX > (lastposX-30)" +
+        				" and  posY < (lastposY+30) and posY > (lastposY-30)";
 	}
     
     public moduleFixation(String string, int i, FluxPosition position) {
@@ -62,8 +62,8 @@ public class moduleFixation extends module<FluxPosition ,FluxFixation > implemen
         fluxEntrant = position;
         fluxSortant = new FluxFixation();
         expression =  "select posX,posY,lastposX,lastposY from org.myapp.module.moduleFixation.win:time(5 sec) "+
-        				"where posX < (lastposX+2) and  posX > (lastposX-2)" +
-        				" and  posY < (lastposY+2) and posY > (lastposY-2)";
+        				"where posX < (lastposX+30) and  posX > (lastposX-30)" +
+        				" and  posY < (lastposY+30) and posY > (lastposY-30)";
 	}
     
 
@@ -77,9 +77,9 @@ public class moduleFixation extends module<FluxPosition ,FluxFixation > implemen
 					//System.out.println("new info MFixation");
 					}
 				else{
-					System.out.println("old info MFixation ! ! ! ");
+					//System.out.println("old info MFixation ! ! ! ");
 				}
-	    		sleep(30);
+	    		sleep(vitesseDeTraitement);
 	    		} catch (InterruptedException e) { e.printStackTrace();	}
 			}
     }

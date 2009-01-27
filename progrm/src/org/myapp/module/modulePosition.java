@@ -69,12 +69,12 @@ public class modulePosition  extends module<FluxPosition ,FluxBool> implements U
 		while(true){
 			if(fluxEntrant.isFresh(20)){
 				epService.getEPRuntime().sendEvent(this);
-				System.out.println("new info MPosition");
+				//System.out.println("new info MPosition");
 				}
 			else{
 				fluxSortant.data.setValue(false);
 	    		//System.out.println(nom + " \t On regarde vers => " + fluxEntrant.data.toString());
-				System.out.println("old info Mposition" + " FXE = " + fluxEntrant.data.toString());
+				//System.out.println("old info Mposition" + " FXE = " + fluxEntrant.data.toString());
 				
 			}
     		 try {
