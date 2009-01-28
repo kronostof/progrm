@@ -15,6 +15,12 @@ public class FluxPosition extends Flux<Position>{
 		data = position;
 	}
 	
+	@Override
+	public void set(Position fe) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 	/*
 	public void run(){
 		while(true){
@@ -40,9 +46,5 @@ public class FluxPosition extends Flux<Position>{
     	
     }
 
-	@Override
-	public void set(Position fe) {
-		// TODO Auto-generated method stub
-		
-	}
+
 }

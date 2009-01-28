@@ -11,10 +11,7 @@ public class FluxFixation extends Flux<Fixation> {
 		data = new Fixation();
 	}
 	
-	public void set(Position fe) {
-		// TODO Auto-generated method stub
-		
-	}
+
 
 	/** setter 
 	 * c est principalement par cette methode que le flux sera modifié
@@ -23,28 +20,37 @@ public class FluxFixation extends Flux<Fixation> {
 	 *
 	 * ¤  si les position de fixation sont differante on les modifie on indique quand on les a modifié
 	 */
-				@Override
-				public void set(Fixation fe) {
-					if(data.setPosition(fe.getPosition())) 
-						data.resetTemps();
-					data.upDate();
-				}
-				
-				public void set(int x,int y) {
-					//if(
-							data.setPosition(x,y);
-					//) 
-						data.resetTemps();
-					data.upDate();
-					
-					data.getPosition().resetTemps();
-					data.getPosition().upDate();
-					
-				}
-
-	public long getTemps() {
-		return data.getTemps();
+	
+	public void set(Position fe) {
+		// TODO Auto-generated method stub
+		
 	}
+	
+	@Override
+	public void set(Fixation fe) {
+		if(data.setPosition(fe.getPosition())) 
+			data.resetTemps();
+		data.upDate();
+	}
+	
+	public void set(int x,int y) {
+		//if(
+				data.setPosition(x,y);
+		//) 
+			data.resetTemps();
+		data.upDate();
+		
+		data.getPosition().resetTemps();
+		data.getPosition().upDate();
+	}
+	
+	
+    public int getPosX(){
+    	return data.getPosX();
+    }
 
-
+    public int getPosY(){
+    	return data.getPosY();
+    	
+    }
 }
