@@ -29,11 +29,11 @@ public class Fixation extends Information {
 
 	
 	/*  getter	 */
-	public float getPosX(){
+	public int getPosX(){
     	return position.getPosX();
 	}
 	
-	public float getPosY(){
+	public int getPosY(){
 		return position.getPosY();
 	}
 	
@@ -63,7 +63,7 @@ public class Fixation extends Information {
 
 	/* To string */
 	@Override	public String toString() {	
-		return position.toString() + " temps:" + getTemps()+ " millisecondes \t" + "date : " + getDate();
+		return position.toString() + "\t temps:" + getTemps()+ " millisecondes \t" + "date : " + getDate();
 	}
 
 	@Override	public Fixation get() {	return this;	}
