@@ -5,7 +5,7 @@ import java.util.HashMap;
 import org.myapp.flux.FluxBool;
 import org.myapp.flux.FluxPosition;
 
-import com.espertech.esper.client.EPServiceProvider;
+//import com.espertech.esper.client.EPServiceProvider;
 import com.espertech.esper.client.UpdateListener;
 import com.espertech.esper.event.EventBean;
 
@@ -13,7 +13,7 @@ public class moduleRegion extends module<FluxPosition ,FluxBool> implements Upda
 
 	
 	
-    EPServiceProvider epService;
+   // CHK UML 28 EPServiceProvider epService;
     
     /**
 	 * 
@@ -47,11 +47,7 @@ public class moduleRegion extends module<FluxPosition ,FluxBool> implements Upda
 		System.out.println(" module Region " +nom +" => "+fluxEntrant.data.toString() + " =>" + fluxSortant.data.toString());
 	}
 
-	@Override
-	public void init(EPServiceProvider nepService) {
-		this.epService=nepService;
-		
-	}
+	//@Override	public void init(EPServiceProvider nepService) {		this.epService=nepService;			}
 	/**
 	 * Le coeur du module.
 	 * On peut en choisir le rythme
@@ -76,7 +72,10 @@ public class moduleRegion extends module<FluxPosition ,FluxBool> implements Upda
 	public float getPosX() {        return fluxEntrant.getPosX();    }
     public float getPosY() {        return fluxEntrant.getPosY();    }
     
-
+/**
+ * Cette methode est utilisée afin de modifier l'expression utilisée par ce module par défault l expression designe 
+ * le point 0 0
+ */
 	@Override
 	public int setup(HashMap<String, Object> conf) {
 		expression =  new String((String)conf.get("expression"));

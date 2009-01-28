@@ -7,14 +7,14 @@ import org.myapp.event.Bbool;
 import org.myapp.flux.FluxBool;
 import org.myapp.flux.FluxPosition;
 
-import com.espertech.esper.client.EPServiceProvider;
+//import com.espertech.esper.client.EPServiceProvider;
 import com.espertech.esper.client.UpdateListener;
 import com.espertech.esper.event.EventBean;
 
 public class moduleBas  extends module<FluxPosition ,FluxBool > implements UpdateListener{
 
 	
-    EPServiceProvider epService;
+	// CHK UML 28 EPServiceProvider epService;
 	/**
 	 * Indique si l'utilisateur regarde en bas !
 	 * 
@@ -37,13 +37,10 @@ public class moduleBas  extends module<FluxPosition ,FluxBool > implements Updat
 	public void update(EventBean[] newEvents, EventBean[] oldEvents) {
 	        this.fluxSortant.set(new Bbool());
 	        System.out.println("\t module Bas => "+ fluxSortant.data.toString() );
+	       
 	}
 
-	@Override
-	public void init(EPServiceProvider nepService) {
-		this.epService=nepService;
-		
-	}
+	//@Override	public void init(EPServiceProvider nepService) {		this.epService=nepService;		}
 
 	public void run(){
 		while(true){
@@ -54,15 +51,6 @@ public class moduleBas  extends module<FluxPosition ,FluxBool > implements Updat
 	    	} catch (InterruptedException e) { e.printStackTrace();	}
 		}
 	}
-
-
-	 public float getPosX() {
-	        return fluxEntrant.data.getPosX();
-    }
-    
-    public float getPosY() {
-    	return fluxEntrant.data.getPosY();
-    }
 
 	
 	/**
@@ -87,4 +75,16 @@ public class moduleBas  extends module<FluxPosition ,FluxBool > implements Updat
 		// delai
 		return 0;
 	}
+	
+
+	 public float getPosX() {
+	        return fluxEntrant.data.getPosX();
+    }
+    
+    public float getPosY() {
+    	return fluxEntrant.data.getPosY();
+    }
+
+	
+
 }
