@@ -1,10 +1,10 @@
 package org.myapp;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+//import java.util.ArrayList;
+//import java.util.HashMap;
 
-import org.myapp.event.Position;
-import org.myapp.flux.FluxBool;
+//import org.myapp.event.Position;
+//import org.myapp.flux.FluxBool;
 import org.myapp.flux.FluxFixation;
 import org.myapp.flux.FluxPosition;
 import org.myapp.module.*;
@@ -24,7 +24,7 @@ public class MainTest  extends Thread{
 		
 
 		FluxPosition position = new FluxPosition();
-		//FluxFixation fixation= new FluxFixation();
+		FluxFixation fixation= new FluxFixation();
 		//FluxBool fixeCentre= new FluxBool();
 		//FluxBool versBas= new FluxBool();
 		
@@ -36,30 +36,30 @@ public class MainTest  extends Thread{
 		EPServiceProvider epService = EPServiceProviderManager.getDefaultProvider();
 
 		
-		//moduleFixation listener =  new moduleFixation("tset", 33,position,fixation);
+		moduleFixation listener =  new moduleFixation("tset", 33,position,fixation);
 		//moduleFixationCentre listener2 =  new moduleFixationCentre("tset", 33,fixation,fixeCentre);
 		//moduleBas listener3 =  new moduleBas("tset", 33,position,versBas);
 		
 		
-		//listener.init(epService);
+		listener.init(epService);
 		//listener2.init(epService);
 		//listener3.init(epService);
 
-		//EPStatement statement = epService.getEPAdministrator().createEPL(listener.expression);
+		EPStatement statement = Lecteur.getInstance().getEPAdministrator().createEPL(listener.expression);
 		//EPStatement statement2 = epService.getEPAdministrator().createEPL(listener2.expression);
 		//EPStatement statement3 = epService.getEPAdministrator().createEPL(listener3.expression);
 		
-		//statement.addListener(listener);
+		statement.addListener(listener);
 		//statement2.addListener(listener2);
 		//statement3.addListener(listener3);
 		
-		//listener.start();
+		listener.start();
 		//listener2.start();
 		//listener3.start();	
 
 
 // les dix modules 
-
+/*
 		ArrayList<FluxBool> ListeFluxBool= new ArrayList<FluxBool>();
 		ArrayList<modulePosition> ListModuleRegion = new ArrayList<modulePosition>();
 		ArrayList<EPStatement> ListStatement = new ArrayList<EPStatement>();
@@ -87,5 +87,6 @@ public class MainTest  extends Thread{
 			ListModuleRegion.add(mR);
 			ListStatement.add(St);
 		}
-	}
+	*/
+		}
 }
