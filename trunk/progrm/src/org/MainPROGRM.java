@@ -10,6 +10,7 @@ public class MainPROGRM {
 	 */
 	public static void main(String[] args) {
 		JCanvas Vue = new JCanvas();
+		// erreur de conception
 			CircleDrawable.set(Vue);
 		MondeDesFormeModel model = new MondeDesFormeModel();		
 		MondeDesFormeController Controleur = new MondeDesFormeController(model,Vue);
