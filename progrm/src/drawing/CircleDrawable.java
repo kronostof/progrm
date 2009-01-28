@@ -6,8 +6,8 @@ import java.awt.Graphics;
 import java.awt.Point;
 
 import org.FormeListener;
-import org.myapp.ModelForme;
 import org.myapp.event.Position;
+import org.myapp.model.ModelForme;
 
 /**
  * @author duj
@@ -55,4 +55,5 @@ public class CircleDrawable extends FormDrawable{
 		// on fait un repaint de tt la vue et c est moche ! ! !
 		this.Vue.repaint();
 	}
+	
 }

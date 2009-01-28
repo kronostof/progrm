@@ -18,7 +18,11 @@ import org.MondeDesFormeControllerListener;
  */
 public class JCanvas extends JPanel {
 
-    private List drawables = new LinkedList();
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4949577436530106152L;
+	private List<IDrawable> drawables = new LinkedList<IDrawable>();
 	private MondeDesFormeControllerListener Controleur;
 
     /**
@@ -41,7 +45,7 @@ public class JCanvas extends JPanel {
 
     public void paint(Graphics g) {
         super.paint(g);
-        for (Iterator iter = drawables.iterator(); iter.hasNext();) {
+        for (Iterator<IDrawable> iter = drawables.iterator(); iter.hasNext();) {
             ((IDrawable) iter.next()).draw(g);
         }
     }
@@ -51,9 +55,9 @@ public class JCanvas extends JPanel {
         repaint();
     }
 
-    public List findDrawables(Point p) {
-        List l = new ArrayList();
-        for (Iterator iter = drawables.iterator(); iter.hasNext();) {
+    public List<IDrawable> findDrawables(Point p) {
+        List<IDrawable> l = new ArrayList<IDrawable>();
+        for (Iterator<IDrawable> iter = drawables.iterator(); iter.hasNext();) {
             IDrawable element = (IDrawable) iter.next();
             if (element.getRectangle().contains(p)) {
                 l.add(element);
@@ -63,7 +67,7 @@ public class JCanvas extends JPanel {
     }
 
     public boolean isFree(Rectangle rect) {
-        for (Iterator iter = drawables.iterator(); iter.hasNext();) {
+        for (Iterator<IDrawable> iter = drawables.iterator(); iter.hasNext();) {
             IDrawable element = (IDrawable) iter.next();
             System.out.println(element.getRectangle());
             if (element.getRectangle().intersects(rect)) {
@@ -72,10 +76,10 @@ public class JCanvas extends JPanel {
         }
         return true;
     }
-
+ 
     public boolean isAlone(IDrawable drawable) {
         Rectangle rect = drawable.getRectangle();
-        for (Iterator iter = drawables.iterator(); iter.hasNext();) {
+        for (Iterator<IDrawable> iter = drawables.iterator(); iter.hasNext();) {
             IDrawable element = (IDrawable) iter.next();
             System.out.println(element.getRectangle());
             if (!element.equals(drawable)

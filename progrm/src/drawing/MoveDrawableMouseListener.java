@@ -37,7 +37,7 @@ public class MoveDrawableMouseListener extends JCanvasMouseAdapter {
 	 * @see java.awt.event.MouseListener#mousePressed(java.awt.event.MouseEvent)
 	 */
 	public void mousePressed(MouseEvent e) {
-		List selectedDrawables = canvas.findDrawables(e.getPoint());
+		List<IDrawable> selectedDrawables = canvas.findDrawables(e.getPoint());
 		if (selectedDrawables.size() == 0)
 			return;
 		drawable = (IMovableDrawable) selectedDrawables.get(0);
