@@ -31,7 +31,7 @@ public class TestML extends JCanvasMouseListener {
 	}
 
 	protected void rightClickAction(MouseEvent e) {
-		List selectedDrawables = canvas.findDrawables(e.getPoint());
+		List<IDrawable> selectedDrawables = canvas.findDrawables(e.getPoint());
 		if (selectedDrawables.size() == 0)
 			return;
 		IDrawable drawable = (IDrawable) selectedDrawables.get(0);
