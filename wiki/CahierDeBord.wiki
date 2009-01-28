@@ -10,7 +10,31 @@
 ++Ajouter l'interface graphique.<br>
 
 = Hitorique=
+=Mercredi 28 Janvier
+Utilisation du pluging : EclipseUML 2008 <br>
+Du code qui a tendance a ressembler a un plat de pâtes.
 
+Il faut penser a modifier le fichier eclipse.ini
+{{{
+-showsplash
+org.eclipse.platform
+--launcher.XXMaxPermSize
+256M
+-framework
+plugins\org.eclipse.osgi_3.4.2.R34x_v20080826-1230.jar
+-vmargs
+-Dosgi.requiredJavaVersion=1.5
+-Xms40m
+-Xmx256m
+}}}
+
+Avec les valeurs
+
+{{{
+-Xms40m
+-Xmx512m
+-XX:PermSize=512m
+}}}
 = mardi 27 Janvier=
 Interface Graphique OK
 
