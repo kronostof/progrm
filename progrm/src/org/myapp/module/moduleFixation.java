@@ -2,7 +2,7 @@ package org.myapp.module;
 
 import java.util.HashMap;
 
-import org.myapp.event.Fixation;
+//import org.myapp.event.Fixation;
 import org.myapp.event.Position;
 import org.myapp.flux.FluxFixation;
 import org.myapp.flux.FluxPosition;
