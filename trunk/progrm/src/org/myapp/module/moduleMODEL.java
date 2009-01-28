@@ -14,7 +14,7 @@ public class moduleMODEL  extends module<FluxPosition ,FluxPosition> implements 
 
 	
 	
-    EPServiceProvider epService;
+   // EPServiceProvider epService;
     
     /**
 	 * 
@@ -53,11 +53,7 @@ public class moduleMODEL  extends module<FluxPosition ,FluxPosition> implements 
 		// * * * this.fluxSortant.data...
 	}
 
-	@Override
-	public void init(EPServiceProvider nepService) {
-		this.epService=nepService;
-		
-	}
+	//@Override	public void init(EPServiceProvider nepService) {		this.epService=nepService;	}
 
 	
 	

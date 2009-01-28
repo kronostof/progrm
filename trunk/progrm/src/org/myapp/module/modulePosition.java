@@ -5,14 +5,14 @@ import java.util.HashMap;
 import org.myapp.event.Position;
 import org.myapp.flux.FluxBool;
 import org.myapp.flux.FluxPosition;
-import com.espertech.esper.client.EPServiceProvider;
+//import com.espertech.esper.client.EPServiceProvider;
 import com.espertech.esper.client.UpdateListener;
 import com.espertech.esper.event.EventBean;
 
 public class modulePosition  extends module<FluxPosition ,FluxBool> implements UpdateListener{
 
 	Position position;
-    EPServiceProvider epService;
+//    EPServiceProvider epService;
 
     /**
 	 * 
@@ -59,10 +59,7 @@ public class modulePosition  extends module<FluxPosition ,FluxBool> implements U
 		// * * * this.fluxSortant.data...
 	}
 
-	@Override
-	public void init(EPServiceProvider nepService) {
-		this.epService=nepService;
-	}
+	//@Override	public void init(EPServiceProvider nepService) {		this.epService=nepService;	}
 
 
 	public void run(){

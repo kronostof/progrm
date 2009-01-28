@@ -15,7 +15,7 @@ public class moduleFixationCentre  extends module<FluxFixation ,FluxBool > imple
 
 	
 	
-    EPServiceProvider epService;
+	// CHK UML 28 EPServiceProvider epService;
 	
 	public moduleFixationCentre(String string, int i, FluxFixation fluxe, FluxBool fluxs) {
 
@@ -33,11 +33,7 @@ public class moduleFixationCentre  extends module<FluxFixation ,FluxBool > imple
 	        System.out.println("\t module Fixation Centre => "+ fluxSortant.data.toString());
 	}
 
-	@Override
-	public void init(EPServiceProvider nepService) {
-		this.epService=nepService;
-		
-	}
+	//@Override	public void init(EPServiceProvider nepService) {		this.epService=nepService;	}
 
 	public void run(){
 		while(true){

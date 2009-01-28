@@ -2,6 +2,7 @@ package org.myapp.module;
 
 import java.util.HashMap;
 
+import org.myapp.Lecteur;
 import org.myapp.flux.Flux;
 
 import com.espertech.esper.client.EPServiceProvider;
@@ -18,14 +19,14 @@ import com.espertech.esper.event.EventBean;
  *
  */
 public abstract class module<E extends Flux<?>,F extends Flux<?>> extends Thread implements UpdateListener {
-
+ 
 	public String nom;
 	public String expression;
 	public E fluxEntrant;
 	public F fluxSortant;
-	public int vitesseDeTraitement = 1000;
+	public int vitesseDeTraitement = 50;
 	public EPStatement statement;
-	static public EPServiceProvider epService;
+	static public EPServiceProvider epService = Lecteur.getInstance();
 	
 	
 	public module(){
@@ -35,7 +36,7 @@ public abstract class module<E extends Flux<?>,F extends Flux<?>> extends Thread
 
 	//abstract public UpdateListener getListener();
 	
-	abstract public void init(EPServiceProvider nepService);
+	//abstract public void init(EPServiceProvider nepService);
 	
 	/**
 	 * 
@@ -45,6 +46,5 @@ public abstract class module<E extends Flux<?>,F extends Flux<?>> extends Thread
 	 *  
 	 * @return
 	 */
-	
 	abstract public int setup(HashMap<String, Object> conf);
 }
