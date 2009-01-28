@@ -1,7 +1,7 @@
 package org.myapp.flux;
 
-import org.myapp.event.Bbool;
 import org.myapp.flux.Flux;
+import org.myapp.event.Bbool;
 
 
 public class FluxBool extends Flux<Bbool> {
