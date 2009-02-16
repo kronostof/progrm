@@ -34,18 +34,19 @@ public class Lecteur extends Thread{
 	//private EPServiceProvider epService;
 	private static EPServiceProvider instance;
 	//private static Object objetSynchrone__;
-	private long vitesseDelecture;
-	private FluxPosition fluxdata;
+	private long vitesseDelecture ;
+	private static FluxPosition fluxdata;
 	
 	
 	public Lecteur(FluxPosition position) {
 		vitesseDelecture = 20;
 	//	epService = EPServiceProviderManager.getDefaultProvider();
-		fluxdata = position; 
+		fluxdata = position;
+		this.start();
 	}
 	
 	public Lecteur() {
-		vitesseDelecture = 100;
+		vitesseDelecture = 30;
 	//	epService = EPServiceProviderManager.getDefaultProvider();
 		fluxdata = new FluxPosition();
 		/*
@@ -61,14 +62,15 @@ public class Lecteur extends Thread{
 			e.printStackTrace();
 		}
 		*/
+		this.start();
 	}
 
 	/**
 	 * le flux de position passé sera le même flux de position fournie par Lecteur.
 	 * @param f
 	 */
-	public void accroche(FluxPosition f){
-		System.out.println("ICI");
+	public static void accroche(FluxPosition f){
+		System.out.println("Lecteur:accroche");
 		f.data = fluxdata.data ;
 	}
 	
@@ -77,6 +79,12 @@ public class Lecteur extends Thread{
 	
 	@Override
 	public void run() {
+		try {
+			sleep(1000);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		while(true){
 			try {
 				liremouse();

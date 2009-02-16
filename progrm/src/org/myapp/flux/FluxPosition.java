@@ -1,12 +1,12 @@
 package org.myapp.flux;
 
-//import java.awt.MouseInfo;
+import org.myapp.event.Information;
 import org.myapp.event.Position;
 
 
 public class FluxPosition extends Flux<Position>{
-	
-	
+
+
 	public FluxPosition(){
 		data = new Position();
 	}
@@ -17,26 +17,10 @@ public class FluxPosition extends Flux<Position>{
 	
 	@Override
 	public void set(Position fe) {
-		// TODO Auto-generated method stub
-		
+		data.set(fe);
 	}
 	
-	/*
-	public void run(){
-		while(true){
-			try {
-				liremouse();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-	
-    private void liremouse() throws InterruptedException {
-    	data.set(MouseInfo.getPointerInfo().getLocation().x,MouseInfo.getPointerInfo().getLocation().y);
-    	sleep(20);
-	}
-    */
+
     public int getPosX(){
     	return data.getPosX();
     }
@@ -45,6 +29,16 @@ public class FluxPosition extends Flux<Position>{
     	return data.getPosY();
     	
     }
+
+
+	@Override
+	public void setFromFlux(Flux<? extends Information> flux) {
+		//System.out.println(flux.getClass().getSimpleName());
+		if((new String(flux.getClass().getSimpleName()).compareTo(new String("FluxPosition"))== 0))
+		data = ((FluxPosition) flux).data;
+		if((new String(flux.getClass().getSimpleName()).compareTo(new String("FluxFixation"))== 0))
+		data = ((FluxFixation) flux).data.getPosition();
+	}
 
 
 }

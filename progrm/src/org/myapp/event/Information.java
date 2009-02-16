@@ -38,22 +38,35 @@ public abstract class Information {
 		release = System.currentTimeMillis();	
 	}
 	
-	// Depuis combien de temps cette info est disponible
+	/**
+	 * 
+	 * @return Depuis combien de temps cette donnée est a cette valeur.
+	 */
 	public long getTemps() {
 		return System.currentTimeMillis() - release;	
 	}
 	
-	// La date de publication de cette information
+	/**
+	 * 
+	 * @return La date de publication de cette information.
+	 */
 	public long getDate() {
 		return release;
 	}
 	
-	
+	/**
+	 *  Indique que l'information contenue est récente. 
+	 */
 	public void upDate(){
 		upToDate = System.currentTimeMillis();
 	}
 	
-	public boolean isFresh(long marge){
-		return ((System.currentTimeMillis() - upToDate) < marge);
+	/**
+	 * 
+	 * @param delai
+	 * @return - true si la donnée date de moins de 'delai' ms. 
+	 */
+	public boolean isFresh(long delai){
+		return ((System.currentTimeMillis() - upToDate) < delai);
 	}
 }

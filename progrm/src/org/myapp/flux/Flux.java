@@ -10,7 +10,7 @@ import org.myapp.event.Information;
  *
  * @param <E extends Information> de type Data, contient les donnée composant le flux.
  */
-public abstract class Flux<E extends Information>{
+public abstract class Flux<E extends Information> implements interfSetFromFlux{
 	
 
 	public E data ;

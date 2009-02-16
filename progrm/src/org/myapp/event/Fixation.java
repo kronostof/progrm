@@ -28,15 +28,25 @@ public class Fixation extends Information {
 	}
 
 	
-	/*  getter	 */
+	/**
+	 * 
+	 * @return La valeur de la position en X
+	 */
 	public int getPosX(){
     	return position.getPosX();
 	}
-	
+	/**
+	 * 
+	 * @return La valeur de la position en Y.
+	 */
 	public int getPosY(){
 		return position.getPosY();
 	}
 	
+	/**
+	 * 
+	 * @return La position de la derniere fixation
+	 */
 	public Position getPosition() {
 		return position;
 	}
@@ -48,20 +58,15 @@ public class Fixation extends Information {
 	/*  setter	 */
 	
 	/**
+	 * Place les coordonnée de la position en x,y.
 	 * @param x :Position en x
 	 * @param y :Position en y
 	 */
 	public void set(int x,int y){
-		//upToDate = true;
-
-		//if((position.posX != x ) | (position.posY != y )){
-			position.posX = x;
-			position.posY = y;
-		//	this.release = System.currentTimeMillis();
-		//}
+			position.set(x, y);
 	}
 
-	/* To string */
+	
 	@Override	public String toString() {	
 		return position.toString() + "\t temps:" + getTemps()+ " millisecondes \t" + "date : " + getDate();
 	}
@@ -70,9 +75,9 @@ public class Fixation extends Information {
 
 
 	/**
-	 * repond vrai si les position passer en parametre sont diff de celle presentes
+	 * repond vrai si les position passée en parametre sont diff de celle presentes
 	 * @param position2
-	 * @return
+	 * @return -True Uniquement si les coordonnée de la position parametre sont diff de l objet.
 	 */
 	public boolean setPosition(Position position2) {
 		boolean T = ((this.getPosX() != position2.getPosX()) | (this.getPosY() != position2.getPosY()));
