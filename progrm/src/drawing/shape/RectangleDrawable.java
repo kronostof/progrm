@@ -1,5 +1,5 @@
 
-package drawing;
+package drawing.shape;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 
 import org.FormeListener;
+
 
 
 public class RectangleDrawable extends FormDrawable{
@@ -37,4 +38,8 @@ public class RectangleDrawable extends FormDrawable{
 		
 	}
 
+	@Override
+	public Point getPoint() {
+		return getPosition();
+	}
 }

@@ -7,11 +7,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-
 import javax.swing.JPanel;
-
-import org.MondeDesFormeController;
 import org.MondeDesFormeControllerListener;
+
+import drawing.shape.IDrawable;
 
 /**
  * @author duj
@@ -23,7 +22,7 @@ public class JCanvas extends JPanel {
 	 */
 	private static final long serialVersionUID = 4949577436530106152L;
 	private List<IDrawable> drawables = new LinkedList<IDrawable>();
-	private MondeDesFormeControllerListener Controleur;
+//	private MondeDesFormeControllerListener Controleur;
 
     /**
      * @pre: d != null
@@ -91,7 +90,7 @@ public class JCanvas extends JPanel {
     }
 
 	public void addControlleurListner(MondeDesFormeControllerListener Controller) {
-		this.Controleur = Controleur;
+	//	this.Controleur = Controleur;
 		
 		// TODO Auto-generated method stub
 		

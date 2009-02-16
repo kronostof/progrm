@@ -1,6 +1,6 @@
 
 
-package drawing;
+package drawing.shape;
 import java.awt.*;
 
 public abstract class FormDrawable implements IMovableDrawable {
@@ -43,8 +43,14 @@ public abstract class FormDrawable implements IMovableDrawable {
 
 	
 	public void setPosition(Point p) {
-		rect.x = (p.x-rect.width/2);
-		rect.y = (p.y-rect.height/2);
+		rect.x = p.x;//(p.x-rect.width/2);
+		rect.y = p.y;//(p.y-rect.height/2);
+
+	}
+	
+	public void setPosition(int x,int y) {
+		rect.x = x;//(x-rect.width/2);
+		rect.y = y;//(y-rect.height/2);
 
 	}
 

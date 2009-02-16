@@ -4,6 +4,9 @@ package drawing;
 import java.awt.event.MouseEvent;
 import java.util.List;
 
+import drawing.shape.IDrawable;
+import drawing.shape.IMovableDrawable;
+
 /**
  * @author duj
  * 

@@ -1,4 +1,4 @@
-package drawing;
+package drawing.shape;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -7,7 +7,9 @@ import java.awt.Point;
 
 import org.FormeListener;
 import org.myapp.event.Position;
-import org.myapp.model.ModelForme;
+import org.myapp.model.Shape;
+
+import drawing.JCanvas;
 
 /**
  * @author duj
@@ -22,6 +24,11 @@ public class CircleDrawable extends FormDrawable{
 	 * @param dim
 	 */
 	static public JCanvas Vue;
+	
+	public CircleDrawable(Color color, Dimension dim) {
+		super(color, new Point(), dim);
+		//Vue.addDrawable(this);
+	}
 	
 	public CircleDrawable(Color color, Point pos, Dimension dim) {
 		super(color, pos, dim);
@@ -51,9 +58,14 @@ public class CircleDrawable extends FormDrawable{
 	public void positionChangee(FormeListener FL) {
 		//System.out.println("public class CircleDrawable extends FormDrawable");
 		
-		this.setPosition(new Point(((ModelForme)FL).getPosition().getPosX(),((ModelForme)FL).getPosition().getPosY()));
+		this.setPosition(((Shape)FL).getPosition().getPoint());
 		// on fait un repaint de tt la vue et c est moche ! ! !
-		this.Vue.repaint();
+		Vue.repaint();
 	}
 	
+	
+	@Override
+	public Point getPoint() {
+		return getPosition();
+	}
 }
