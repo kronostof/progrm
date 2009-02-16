@@ -1,86 +1,75 @@
-package org;
-
-
+package org.myapp.model;
 
 //import java.awt.Color;
 //import java.awt.Dimension;
+
+import java.awt.Color;
+import java.awt.Point;
 
 import javax.swing.event.EventListenerList;
 
 import org.FormeListener;
 import org.myapp.Lecteur;
 import org.myapp.event.Position;
-import org.myapp.flux.FluxBool;
-import org.myapp.flux.FluxFixation;
 import org.myapp.flux.FluxPosition;
-import org.myapp.module.moduleFixation;
-//import org.myapp.module.modulePosition;
 
 import com.espertech.esper.client.EPServiceProvider;
-import com.espertech.esper.client.EPStatement;
 
 //	import drawing.CircleDrawable; //=*
 //import drawing.IDrawable;
 
+/**
+ * model de l'objet forme.
+ */
+public class Shape extends Thread implements AbstractShape,FormeListener{
 
-public class GazeModelForme extends Thread implements FormeListener{
-
+	
 	
 	EPServiceProvider epService;
 	
-	private EventListenerList listeners;
+	private EventListenerList listeners = new EventListenerList();
 	
 	private String nom;			// Un identifiant- utilisé pour la sortie console.
+	private int forme;
 	private Position position;	// la position dans le monde.
-
+	public Color color;
 
 	
 	//FormeListener VueForme;
 	FluxPosition Gaze = new FluxPosition();
-	FluxBool fbool;
+	//FluxBool fbool;
 
 	
-	private FormeListener monlistener;
-	private FluxFixation fixation;
+//	private FormeListener monlistener;
+
+	public ModuleManager poolModule;
+
+	
+
+	
+	
 	//cercle vueForme;
 	// Angle angle
 	//public void avancer(){ ... 
 	
-	public GazeModelForme(String nom ,Lecteur lecteur) {
+	public Shape(String nom,int type) {
+		this.nom = nom;
+		Lecteur.accroche(Gaze);									
+		position = new Position((int)(Math.random()*1024),(int)(Math.random()*768));
+		poolModule = new ModuleManager(Gaze);
+		color = new Color(50000 * type);
+		this.start();
+	}
+	
+	public Shape(String nom) {
 		// random de 0 a 1200 CRADE pas de controle !!!
 		this.nom = nom;
-		lecteur.accroche(Gaze);									
-		epService = lecteur.epService;
-		// on rajoute les listener et tout ça ! ! ! 
-		position = new Position((int)(Math.random()*2200),(int)(Math.random()*700));
-		//System.out.println("creation de " + nom + ": " +position.getPosX()+ " " + position.getPosY() + " " +(int)Math.random() );
-		//VueForme = new CircleDrawable(Color.BLUE,position,new Dimension(40,40));
-		// postion hazardeuse
-		
-		
-		
-		// Gestionnaire de module()
-		// a la main pr l instant.
-		fixation = new FluxFixation();
-		FluxPosition fposition = new FluxPosition();
-		fbool = new FluxBool();
-		moduleFixation listener =  new moduleFixation(nom, 33,Gaze,fixation);
-		
-		
-		listener.init(epService);
-		
-		EPStatement statement = epService.getEPAdministrator().createEPL(listener.expression);
-		
-		statement.addListener(listener);
-		
-		listener.start();
-		
-		
-		// creeation des module de base.
-		
-		
-		//addFormeListener(VueForme);
-		
+		Lecteur.accroche(Gaze);									
+		epService = Lecteur.getInstance(); 
+		position = new Position((int)(Math.random()*1024),(int)(Math.random()*768));
+
+		poolModule = new ModuleManager(Gaze);
+		color = new Color(50000);
 		this.start();
 	}
 	
@@ -98,9 +87,9 @@ public class GazeModelForme extends Thread implements FormeListener{
         return listeners.getListeners(FormeListener.class);
         
     }
-
+/*
     public void addMonFormeListener(FormeListener listener) {
-    //	System.out.println("ICI");
+    	addFormeListener(listener);
     	monlistener = listener;
     }
 	  
@@ -108,25 +97,23 @@ public class GazeModelForme extends Thread implements FormeListener{
     	return monlistener;
         
     }
-    
+ */   
 	@Override
 	public void run(){
 		while(true){
 			try {
-				sleep(100);
-				System.out.println(" ICI " +Gaze.data.toString());
-				 //if (fixation.isFresh(200))
+				sleep(30);
+				 //if (!fbool.data.getValue())
 				 {
-					 
 					 // on déplace la forme en fonction de qlq chose
 					// System.out.println("GAZE " +Gaze.data.getPosX() + " " + Gaze.data.getPosY());
-					 position.set(Gaze.data.getPosX(),Gaze.data.getPosY());
+					 //position.set(Gaze.data.getPosX()+1,position.getPosY()+1);
 					 //position.set(Gaze.data);
 					 // la position de la forme se rapporche de la position du Gaze
-					// FonctionTemp1();
+					 //FonctionTemp1();
 					// FonctionTemp2();
 					 // on crie sur ts les toit q l on a changer qlq chose ! ! !
-				 	 firePositionChangee();
+				 	//firePositionChangee();
 			}
 				
 				//System.out.println(position + " " + fbool.data.toString());
@@ -140,18 +127,56 @@ public class GazeModelForme extends Thread implements FormeListener{
 	}
 	
 	
-	
-	public void firePositionChangee() {
+
+	public void firePositionChangee(){
 		//on avertit tous les listener
-        //for(FormeListener listener : getFormeListeners())    listener.positionChangee();
-		getMonFormeListener().positionChangee(this);
+		//System.out.println(nom + "bla " + System.currentTimeMillis());
+        for(FormeListener listener : getFormeListeners())    listener.positionChangee(this);
+		//if (getMonFormeListener() != null)		getMonFormeListener().positionChangee(this);
 	}
 
-
+	public void fireCouleurChangee() {
+		for(FormeListener listener : getFormeListeners())    listener.positionChangee(this);
+		
+	}
 
 
 	@Override
 	public void positionChangee(FormeListener Fl) {
 		// TODO Auto-generated method stub
 		
-	}}
+	}
+
+	public String getNom() {
+		return nom;
+	}
+	
+	public FluxPosition getGaze() {
+		return Gaze;
+	}
+
+	public Color getColor() {
+		return color;
+	}
+
+	@Override
+	public Point getPoint() {
+		return position.getPoint();
+	}
+
+	/**
+	 * @param forme the forme to set
+	 */
+	public void setForme(int forme) {
+		this.forme = forme;
+	}
+
+	/**
+	 * @return the forme
+	 */
+	public int getForme() {
+		return forme;
+	}
+
+
+}

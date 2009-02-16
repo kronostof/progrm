@@ -1,5 +1,8 @@
 package org.myapp.event;
 
+import java.awt.Point;
+
+
 
 /**
  * @param posX : position en x.</br>
@@ -7,59 +10,109 @@ package org.myapp.event;
  * </br>
  * 
  */
-public class Position extends Information {
+public class Position extends Information{
 
-	protected int posX;
-	protected int posY;
-
+	protected Point point;
 	/* constructeur */
 	
 	public Position(){
 		super();
-		posX = 0;
-		posY = 0;
+		point = new Point();
 	}
 
 	public Position(int posX,int posY){
 		super();
-		this.posX = posX;
-		this.posY = posY;
+		point = new Point(posX,posY);
 	}
 
 	public Position(Position position){
 		super();
-		this.posX = position.getPosX();
-		this.posY = position.getPosY();
+		point = new Point(position.getPoint());
 	}
 
-	/*  getter	 */
-	public int getPosX(){	    	return posX;    }
-    public int getPosY(){	    	return posY;    }
+	
+	
+	
+	/**
+	 * 
+	 * @param pt
+	 * @return Returns the distance from this Position to a specified Position.
+	 */
+	public double distance(Position pt){
+		return point.distance(pt.getPoint());
+	}
+	
+	/**
+	 * 
+	 * @return Retourn la position en x.
+	 */
+	public int getPosX(){	    	return point.x;    }
+	/**
+	 * 
+	 * @return Retourn la position en y.
+	 */
+    public int getPosY(){	    	return point.y;    }
+    @Override
+	public Position get() {
+		return this;
+	}
     
-    /*  setter */
+    public Point getPoint() {
+		return point;
+	}
     
-	/** set a partir des position en x et y
+    
+	/** Changes the point to have the specified location.
 	 * @param posX : position en x.</br>
 	 * @param posY :  position en y.</br>
 	 */
  	public void set(int x,int y){
-    	posX = x;
-    	posY = y;
+    	point.setLocation(x, y);
     }
-	/** set a partir d un objet position; 
+	/** Sets the location of the point to the specified location.
 	 * @param position
 	 */
     public void set(Position position){
-    	posX = position.getPosX();
-    	posY = position.getPosY();
+    	point.setLocation(position.getPoint());
+    	upDate();
     }
 
-	@Override
-	public Position get() {
-		return null;
-	}
+	
+	
+	
 	
     /** To string   */
-    @Override	public String toString() {		return "X="+posX+" Y="+posY ;/* + " " + this.upToDate + " " + this.release;*/ 	}
+    @Override	public String toString() {		return point.toString() ;/* + " " + this.upToDate + " " + this.release;*/ 	}
+
+    /**
+     * Déplace le point vers le point spécfié d'une valeur de 
+     * @param data
+     * @param i
+     */
+	public void approche(Position data, int i){
+		if (distance(data) > 100)
+		{			// on s'interesse a la position vers laquelle on va aller
+			int cx=0,dx = data.getPosX() - getPosX();
+			int cy=0,dy = data.getPosY() - getPosY();
+			if (dx != 0) cx = new Integer((int) (dx/distance(data)*i)).intValue();
+			if (dy != 0) cy = new Integer((int) (dy/distance(data)*i)).intValue();
+
+			point.translate(cx,cy);
+			//System.out.println("hey hey" + dx/distance(data)*i + " " + dx + " " + distance(data) );
+		}
+	}
+
+	public void eloigne(Position data, int i) {
+		if (distance(data) < 100){			// on s'interesse a la position vers laquelle on va aller
+			int cx=0,dx = data.getPosX() - getPosX();
+			int cy=0,dy = data.getPosY() - getPosY();
+			if (dy != 0) cx = new Integer((int) (dx/distance(data)*i)).intValue();
+			if (dx != 0) cy = new Integer((int) (dy/distance(data)*i)).intValue();
+
+			point.translate(cx,cy);
+			
+		}
+		
+	}
 
 }

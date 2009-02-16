@@ -4,6 +4,8 @@ package org.myapp.module;
 import java.util.HashMap;
 
 import org.myapp.event.Bbool;
+import org.myapp.event.Information;
+import org.myapp.flux.Flux;
 import org.myapp.flux.FluxBool;
 import org.myapp.flux.FluxPosition;
 
@@ -26,8 +28,8 @@ public class moduleBas  extends module<FluxPosition ,FluxBool > implements Updat
 	public moduleBas(String string, int i, FluxPosition fluxe, FluxBool fluxs) {
 
 
-		fluxEntrant = fluxe;
-        fluxSortant = fluxs;
+		setFluxEntrant(fluxe);
+        setFluxSortant(fluxs);
         
         expression =  new String("select posY from org.myapp.module.moduleBas "+
         						" where posY>500");
@@ -35,8 +37,8 @@ public class moduleBas  extends module<FluxPosition ,FluxBool > implements Updat
 
 	@Override
 	public void update(EventBean[] newEvents, EventBean[] oldEvents) {
-	        this.fluxSortant.set(new Bbool());
-	        System.out.println("\t module Bas => "+ fluxSortant.data.toString() );
+	        this.getFluxSortant().set(new Bbool());
+	        System.out.println("\t module Bas => "+ getFluxSortant().data.toString() );
 	       
 	}
 
@@ -45,7 +47,7 @@ public class moduleBas  extends module<FluxPosition ,FluxBool > implements Updat
 	public void run(){
 		while(true){
 	    	try {
-	    		if (fluxEntrant.isFresh(40))
+	    		if (getFluxEntrant().isFresh(40))
 	    		epService.getEPRuntime().sendEvent(this);
 	    		sleep(20);
 	    	} catch (InterruptedException e) { e.printStackTrace();	}
@@ -78,13 +80,17 @@ public class moduleBas  extends module<FluxPosition ,FluxBool > implements Updat
 	
 
 	 public float getPosX() {
-	        return fluxEntrant.data.getPosX();
+	        return getFluxEntrant().data.getPosX();
     }
     
     public float getPosY() {
-    	return fluxEntrant.data.getPosY();
+    	return getFluxEntrant().data.getPosY();
     }
 
-	
+	public void setFluxEntrant(Flux<? extends Information> fluxEntrant){
+		this.fluxEntrant = new FluxPosition();
+		this.fluxEntrant.setFromFlux(fluxEntrant);
+		
+	}
 
 }

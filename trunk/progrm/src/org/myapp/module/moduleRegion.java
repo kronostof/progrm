@@ -2,6 +2,9 @@ package org.myapp.module;
 
 
 import java.util.HashMap;
+
+import org.myapp.event.Information;
+import org.myapp.flux.Flux;
 import org.myapp.flux.FluxBool;
 import org.myapp.flux.FluxPosition;
 
@@ -28,8 +31,8 @@ public class moduleRegion extends module<FluxPosition ,FluxBool> implements Upda
 	public moduleRegion(String string, int i, FluxPosition fluxEntrant, FluxBool fluxSortant) {
 
 		this.nom = string;
-		this.fluxEntrant = fluxEntrant;
-        this.fluxSortant = fluxSortant;
+		this.setFluxEntrant(fluxEntrant);
+        this.setFluxSortant(fluxSortant);
         expression =  new String("select posX from org.myapp.module.moduleRegion where posX<850 and posX>50 and posY<850 and posY>50");
 	}
 
@@ -41,10 +44,10 @@ public class moduleRegion extends module<FluxPosition ,FluxBool> implements Upda
 	 */
 	public void update(EventBean[] newEvents, EventBean[] oldEvents) {
 
-		fluxSortant.set(true);
+		getFluxSortant().set(true);
 		//if (fluxEntrant.getPosX()>500) System.out.println(nom + " " + fluxSortant.data.getValue());
-		if(fluxEntrant.isFresh(20));
-		System.out.println(" module Region " +nom +" => "+fluxEntrant.data.toString() + " =>" + fluxSortant.data.toString());
+		if(getFluxEntrant().isFresh(20));
+		System.out.println(" module Region " +nom +" => "+getFluxEntrant().data.toString() + " =>" + getFluxSortant().data.toString());
 	}
 
 	//@Override	public void init(EPServiceProvider nepService) {		this.epService=nepService;			}
@@ -69,8 +72,8 @@ public class moduleRegion extends module<FluxPosition ,FluxBool> implements Upda
 			}
 	}
 
-	public float getPosX() {        return fluxEntrant.getPosX();    }
-    public float getPosY() {        return fluxEntrant.getPosY();    }
+	public float getPosX() {        return getFluxEntrant().getPosX();    }
+    public float getPosY() {        return getFluxEntrant().getPosY();    }
     
 /**
  * Cette methode est utilisée afin de modifier l'expression utilisée par ce module par défault l expression designe 
@@ -80,5 +83,11 @@ public class moduleRegion extends module<FluxPosition ,FluxBool> implements Upda
 	public int setup(HashMap<String, Object> conf) {
 		expression =  new String((String)conf.get("expression"));
 		return 0;
+	}
+	
+	public void setFluxEntrant(Flux<? extends Information> fluxEntrant){
+		this.fluxEntrant = new FluxPosition();
+		this.fluxEntrant.setFromFlux(fluxEntrant);
+		
 	}
 }

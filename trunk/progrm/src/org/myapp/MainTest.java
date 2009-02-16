@@ -1,16 +1,8 @@
 package org.myapp;
 
-//import java.util.ArrayList;
-//import java.util.HashMap;
-
-//import org.myapp.event.Position;
-//import org.myapp.flux.FluxBool;
 import org.myapp.flux.FluxFixation;
 import org.myapp.flux.FluxPosition;
 import org.myapp.module.*;
-
-import com.espertech.esper.client.EPServiceProvider;
-import com.espertech.esper.client.EPServiceProviderManager;
 import com.espertech.esper.client.EPStatement;
 
 
@@ -28,12 +20,8 @@ public class MainTest  extends Thread{
 		//FluxBool fixeCentre= new FluxBool();
 		//FluxBool versBas= new FluxBool();
 		
-		Lecteur lecteur = new Lecteur(position);
-		
-		
-		lecteur.start(); // on recupere la position du pts d attention.
-		
-		EPServiceProvider epService = EPServiceProviderManager.getDefaultProvider();
+		new Lecteur(position);
+		//EPServiceProvider epService = EPServiceProviderManager.getDefaultProvider();
 
 		
 		moduleFixation listener =  new moduleFixation("tset", 33,position,fixation);
@@ -41,7 +29,7 @@ public class MainTest  extends Thread{
 		//moduleBas listener3 =  new moduleBas("tset", 33,position,versBas);
 		
 		
-		listener.init(epService);
+		//epService = Lecteur.getInstance();
 		//listener2.init(epService);
 		//listener3.init(epService);
 

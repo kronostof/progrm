@@ -1,42 +1,26 @@
 package org.myapp.model;
 
-
-import java.awt.Color;
-import java.awt.Dimension;
-
-import javax.swing.event.EventListenerList;
-
-import org.Entrepot;
-//import org.ModelListener;
-import org.MondeDesFormeController;
-import org.MondeDesFormeControllerListener;
 import org.myapp.Lecteur;
-import org.myapp.flux.FluxPosition;
-import org.myapp.module.GazeModelForme;
-
-import drawing.CircleDrawable;
+import org.myapp.controle.MondeDesFormeController;
+import org.myapp.controle.MondeDesFormeControllerListener;
+import org.myapp.factory.ShapeFactory;
 
 
 public class MondeDesFormeModel {
 
+//	private EventListenerList listeners;
+//	private MondeDesFormeControllerListener Controleur;
 
-	private EventListenerList listeners;
-	Entrepot entrepotDeForme;
-
-	Lecteur lecteur;		// afin de tester j utilise ma propre classe lecteur.
 	
-	private MondeDesFormeControllerListener Controleur;
-
+	//private ShapeFactory shapeFactory;
 	public MondeDesFormeModel() {
 		 
-		listeners = new EventListenerList();
-
-
-		// juste por tester
-		entrepotDeForme = new Entrepot();
-		FluxPosition fluxgaze = new FluxPosition();
-		lecteur = new Lecteur();
-		lecteur.start();
+//		listeners = new EventListenerList();
+		//entrepotDeForme = new Entrepot();
+		new Lecteur();
+		new ShapeFactory();
+		//shapeFactory.setControlleur(Controleur);
+		
 	}
 
 /**
@@ -44,43 +28,26 @@ public class MondeDesFormeModel {
  * @param Controleur
  */
 	public void build(MondeDesFormeController Controleur){
-		this.Controleur = Controleur;
+//		this.Controleur = Controleur;
+		//shapeFactory.setControlleur(Controleur);
+		//ShapeFactory.
+		ShapeFactory.newShape("Gaze0");
+		//Controleur.nouvelleForme(new Shape("name " + System.currentTimeMillis(),10),100);
 		
-		
-		 for (int i=0;i<12;i++){
-		 
-			// creeation des forme
-			ModelForme forme = new ModelForme("forme n°"+i,lecteur);
-			CircleDrawable c = new CircleDrawable(Color.BLUE,forme.getPosition(),new Dimension(40,40));
-			// on averti le truc 
-		 
-			//Controleur.addFormeListener(forme);
-			//forme.addFormeListener(new CircleDrawable(Color.BLUE,forme.getPosition(),new Dimension(40,40)));
-			forme.addMonFormeListener(c);
-			//entrepotDeForme.put(new String("forme n°"+i), forme);
+		 for (int i=0;i<3;i++){
+			 ShapeFactory.newShape("fuite0");
+			 ShapeFactory.newShape("approche1");
+			 ShapeFactory.newShape("approche0");
+			
+			//Controleur.nouvelleForme(new Shape("name " + System.currentTimeMillis(),i%4),i%4);
 		}
-	
-		// TEMP moche il ns faut un gestionnaire de module ! ! !
-		//GazeModelForme gaze = new GazeModelForme("forme GAZE",lecteur);
-		//CircleDrawable c = new CircleDrawable(Color.RED,gaze.getPosition(),new Dimension(40,40));
-		//gaze.addMonFormeListener(c);
-		// juste pour tester
+		 ShapeFactory.newShape("type1");
+		 ShapeFactory.newShape("type2");
 	}
 
-/*
-	public void addModelListener(ModelListener listener){
-		listeners.add(ModelListener.class, listener);
-	}
-	
-
-
-	public void removeModelListener(ModelListener l){
-		 listeners.remove(ModelListener.class, l);
-	}
-*/
-
-	public void addControlleurListner(MondeDesFormeControllerListener Controller) {
-		this.Controleur = Controleur;
+	public void addControlleurListner(MondeDesFormeControllerListener Controleur) {
+//		this.Controleur = Controleur;
 		
 	}
+	
 }

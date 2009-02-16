@@ -1,6 +1,7 @@
 package org.myapp.flux;
 
 import org.myapp.event.Fixation;
+import org.myapp.event.Information;
 import org.myapp.event.Position;
 
 
@@ -33,11 +34,24 @@ public class FluxFixation extends Flux<Fixation> {
 		data.upDate();
 	}
 	
+	public void set(FluxFixation fe) {
+		if(data.setPosition(fe.data.getPosition())) 
+			data.resetTemps();
+		data.upDate();
+	}
+	
+	public void set(FluxPosition fe) {
+		if(data.setPosition(fe.data)) 
+			data.resetTemps();
+		data.upDate();
+	}
+	
+	
 	public void set(int x,int y) {
 		//if(
 				data.setPosition(x,y);
 		//) 
-			data.resetTemps();
+		data.resetTemps();
 		data.upDate();
 		
 		data.getPosition().resetTemps();
@@ -53,4 +67,13 @@ public class FluxFixation extends Flux<Fixation> {
     	return data.getPosY();
     	
     }
+
+	
+	@Override
+	public void setFromFlux(Flux<? extends Information> flux) {
+		//System.out.println(flux.getClass().getSimpleName());
+		if((new String(flux.getClass().getSimpleName()).compareTo(new String("FluxFixation"))== 0))
+		set(((FluxFixation) flux));
+	}
+
 }
