@@ -10,12 +10,12 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Point;
 
-import drawing.CircleDrawable;
 import drawing.GUIHelper;
-import drawing.IDrawable;
 import drawing.JCanvas;
-import drawing.RectangleDrawable;
 import drawing.listeners.NonOverlapMoveAdapter;
+import drawing.shape.CircleDrawable;
+import drawing.shape.IDrawable;
+import drawing.shape.RectangleDrawable;
 
 
 /**

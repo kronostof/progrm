@@ -12,10 +12,10 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.util.List;
 
-import drawing.IDrawable;
 import drawing.JCanvas;
 import drawing.JCanvasMouseListener;
-import drawing.RectangleDrawable;
+import drawing.shape.IDrawable;
+import drawing.shape.RectangleDrawable;
 
 /**
  * @author duj
@@ -42,7 +42,7 @@ public class TestML extends JCanvasMouseListener {
 	 * @see draw2.JCanvasMouseListener#rightClickAction(java.awt.event.MouseEvent)
 	 */
 	protected void leftClickAction(MouseEvent e) {
-		Point p = e.getPoint();
+		//Point p = e.getPoint();
 		IDrawable rect = createDrawable(e);
 		if (canvas.isFree(rect.getRectangle())) {
 			canvas.addDrawable(rect);

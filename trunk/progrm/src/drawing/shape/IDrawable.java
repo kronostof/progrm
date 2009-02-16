@@ -1,4 +1,4 @@
-package drawing;
+package drawing.shape;
 
 import java.awt.Graphics;
 import java.awt.Point;
