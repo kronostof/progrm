@@ -56,10 +56,10 @@ public class fenetre extends JFrame implements ActionListener,MouseMotionListene
 		
 	public JPanel getContainer(){
 		
-		//fenetreCalibration fen = new fenetreCalibration(socket);
-		//fen.setVisible(true);
+
 		
-		layout = new FlowLayout(); 
+		
+		layout = new FlowLayout();  
 		layout.setAlignment(FlowLayout.CENTER);
 		container = new JPanel() ; 
 		container.setLayout(layout); 

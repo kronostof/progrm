@@ -39,11 +39,7 @@ public class affichage extends JFrame implements ActionListener,MouseMotionListe
 		this.setDefaultLookAndFeelDecorated(true);
 		this.setUndecorated(false);
 		this.setExtendedState(this.MAXIMIZED_BOTH);
-		//this.setSize(500,350); //On donne une taille à notre fenêtre
-		//this.setLocationRelativeTo(null); //On centre la fenêtre sur l'écran
-		//this.setResizable(false) ; //On interdit la redimensionnement de la fenêtre
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //On dit à l'application de sefermer
-		//lors du clic sur la croix
 		this.setContentPane(getContainer());
 		}
 		private JPanel getContainer(){
