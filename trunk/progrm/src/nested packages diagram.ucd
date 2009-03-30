@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" name="nested packages diagram" id="{UMLID=_nBGocP83Ed22V-r9Yukv6A,JavaID=.}" metadata="uml2-1.0" initialized="true" scrolledX="-5" scrolledY="-10" tag="10" key="32303037303632392070726F67726D">
+  <children xsi:type="editmodel:PackageEditModel" name="org" size="729,435" id="{UMLID=_tiIRAP8tEd22V-r9Yukv6A,JavaID=org}">
+    <children xsi:type="editmodel:PackageEditModel" name="org.asma" location="561,339" size="80,70" id="{UMLID=_nB2PUf83Ed22V-r9Yukv6A,JavaID=org.asma}">
+      <packagePreferences xsi:type="editmodel:UMLClassDiagramPackagePreference" shortPackageNameFormat="true"/>
+    </children>
+    <children xsi:type="editmodel:PackageEditModel" name="org.myapp" location="50,50" size="481,347" id="{UMLID=_tibzAP8tEd22V-r9Yukv6A,JavaID=org.myapp}">
+      <children xsi:type="editmodel:PackageEditModel" name="org.myapp.factory" location="257,43" size="82,70" id="{UMLID=_tibzAf8tEd22V-r9Yukv6A,JavaID=org.myapp.factory}">
+        <packagePreferences xsi:type="editmodel:UMLClassDiagramPackagePreference" shortPackageNameFormat="true"/>
+      </children>
+      <children xsi:type="editmodel:PackageEditModel" name="org.myapp.module" location="50,50" size="176,270" id="{UMLID=_8dQMhP8tEd22V-r9Yukv6A,JavaID=org.myapp.module}">
+        <children xsi:type="editmodel:PackageEditModel" name="org.myapp.module.action" location="50,170" size="80,70" id="{UMLID=_N2S3wP81Ed22V-r9Yukv6A,JavaID=org.myapp.module.action}">
+          <packagePreferences xsi:type="editmodel:UMLClassDiagramPackagePreference" shortPackageNameFormat="true"/>
+        </children>
+        <children xsi:type="editmodel:PackageEditModel" name="org.myapp.module.manager" location="50,50" size="96,70" id="{UMLID=_N2S3xP81Ed22V-r9Yukv6A,JavaID=org.myapp.module.manager}">
+          <packagePreferences xsi:type="editmodel:UMLClassDiagramPackagePreference" shortPackageNameFormat="true"/>
+        </children>
+        <packagePreferences xsi:type="editmodel:UMLClassDiagramPackagePreference" shortPackageNameFormat="true"/>
+      </children>
+      <children xsi:type="editmodel:PackageEditModel" name="org.myapp.flux" location="255,253" size="80,70" id="{UMLID=_gUYN8P-IEd2j4rllHQHsag,JavaID=org.myapp.flux}">
+        <packagePreferences xsi:type="editmodel:UMLClassDiagramPackagePreference" shortPackageNameFormat="true"/>
+      </children>
+      <children xsi:type="editmodel:PackageEditModel" name="org.myapp.event" location="257,163" size="80,70" id="{UMLID=_MhGedP-NEd2j4rllHQHsag,JavaID=org.myapp.event}">
+        <packagePreferences xsi:type="editmodel:UMLClassDiagramPackagePreference" shortPackageNameFormat="true"/>
+      </children>
+      <children xsi:type="editmodel:PackageEditModel" name="org.myapp.controle" location="362,161" size="91,70" id="{UMLID=_ul-ToP8tEd22V-r9Yukv6A,JavaID=org.myapp.controle}">
+        <packagePreferences xsi:type="editmodel:UMLClassDiagramPackagePreference" shortPackageNameFormat="true"/>
+      </children>
+      <children xsi:type="editmodel:PackageEditModel" name="..model" location="370,42" size="80,70" id="{UMLID=_gLKAgP-IEd2j4rllHQHsag,JavaID=..model}">
+        <packagePreferences xsi:type="editmodel:UMLClassDiagramPackagePreference" shortPackageNameFormat="true"/>
+      </children>
+      <packagePreferences xsi:type="editmodel:UMLClassDiagramPackagePreference" shortPackageNameFormat="true"/>
+    </children>
+    <children xsi:type="editmodel:PackageEditModel" name="org.lamia" location="555,48" size="160,276" id="{UMLID=_8XwBc_8tEd22V-r9Yukv6A,JavaID=org.lamia}">
+      <children xsi:type="editmodel:PackageEditModel" name="org.lamia.src" location="50,170" size="80,70" id="{UMLID=_8XwBdP8tEd22V-r9Yukv6A,JavaID=org.lamia.src}">
+        <packagePreferences xsi:type="editmodel:UMLClassDiagramPackagePreference" shortPackageNameFormat="true"/>
+      </children>
+      <children xsi:type="editmodel:PackageEditModel" name="org.lamia.bin" location="50,50" size="80,70" id="{UMLID=_nCAAUP83Ed22V-r9Yukv6A,JavaID=org.lamia.bin}">
+        <packagePreferences xsi:type="editmodel:UMLClassDiagramPackagePreference" shortPackageNameFormat="true"/>
+      </children>
+      <packagePreferences xsi:type="editmodel:UMLClassDiagramPackagePreference" shortPackageNameFormat="true"/>
+    </children>
+    <packagePreferences xsi:type="editmodel:UMLClassDiagramPackagePreference" shortPackageNameFormat="true"/>
+  </children>
+  <children xsi:type="editmodel:PackageEditModel" name="drawing" location="756,0" size="239,448" id="{UMLID=_undhYP8tEd22V-r9Yukv6A,JavaID=drawing}">
+    <children xsi:type="editmodel:PackageEditModel" name="drawing.shape" location="23,40" size="160,156" id="{UMLID=_undhYf8tEd22V-r9Yukv6A,JavaID=drawing.shape}">
+      <children xsi:type="editmodel:PackageEditModel" name="drawing.shape.type" location="50,50" size="80,70" id="{UMLID=_nCAAUv83Ed22V-r9Yukv6A,JavaID=drawing.shape.type}">
+        <packagePreferences xsi:type="editmodel:UMLClassDiagramPackagePreference" shortPackageNameFormat="true"/>
+      </children>
+      <packagePreferences xsi:type="editmodel:UMLClassDiagramPackagePreference" shortPackageNameFormat="true"/>
+    </children>
+    <children xsi:type="editmodel:PackageEditModel" name="drawing.demos" location="31,320" size="81,70" id="{UMLID=_nCJxUP83Ed22V-r9Yukv6A,JavaID=drawing.demos}">
+      <packagePreferences xsi:type="editmodel:UMLClassDiagramPackagePreference" shortPackageNameFormat="true"/>
+    </children>
+    <children xsi:type="editmodel:PackageEditModel" name="drawing.listeners" location="29,227" size="92,70" id="{UMLID=_nCAAUf83Ed22V-r9Yukv6A,JavaID=drawing.listeners}">
+      <packagePreferences xsi:type="editmodel:UMLClassDiagramPackagePreference" shortPackageNameFormat="true"/>
+    </children>
+    <packagePreferences xsi:type="editmodel:UMLClassDiagramPackagePreference" shortPackageNameFormat="true"/>
+  </children>
+  <diagramOptions xsi:type="options:ClassDiagramOptions" level="4" properties="wireOptions=4" Nestedpackages="true" NestedpackagesDeep="6"/>
+  <boardSetting snapToGeometry="true" gridEnabled="true" gridSpacing="14,14" gridOrigin="392,84" rulerUnit="cm" gridShow="true">
+    <leftRuler/>
+    <topRuler/>
+  </boardSetting>
+  <classDiagramPreferences xsi:type="editmodel:UMLClassDiagramPreference" attributeSorter="Naturel" methodSorter="Naturel" shortPackageNameFormat="true" showClassStereotype="true" showPackageStereotype="true" innerClassSorter="Naturel" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showInterfaceStereotype="true" showMethods="true" showAttributes="true" showLiterlas="true" showInnerEntity="true"/>
+</editmodel:ClassDiagramEditModel>

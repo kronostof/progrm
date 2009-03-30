@@ -31,12 +31,19 @@ public class GUIHelper {
 	 
 	public static void showOnFrame(JComponent component, String frameName) {
 		JFrame frame = new JFrame(frameName);
+		GraphicsDevice device = null;
 		if(GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices().length == 2){ //si on a deux éran
-		frame.setLocation(GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[1].getConfigurations()[1].getBounds().x,GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[1].getConfigurations()[1].getBounds().y);
+			frame.setLocation(GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[1].getConfigurations()[1].getBounds().x,GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[1].getConfigurations()[1].getBounds().y);
+			device = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[1];
+		}
+		else 
+		{
+			frame.setLocation(GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0].getConfigurations()[0].getBounds().x,GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0].getConfigurations()[0].getBounds().y);
+			device = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
 		}
 		frame.setUndecorated(true);
 		frame.setIgnoreRepaint(true);
-		GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[1];
+		
 		
 		device.setFullScreenWindow(frame);
 		if (device.isDisplayChangeSupported()) {
@@ -53,11 +60,11 @@ public class GUIHelper {
 		frame.getContentPane().add(component);
 		frame.pack();
 		
-		frame.setExtendedState(Frame.MAXIMIZED_BOTH);
+		//frame.setExtendedState(Frame.MAXIMIZED_BOTH);
 		frame.setVisible(true);
 		
 		//
-		//frame.setDefaultLookAndFeelDecorated(true);
+		frame.setDefaultLookAndFeelDecorated(true);
 		
 		
 

@@ -8,7 +8,8 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JPanel;
-import org.MondeDesFormeControllerListener;
+
+import org.myapp.controle.MondeDesFormeControllerListener;
 
 import drawing.shape.IDrawable;
 

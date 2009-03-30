@@ -32,15 +32,20 @@ public class RecevoirData extends Thread {
 		      
 		    	try {
 					socket.receive(p);
-					sleep(20);
+					sleep(0);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} 
 		    	ch = new String(buffer, 0, p.getLength()); 
+		    	try {
+					Send send = new Send("ET_CHG" +"\n" + "\r", socket);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 		    	
-		    	
-		    	
+		    	System.out.println(ch);
 		    	if ((ch.substring(0, 6)).equals("ET_SPL")){
 		    	String[] results = ch.split( "#\\s*" );
 		    	String[] right = results[1].split( " \\s*" );
@@ -50,6 +55,7 @@ public class RecevoirData extends Thread {
 		    	//if (posX != 0)if (posY != 0)
 		    	fluxposition.data.set(posX, posY);
 		    	System.out.println("position X = " + posX +" position Y = " + posY);
+		    	
 		    	}
 		 
 		    }
