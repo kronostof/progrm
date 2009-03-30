@@ -3,12 +3,12 @@ package org.myapp.factory;
 import java.awt.Color;
 
 import org.myapp.controle.MondeDesFormeController;
-import org.myapp.model.ModuleManager;
 import org.myapp.model.Shape;
-import org.myapp.module.action.ModuleSuivreGaze;
+import org.myapp.module.manager.ModuleManager;
 import org.myapp.module.manager.ModuleManagerApproche;
 import org.myapp.module.manager.ModuleManagerFuite;
 import org.myapp.module.manager.ModuleManagerType1;
+import org.myapp.module.manager.ModuleManagerSuivreGaze;
 
 import drawing.shape.VueForme;
 
@@ -16,12 +16,12 @@ public class ShapeFactory {
 
 	
 	//public static MondeDesFormeController controleur = null;
-	
+	static ModuleManager nwModuleManager;
 	
 	
 	
 	public ShapeFactory() {
-		
+		nwModuleManager = null;
 	}
 	/*
 	public static Shape newShape(){
@@ -49,13 +49,13 @@ public class ShapeFactory {
 		
 		
 		// par default les forme se comporte ... comme des caillouuuxxx !!!
-		ModuleManager nwModuleManager = null;
+		
 		
 		
 		if (type == "Gaze0"){
 			nwShape.color = Color.RED;
 			nwShape.setForme(Shape.CURSOR);
-			nwModuleManager = new ModuleSuivreGaze(nwShape);		// colle la position d'une la forme au gaze.
+			nwModuleManager = new ModuleManagerSuivreGaze(nwShape);		// colle la position d'une la forme au gaze.
 		}
 		
 		
@@ -69,9 +69,6 @@ public class ShapeFactory {
 			nwShape.setForme(Shape.TRANGLE);
 			nwModuleManager = new ModuleManagerFuite(nwShape,8);
 		}
-		
-		
-		
 		
 		
 		if (type == "approche0"){
@@ -96,7 +93,7 @@ public class ShapeFactory {
 			nwModuleManager = new ModuleManagerType1(nwShape,Color.RED.getRGB());
 		}
 
-
+		
 		VueForme nwVueForme = new VueForme(nwShape,nwShape.getForme());
 		
 		nwShape.addFormeListener(nwVueForme);

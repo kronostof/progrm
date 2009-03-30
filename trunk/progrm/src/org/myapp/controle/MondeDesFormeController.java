@@ -52,33 +52,14 @@ public class MondeDesFormeController implements MondeDesFormeControllerListener{
 		
 	}
 	*/
-	
+	/*
 	public void nouvelleForme(Shape nf ,int type) {
 		VueForme c = new VueForme(nf,type);
 		
-	/*	switch(type){
-		case 0:
-			nf.poolModule.chainnage(new moduleSuivrePosition(nf,2,nf.getPosition(),nf.getGaze()));
-		break;
-		case 1:
-			nf.poolModule.chainnage(new moduleEviterPosition(nf,33,nf.getPosition(),nf.getGaze()));
-		break;
-		
-		case 2:
-			nf.poolModule.chainnage(new moduleChangerCouleur(nf,33,nf.getColor(),nf.getPosition(),nf.getGaze()));
-		break;
-			
-		case 100:
-			nf.poolModule.chainnage(new moduleSuivrePosition(nf,5,nf.getPosition(),nf.getGaze()));
-		break;
-		
-		default:
-			nf.poolModule.chainnage(new moduleEviterPosition(nf,33,nf.getPosition(),nf.getGaze()));
-		}
-	*/
 		moduleFixation mf = new moduleFixation(nf.getNom(),type);
 		nf.poolModule.chainnage(mf);
 		
 		nf.addFormeListener(c);
 	}
+	*/
 }

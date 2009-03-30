@@ -2,12 +2,9 @@ package org.myapp.module;
 
 
 import java.util.HashMap;
-
 import org.myapp.event.Information;
 import org.myapp.flux.Flux;
 import org.myapp.flux.FluxPosition;
-
-import com.espertech.esper.client.EPServiceProvider;
 import com.espertech.esper.client.UpdateListener;
 import com.espertech.esper.event.EventBean;
 
@@ -15,7 +12,7 @@ public class ModuleTrace  extends module<FluxPosition ,FluxPosition> implements 
 
 	
 	
-    EPServiceProvider epService;
+   // EPServiceProvider epService;
     
     /**
 	 * Ce module permet la construction d'une trace a partir d'un flux d'information

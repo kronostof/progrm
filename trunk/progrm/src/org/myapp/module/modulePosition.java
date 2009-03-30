@@ -100,17 +100,9 @@ public class modulePosition  extends module<FluxPosition ,FluxPosition> implemen
 
 	public void run(){
 		while(true){
-			if(getFluxEntrant().isFresh(20)){
+			//if(getFluxEntrant().isFresh(20))
 				epService.getEPRuntime().sendEvent(this);
-				//System.out.println(nom + " \t On regarde vers => " + getFluxEntrant().toString());
-				//System.out.println("new info MPosition");
-				}
-		/*	else{
-				getFluxSortant().data.setValue(false);
-	    		//System.out.println(nom + " \t On regarde vers => " + fluxEntrant.data.toString());
-				//System.out.println("old info Mposition" + " FXE = " + fluxEntrant.data.toString());
-				
-			}*/
+			
     		 try {
     		 sleep(vitesseDeTraitement);
     		 } catch (InterruptedException e) { e.printStackTrace();	}

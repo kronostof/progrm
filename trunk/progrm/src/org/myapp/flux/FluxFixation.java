@@ -2,7 +2,7 @@ package org.myapp.flux;
 
 import org.myapp.event.Fixation;
 import org.myapp.event.Information;
-import org.myapp.event.Position;
+//import org.myapp.event.Position;
 
 
 public class FluxFixation extends Flux<Fixation> {
@@ -22,11 +22,11 @@ public class FluxFixation extends Flux<Fixation> {
 	 * ¤  si les position de fixation sont differante on les modifie on indique quand on les a modifié
 	 */
 	
-	public void set(Position fe) {
+/*	public void set(Position fe) {
 		// TODO Auto-generated method stub
 		
 	}
-	
+	*/
 	@Override
 	public void set(Fixation fe) {
 		if(data.setPosition(fe.getPosition())) 
@@ -39,14 +39,14 @@ public class FluxFixation extends Flux<Fixation> {
 			data.resetTemps();
 		data.upDate();
 	}
-	
+	/*
 	public void set(FluxPosition fe) {
 		if(data.setPosition(fe.data)) 
 			data.resetTemps();
 		data.upDate();
 	}
 	
-	
+	*/
 	public void set(int x,int y) {
 		//if(
 				data.setPosition(x,y);

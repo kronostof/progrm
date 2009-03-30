@@ -57,7 +57,7 @@ public class moduleSuivrePosition   extends module<FluxPosition ,FluxBool> imple
 	public void run(){
 		while(true){	    	
 	    		//System.out.println(getFluxEntrant().get().toString() + "\t" + position.toString());
-	    		if (getFluxEntrant().isFresh(20)) 
+	    		//if (getFluxEntrant().isFresh(20)) 
 	    		epService.getEPRuntime().sendEvent(this);
 	    		
 	    		try {

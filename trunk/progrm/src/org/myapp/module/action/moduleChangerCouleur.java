@@ -40,7 +40,7 @@ public class moduleChangerCouleur   extends module<FluxPosition ,FluxBool> imple
 		boolclignote = false;
 		originalColor = shape.color;
 		alternativeColor = new Color(type);
-		//this.setFluxEntrant(fluxEntrant);
+		setFluxEntrant(new FluxPosition());
 		setFluxSortant(new FluxBool());
         expression =  "select name,posX from org.myapp.module.action.moduleChangerCouleur ";
     	
@@ -56,7 +56,8 @@ public class moduleChangerCouleur   extends module<FluxPosition ,FluxBool> imple
 	 */
 	public void update(EventBean[] newEvents, EventBean[] oldEvents) {
 		//System.out.println(" " +newEvents[0].get("name") + " " + getName());
-		if (getName().compareTo(newEvents[0].get("name").toString()) == 0){
+		if (getName().compareTo(newEvents[0].get("name").toString()) == 0)
+		{
 		setClignote(1000,100);
 		shape.firePositionChangee();
 		}
@@ -80,18 +81,14 @@ public class moduleChangerCouleur   extends module<FluxPosition ,FluxBool> imple
 			if (shape.color == originalColor)
 				shape.color = alternativeColor;
 			else shape.color = originalColor;
-			
 			shape.firePositionChangee();
-			
 			time = System.currentTimeMillis();
 			delay -= speed;
-			if ((delay )< 0) {
-				boolclignote = false;
-				shape.color = originalColor;
-			}
 		}
-		//
-		//	
+		if ((delay )<= 0) {
+			boolclignote = false;
+			shape.color = originalColor;
+		}	
 	}
 
 	/**
@@ -106,7 +103,7 @@ public class moduleChangerCouleur   extends module<FluxPosition ,FluxBool> imple
 		while(true){
 			
     		if (getFluxEntrant().isFresh(40)){
-    			//System.out.println(shape.getName()+ " " + fluxEntrant.data.toString() + " " );
+    			System.out.println(shape.getName()+ " " + fluxEntrant.data.toString() + " " );
 	    		epService.getEPRuntime().sendEvent(this);	
     		}
     		if(boolclignote) 	clignote();
