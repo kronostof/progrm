@@ -1,6 +1,5 @@
 package org.myapp.module.manager;
 
-import org.myapp.model.ModuleManager;
 import org.myapp.model.Shape;
 import org.myapp.module.action.moduleSuivrePosition;
 

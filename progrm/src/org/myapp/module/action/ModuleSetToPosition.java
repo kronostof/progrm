@@ -12,7 +12,7 @@
 	import com.espertech.esper.client.UpdateListener;
 	import com.espertech.esper.event.EventBean;
 
-	public class ModuleSetToPosition extends module<FluxPosition ,FluxBool> implements UpdateListener{
+	public class ModuleSetToPosition extends module<FluxPosition ,FluxBool> implements UpdateListener,ModuleAction{
 
 		
 
@@ -37,7 +37,8 @@
 		 *  les traitements a effectuer en fonction de la nature du flux entrant sont a y placer.
 		 */
 		public void update(EventBean[] newEvents, EventBean[] oldEvents) {
-			if (getName().compareTo(newEvents[0].get("name").toString()) == 0){
+			//if (getName().compareTo(newEvents[0].get("name").toString()) == 0)
+			{
 				shape.getPosition().set(getFluxEntrant().data);
 				shape.firePositionChangee();
 			}
@@ -54,9 +55,9 @@
 		public void run(){
 			while(true){	    	
 		    		//System.out.println(getFluxEntrant().get().toString() + "\t" + position.toString());
-		    		if (getFluxEntrant().isFresh(20)) 
+		    		//if (getFluxEntrant().isFresh(20)) 
 		    		epService.getEPRuntime().sendEvent(this);
-		    		
+		    		System.out.println(fluxEntrant.data.toString());
 		    		try {
 		    		sleep(vitesseDeTraitement);
 		    		} catch (InterruptedException e) { e.printStackTrace();	}

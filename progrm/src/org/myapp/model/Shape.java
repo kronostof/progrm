@@ -12,6 +12,7 @@ import org.FormeListener;
 import org.myapp.Lecteur;
 import org.myapp.event.Position;
 import org.myapp.flux.FluxPosition;
+import org.myapp.module.manager.ModuleManager;
 
 import com.espertech.esper.client.EPServiceProvider;
 
@@ -36,7 +37,7 @@ public class Shape extends Thread implements AbstractShape,FormeListener{
 
 	
 	//FormeListener VueForme;
-	FluxPosition Gaze = new FluxPosition();
+	public FluxPosition Gaze = new FluxPosition();
 	//FluxBool fbool;
 
 	
@@ -68,7 +69,7 @@ public class Shape extends Thread implements AbstractShape,FormeListener{
 		epService = Lecteur.getInstance(); 
 		position = new Position((int)(Math.random()*1024),(int)(Math.random()*768));
 
-		poolModule = new ModuleManager(Gaze);
+		//poolModule = new ModuleManager(Gaze);
 		color = new Color(50000);
 		this.start();
 	}
@@ -176,6 +177,11 @@ public class Shape extends Thread implements AbstractShape,FormeListener{
 	 */
 	public int getForme() {
 		return forme;
+	}
+
+	public void eloigne(Position data, int paramPas) {
+		position.eloigne(data, paramPas);
+		
 	}
 
 

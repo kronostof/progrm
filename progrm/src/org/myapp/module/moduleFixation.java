@@ -60,6 +60,7 @@ public class moduleFixation extends module<FluxPosition ,FluxFixation > implemen
      * @param position
      * @param fixation
      */
+	/*
     public moduleFixation(String nom, int i, FluxPosition position,FluxFixation fixation) {
         super();
         this.nom = nom;
@@ -82,22 +83,20 @@ public class moduleFixation extends module<FluxPosition ,FluxFixation > implemen
         				" and  posY < (lastposY+30) and posY > (lastposY-30)";
 	}
     
-
+*/
 	
 
 	public void run(){
     	while(true){
 	    	try {   
-	    		if(getFluxEntrant().isFresh(20)){
+	    		//if(getFluxEntrant().isFresh(20))
+	    		{
 					epService.getEPRuntime().sendEvent(this);
 		    		lastpos.set(pos);
 		    		pos.set(getFluxEntrant().data);
 					//System.out.println(pos.toString() + " " + lastpos.toString());
 					}
-				else{
-					//System.out.println("old info MFixation ! ! ! ");
-					sleep(vitesseDeTraitement);
-				}
+
 	    		sleep(vitesseDeTraitement);
 	    		} catch (InterruptedException e) { e.printStackTrace();	}
 			}

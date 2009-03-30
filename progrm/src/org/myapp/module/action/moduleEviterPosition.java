@@ -28,6 +28,19 @@ public class moduleEviterPosition   extends module<FluxPosition ,FluxBool> imple
 	 * @param fluxEntrant
 	 * @param fluxSortant
 	 */
+	public moduleEviterPosition (Shape shape2, int i) {
+		super();
+		shape = shape2;
+		position = shape.getPosition();
+		setFluxEntrant(new FluxPosition());
+		setFluxSortant(new FluxBool());
+        expression =  "select name,posX from org.myapp.module.action.moduleEviterPosition";
+        
+		init_module();
+		start();
+	}
+	
+	
 	public moduleEviterPosition (Shape shape2, int i, Position position,FluxPosition fluxEntrant) {
 		super();
 		shape = shape2;
@@ -48,7 +61,7 @@ public class moduleEviterPosition   extends module<FluxPosition ,FluxBool> imple
 	 */
 	public void update(EventBean[] newEvents, EventBean[] oldEvents) {
 		if (getName().compareTo(newEvents[0].get("name").toString()) == 0){
-			position.eloigne(getFluxEntrant().data,paramPas );
+			shape.eloigne(getFluxEntrant().data,paramPas );
 			shape.firePositionChangee();
 		}
 	}
@@ -64,7 +77,7 @@ public class moduleEviterPosition   extends module<FluxPosition ,FluxBool> imple
 	public void run(){
 		while(true){	    	
 	    		//System.out.println(getFluxEntrant().get().toString() + "\t" + position.toString());
-	    		if (getFluxEntrant().isFresh(20)) 
+	    		//if (getFluxEntrant().isFresh(20)) 
 	    		epService.getEPRuntime().sendEvent(this);
 	    		
 	    		try {
