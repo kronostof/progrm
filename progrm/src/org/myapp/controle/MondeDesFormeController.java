@@ -3,12 +3,12 @@ package org.myapp.controle;
 import java.awt.Color;
 import drawing.GUIHelper;
 import drawing.JCanvas;
-import drawing.shape.VueForme;
+//import drawing.shape.VueForme;
 
 import org.FormeListener;
-import org.myapp.model.Shape;
+//import org.myapp.model.Shape;
 import org.myapp.model.MondeDesFormeModel;
-import org.myapp.module.moduleFixation;
+//import org.myapp.module.moduleFixation;
 
 public class MondeDesFormeController implements MondeDesFormeControllerListener{
 
