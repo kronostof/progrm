@@ -18,12 +18,12 @@ import com.espertech.esper.client.EPServiceProvider;
 import com.espertech.esper.client.EPServiceProviderManager;
 
 /**
- * Cette classe constitue le pré-lecteur du flux elle offre le "EPServiceProvider"
+ * Cette classe constitue le prï¿½-lecteur du flux elle offre le "EPServiceProvider"
  * sa conception modulaire permet l'ajout de nouveau module de comprehention du flux
- * par 	la construction du module (objet dérivant de module) 
- * et 	son ajout au evennement listée ( ajoutStatement() )
+ * par 	la construction du module (objet dï¿½rivant de module) 
+ * et 	son ajout au evennement listï¿½e ( ajoutStatement() )
  * 
- * la vitesse de lecture est celle a laquel on considere qu'une nouvelle info est arrivé
+ * la vitesse de lecture est celle a laquel on considere qu'une nouvelle info est arrivï¿½
  * elle rythme l'envoie de la requete de mise a jour des listener
  * 
  * 
@@ -73,7 +73,7 @@ public class Lecteur extends Thread{
 	}
 
 	/**
-	 * le flux de position passé sera le même flux de position fournie par Lecteur.
+	 * le flux de position passï¿½ sera le mï¿½me flux de position fournie par Lecteur.
 	 * @param f
 	 */
 	public static void accroche(FluxPosition f){
@@ -92,7 +92,8 @@ public class Lecteur extends Thread{
 		
 			e1.printStackTrace();
 		}
-//		if (boolEchecSocket)
+
+                //		if (boolEchecSocket)
 			while(true){
 				try {
 					liremouse();
@@ -126,17 +127,17 @@ public class Lecteur extends Thread{
 
 /*
 
-Exemple utilisée.
+Exemple utilisï¿½e.
 
 http://smeric.developpez.com/java/uml/singleton/
 
-/ ** Exemple d'implémentation d'un singleton dans le cas du multithreading.<p>
+/ ** Exemple d'implï¿½mentation d'un singleton dans le cas du multithreading.<p>
  * Cet exemple ne fait rien.
  * /
 
 public class Singleton {
 
-    / ** Récupère l'instance unique de la class Singleton.<p>
+    / ** Rï¿½cupï¿½re l'instance unique de la class Singleton.<p>
  * Remarque : le constructeur est rendu inaccessible
  * /
     public static Singleton getInstance() {
@@ -150,8 +151,8 @@ public class Singleton {
         return instance;
     }
 
-    / ** Constructeur redéfini comme étant privé pour interdire
- * son appel et forcer à passer par la méthode <link
+    / ** Constructeur redï¿½fini comme ï¿½tant privï¿½ pour interdire
+ * son appel et forcer ï¿½ passer par la mï¿½thode <link
  * /
     private Singleton() {
     }
@@ -159,8 +160,8 @@ public class Singleton {
     / ** L'instance statique * /
     private static Singleton instance;
     / ** objet pour la synchronisation. <p>
- * j'ajoute deux "soulignés" (__) au nom de l'attribut car il n'a
- * qu'un intérêt purement technique.
+ * j'ajoute deux "soulignï¿½s" (__) au nom de l'attribut car il n'a
+ * qu'un intï¿½rï¿½t purement technique.
  * /
     private static Object objetSynchrone__;
 }
