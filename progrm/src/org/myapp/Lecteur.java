@@ -97,7 +97,7 @@ public class Lecteur extends Thread{
 			while(true){
 				try {
 					liremouse();
-					System.out.println(fluxdata.data.toString());
+//					System.out.println(fluxdata.data.toString());
 					sleep(vitesseDelecture);
 				} catch (InterruptedException e) {	e.printStackTrace();	}
 			}
