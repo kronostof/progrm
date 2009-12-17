@@ -1,7 +1,6 @@
 package drawing;
 
 import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.DisplayMode;
 import java.awt.Frame;
 import java.awt.GraphicsDevice;

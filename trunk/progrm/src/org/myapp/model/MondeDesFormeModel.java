@@ -19,12 +19,12 @@ public class MondeDesFormeModel {
 	}
 
 /**
- * Construction de l'état du monde de départ
+ * Construction de l'ï¿½tat du monde de dï¿½part
  * @param Controleur
  */
 	public void build(MondeDesFormeController Controleur){
 		ShapeFactory.newShape("Gaze0");
-		 for (int i=0;i<2;i++){
+		 for (int i=0;i<5;i++){
 			 ShapeFactory.newShape("fuite0");
 			 ShapeFactory.newShape("approche1");
 			 ShapeFactory.newShape("approche0");
