@@ -6,6 +6,7 @@ import org.myapp.module.manager.*;
 
 
 import drawing.shape.VueForme;
+import drawing.shape.VueForme.ShapeForme;
 
 /**
  * une factory en singleton.<p>
@@ -21,10 +22,9 @@ public class ShapeFactory {
     public enum ShapeType {
 
         Gaze0,
-        type1, type2,
-        fuite0, fuite1,
-        approche0, approche1,
-        Hawaiian
+        Type1, Type2,
+        fuite0, Fuite1,
+        Approche0, Approche1
     }
 
     private ShapeFactory() {
@@ -43,6 +43,8 @@ public class ShapeFactory {
 
         Shape nwShape = new Shape("nom" + System.currentTimeMillis());
 
+        nwShape.setType(type);
+
         switch (type) {
 
             case Gaze0:
@@ -56,34 +58,87 @@ public class ShapeFactory {
                 nwShape.setForme(Shape.CIRCLE);
                 nwModuleManager = new ModuleManagerFuite(nwShape, 3);
                 break;
-            case fuite1:
+            case Fuite1:
                 nwShape.color = Color.CYAN;
                 nwShape.setForme(Shape.TRANGLE);
                 nwModuleManager = new ModuleManagerFuite(nwShape, 8);
                 break;
-            case approche0:
+            case Approche0:
                 nwShape.color = Color.BLACK;
                 nwShape.setForme(Shape.SQUARE);
                 nwModuleManager = new ModuleManagerApproche(nwShape, 2);		// colle la position d'une la forme au gaze.
                 break;
-            case approche1:
+            case Approche1:
                 nwShape.color = Color.RED;
                 nwShape.setForme(Shape.SQUARE);
                 nwModuleManager = new ModuleManagerApproche(nwShape, 20);
                 break;
 
-            case type1:
+            case Type1:
                 nwShape.color = Color.YELLOW;
                 nwShape.setForme(Shape.TRANGLE);
                 nwModuleManager = new ModuleManagerType1(nwShape, Color.GRAY.getRGB());
                 break;
-            case type2:
+            case Type2:
                 nwShape.color = Color.GREEN;
                 nwShape.setForme(Shape.TRANGLE);
                 nwModuleManager = new ModuleManagerType1(nwShape, Color.RED.getRGB());
                 break;
         }
-        VueForme nwVueForme = new VueForme(nwShape, nwShape.getForme());
+        VueForme nwVueForme = new VueForme(nwShape);
+        nwShape.addFormeListener(nwVueForme);
+        nwShape.poolModule = nwModuleManager;
+        return nwShape;
+    }
+
+    public static Shape createShape(ShapeType type, ShapeForme forme) {
+
+        Shape nwShape = new Shape("nom" + System.currentTimeMillis());
+
+        nwShape.setType(type);
+        nwShape.setForme2(forme);
+
+        switch (type) {
+
+            case Gaze0:
+                nwShape.color = Color.RED;
+                //nwShape.setForme(Shape.CURSOR);
+                nwModuleManager = new ModuleManagerSuivreGaze(nwShape);		// colle la position d'une la forme au gaze.
+                break;
+
+            case fuite0:
+                nwShape.color = Color.BLUE;
+                //nwShape.setForme(Shape.CIRCLE);
+                nwModuleManager = new ModuleManagerFuite(nwShape, 3);
+                break;
+            case Fuite1:
+                nwShape.color = Color.CYAN;
+                //nwShape.setForme(Shape.TRANGLE);
+                nwModuleManager = new ModuleManagerFuite(nwShape, 8);
+                break;
+            case Approche0:
+                nwShape.color = Color.BLACK;
+                //nwShape.setForme(Shape.SQUARE);
+                nwModuleManager = new ModuleManagerApproche(nwShape, 2);		// colle la position d'une la forme au gaze.
+                break;
+            case Approche1:
+                nwShape.color = Color.RED;
+                //nwShape.setForme(Shape.SQUARE);
+                nwModuleManager = new ModuleManagerApproche(nwShape, 20);
+                break;
+
+            case Type1:
+                nwShape.color = Color.YELLOW;
+                //nwShape.setForme(Shape.TRANGLE);
+                nwModuleManager = new ModuleManagerType1(nwShape, Color.GRAY.getRGB());
+                break;
+            case Type2:
+                nwShape.color = Color.GREEN;
+                //nwShape.setForme(Shape.TRANGLE);
+                nwModuleManager = new ModuleManagerType1(nwShape, Color.RED.getRGB());
+                break;
+        }
+        VueForme nwVueForme = new VueForme(nwShape,0);
         nwShape.addFormeListener(nwVueForme);
         nwShape.poolModule = nwModuleManager;
         return nwShape;
