@@ -1,111 +1,91 @@
 package org.myapp.factory;
 
 import java.awt.Color;
-
-import org.myapp.controle.MondeDesFormeController;
 import org.myapp.model.Shape;
-import org.myapp.module.manager.ModuleManager;
-import org.myapp.module.manager.ModuleManagerApproche;
-import org.myapp.module.manager.ModuleManagerFuite;
-import org.myapp.module.manager.ModuleManagerType1;
-import org.myapp.module.manager.ModuleManagerSuivreGaze;
+import org.myapp.module.manager.*;
+
 
 import drawing.shape.VueForme;
 
+/**
+ * une factory en singleton.<p>
+ * la crÃ©ation d'une nouvelle forme passe par l'ajout du nom de la forme dans la liste
+ * ShapeType puis par son implemetentation dans creatShape
+ * @author christophe
+ */
 public class ShapeFactory {
 
-	
-	//public static MondeDesFormeController controleur = null;
-	static ModuleManager nwModuleManager;
-	
-	
-	
-	public ShapeFactory() {
-		nwModuleManager = null;
-	}
-	/*
-	public static Shape newShape(){
-		//if (null == controleur) System.out.println("ShapeFactory: le controleur n a pas été initialisé");
-		
-		Shape nwShape = new Shape("nom" + System.currentTimeMillis());
-		VueForme nwVueForme = new VueForme(nwShape,1);
-		
-		nwShape.addFormeListener(nwVueForme);
-		
-		// par default les forme se comporte ...
-		ModuleManager nwModuleManager = new ModuleManagerFuite(nwShape);
+    static ModuleManager nwModuleManager;
+    public static ShapeFactory instance = new ShapeFactory();
 
-		return nwShape; 
-	}
-	*/
-	
-	/**
-	 * parametre les formes
-	 */
-	public static Shape newShape(String type){
-		//if (null == controleur) System.out.println("ShapeFactory: le controleur n a pas été initialisé");
-		
-		Shape nwShape = new Shape("nom" + System.currentTimeMillis());
-		
-		
-		// par default les forme se comporte ... comme des caillouuuxxx !!!
-		
-		
-		
-		if (type == "Gaze0"){
-			nwShape.color = Color.RED;
-			nwShape.setForme(Shape.CURSOR);
-			nwModuleManager = new ModuleManagerSuivreGaze(nwShape);		// colle la position d'une la forme au gaze.
-		}
-		
-		
-		if (type == "fuite0"){
-			nwShape.color = Color.BLUE;
-			nwShape.setForme(Shape.CIRCLE);
-			nwModuleManager = new ModuleManagerFuite(nwShape,3);
-		}
-		if (type == "fuite1"){
-			nwShape.color = Color.CYAN;
-			nwShape.setForme(Shape.TRANGLE);
-			nwModuleManager = new ModuleManagerFuite(nwShape,8);
-		}
-		
-		
-		if (type == "approche0"){
-			nwShape.color = Color.BLACK;
-			nwShape.setForme(Shape.SQUARE);
-			nwModuleManager = new ModuleManagerApproche(nwShape,2);		// colle la position d'une la forme au gaze.
-		}
-		if (type == "approche1"){
-			nwShape.color = Color.RED;
-			nwShape.setForme(Shape.SQUARE);
-			nwModuleManager = new ModuleManagerApproche(nwShape,20);
-		}
-		
-		if (type == "type1"){
-			nwShape.color = Color.YELLOW;
-			nwShape.setForme(Shape.TRANGLE);
-			nwModuleManager = new ModuleManagerType1(nwShape,Color.GRAY.getRGB());
-		}
-		if (type == "type2"){
-			nwShape.color = Color.GREEN;
-			nwShape.setForme(Shape.TRANGLE);
-			nwModuleManager = new ModuleManagerType1(nwShape,Color.RED.getRGB());
-		}
+    public enum ShapeType {
 
-		
-		VueForme nwVueForme = new VueForme(nwShape,nwShape.getForme());
-		
-		nwShape.addFormeListener(nwVueForme);
-		nwShape.poolModule = nwModuleManager;
-		return nwShape; 
-	}
-	
-	
+        Gaze0,
+        type1, type2,
+        fuite0, fuite1,
+        approche0, approche1,
+        Hawaiian
+    }
 
-	public void setControlleur(MondeDesFormeController controleur2) {
-		//controleur = controleur2;		
-	}
+    private ShapeFactory() {
+        nwModuleManager = null;
+    }
 
+    public final synchronized static ShapeFactory getInstance() {
+        return instance;
+    }
 
+    /**
+     * Creation des forme <p>
+     * Retourne une nouvelle forme crÃ©e en fonction du type passe en paramÃ¨tre
+     */
+    public static Shape createShape(ShapeType type) {
+
+        Shape nwShape = new Shape("nom" + System.currentTimeMillis());
+
+        switch (type) {
+
+            case Gaze0:
+                nwShape.color = Color.RED;
+                nwShape.setForme(Shape.CURSOR);
+                nwModuleManager = new ModuleManagerSuivreGaze(nwShape);		// colle la position d'une la forme au gaze.
+                break;
+
+            case fuite0:
+                nwShape.color = Color.BLUE;
+                nwShape.setForme(Shape.CIRCLE);
+                nwModuleManager = new ModuleManagerFuite(nwShape, 3);
+                break;
+            case fuite1:
+                nwShape.color = Color.CYAN;
+                nwShape.setForme(Shape.TRANGLE);
+                nwModuleManager = new ModuleManagerFuite(nwShape, 8);
+                break;
+            case approche0:
+                nwShape.color = Color.BLACK;
+                nwShape.setForme(Shape.SQUARE);
+                nwModuleManager = new ModuleManagerApproche(nwShape, 2);		// colle la position d'une la forme au gaze.
+                break;
+            case approche1:
+                nwShape.color = Color.RED;
+                nwShape.setForme(Shape.SQUARE);
+                nwModuleManager = new ModuleManagerApproche(nwShape, 20);
+                break;
+
+            case type1:
+                nwShape.color = Color.YELLOW;
+                nwShape.setForme(Shape.TRANGLE);
+                nwModuleManager = new ModuleManagerType1(nwShape, Color.GRAY.getRGB());
+                break;
+            case type2:
+                nwShape.color = Color.GREEN;
+                nwShape.setForme(Shape.TRANGLE);
+                nwModuleManager = new ModuleManagerType1(nwShape, Color.RED.getRGB());
+                break;
+        }
+        VueForme nwVueForme = new VueForme(nwShape, nwShape.getForme());
+        nwShape.addFormeListener(nwVueForme);
+        nwShape.poolModule = nwModuleManager;
+        return nwShape;
+    }
 }
