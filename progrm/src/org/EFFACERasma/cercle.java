@@ -1,4 +1,4 @@
-package org.asma;
+package org.EFFACERasma;
 import java.awt.Color;
 import java.awt.Graphics;
 
@@ -6,7 +6,7 @@ import javax.swing.JPanel;
 
 
 public class cercle extends Forme{
-	public  Graphics g;
+/*	public  Graphics g;
 	
 	public cercle(int position_x,int position_y, int longueur, int largeur,JPanel panel) {
 		super(position_x,position_y, longueur, largeur,panel);
@@ -35,5 +35,5 @@ public class cercle extends Forme{
 		g = graphics;
 		g.setColor(Color.ORANGE);
 	}
-
+*/
 }

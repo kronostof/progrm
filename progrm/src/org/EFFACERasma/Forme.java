@@ -1,4 +1,4 @@
-package org.asma;
+package org.EFFACERasma;
 import java.awt.Graphics;
 import java.awt.Panel;
 
@@ -6,7 +6,7 @@ import javax.swing.JPanel;
 
 
 public class Forme {
-	int position_x;
+/*	int position_x;
 	int position_y;
 	int longueur;
 	int largeur;
@@ -50,5 +50,5 @@ public class Forme {
     }
     public void draw(JPanel panel){
     	
-    }
+    }*/
 }

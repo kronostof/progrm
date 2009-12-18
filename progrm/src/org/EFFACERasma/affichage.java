@@ -1,5 +1,5 @@
 /* licence GPL 2*/
-package org.asma;
+package org.EFFACERasma;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -14,58 +14,58 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-
+/*
 public class affichage extends JFrame implements ActionListener,MouseMotionListener{
-	private JPanel container = null;//Déclaration de l'objet JPanel
-	private JPanel tableau = null;//Déclaration de l'objet JPanel
-	private FlowLayout layout = null ;//Déclaration de notre layout
-	private JLabel texte = null;//Déclaration de l'objet JLabel
-	private JButton bouton = null;//Déclaration du bouton
-	private JButton bouton2 = null;//Déclaration du bouton
-	private JButton bouton3 = null;//Déclaration du bouton
-	private int nombre = 0; //Déclaration du chiffre
-	private int X = 0, Y = 0; //Déclaration du chiffre
+	private JPanel container = null;//Dï¿½claration de l'objet JPanel
+	private JPanel tableau = null;//Dï¿½claration de l'objet JPanel
+	private FlowLayout layout = null ;//Dï¿½claration de notre layout
+	private JLabel texte = null;//Dï¿½claration de l'objet JLabel
+	private JButton bouton = null;//Dï¿½claration du bouton
+	private JButton bouton2 = null;//Dï¿½claration du bouton
+	private JButton bouton3 = null;//Dï¿½claration du bouton
+	private int nombre = 0; //Dï¿½claration du chiffre
+	private int X = 0, Y = 0; //Dï¿½claration du chiffre
 	private String shape = "";
 	private Graphics g;
 	cercle cercercle;
 	
 	public affichage(){
 		super("Suivi moi");
-		build();//On initialise notre fenêtre
+		build();//On initialise notre fenï¿½tre
 		}
 	
 		private void build(){
-		//this.setTitle("Suivi moi"); //On donne un titre à l'application
+		//this.setTitle("Suivi moi"); //On donne un titre ï¿½ l'application
 		this.setDefaultLookAndFeelDecorated(true);
 		this.setUndecorated(false);
 		this.setExtendedState(this.MAXIMIZED_BOTH);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //On dit à l'application de sefermer
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //On dit ï¿½ l'application de sefermer
 		this.setContentPane(getContainer());
 		}
 		private JPanel getContainer(){
 			layout = new FlowLayout(); //Instanciation du layout
 			layout.setAlignment(FlowLayout.CENTER);//On centre les composants
-			container = new JPanel() ; //On crée notre objet
+			container = new JPanel() ; //On crï¿½e notre objet
 			container.setLayout(layout); //On applique le layout
-			//texte = new JLabel() ;//On crée notre objet
+			//texte = new JLabel() ;//On crï¿½e notre objet
 			//texte.setPreferredSize(new Dimension(250,25)) ;//On lui donne une taille
 			//texte.setText(""); //On lui donne un texte
 			//container.add(texte);//On l'ajoute au container
-			bouton = new JButton () ;//Création du bouton
+			bouton = new JButton () ;//Crï¿½ation du bouton
 			bouton.setPreferredSize(new Dimension(125,25)) ;//On lui donne une taille
 			bouton.setText("SQUARE") ;//On lui donne un texte
-			bouton.addActionListener(this);//On ajoute la fenêtre en tant qu'écouteur du bouton
-			container.add(bouton);//On l'ajoute à la fenêtre
-			bouton2 = new JButton () ;//Création du bouton
+			bouton.addActionListener(this);//On ajoute la fenï¿½tre en tant qu'ï¿½couteur du bouton
+			container.add(bouton);//On l'ajoute ï¿½ la fenï¿½tre
+			bouton2 = new JButton () ;//Crï¿½ation du bouton
 			bouton2.setPreferredSize(new Dimension(125,25)) ;//On lui donne une taille
 			bouton2.setText("CIRCLE") ;//On lui donne un texte
-			bouton2.addActionListener(this);//On ajoute la fenêtre en tant qu'écouteur du bouton
-			container.add(bouton2);//On l'ajoute à la fenêtre
-			bouton3 = new JButton () ;//Création du bouton
+			bouton2.addActionListener(this);//On ajoute la fenï¿½tre en tant qu'ï¿½couteur du bouton
+			container.add(bouton2);//On l'ajoute ï¿½ la fenï¿½tre
+			bouton3 = new JButton () ;//Crï¿½ation du bouton
 			bouton3.setPreferredSize(new Dimension(125,25)) ;//On lui donne une taille
 			bouton3.setText("OVALE") ;//On lui donne un texte
-			bouton3.addActionListener(this);//On ajoute la fenêtre en tant qu'écouteur du bouton
-			container.add(bouton3);//On l'ajoute à la fenêtre
+			bouton3.addActionListener(this);//On ajoute la fenï¿½tre en tant qu'ï¿½couteur du bouton
+			container.add(bouton3);//On l'ajoute ï¿½ la fenï¿½tre
 			tableau = new JPanel();
 			tableau.setBackground(Color.WHITE);
 			tableau.setPreferredSize(container.getMaximumSize());
@@ -130,4 +130,4 @@ public class affichage extends JFrame implements ActionListener,MouseMotionListe
 		}
 
 }
-																																																																																																																																																																																																																																																										
+*/
