@@ -34,17 +34,7 @@ public class Shape extends Thread implements AbstractShape, FormeListener {
     private ShapeType shapeType;
     private ShapeForme forme2;
 
-    /*
-    public Shape(String nom, int type) {
-        this.nom = nom;
-        Lecteur.accroche(Gaze);
-        position = new Position((int) (Math.random() * 1024), (int) (Math.random() * 768));
-        poolModule = new ModuleManager(Gaze);
-        color = new Color(50000 * type);
-        this.start();
-    }
-    */
-    
+
     public Shape(String nom) {
         this.nom = nom;
         Lecteur.accroche(Gaze);
