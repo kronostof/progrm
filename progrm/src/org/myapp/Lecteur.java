@@ -77,7 +77,7 @@ public class Lecteur extends Thread{
 	 * @param f
 	 */
 	public static void accroche(FluxPosition f){
-		System.out.println("Lecteur:accroche");
+		//System.out.println("Lecteur:accroche");
 		f.data = fluxdata.data ;
 	}
 
