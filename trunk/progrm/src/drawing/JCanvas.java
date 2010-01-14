@@ -10,25 +10,16 @@ import java.util.List;
 import javax.swing.JPanel;
 
 import org.myapp.controle.MondeDesFormeControllerListener;
-
 import drawing.shape.IDrawable;
 
-/**
- * @author duj
+/*
+ * @author ter Christophe Moncy
  */
 public class JCanvas extends JPanel {
+    private static final long serialVersionUID = 4949577436530106152L;
+    //liste d'élément à dessiner
+    private List<IDrawable> drawables = new LinkedList<IDrawable>();
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 4949577436530106152L;
-	private List<IDrawable> drawables = new LinkedList<IDrawable>();
-//	private MondeDesFormeControllerListener Controleur;
-
-    /**
-     * @pre: d != null
-     * @post: le drawable d est ajout� sur this
-     */
     public void addDrawable(IDrawable d) {
         drawables.add(d);
         repaint();
@@ -36,7 +27,7 @@ public class JCanvas extends JPanel {
 
     /**
      * @pre:d!= null
-     * @post: d est retir� de this
+     * @post: d est retiré de this
      */
     public void removeDrawable(IDrawable d) {
         drawables.remove(d);
@@ -90,11 +81,5 @@ public class JCanvas extends JPanel {
         return true;
     }
 
-	public void addControlleurListner(MondeDesFormeControllerListener Controller) {
-	//	this.Controleur = Controleur;
-		
-		// TODO Auto-generated method stub
-		
-	}
-
+    public void addControlleurListner(MondeDesFormeControllerListener Controller) {}
 }

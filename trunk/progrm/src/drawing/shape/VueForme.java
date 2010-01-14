@@ -14,10 +14,7 @@ public class VueForme extends FormDrawable implements FormeListener {
     static public JCanvas Vue;
     private graphicsShape gShape;
 
-    public enum ShapeForme {
-
-        Circle, Cursor, Square, Triangle
-    }
+    public enum ShapeForme { Circle, Cursor, Square, Triangle }
 
     public VueForme(Shape forme) {
         super(forme.color, forme.getPoint(), new Dimension(40, 40));
