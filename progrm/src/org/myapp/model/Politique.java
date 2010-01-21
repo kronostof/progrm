@@ -20,9 +20,9 @@ public class Politique {
 
     public Politique(int nbEtat) {
         //on cré la hashTable qui contiendra les quality
-        HashQualityOfStates=new Hashtable(SARSA_State.getStates().length);
+        HashQualityOfStates=new Hashtable(SarsaStateFactory.getStates().length);
 
-        for (int state : SARSA_State.getStates()) {
+        for (int state : SarsaStateFactory.getStates()) {
           double initialQuality = 0.5;
           HashQualityOfStates.put(state,initialQuality);
         }
@@ -33,7 +33,7 @@ public class Politique {
 //    public double getQualityOfState(SARSA_State a_state) {
 //        a_state.getState();
 //    }
-    public void setQualityOfState(SARSA_State a_state) {}
+    public void setQualityOfState(SarsaStateFactory a_state) {}
     //public SARSA_State getBestState(SARSA_State currentState) {}
 
     /* fonction debug affiche les qualité des états dans le terminal */

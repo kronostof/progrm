@@ -1,3 +1,11 @@
+/* Une shape dans le monde des formes est l'agent.
+ * C'est lui qui doit apprendre des interactions avec le regard de l'utilsateur
+ * il est caractérisé par une association avec un objet de type State, fournit
+ * par la classe SarsaStateFactory. Et possède une politique particuliere.
+ * Il a également un algorithme d'apprentissage.
+ *
+ */
+
 package org.myapp.model;
 
 import com.espertech.esper.client.EPServiceProvider;
@@ -20,7 +28,7 @@ public class NewShape extends Thread implements FormeListener {
     public static final int CIRCLE = 3;
     public static final int TRANGLE = 4;
 
-    private SARSA_State state;
+    private SarsaStateFactory state;
     private String nom;
     private Position position;	// la position dans le monde.
     private EventListenerList listeners = new EventListenerList();
@@ -39,7 +47,7 @@ public class NewShape extends Thread implements FormeListener {
         Lecteur.accroche(Gaze);
         epService = Lecteur.getInstance();
         position = new Position((int) (Math.random() * 1024), (int) (Math.random() * 768));
-        state = new SARSA_State();
+        state = new SarsaStateFactory();
         this.start();
     }
     @Override
@@ -64,7 +72,7 @@ public class NewShape extends Thread implements FormeListener {
     public FluxPosition getGaze() { return Gaze;}
     public EventListenerList getListeners() { return listeners; }
     public String getNom() { return nom;}
-    public SARSA_State getStateOfShape() {return state; }
+    public SarsaStateFactory getStateOfShape() {return state; }
     public Position getPosition() {return position;}
 
     public void setGaze(FluxPosition Gaze) {this.Gaze = Gaze; }
