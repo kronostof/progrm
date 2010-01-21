@@ -1,3 +1,7 @@
+/*
+ * SarsaStateFactory génère les états possibles du mondes des formes.
+ *
+ */
 package org.myapp.model;
 
 import java.awt.Color;
@@ -11,7 +15,8 @@ import java.awt.Color;
  *  RECTANGLE : 6 : rectangle
  * @author ter Vincent Bonnier
  */
-public class SARSA_State {
+public class SarsaStateFactory {
+
     // pour l'affichage graphique
     private Color couleur ;
     private ShapeType shapeType;
@@ -42,7 +47,7 @@ public class SARSA_State {
     public enum ShapeForme { TRIANGLE, RECTANGLE, CIRCLE};
     //public enum ShapeBehavior {NOTHING };
 
-    public SARSA_State() {
+    public SarsaStateFactory() {
         // a red circle .
         forme = 3 ;
         couleur = Color.RED;
