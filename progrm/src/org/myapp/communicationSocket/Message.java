@@ -1,10 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.myapp.communicationSocket;
 
-import java.util.StringTokenizer;
 
 /**
  *  Cette classe conserve le  dernier message lu.<p>
@@ -18,17 +13,22 @@ public class Message {
 
     private Type_de_message type = null;
     private String donnée = null;
-
+    /*
     Message(Type_de_message type_de_message, StringTokenizer tête) {
-        throw new UnsupportedOperationException("Not yet implemented");
+    throw new UnsupportedOperationException("Not yet implemented");
     }
+     */
 
     /**
      * enumeration des differants type de messages gérés.
      */
     public enum Type_de_message {
 
-        ET_CHG, ET_CSZ, ET_FRM, ET_PNT, ET_SPL;
+        ET_CHG,
+        ET_CSZ,
+        ET_FRM,
+        ET_PNT,
+        ET_SPL;
     }
 
     public Message() {
@@ -51,19 +51,28 @@ public class Message {
         donnée = new String(substring_queud);
     }
 
-    public void read(Type_de_message tête, StringTokenizer corps) {
+    public void read(Type_de_message tête, String corps) {
         if (donnée == null) {
-           ;//System.err.println("Aucun message n'a été lue depuis la derniere lecture");
+            //System.err.println("Aucun message n'a été lue depuis la derniere lecture");
+            corps = new String("");
         } else {
-            corps = new StringTokenizer(this.donnée + "");
+            corps = new String(this.donnée + "");
             tête = this.type;
         }
     }
 
+    /**
+     * Renvoi les données du dernier message lue.
+     * @return Les données du dernier message lue.
+     */
     public String getDonnée() {
         return donnée;
     }
 
+    /**
+     * Renvoi le type du dernier message lue.
+     * @return Le type du dernier message lue.
+     */
     public Type_de_message getType() {
         return type;
     }
