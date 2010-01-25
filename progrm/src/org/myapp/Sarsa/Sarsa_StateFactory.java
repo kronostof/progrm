@@ -188,6 +188,7 @@ public class Sarsa_StateFactory {
     }
 
     public Sarsa_State get_Sarsa_State_aleatoire() {
+        System.out.println(listeDesEtat.size());
         return listeDesEtat.get(Math.round((float) Math.random() * listeDesEtat.size()));
     }
 }
