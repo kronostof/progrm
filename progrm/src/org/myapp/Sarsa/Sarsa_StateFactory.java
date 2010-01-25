@@ -14,8 +14,7 @@ import org.myapp.Sarsa.Sarsa_State.*;
  */
 public class Sarsa_StateFactory {
 
-
-    private int bidon = init();
+//    private static int bidon = init();
     static public ArrayList<Sarsa_State> listeDesEtat = new ArrayList<Sarsa_State>();
     static public ArrayList<Sarsa_Action> listeDesActions = new ArrayList<Sarsa_Action>();
     private boolean bool_Generer_tout_les_etats = false;
@@ -30,16 +29,18 @@ public class Sarsa_StateFactory {
     private Sarsa_Action temp_Sarsa_Action;
 
     public Sarsa_StateFactory() {
+        Generer_tout_les_etats();
+        Generer_toutes_les_action();
     }
 
     /**
      * Cette methode doit etre appellé une unique fois;
      */
     public void Generer_tout_les_etats() {
-        if (bool_Generer_tout_les_etats) {
+        if (bool_Generer_tout_les_etats == true) {
             System.err.println("package org.myapp.factory;\npublic class StateFactory \nLa methode public void Generer_tout_les_etats() doit être appelle une unique fois");
         } else {
-
+            bool_Generer_tout_les_etats = true;
             int id = 0;
             Sarsa_State etat_temp;
             for (ShapeType Shape_t : ShapeType.values()) {
@@ -78,7 +79,7 @@ public class Sarsa_StateFactory {
      */
     public void Generer_toutes_les_action() {
         char[] test = new char[1];
-        if (bool_Generer_tout_les_action) {
+        if (bool_Generer_tout_les_action = true) {
             System.err.println("package org.myapp.factory;\npublic class StateFactory \nLa methode public void Generer_toutes_les_action() doit être appelle une unique fois");
         } else {
             bool_Generer_tout_les_action = true;
@@ -86,15 +87,15 @@ public class Sarsa_StateFactory {
 
 
             for (Sarsa_State sarsa_State : listeDesEtat) {// Pour chaque état
-                System.out.println("états : " + sarsa_State);
+                //System.out.println("états : " + sarsa_State);
                 // nouvelle liste d'action
                 //temp_liste_action = new Sarsa_Action[TAILLE_MAX_LISTE_ACTION];
                 for (Field field : fields) {// pour chaque champ de la forme
-                    System.out.println("\tTraitement du champ " + field.getType().getSimpleName() + " | " + field.getName());
+                    //System.out.println("\tTraitement du champ " + field.getType().getSimpleName() + " | " + field.getName());
                     for (Field field1 : field.getType().getDeclaredFields()) {
                         field1.getName().getChars(0, 1, test, 0);
                         if (test[0] != '$') {// On vire le champs dont la valeur commence par un $
-                            System.out.println("\t\t" + field1.getType().getSimpleName() + " | " + field1.getName());
+                            //System.out.println("\t\t" + field1.getType().getSimpleName() + " | " + field1.getName());
                             // on construit les action posible pour chaque états.
 
                             // System.out.println(sarsa_State);
@@ -190,13 +191,7 @@ public class Sarsa_StateFactory {
         }
     }
 
-    public static Sarsa_State get_Sarsa_State_aleatoire() {
+    public Sarsa_State get_Sarsa_State_aleatoire() {
         return listeDesEtat.get(Math.round((float) Math.random() * listeDesEtat.size()));
-    }
-
-    private int init() {
-        Generer_tout_les_etats();
-        Generer_toutes_les_action();
-        return 0;
     }
 }
