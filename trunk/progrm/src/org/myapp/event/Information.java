@@ -1,12 +1,12 @@
 package org.myapp.event;
 
 /**
- * @param upToDate : Indique que l'information contenue ds le flux est à jour.</br>
- * @param release :  Indique la date de créeation de l'information.</br>
+ * @param upToDate : Indique que l'information contenue ds le flux est Ã  jour.</br>
+ * @param release :  Indique la date de crÃ©eation de l'information.</br>
  * </br>
- * Toutes recuperation d'information devrons être faite en passant par les methodes </br>
+ * Toutes recuperation d'information devrons Ãªtre faite en passant par les methodes </br>
  * getNOM_PARAMETRE()</br>
- * sous peine de recuperer des informations erronnéees
+ * sous peine de recuperer des informations erronnÃ©es
  * 
  * @author Silex
  *
@@ -17,7 +17,7 @@ public abstract class Information {
 	protected long release;
 	
 	// reset le tmp indiquant depuis combien de temps cette nvll info est disponible
-	// nvll ds le sens " l information préc. était diff.
+	// nvll ds le sens " l information prc. Ã©tait diff.
 	// @param release
 	public Information() {
 		release = System.currentTimeMillis();
@@ -32,7 +32,7 @@ public abstract class Information {
 	
 
 	/**
-	 * fixe la date de réalisation a l'heure courante.
+	 * fixe la date de rÃ©alisation a l'heure courante.
 	 */
 	public void resetTemps() {
 		release = System.currentTimeMillis();	
@@ -40,7 +40,7 @@ public abstract class Information {
 	
 	/**
 	 * 
-	 * @return Depuis combien de temps cette donnée est a cette valeur.
+	 * @return Depuis combien de temps cette donnÃ©e est a cette valeur.
 	 */
 	public long getTemps() {
 		return System.currentTimeMillis() - release;	
@@ -55,7 +55,7 @@ public abstract class Information {
 	}
 	
 	/**
-	 *  Indique que l'information contenue est récente. 
+	 *  Indique que l'information contenue est rÃ©cente.
 	 */
 	public void upDate(){
 		upToDate = System.currentTimeMillis();
@@ -64,7 +64,7 @@ public abstract class Information {
 	/**
 	 * 
 	 * @param delai
-	 * @return - true si la donnée date de moins de 'delai' ms. 
+	 * @return - true si la donnÃ©e date de moins de 'delai' ms.
 	 */
 	public boolean isFresh(long delai){
 		return ((System.currentTimeMillis() - upToDate) < delai);

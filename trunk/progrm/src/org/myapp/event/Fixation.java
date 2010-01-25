@@ -6,7 +6,7 @@ public class Fixation extends Information {
 
 	
 	private Position position;
-	private long temps;						// Durée de la fixation en milliseconde
+	private long temps;						// DurÃ©e de la fixation en milliseconde
 
 
 	public Fixation(){
@@ -58,7 +58,7 @@ public class Fixation extends Information {
 	/*  setter	 */
 	
 	/**
-	 * Place les coordonnée de la position en x,y.
+	 * Place les coordonnÃ©e de la position en x,y.
 	 * @param x :Position en x
 	 * @param y :Position en y
 	 */
@@ -75,9 +75,9 @@ public class Fixation extends Information {
 
 
 	/**
-	 * repond vrai si les position passée en parametre sont diff de celle presentes
+	 * repond vrai si les position passÃ©e en parametre sont diff de celle presentes
 	 * @param position2
-	 * @return -True Uniquement si les coordonnée de la position parametre sont diff de l objet.
+	 * @return -True Uniquement si les coordonnÃ©e de la position parametre sont diff de l objet.
 	 */
 	public boolean setPosition(Position position2) {
 		boolean T = ((this.getPosX() != position2.getPosX()) | (this.getPosY() != position2.getPosY()));

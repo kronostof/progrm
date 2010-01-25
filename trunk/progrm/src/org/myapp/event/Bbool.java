@@ -8,7 +8,7 @@ public class Bbool extends Information{
 	protected long temps;
 	
 	/**
-	 * Crée un nouvelle instance de Bbool initialisée a true
+	 * CrÃ©e un nouvelle instance de Bbool initialisÃ©e a true
 	 */
 	public Bbool() {
 		super();
@@ -17,7 +17,7 @@ public class Bbool extends Information{
 	}
 	
 	/**
-	 * Crée un nouvelle instance de Bbool initialisée a la valeur de bValue
+	 * CrÃ©e un nouvelle instance de Bbool initialisÃ©e a la valeur de bValue
 	 */
 	public Bbool(Bbool bValue) {
 		super();
@@ -34,7 +34,7 @@ public class Bbool extends Information{
 
 
 	/**@param b - La valeur que va prendre l objet booleen 
-	 * @return true UNIQUEMENT si la valeur est changée en une autre.
+	 * @return true UNIQUEMENT si la valeur est changÃ©e en une autre.
 	 */
 	public boolean setValue(boolean b) {
 		boolean T = (this.value != b);

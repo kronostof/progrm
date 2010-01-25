@@ -85,7 +85,7 @@ public class Position extends Information{
     @Override	public String toString() {		return point.toString() ;/* + " " + this.upToDate + " " + this.release;*/ 	}
 
     /**
-     * Déplace le point vers le point spécfié d'une valeur de 
+     * DÃ©place le point vers le point spÃ©cfiÃ© d'une valeur de
      * @param data
      * @param i
      */
