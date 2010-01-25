@@ -57,7 +57,7 @@ import javax.swing.JPanel;
         
         
        /*
-        * j'ai ajouté ce code pour se localiser un peut dans l'ecran
+        * j'ai ajoutÃ© ce code pour se localiser un peut dans l'ecran
         *  g.fillRect(haut_X, haut_y, 2, 2);
         g.fillRect(bas_X, bas_y, 2, 2);
         g.fillRect(droite_X, droite_y, 2, 2);

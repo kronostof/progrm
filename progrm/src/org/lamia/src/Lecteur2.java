@@ -31,12 +31,12 @@ import com.espertech.esper.client.EPServiceProviderManager;
 
 / **
  *
- * Cette classe constitue le pré-lecteur du flux elle offre le "EPServiceProvider"
+ * Cette classe constitue le prÃ©-lecteur du flux elle offre le "EPServiceProvider"
  * sa conception modulaire permet l'ajout de nouveau module de comprehention du flux
- * par 	la construction du module (objet dérivant de module) 
- * et 	son ajout au evennement listée ( ajoutStatement() )
+ * par 	la construction du module (objet dÃ©rivant de module)
+ * et 	son ajout au evennement listÃ©e ( ajoutStatement() )
  * 
- * la vitesse de lecture est celle a laquel on considere qu'une nouvelle info est arrivé
+ * la vitesse de lecture est celle a laquel on considere qu'une nouvelle info est arrivÃ©
  * elle rythme l'envoie de la requete de mise a jour des listener
  * @author Moncy christophe
  * /
