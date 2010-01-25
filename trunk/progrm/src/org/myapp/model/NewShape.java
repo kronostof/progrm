@@ -15,6 +15,8 @@ import org.FormeListener;
 import org.myapp.event.Position;
 import org.myapp.flux.FluxPosition;
 import org.myapp.Lecteur;
+import org.myapp.Sarsa.Sarsa_State;
+import org.myapp.Sarsa.Sarsa_StateFactory;
 import org.myapp.module.manager.ModuleManager;
 /**
  * Une shape possède un objet SARSA_State correspondant à son état.
@@ -22,32 +24,23 @@ import org.myapp.module.manager.ModuleManager;
  * @author ter Vincent Bonnier
  */
 public class NewShape extends Thread implements FormeListener {
-    /* Autrefois dans AbstractShape */
-    public static final int CURSOR = 1;
-    public static final int SQUARE = 2;
-    public static final int CIRCLE = 3;
-    public static final int TRANGLE = 4;
 
-    private SarsaStateFactory state;
+    private Sarsa_State state;
     private String nom;
     private Position position;	// la position dans le monde.
     private EventListenerList listeners = new EventListenerList();
-    //private MondeDesFormesMDP mdp = new MondeDesFormesMDP(0,1);
-    //private LearningAlgorithm learningalgo = new Sarsa(mdp); // algo d'apprentissage
 
     //gestion du regard de l'utilisateur
     EPServiceProvider epService;
-
     public FluxPosition Gaze = new FluxPosition(); // position du regard de l'utilisateur
     public ModuleManager poolModule;
 
-
-    public NewShape(String nom) {
+    public NewShape(String nom, Sarsa_StateFactory stateFactory) {
         this.nom = nom;
         Lecteur.accroche(Gaze);
         epService = Lecteur.getInstance();
         position = new Position((int) (Math.random() * 1024), (int) (Math.random() * 768));
-        state = new SarsaStateFactory();
+        state = stateFactory.get_Sarsa_State_aleatoire();
         this.start();
     }
     @Override
@@ -72,7 +65,7 @@ public class NewShape extends Thread implements FormeListener {
     public FluxPosition getGaze() { return Gaze;}
     public EventListenerList getListeners() { return listeners; }
     public String getNom() { return nom;}
-    public SarsaStateFactory getStateOfShape() {return state; }
+    public Sarsa_State getStateOfShape()  {return state; }
     public Position getPosition() {return position;}
 
     public void setGaze(FluxPosition Gaze) {this.Gaze = Gaze; }
