@@ -12,12 +12,12 @@ public class FluxMODEL extends Flux<Information> {
 	}
 
 	/** 
-	 * c est principalement par cette methode que le flux sera modifié dans un module
-	 * @param info : l'information represante ce que l'on veut inserer dans le flux sous forme d'un element du même type que le type d'information présante dans le flux<br>
-	 * la pertinance de l information est traitée ici.<br>
-	 * ¤ si elle y est deja on fait ça ...<br>
-	 * ¤ si elle est moins recente...<br>
-	 * ¤ si elle est précédé de ça alors ...  autrement...<br>
+	 * c est principalement par cette methode que le flux sera modifiÃ© dans un module
+	 * @param info : l'information represante ce que l'on veut inserer dans le flux sous forme d'un element du mÃ©me type que le type d'information prÃ©sante dans le flux<br>
+	 * la pertinance de l information est traitÃ©e ici.<br>
+	 * Ã© si elle y est deja on fait Ã©a ...<br>
+	 * Ã© si elle est moins recente...<br>
+	 * Ã© si elle est prÃ©cÃ©dÃ© de Ã©a alors ...  autrement...<br>
 	 */
 	@Override
 	public void set(Information info) {
@@ -26,7 +26,7 @@ public class FluxMODEL extends Flux<Information> {
 	}
 
 	/**
-	 * Cette méthode permet 
+	 * Cette mÃ©thode permet
 	 * 
 	 */
 	@Override

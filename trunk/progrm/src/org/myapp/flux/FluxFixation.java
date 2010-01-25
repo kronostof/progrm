@@ -15,11 +15,11 @@ public class FluxFixation extends Flux<Fixation> {
 
 
 	/** setter 
-	 * c est principalement par cette methode que le flux sera modifié
+	 * c est principalement par cette methode que le flux sera modifiÃ©
 	 * @param info : l'information represante ce que l'on veut inserer dans le flux <br>
-	 * la pertinance de l information est traitée ici.<br>
+	 * la pertinance de l information est traitÃ©e ici.<br>
 	 *
-	 * ¤  si les position de fixation sont differante on les modifie on indique quand on les a modifié
+	 * Ã©  si les position de fixation sont differante on les modifie on indique quand on les a modifiÃ©
 	 */
 	
 /*	public void set(Position fe) {

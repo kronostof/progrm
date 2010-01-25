@@ -8,7 +8,7 @@ import org.myapp.event.Information;
  * @author Moncy christophe 10304320 
  * <br>Ucb Lyon1 
  *
- * @param <E extends Information> de type Data, contient les donnée composant le flux.
+ * @param <E extends Information> de type Data, contient les donnÃ©e composant le flux.
  */
 public abstract class Flux<E extends Information> implements interfSetFromFlux{
 	
