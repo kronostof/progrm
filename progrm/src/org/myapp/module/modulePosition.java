@@ -16,11 +16,11 @@ import com.espertech.esper.event.EventBean;
 /**
  * 
  * 
- * Ce module détermine si le gaze est proche de la position déterminé par Focus
- * La principale utilisation est : déterminer si l'utilisateur regarde vers la position Focus
+ * Ce module dÃ©termine si le gaze est proche de la position dtÃ©erminÃ© par Focus
+ * La principale utilisation est : dÃ©terminer si l'utilisateur regarde vers la position Focus
  * @param string
  * @param i
- * @param position la position que l on va considérer
+ * @param position la position que l on va considÃ©rer
  * @param fluxEntrant
  * @param fluxSortant
  */
@@ -75,7 +75,7 @@ public class modulePosition  extends module<FluxPosition ,FluxPosition> implemen
 
 
 	/**
-	 *  Cette methode est reçut a chaque envoie d un nvll evenement
+	 *  Cette methode est reÃ©ut a chaque envoie d un nvll evenement
 	 *  
 	 *  les traitements a effectuer en fonction de la nature du flux entrant sont a y placer.
 	 */
@@ -83,7 +83,7 @@ public class modulePosition  extends module<FluxPosition ,FluxPosition> implemen
 		//System.out.println(newEvents[0].get("name") + " " + getName());
 		if (getName().compareTo(newEvents[0].get("name").toString()) == 0)
 			getFluxSortant().set(getFluxEntrant().get());  
-		/* Pour recuperer des données propre a un evenement
+		/* Pour recuperer des donnÃ©es propre a un evenement
 		 * event.get("avg(price)") 
 		 * /!\ il faut que la methodes getXXX existe dans l'objet envoiyer par send donc dans le module.
 		 */
