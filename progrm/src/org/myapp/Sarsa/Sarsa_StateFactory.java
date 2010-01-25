@@ -17,7 +17,6 @@ public class Sarsa_StateFactory {
 //    private static int bidon = init();
     static public ArrayList<Sarsa_State> listeDesEtat = new ArrayList<Sarsa_State>();
     static public ArrayList<Sarsa_Action> listeDesActions = new ArrayList<Sarsa_Action>();
-    
     private boolean bool_Generer_tout_les_etats = false;
     private boolean bool_Generer_tout_les_action = false;
     ShapeType shapeType;
@@ -67,10 +66,7 @@ public class Sarsa_StateFactory {
             System.err.println("package org.myapp.factory;\npublic class StateFactory \nLa methode public void Generer_tout_les_etats() n'a pas encore été appellé");
         } else {
             for (Sarsa_State sarsa_State : listeDesEtat) {
-                System.out.print(sarsa_State.getShapeColor() + " ");
-                System.out.print(sarsa_State.getShapeDist() + " ");
-                System.out.print(sarsa_State.getShapeType() + " ");
-                System.out.println(" ");
+                System.out.println(sarsa_State);
             }
         }
     }
@@ -80,12 +76,11 @@ public class Sarsa_StateFactory {
      */
     public void Generer_toutes_les_action() {
         char[] test = new char[1];
-        if (bool_Generer_tout_les_action = true) {
+        if (bool_Generer_tout_les_action == true) {
             System.err.println("package org.myapp.factory;\npublic class StateFactory \nLa methode public void Generer_toutes_les_action() doit être appelle une unique fois");
         } else {
             bool_Generer_tout_les_action = true;
             Field[] fields = Sarsa_State.class.getDeclaredFields();
-
 
             for (Sarsa_State sarsa_State : listeDesEtat) {// Pour chaque état
                 //System.out.println("états : " + sarsa_State);

@@ -52,6 +52,6 @@ public class Sarsa_State {
 
     @Override
     public String toString() {
-        return getShapeColor() + " " + getShapeDist() + " " + getShapeType();
+        return "(" + getShapeColor() + "," + getShapeDist() + "," + getShapeType() + ")";
     }
 }

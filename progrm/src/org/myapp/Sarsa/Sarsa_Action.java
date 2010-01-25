@@ -45,6 +45,6 @@ public class Sarsa_Action {
 
     @Override
     public String toString() {
-        return " De (" + state_1 + ") a (" + state_2 + ")";
+        return " De " + state_1 + " a " + state_2 + "";
     }
 }
