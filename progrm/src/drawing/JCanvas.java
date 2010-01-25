@@ -12,7 +12,8 @@ import javax.swing.JPanel;
 import org.myapp.controle.MondeDesFormeControllerListener;
 import drawing.shape.IDrawable;
 
-/*
+/* surface sur laquelle tout s'affiche
+ * possède une liste d'objet qu'elle dessine
  * @author ter Christophe Moncy
  */
 public class JCanvas extends JPanel {
