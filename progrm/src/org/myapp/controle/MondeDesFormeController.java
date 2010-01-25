@@ -20,7 +20,7 @@ public class MondeDesFormeController implements MondeDesFormeControllerListener{
 		this.model = model;
 		//this.Vue = Vue;
 		//ControleForme.Vue = Vue;
-		// On enregistre le controlleur auprès de la vue et du model
+		// On enregistre le controlleur auprÃ¨s de la vue et du model
 		model.addControlleurListner(this);
 		Vue.addControlleurListner(this);
 		
@@ -38,7 +38,7 @@ public class MondeDesFormeController implements MondeDesFormeControllerListener{
 		//VueForme nv = new VueForme(forme);
 		//ControleForme nc = new ControleForme(forme);
 		//Vue.addDrawable(new VueForme(forme));
-		// a rectifier: on sait que ce que l on reçoit est une forme
+		// a rectifier: on sait que ce que l on reÃ§oit est une forme
 		//((Shape)forme).addFormeListener(nv);
 	}
 
