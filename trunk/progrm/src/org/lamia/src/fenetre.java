@@ -16,7 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
- * affiche le fenetre temporaire pour verifier les donnée reçut
+ * affiche le fenetre temporaire pour verifier les donnÃ©e reÃ©ut
  * @author Silex
  *
  */
