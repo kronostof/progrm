@@ -12,5 +12,6 @@ public class GenerationState {
         sta.Generer_tout_les_etats();
        // sta.affichage_listeDesEtat();
         sta.Generer_toutes_les_action();
+        Sarsa_StateFactory.get_Sarsa_State_aleatoire();
     }
 }
