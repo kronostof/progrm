@@ -6,7 +6,6 @@ package org.myapp.Sarsa;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Random;
 import org.myapp.Sarsa.Sarsa_State.*;
 
 /**
@@ -15,6 +14,8 @@ import org.myapp.Sarsa.Sarsa_State.*;
  */
 public class Sarsa_StateFactory {
 
+
+    private int bidon = init();
     static public ArrayList<Sarsa_State> listeDesEtat = new ArrayList<Sarsa_State>();
     static public ArrayList<Sarsa_Action> listeDesActions = new ArrayList<Sarsa_Action>();
     private boolean bool_Generer_tout_les_etats = false;
@@ -24,7 +25,7 @@ public class Sarsa_StateFactory {
     ShapeColor shapeColor;
     //chk action
     private Sarsa_State temp;
-    private Sarsa_Action[] temp_liste_action = null;
+    //private Sarsa_Action[] temp_liste_action = null;
     private int TAILLE_MAX_LISTE_ACTION = 4;
     private Sarsa_Action temp_Sarsa_Action;
 
@@ -62,13 +63,13 @@ public class Sarsa_StateFactory {
 
         if (bool_Generer_tout_les_etats == false) {
             System.err.println("package org.myapp.factory;\npublic class StateFactory \nLa methode public void Generer_tout_les_etats() n'a pas encore été appellé");
-        }
-
-        for (Sarsa_State sarsa_State : listeDesEtat) {
-            System.out.print(sarsa_State.getShapeColor() + " ");
-            System.out.print(sarsa_State.getShapeDist() + " ");
-            System.out.print(sarsa_State.getShapeType() + " ");
-            System.out.println(" ");
+        } else {
+            for (Sarsa_State sarsa_State : listeDesEtat) {
+                System.out.print(sarsa_State.getShapeColor() + " ");
+                System.out.print(sarsa_State.getShapeDist() + " ");
+                System.out.print(sarsa_State.getShapeType() + " ");
+                System.out.println(" ");
+            }
         }
     }
 
@@ -87,7 +88,7 @@ public class Sarsa_StateFactory {
             for (Sarsa_State sarsa_State : listeDesEtat) {// Pour chaque état
                 System.out.println("états : " + sarsa_State);
                 // nouvelle liste d'action
-                temp_liste_action = new Sarsa_Action[TAILLE_MAX_LISTE_ACTION];
+                //temp_liste_action = new Sarsa_Action[TAILLE_MAX_LISTE_ACTION];
                 for (Field field : fields) {// pour chaque champ de la forme
                     System.out.println("\tTraitement du champ " + field.getType().getSimpleName() + " | " + field.getName());
                     for (Field field1 : field.getType().getDeclaredFields()) {
@@ -170,14 +171,6 @@ public class Sarsa_StateFactory {
                                     listeDesActions.add(temp_Sarsa_Action);
                                 }
                             }
-
-                            /*   if (field.getType().getSimpleName().compareTo("ShapeDist") == 0) {
-                            System.out.println("nouvelle action : action de " + sarsa_State.getShapeDist() + " a " + field1.getName());
-                            }
-                            if (field.getType().getSimpleName().compareTo("ShapeColor") == 0) {
-                            System.out.println("nouvelle action : action de " + sarsa_State.getShapeColor() + " a " + field1.getName());
-                            }
-                             * */
                         }
                     }
                 }
@@ -188,17 +181,22 @@ public class Sarsa_StateFactory {
     public void affichage_listeDesAction() {
 
         if (bool_Generer_tout_les_etats == false) {
-            System.err.println("package org.myapp.factory;\npublic class StateFactory \nLa methode public void Generer_tout_les_etats() n'a pas encore été appellé");
+            System.err.println("package org.myapp.factory;\npublic class StateFactory \nLa methode public void actions() n'a pas encore été appellé");
+        } else {
 
-
-        }
-
-        for (Sarsa_Action sarsa_Action : listeDesActions) {
-            System.out.println(sarsa_Action);
+            for (Sarsa_Action sarsa_Action : listeDesActions) {
+                System.out.println(sarsa_Action);
+            }
         }
     }
 
     public static Sarsa_State get_Sarsa_State_aleatoire() {
         return listeDesEtat.get(Math.round((float) Math.random() * listeDesEtat.size()));
+    }
+
+    private int init() {
+        Generer_tout_les_etats();
+        Generer_toutes_les_action();
+        return 0;
     }
 }
