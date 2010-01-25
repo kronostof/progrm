@@ -8,10 +8,10 @@ public class GenerationState {
 
     public static void main(String[] args) {
         Sarsa_StateFactory sta = new Sarsa_StateFactory();
-        sta.Generer_tout_les_etats();
+        //sta.Generer_tout_les_etats();
         sta.affichage_listeDesEtat();
         System.out.println(sta.listeDesEtat.size());
-        sta.Generer_toutes_les_action();
+        //sta.Generer_toutes_les_action();
         sta.affichage_listeDesAction();
         System.out.println(sta.listeDesActions.size());
 
