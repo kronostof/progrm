@@ -16,22 +16,18 @@ public class NewVueForme extends FormDrawable implements FormeListener {
     public enum ShapeForme { Circle, Cursor, Square, Triangle }
 
     public NewVueForme(NewShape forme) {
-        super(forme.getStateOfShape().getColor(), forme.getPoint(), new Dimension(40, 40));
+        super(forme.getStateOfShape().getAWTShapeColor(), forme.getPoint(), new Dimension(40, 40));
         
-        switch (forme.getStateOfShape().getForme()) {
-            case NewShape.CIRCLE:
+        switch (forme.getStateOfShape().getShapeType()) {
+            case ROND :
                 this.gShape = new graphicsShapeCIRCLE();
                 break;
-            case NewShape.CURSOR:
-                this.gShape = new graphicsShapeCURSOR();
-                break;
-            case NewShape.SQUARE:
+            case CARRE:
                 this.gShape = new graphicsShapeSQUARE();
                 break;
-            case NewShape.TRANGLE:
+            case TRIANGLE:
                 this.gShape = new graphicsShapeTRIANGLE();
                 break;
-
             default:
                 System.out.println("VueForme:public VueForme(Shape forme,int type) pas d'objet graphiqueShape initialis�e !");
                 break;
@@ -54,7 +50,7 @@ public class NewVueForme extends FormDrawable implements FormeListener {
         //System.out.println("public class CircleDrawable extends FormDrawable");
 
         this.setPosition(((NewShape) FL).getPosition().getPoint());
-        this.color = ((NewShape) FL).getStateOfShape().getColor();
+        this.color = ((NewShape) FL).getStateOfShape().getAWTShapeColor();
         // on fait un repaint de tt la vue et c est moche ! ! !
         Vue.repaint();
     }
