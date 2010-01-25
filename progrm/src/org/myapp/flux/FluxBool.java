@@ -13,8 +13,8 @@ public class FluxBool extends Flux<Bbool> {
 	}
 
 	/** setter 
-	 * c est principalement par cette methode que le flux sera modifiée
-	 * on veut que le flux conserve en memoire la date la plus ancienne du passage a l'état de la valeur boolenne.
+	 * c est principalement par cette methode que le flux sera modifiÃ©e
+	 * on veut que le flux conserve en memoire la date la plus ancienne du passage a l'Ã©tat de la valeur boolenne.
 	 */
 	@Override
 	public void set(Bbool b) {
