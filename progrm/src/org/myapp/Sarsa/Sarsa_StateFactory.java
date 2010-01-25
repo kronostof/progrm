@@ -17,6 +17,7 @@ public class Sarsa_StateFactory {
 //    private static int bidon = init();
     static public ArrayList<Sarsa_State> listeDesEtat = new ArrayList<Sarsa_State>();
     static public ArrayList<Sarsa_Action> listeDesActions = new ArrayList<Sarsa_Action>();
+    
     private boolean bool_Generer_tout_les_etats = false;
     private boolean bool_Generer_tout_les_action = false;
     ShapeType shapeType;
@@ -181,7 +182,7 @@ public class Sarsa_StateFactory {
 
     public void affichage_listeDesAction() {
 
-        if (bool_Generer_tout_les_etats == false) {
+        if (bool_Generer_tout_les_action == false) {
             System.err.println("package org.myapp.factory;\npublic class StateFactory \nLa methode public void actions() n'a pas encore été appellé");
         } else {
 
