@@ -14,7 +14,7 @@ import com.espertech.esper.event.EventBean;
 
 
 /**
- * Reçoit un flux, le traite et en propose un autre.
+ * ReÃ§oit un flux, le traite et en propose un autre.
  * @author Moncy christophe 10304320 
  * <br>Ucb Lyon1 
  * @param <Type de flux entrant, Type de flux Sortant>
@@ -50,7 +50,7 @@ public abstract class module<E extends Flux<? extends Information>,F extends Flu
 	
 	/**
 	 * 
-	 * Toutes les classe dérivant de module devrons proposer un fonction setup 
+	 * Toutes les classe dÃ©rivant de module devrons proposer un fonction setup
 	 * prenant en parametre les argument propre au module.
 	 * TODO On peut pas faire mieux ???
 	 *  

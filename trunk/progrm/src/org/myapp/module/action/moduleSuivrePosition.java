@@ -34,7 +34,7 @@ public class moduleSuivrePosition   extends module<FluxPosition ,FluxBool> imple
 
 
 	/**
-	 *  Cette methode est reçut a chaque envoie d un nvll evenement
+	 *  Cette methode est reï¿½ut a chaque envoie d un nvll evenement
 	 *  
 	 *  les traitements a effectuer en fonction de la nature du flux entrant sont a y placer.
 	 */
@@ -50,7 +50,7 @@ public class moduleSuivrePosition   extends module<FluxPosition ,FluxBool> imple
 	 * Le coeur du module.
 	 * On peut en choisir le rythme
 	 *  la ligne "epService.getEPRuntime().sendEvent(this);"
-	 *  envoie l'évenement 'MODEL' au gestionnaire d'évenement
+	 *  envoie l'Ã©venement 'MODEL' au gestionnaire d'Ã©venement
 	 *  
 	 *  les traitement a effectuer independament de la nature des flux entrant et sortant sont a y placer.
 	 */

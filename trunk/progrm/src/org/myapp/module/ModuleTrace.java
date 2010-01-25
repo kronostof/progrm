@@ -17,9 +17,9 @@ public class ModuleTrace  extends module<FluxPosition ,FluxPosition> implements 
     /**
 	 * Ce module permet la construction d'une trace a partir d'un flux d'information
 	 * 
-	 * @param String string : nom de l'élément appellant ce module
+	 * @param String string : nom de l'Ã©lÃ©ment appellant ce module
 	 * @param Flux fluxEntrant
-	 * @param String fluxSortant : nom du fichier ds lequel sera conservé la trace.
+	 * @param String fluxSortant : nom du fichier ds lequel sera conservÃ© la trace.
 	 */
 	public ModuleTrace(String string, FluxPosition fluxEntrant, String fluxSortant) {
 		this.setFluxEntrant(fluxEntrant);

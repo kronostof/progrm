@@ -38,7 +38,7 @@ public class moduleRegion extends module<FluxPosition ,FluxBool> implements Upda
 
 
 	/**
-	 *  Cette methode est reçut a chaque envoie d un nvll evenement
+	 *  Cette methode est reÃ©ut a chaque envoie d un nvll evenement
 	 *  
 	 *  les traitements a effectuer en fonction de la nature du flux entrant sont a y placer.
 	 */
@@ -55,7 +55,7 @@ public class moduleRegion extends module<FluxPosition ,FluxBool> implements Upda
 	 * Le coeur du module.
 	 * On peut en choisir le rythme
 	 *  la ligne "epService.getEPRuntime().sendEvent(this);"
-	 *  envoie l'évenement 'Region' au gestionnaire d'évenement
+	 *  envoie l'Ã©venement 'Region' au gestionnaire d'Ã©venement
 	 *  
 	 *  les traitement a effectuer independament de la nature des flux entrant et sortant sont a y placer.
 	 */
@@ -76,7 +76,7 @@ public class moduleRegion extends module<FluxPosition ,FluxBool> implements Upda
     public float getPosY() {        return getFluxEntrant().getPosY();    }
     
 /**
- * Cette methode est utilisée afin de modifier l'expression utilisée par ce module par défault l expression designe 
+ * Cette methode est utilisÃ©e afin de modifier l'expression utilisÃ©e par ce module par dÃ©fault l expression designe
  * le point 0 0
  */
 	@Override

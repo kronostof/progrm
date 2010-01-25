@@ -9,7 +9,7 @@ import org.myapp.module.module;
 /**
  * 
  * @author Moncy Christophe 10304320 UCBLyon1
- *	Cette classe implement les méthode pouvant agir sur un ensemble de module
+ *	Cette classe implement les mÃ©thode pouvant agir sur un ensemble de module
  */
 public class ModuleManager {
 
@@ -18,7 +18,7 @@ public class ModuleManager {
 	
 	
 	public ModuleManager(Flux<? extends Information> FLXE) {
-		// on initialise le gestionnaire de module avec le flux entrant de la forme le créeant.
+		// on initialise le gestionnaire de module avec le flux entrant de la forme le crÃ©eant.
 		this.FLXS = FLXE;
 		
 	}

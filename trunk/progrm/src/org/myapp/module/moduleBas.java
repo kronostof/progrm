@@ -56,8 +56,8 @@ public class moduleBas  extends module<FluxPosition ,FluxBool > implements Updat
 
 	
 	/**
-	 * @param borneSup: valeur représantant ce que l on considere 
-	 * comme region basse de l'écrant en pourcentage de la surfaces totale. 
+	 * @param borneSup: valeur reprÃ©santant ce que l on considere
+	 * comme region basse de l'Ã©crant en pourcentage de la surfaces totale.
 	 * 
 	 * @return
 	 */
