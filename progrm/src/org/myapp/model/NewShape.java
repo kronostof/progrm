@@ -9,31 +9,27 @@
 package org.myapp.model;
 
 import com.espertech.esper.client.EPServiceProvider;
+import java.awt.Color;
 import java.awt.Point;
 import javax.swing.event.EventListenerList;
 import org.FormeListener;
 import org.myapp.event.Position;
+import org.myapp.factory.ShapeFactory.ShapeType;
 import org.myapp.flux.FluxPosition;
 import org.myapp.Lecteur;
 import org.myapp.Sarsa.Sarsa_State;
 import org.myapp.Sarsa.Sarsa_StateFactory;
-import org.myapp.module.manager.ModuleManager;
 /**
  * Une shape possède un objet SARSA_State correspondant à son état.
  * (sa couleur, sa forme...)
  * @author ter Vincent Bonnier
  */
-public class NewShape extends Thread implements FormeListener {
+public class NewShape extends AbstractShape implements FormeListener {
 
     private Sarsa_State state;
     private String nom;
     private Position position;	// la position dans le monde.
     private EventListenerList listeners = new EventListenerList();
-
-    //gestion du regard de l'utilisateur
-    EPServiceProvider epService;
-    public FluxPosition Gaze = new FluxPosition(); // position du regard de l'utilisateur
-    public ModuleManager poolModule;
 
     public NewShape(String nom, Sarsa_StateFactory stateFactory) {
         this.nom = nom;
@@ -74,4 +70,39 @@ public class NewShape extends Thread implements FormeListener {
     public void setListeners(EventListenerList listeners) { this.listeners = listeners; }
     public void setNom(String nom) {this.nom = nom;}
     public void setPosition(Position position) {this.position = position;}
+
+    @Override
+    void fireCouleurChangee() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    Color getColor() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    void setForme(int forme) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    void setType(ShapeType shapeType) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    int getForme() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    ShapeType getType() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    void eloigne(Position data, int paramPas) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }

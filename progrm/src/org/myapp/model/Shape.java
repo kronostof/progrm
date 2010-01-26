@@ -18,9 +18,8 @@ import drawing.shape.VueForme.ShapeForme;
 /**
  * model de l'objet forme.
  */
-public class Shape extends Thread implements AbstractShape, FormeListener {
+public class Shape extends AbstractShape implements FormeListener {
 
-    EPServiceProvider epService;
     private EventListenerList listeners = new EventListenerList();
     private String nom;			// Un identifiant- utilis� pour la sortie console.
 /** 
@@ -28,9 +27,6 @@ public class Shape extends Thread implements AbstractShape, FormeListener {
  */
     private int forme;
     private Position position;	// la position dans le monde.
-    public Color color;
-    public FluxPosition Gaze = new FluxPosition();
-    public ModuleManager poolModule;
     private ShapeType shapeType;
     private ShapeForme forme2;
 
