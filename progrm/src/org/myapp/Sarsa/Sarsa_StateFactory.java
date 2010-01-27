@@ -188,7 +188,20 @@ public class Sarsa_StateFactory {
     }
 
     public Sarsa_State get_Sarsa_State_aleatoire() {
-        System.out.println(listeDesEtat.size());
-        return listeDesEtat.get(Math.round((float) Math.random() * listeDesEtat.size()));
+        //System.out.println(listeDesEtat.size());
+        //Math.round demande un float
+        //Math.round drenvoi un int
+        //Math.random renvoi un double
+        //listeDesEtat.size renvoi un int
+        int rnd = 0;
+        do {
+            float random = ((float) Math.random()) * ((float)listeDesEtat.size());
+            float roundRandom = (float) Math.round(random);
+            rnd = Math.round(roundRandom);
+//            System.out.println("rnd = " + rnd + " est ce que ça ira ?");
+        } while ((rnd >= listeDesEtat.size()));
+
+//        System.out.println("on demande dans listeDesEtat l'index : " +rnd);
+        return listeDesEtat.get(rnd);
     }
 }
