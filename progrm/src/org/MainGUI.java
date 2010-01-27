@@ -10,10 +10,10 @@ import org.myapp.model.NewMondeDesFormeModel;
  */
 public class MainGUI {
     public static void main(String[] args) {
-        JCanvas Vue = new JCanvas();
-        NewVueForme.set(Vue);
+        JCanvas vue = new JCanvas();
+        NewVueForme.set(vue);
         NewMondeDesFormeModel model = new NewMondeDesFormeModel();
-        NewMondeDesFormeController Controleur = new NewMondeDesFormeController(model,Vue);
-        model.build(Controleur);
+        NewMondeDesFormeController Controleur = new NewMondeDesFormeController(model,vue);
+        model.build(Controleur, vue);
     }
 }
