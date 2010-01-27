@@ -9,9 +9,9 @@ import org.lamia.src.RecevoirData;
 import org.lamia.src.fenetre;
 import org.myapp.event.Position;
  */
-import org.lamia.src.OuvrirSocket;
-import org.lamia.src.RecevoirData;
-import org.lamia.src.fenetre;
+import org.calibration.OuvrirSocket;
+import org.calibration.RecevoirData;
+import org.calibration.fenetre;
 import org.myapp.flux.FluxPosition;
 
 import com.espertech.esper.client.EPServiceProvider;
