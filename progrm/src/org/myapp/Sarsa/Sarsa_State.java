@@ -21,6 +21,7 @@ public class Sarsa_State {
     public enum ShapeType {
         TRIANGLE, ROND, CARRE
     }
+    
     /**
      * Liste des element constituant l'état
      */
