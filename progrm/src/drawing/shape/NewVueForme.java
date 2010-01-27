@@ -1,10 +1,10 @@
 package drawing.shape;
 
+import org.FormeListener;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
-import org.FormeListener;
 import drawing.JCanvas;
 import drawing.shape.type.*;
 import org.myapp.model.NewShape;
@@ -39,10 +39,10 @@ public class NewVueForme extends FormDrawable implements FormeListener {
     * @see draw.Drawable#draw(java.awt.Graphics)
     */
     public void draw(Graphics g) {
-        Color c = g.getColor();
+      Color c = g.getColor();
         g.setColor(color);
         gShape.draw(g, rect.x, rect.y, rect.width, rect.height);
-        g.setColor(c);
+        g.setColor(c);  
     }
 
     @Override
