@@ -31,21 +31,21 @@ public class NewShape extends AbstractShape implements FormeListener {
     private Position position;	// la position dans le monde.
     private EventListenerList listeners = new EventListenerList();
 
-    public NewShape(String nom, Sarsa_StateFactory stateFactory) {
+    public NewShape(String nom) {
         this.nom = nom;
         Lecteur.accroche(Gaze);
         epService = Lecteur.getInstance();
         position = new Position((int) (Math.random() * 1024), (int) (Math.random() * 768));
-        state = stateFactory.get_Sarsa_State_aleatoire();
         this.start();
     }
-    @Override
-    public void positionChangee(FormeListener Fl) {}
-
     public void addFormeListener(FormeListener listener) {
         listeners.add(FormeListener.class, listener);
     }
 
+    @Override
+    public void positionChangee(FormeListener Fl) {}
+
+    
     public void firePositionChangee() {
         for (FormeListener listener : getFormeListeners()) {
             listener.positionChangee(this);
@@ -70,6 +70,8 @@ public class NewShape extends AbstractShape implements FormeListener {
     public void setListeners(EventListenerList listeners) { this.listeners = listeners; }
     public void setNom(String nom) {this.nom = nom;}
     public void setPosition(Position position) {this.position = position;}
+    public void setState(Sarsa_State s) {this.state = s; }
+
 
     @Override
     void fireCouleurChangee() {
