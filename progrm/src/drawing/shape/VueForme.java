@@ -1,10 +1,10 @@
 package drawing.shape;
 
+import org.FormeListener;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
-import org.FormeListener;
 import org.myapp.model.Shape;
 import drawing.JCanvas;
 import drawing.shape.type.*;
