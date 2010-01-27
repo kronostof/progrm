@@ -1,10 +1,10 @@
 package drawing.shape;
 
+import org.FormeListener;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
 
-import org.FormeListener;
 
 /**
  * @author ter Christophe Moncy
