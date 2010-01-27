@@ -21,6 +21,6 @@ public class MainSARSA {
 		NewVueForme.set(Vue);
 		NewMondeDesFormeModel model = new NewMondeDesFormeModel();
 		NewMondeDesFormeController Controleur = new NewMondeDesFormeController(model,Vue);
-		model.build(Controleur);
+		model.build(Controleur, Vue);
 	}
 }
