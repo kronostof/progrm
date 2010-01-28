@@ -1,5 +1,6 @@
 package org.myapp.Sarsa;
 
+import drawing.shape.VueForme.ShapeForme;
 import java.awt.Color;
 
 /**
@@ -10,22 +11,25 @@ public class Sarsa_State {
 
     // ShapeColor couleur (bleue, rouge, jaune)
     public enum ShapeColor {
+
         BLEUE, ROUGE, JAUNE
     }
     // ShapeDist distance au regard (proche, eloigné , neutre)
+
     public enum ShapeDist {
+
         PROCHE, ELOIGNE, NEUTRE
     }
 
     // ShapeType forme (triangle, rond, carré)
-    public enum ShapeType {
+    public enum State_ShapeForme {
+
         TRIANGLE, ROND, CARRE
     }
-    
     /**
      * Liste des element constituant l'état
      */
-    ShapeType shapeType;
+    State_ShapeForme shapeType;
     ShapeDist shapeDist;
     ShapeColor shapeColor;
 
@@ -37,39 +41,58 @@ public class Sarsa_State {
         this.shapeDist = shapeDist;
     }
 
-    public void setShapeType(ShapeType shapeType) {
+    public void setShapeType(State_ShapeForme shapeType) {
         this.shapeType = shapeType;
     }
-    
+
     public Color getAWTShapeColor() {
         Color couleurOfShape;
-        switch(shapeColor) {
-            case BLEUE :
+        switch (shapeColor) {
+            case BLEUE:
                 couleurOfShape = Color.BLUE;
                 break;
-            case ROUGE :
+            case ROUGE:
                 couleurOfShape = Color.RED;
                 break;
-            case JAUNE :
+            case JAUNE:
                 couleurOfShape = Color.YELLOW;
                 break;
-            default :
+            default:
                 couleurOfShape = Color.BLACK;
         }
-       return couleurOfShape;
+        return couleurOfShape;
     }
 
     public ShapeColor getShapeColor() {
         return shapeColor;
-        
+
     }
-  
+
     public ShapeDist getShapeDist() {
         return shapeDist;
     }
 
-    public ShapeType getShapeType() {
+    public State_ShapeForme getShapeType() {
         return shapeType;
+    }
+
+    public ShapeForme getShapeForme() {
+
+        ShapeForme forme;
+        switch (this.shapeType) {
+            case CARRE:
+                forme = ShapeForme.SQUARE;
+                break;
+            case ROND:
+                forme = ShapeForme.CIRCLE;
+                break;
+            case TRIANGLE:
+                forme = ShapeForme.TRIANGLE;
+                break;
+            default:
+                forme = ShapeForme.CIRCLE;
+        }
+        return forme;
     }
 
     @Override
