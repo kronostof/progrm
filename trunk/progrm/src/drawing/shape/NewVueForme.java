@@ -7,22 +7,31 @@ import java.awt.Graphics;
 import java.awt.Point;
 import drawing.JCanvas;
 import drawing.shape.type.*;
-import org.myapp.model.NewShape;
+import org.myapp.Sarsa.Sarsa_Shape;
+import org.myapp.model.Shape;
 
 public class NewVueForme extends FormDrawable implements FormeListener {
 
     static public JCanvas Vue;
     private graphicsShape gShape;
-    public enum ShapeForme { Circle, Cursor, Square, Triangle }
 
-    public NewVueForme(NewShape forme) {
-        super(forme.getStateOfShape().getAWTShapeColor(), forme.getPoint(), new Dimension(40, 40));
-        
-        switch (forme.getStateOfShape().getShapeType()) {
-            case ROND :
+    public void positionChangee(FormeListener Fl) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public enum ShapeForme {
+
+        Circle, Cursor, Square, Triangle
+    }
+
+    public NewVueForme(Sarsa_Shape forme) {
+        super(Color.RED, forme.getPoint(), new Dimension(40, 40));
+
+        switch (forme.getForme()) {
+            case CIRCLE:
                 this.gShape = new graphicsShapeCIRCLE();
                 break;
-            case CARRE:
+            case SQUARE:
                 this.gShape = new graphicsShapeSQUARE();
                 break;
             case TRIANGLE:
@@ -36,24 +45,15 @@ public class NewVueForme extends FormDrawable implements FormeListener {
     }
 
     /* (non-Javadoc)
-    * @see draw.Drawable#draw(java.awt.Graphics)
-    */
+     * @see draw.Drawable#draw(java.awt.Graphics)
+     */
     public void draw(Graphics g) {
-      Color c = g.getColor();
+        Color c = g.getColor();
         g.setColor(color);
         gShape.draw(g, rect.x, rect.y, rect.width, rect.height);
-        g.setColor(c);  
+        g.setColor(c);
     }
 
-    @Override
-    public void positionChangee(FormeListener FL) {
-        //System.out.println("public class CircleDrawable extends FormDrawable");
-
-        this.setPosition(((NewShape) FL).getPosition().getPoint());
-        this.color = ((NewShape) FL).getStateOfShape().getAWTShapeColor();
-        // on fait un repaint de tt la vue et c est moche ! ! !
-        Vue.repaint();
-    }
 
     static public void set(JCanvas nVue) {
         Vue = nVue;

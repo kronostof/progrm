@@ -3,7 +3,6 @@ package org.myapp.module.manager;
 import java.util.ArrayList;
 import org.myapp.event.Information;
 import org.myapp.flux.Flux;
-import org.myapp.model.NewShape;
 import org.myapp.model.Shape;
 import org.myapp.module.module;
 
@@ -27,11 +26,6 @@ public class ModuleManager {
 	 * cree une instance de module manager ayant comme flux entrant le Gaze
 	 */
 	public ModuleManager(Shape shape) {
-		this.FLXS = shape.Gaze;
-		
-	}
-	/** Le meme pour les newShape*/
-	public ModuleManager(NewShape shape) {
 		this.FLXS = shape.Gaze;
 		
 	}

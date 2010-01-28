@@ -14,7 +14,7 @@ public class OuvrirSocket extends DatagramSocket{
 
 	public OuvrirSocket() throws SocketException {
 		super(5555);
-		
+
 	}
 
 }

@@ -105,7 +105,9 @@ public class moduleChangerCouleur   extends module<FluxPosition ,FluxBool> imple
     		if (getFluxEntrant().isFresh(40)){
     			//System.out.println(shape.getName()+ " " + fluxEntrant.data.toString() + " " );
 	    		epService.getEPRuntime().sendEvent(this);	
-    		}
+    		}else {
+                    boolclignote = false;
+                }
     		if(boolclignote) 	clignote();
     		try {
     		sleep(vitesseDeTraitement);
