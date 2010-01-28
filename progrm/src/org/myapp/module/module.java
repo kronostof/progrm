@@ -40,14 +40,14 @@ public abstract class module<E extends Flux<? extends Information>,F extends Flu
 	abstract public void update(EventBean[] arg0, EventBean[] arg1);
 	
 	public void init_module(){
-	EPStatement statement = Lecteur.getInstance().getEPAdministrator().createEPL(this.expression);
+    	EPStatement statement = Lecteur.getInstance().getEPAdministrator().createEPL(this.expression);
 	statement.addListener(this);
 	}
 
 	//abstract public UpdateListener getListener();
-	
+
 	//abstract public void init(EPServiceProvider nepService);
-	
+
 	/**
 	 * 
 	 * Toutes les classe dérivant de module devrons proposer un fonction setup

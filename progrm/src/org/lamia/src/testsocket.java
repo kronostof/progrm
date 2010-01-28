@@ -10,8 +10,9 @@ public class testsocket
 
  public static void main(String argv[]) throws Exception
  {
-	
     OuvrirSocket socket = new OuvrirSocket();
+    socket.close();
+    socket = new OuvrirSocket();
     UserInterface UI = new UserInterface(socket);
     UI.setVisible(true);
     /*fenetre f = new fenetre(socket);

@@ -90,7 +90,7 @@ public class ClientUdp extends DatagramSocket implements Runnable {
 
             chaine_reçut = new String(datagramPacket.getData(), 0, datagramPacket.getLength());
             message.set(chaine_reçut.substring(0, 6), chaine_reçut.substring(6));
-            System.out.println("\n XXX<" + chaine_reçut+ ">XXX");
+            //System.out.println("\n XXX<" + chaine_reçut+ ">XXX");
 
             /// On met a jour les attribut de la classe conservant certaine information.
 

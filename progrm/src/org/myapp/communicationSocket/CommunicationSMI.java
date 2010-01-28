@@ -1,5 +1,7 @@
 package org.myapp.communicationSocket;
 
+import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.myapp.flux.FluxPosition;
@@ -24,13 +26,15 @@ public class CommunicationSMI extends Thread {
     static int nombre_instance_en_cours = 0;
     static private ClientUdp client = null;
 
+
+    // faire passer la valeur de cette variable entre vrai et faux règle pas mal de probleme
     static boolean ERREUR_COMMUNICATION_SMI = true;
 
     /**
      * Constructeur Unique de la classe.
      */
     public CommunicationSMI() {
-
+        System.out.println("   public CommunicationSMI() \n voir initialisation de la variable <ERREUR_COMMUNICATION_SMI>");
 
         try {
             if (client == null) {
@@ -40,8 +44,12 @@ public class CommunicationSMI extends Thread {
                 client.write(new String("ET_FRM \"%SX %SY\" \n\r"));
                 this.start();
             }
-        } catch (Exception ex) {
-            System.err.println("package org.myapp.communicationSocket\n|public CommunicationSMI()\n : Erreur lors de la création de l'instance <client> de <ClientUdp>");
+        } catch (SocketException ex) {
+            System.err.println("package org.myapp.communicationSocket\n|public CommunicationSMI()\n : Erreur de soquet");
+            ERREUR_COMMUNICATION_SMI  = true;
+        }
+         catch (UnknownHostException ex) {
+            System.err.println("package org.myapp.communicationSocket\n|public CommunicationSMI()\n : Erreur : l'adresse de l'hote est inconu du systeme");
             ERREUR_COMMUNICATION_SMI  = true;
         }
     }

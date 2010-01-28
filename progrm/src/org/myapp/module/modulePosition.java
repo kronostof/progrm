@@ -98,10 +98,13 @@ public class modulePosition  extends module<FluxPosition ,FluxPosition> implemen
 	//@Override	public void init(EPServiceProvider nepService) {		this.epService=nepService;	}
 
 
+    @Override
 	public void run(){
 		while(true){
-			//if(getFluxEntrant().isFresh(20))
+			if(getFluxEntrant().isFresh(40)){
 				epService.getEPRuntime().sendEvent(this);
+                                
+                        }
 			
     		 try {
     		 sleep(vitesseDeTraitement);
