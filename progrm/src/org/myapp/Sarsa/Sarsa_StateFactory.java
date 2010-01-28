@@ -19,7 +19,7 @@ public class Sarsa_StateFactory {
     static public ArrayList<Sarsa_Action> listeDesActions = new ArrayList<Sarsa_Action>();
     private boolean bool_Generer_tout_les_etats = false;
     private boolean bool_Generer_tout_les_action = false;
-    ShapeType shapeType;
+    State_ShapeForme shapeType;
     ShapeDist shapeDist;
     ShapeColor shapeColor;
     //chk action
@@ -43,7 +43,7 @@ public class Sarsa_StateFactory {
             bool_Generer_tout_les_etats = true;
             int id = 0;
             Sarsa_State etat_temp;
-            for (ShapeType Shape_t : ShapeType.values()) {
+            for (State_ShapeForme Shape_t : State_ShapeForme.values()) {
                 for (ShapeDist Shape_d : ShapeDist.values()) {
                     for (ShapeColor Shape_c : ShapeColor.values()) {
                         etat_temp = new Sarsa_State();
@@ -101,7 +101,7 @@ public class Sarsa_StateFactory {
 //                            temp.setShapeDist(sarsa_State.getShapeDist());
 //                            temp.setShapeType(sarsa_State.getShapeType());
 
-                            if (field.getType().getSimpleName().compareTo("ShapeType") == 0) {
+                            if (field.getType().getSimpleName().compareTo("State_ShapeForme") == 0) {
                                 if (sarsa_State.getShapeType().toString().compareTo(field1.getName()) != 0) { // On vire le cas ou le champs est identique a celui de la forme
                                     temp.setShapeColor(sarsa_State.getShapeColor());
                                     temp.setShapeDist(sarsa_State.getShapeDist());
@@ -199,9 +199,19 @@ public class Sarsa_StateFactory {
             float roundRandom = (float) Math.round(random);
             rnd = Math.round(roundRandom);
 //            System.out.println("rnd = " + rnd + " est ce que ça ira ?");
-        } while ((rnd >= listeDesEtat.size()));
+        } while (rnd >= listeDesEtat.size());
 
 //        System.out.println("on demande dans listeDesEtat l'index : " +rnd);
         return listeDesEtat.get(rnd);
     }
+
+    public static ArrayList<Sarsa_Action> getListeDesActions() {
+        return listeDesActions;
+    }
+
+    public static ArrayList<Sarsa_State> getListeDesEtat() {
+        return listeDesEtat;
+    }
+
+
 }

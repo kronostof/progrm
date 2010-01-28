@@ -10,33 +10,29 @@ import org.myapp.Lecteur;
 import org.myapp.event.Position;
 import org.myapp.factory.ShapeFactory.ShapeType;
 import org.myapp.flux.FluxPosition;
-import org.myapp.module.manager.ModuleManager;
-
-import com.espertech.esper.client.EPServiceProvider;
 import drawing.shape.VueForme.ShapeForme;
 
 /**
  * model de l'objet forme.
  */
-public class Shape extends AbstractShape implements FormeListener {
+public class Shape extends Abstract_Shape implements FormeListener {
 
     private EventListenerList listeners = new EventListenerList();
-    private String nom;			// Un identifiant- utilis� pour la sortie console.
-/** 
- * Identidiant de la forme associé a l'instance
- */
-    private int forme;
+    protected String nom;			// Un identifiant- utilis� pour la sortie console.
+    /**
+     * Identidiant de la forme associé a l'instance
+     */
+    //private int forme;
     private Position position;	// la position dans le monde.
     private ShapeType shapeType;
-    private ShapeForme forme2;
-
+    private ShapeForme shapeForme;
 
     public Shape(String nom) {
         this.nom = nom;
         Lecteur.accroche(Gaze);
         epService = Lecteur.getInstance();
+        color = new Color(10000);
         position = new Position((int) (Math.random() * 1024), (int) (Math.random() * 768));
-        color = new Color(50000);
         this.start();
     }
 
@@ -81,17 +77,15 @@ public class Shape extends AbstractShape implements FormeListener {
     }
 
     public void firePositionChangee() {
-
         for (FormeListener listener : getFormeListeners()) {
             listener.positionChangee(this);
         }
-
     }
 
     public void fireCouleurChangee() {
         for (FormeListener listener : getFormeListeners()) {
             listener.positionChangee(this);
-     }
+        }
 
     }
 
@@ -117,22 +111,10 @@ public class Shape extends AbstractShape implements FormeListener {
         return position.getPoint();
     }
 
-    /**
-     * @param forme the forme to set
-     */
-    
-    public void setForme(int forme) {
-        this.forme = forme;
-    }
-    
     public void setType(ShapeType shapeType) {
         this.shapeType = shapeType;
     }
 
-    public int getForme() {
-        return forme;
-    }
-    
     /**
      * @return the forme
      */
@@ -144,11 +126,11 @@ public class Shape extends AbstractShape implements FormeListener {
         position.eloigne(data, paramPas);
     }
 
-    public void setForme2(ShapeForme shapeForme) {
-        this.forme2 = shapeForme;
+    public ShapeForme getForme() {
+        return shapeForme;
     }
 
-    public ShapeForme getForme2() {
-        return forme2;
+    public void setForme(ShapeForme forme) {
+        this.shapeForme = forme;
     }
 }

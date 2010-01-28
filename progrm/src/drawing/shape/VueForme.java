@@ -14,22 +14,48 @@ public class VueForme extends FormDrawable implements FormeListener {
     static public JCanvas Vue;
     private graphicsShape gShape;
 
-    public enum ShapeForme { Circle, Cursor, Square, Triangle }
+    public enum ShapeForme {
 
-    public VueForme(Shape forme) {
-        super(forme.color, forme.getPoint(), new Dimension(40, 40));
+        CIRCLE, CURSOR, SQUARE, TRIANGLE;
+    }
 
-        switch (forme.getForme()) {
-            case Shape.CIRCLE:
+//    public VueForme(Shape forme) {
+//        super(forme.color, forme.getPoint(), new Dimension(40, 40));
+//
+//        switch (forme.getForme2()) {
+//            case CIRCLE:
+//                this.gShape = new graphicsShapeCIRCLE();
+//                break;
+//            case CURSOR:
+//                this.gShape = new graphicsShapeCURSOR();
+//                break;
+//            case SQUARE:
+//                this.gShape = new graphicsShapeSQUARE();
+//                break;
+//            case TRIANGLE:
+//                this.gShape = new graphicsShapeTRIANGLE();
+//                break;
+//
+//            default:
+//                System.out.println("VueForme:public VueForme(Shape forme,int type) pas d'objet graphiqueShape initialis�e !");
+//                break;
+//        }
+//        Vue.addDrawable(this);
+//    }
+    public VueForme(Shape shape) {
+        super(shape.color, shape.getPoint(), new Dimension(40, 40));
+
+        switch (shape.getForme()) {
+            case CIRCLE:
                 this.gShape = new graphicsShapeCIRCLE();
                 break;
-            case Shape.CURSOR:
+            case CURSOR:
                 this.gShape = new graphicsShapeCURSOR();
                 break;
-            case Shape.SQUARE:
+            case SQUARE:
                 this.gShape = new graphicsShapeSQUARE();
                 break;
-            case Shape.TRANGLE:
+            case TRIANGLE:
                 this.gShape = new graphicsShapeTRIANGLE();
                 break;
 
@@ -39,33 +65,6 @@ public class VueForme extends FormDrawable implements FormeListener {
         }
         Vue.addDrawable(this);
     }
-
-     public VueForme(Shape forme,int nulll) {
-        super(forme.color, forme.getPoint(), new Dimension(40, 40));
-
-        switch (forme.getForme2()) {
-            case Circle:
-                this.gShape = new graphicsShapeCIRCLE();
-                break;
-            case Cursor:
-                this.gShape = new graphicsShapeCURSOR();
-                break;
-            case Square:
-                this.gShape = new graphicsShapeSQUARE();
-                break;
-            case Triangle:
-                this.gShape = new graphicsShapeTRIANGLE();
-                break;
-
-            default:
-                System.out.println("VueForme:public VueForme(Shape forme,int type) pas d'objet graphiqueShape initialis�e !");
-                break;
-        }
-        Vue.addDrawable(this);
-    }
-
-
-
 
     /* (non-Javadoc)
      * @see draw.Drawable#draw(java.awt.Graphics)
@@ -83,8 +82,33 @@ public class VueForme extends FormDrawable implements FormeListener {
 
         this.setPosition(((Shape) FL).getPosition().getPoint());
         this.color = ((Shape) FL).getColor();
+
+        set_Forme(((Shape) FL).getForme());
+
         // on fait un repaint de tt la vue et c est moche ! ! !
         Vue.repaint();
+    }
+
+    public void set_Forme(ShapeForme forme) {
+        Vue.removeDrawable(this);
+        switch (forme) {
+            case CIRCLE:
+                this.gShape = new graphicsShapeCIRCLE();
+                break;
+            case CURSOR:
+                this.gShape = new graphicsShapeCURSOR();
+                break;
+            case SQUARE:
+                this.gShape = new graphicsShapeSQUARE();
+                break;
+            case TRIANGLE:
+                this.gShape = new graphicsShapeTRIANGLE();
+                break;
+            default:
+                System.out.println("VueForme:public VueForme(Shape forme,int type) pas d'objet graphiqueShape initialis�e !");
+                break;
+        }
+        Vue.addDrawable(this);
     }
 
     static public void set(JCanvas nVue) {

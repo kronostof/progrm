@@ -1,169 +1,90 @@
 package org.myapp;
+
 import java.awt.MouseInfo;
-import java.net.SocketException;
-/*
-import java.net.SocketException;
-
-import org.lamia.src.OuvrirSocket;
-import org.lamia.src.RecevoirData;
-import org.lamia.src.fenetre;
-import org.myapp.event.Position;
- */
-import org.calibration.OuvrirSocket;
-import org.calibration.RecevoirData;
-import org.calibration.fenetre;
-import org.myapp.flux.FluxPosition;
-
 import com.espertech.esper.client.EPServiceProvider;
 import com.espertech.esper.client.EPServiceProviderManager;
+import org.myapp.communicationSocket.CommunicationSMI;
+import org.myapp.event.Position;
+import org.myapp.flux.FluxPosition;
 
 /**
- * Cette classe constitue le pr�-lecteur du flux elle offre le "EPServiceProvider"
+ * Cette classe constitue le pré-lecteur du flux elle offre le "EPServiceProvider"
  * sa conception modulaire permet l'ajout de nouveau module de comprehention du flux
- * par 	la construction du module (objet d�rivant de module) 
- * et 	son ajout au evennement list�e ( ajoutStatement() )
- * 
- * la vitesse de lecture est celle a laquel on considere qu'une nouvelle info est arriv�
+ * par 	la construction du module (objet dérivant de module)
+ * et son ajout au evennement liste ( ajoutStatement() )
+ *
+ * La vitesse de lecture est celle a laquel on considere qu'une nouvelle info est arrivée
  * elle rythme l'envoie de la requete de mise a jour des listener
- * 
- * 
+ *
  * @author Moncy christophe
- * 
- * 
- * 
+ *
  * Designe patern : SINGLETON
  */
-public class Lecteur extends Thread{
+public class Lecteur extends Thread {
 
-	//private EPServiceProvider epService;
-	private static EPServiceProvider instance;
-	//private static Object objetSynchrone__;
-	private long vitesseDelecture = 20;
-	private static FluxPosition fluxdata;
-	private boolean boolEchecSocket = false;
+    private static EPServiceProvider instance;
+    private long vitesseDelecture = 20;
+    private static FluxPosition fluxdata = null;
+    private boolean boolEchecSocket = false;
 
+    public Lecteur(FluxPosition position) {
+        fluxdata = position;
+        this.start();
+    }
 
-	public Lecteur(FluxPosition position) {
-		//vitesseDelecture = 20;
-		//	epService = EPServiceProviderManager.getDefaultProvider();
-		fluxdata = position;
-		this.start();
-	}
+    public Lecteur() {
+        new CommunicationSMI();
+        if (CommunicationSMI.getFlux() == null) {
+            System.out.println("le flux recupérer par le systeme smi est initialisé a null.");
+            boolEchecSocket = true;
+            fluxdata = new FluxPosition();
+            this.start();
+        } else {
+            fluxdata = CommunicationSMI.getFlux();
+        }
+    }
 
-	public Lecteur() {
-		//vitesseDelecture = 20;
-		//	epService = EPServiceProviderManager.getDefaultProvider();
-		fluxdata = new FluxPosition();
-/*
-		OuvrirSocket socket;
-		try {
-			socket = new OuvrirSocket();
-			fenetre f = new fenetre(socket);
-			f.setVisible(true);
-			RecevoirData  m = new RecevoirData (socket,fluxdata);
-			m.start();
-		} catch (SocketException e) {
-			boolEchecSocket = true;
-			System.out.println("echec socket");
-			e.printStackTrace();
-		}
-		*/
+    /**
+     * Permet de recupérer le flux de donnée trouvée par le lecteur et de l'unifier avec le flux de position passé en paramètre.
+     * @param flux_a_unifier
+     */
+    public static void accroche(FluxPosition flux_a_unifier) {
+        System.out.println("Lecteur:accroche");
 
-		this.start();
-	}
+        flux_a_unifier.data = fluxdata.data;
+    }
 
-	/**
-	 * le flux de position pass� sera le m�me flux de position fournie par Lecteur.
-	 * @param f
-	 */
-	public static void accroche(FluxPosition f){
-		//System.out.println("Lecteur:accroche");
-		f.data = fluxdata.data ;
-	}
-
-	//	public void accroche(Position pos){	}
-
-
-	@Override
-	public void run() {
-		try {
-			sleep(1000);
-		} catch (InterruptedException e1) {
-		
-			e1.printStackTrace();
-		}
-
-                //		if (boolEchecSocket)
-			while(true){
-				try {
-					liremouse();
-//					System.out.println(fluxdata.data.toString());
-					sleep(vitesseDelecture);
-				} catch (InterruptedException e) {	e.printStackTrace();	}
-			}
-	}
-
-
-	public static EPServiceProvider getInstance(){
-		if (null == instance) { // Premier appel
-			//	 synchronized(objetSynchrone__) {
-			if (null == instance) {
-				instance = EPServiceProviderManager.getDefaultProvider();
-				//          }
-			}
-		}
-		return instance;
-	}
-
-
-
-	// FONCTION TEMPORAIRE
-	private void liremouse() throws InterruptedException {
-		fluxdata.data.set(MouseInfo.getPointerInfo().getLocation().x,MouseInfo.getPointerInfo().getLocation().y);
-		fluxdata.data.upDate();
-	}
-}
-
-
-/*
-
-Exemple utilis�e.
-
-http://smeric.developpez.com/java/uml/singleton/
-
-/ ** Exemple d'impl�mentation d'un singleton dans le cas du multithreading.<p>
- * Cet exemple ne fait rien.
- * /
-
-public class Singleton {
-
-    / ** R�cup�re l'instance unique de la class Singleton.<p>
- * Remarque : le constructeur est rendu inaccessible
- * /
-    public static Singleton getInstance() {
-        if (null == instance) { // Premier appel
-            synchronized(objetSynchrone__) {
-                if (null == instance) {
-                    instance = new Singleton();
+    @Override
+    public void run() {
+        if (boolEchecSocket) {
+            System.out.println("L'initialisation aveec le système SMI a echoué.\nLa position du regard sera mappé sur le controleur de la souris.");
+            while (true) {
+                try {
+                    liremouse();
+                    sleep(vitesseDelecture);
+                } catch (InterruptedException e) {
+                    fluxdata.set(new Position(50, 50));
+                    //e.printStackTrace();
                 }
+            }
+        }
+    }
+
+    public static EPServiceProvider getInstance() {
+        if (null == instance) {
+            if (null == instance) {
+                instance = EPServiceProviderManager.getDefaultProvider();
             }
         }
         return instance;
     }
 
-    / ** Constructeur red�fini comme �tant priv� pour interdire
- * son appel et forcer � passer par la m�thode <link
- * /
-    private Singleton() {
+    /**
+     * Fonction utilisé en cas d'erreur lors de la tentative de conexion avec le système SMI.
+     * @throws InterruptedException
+     */
+    private void liremouse() {
+        fluxdata.data.set(MouseInfo.getPointerInfo().getLocation().x, MouseInfo.getPointerInfo().getLocation().y);
+        fluxdata.data.upDate();
     }
-
-    / ** L'instance statique * /
-    private static Singleton instance;
-    / ** objet pour la synchronisation. <p>
- * j'ajoute deux "soulign�s" (__) au nom de l'attribut car il n'a
- * qu'un int�r�t purement technique.
- * /
-    private static Object objetSynchrone__;
 }
-
- */
