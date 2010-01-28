@@ -78,19 +78,14 @@ public class VueForme extends FormDrawable implements FormeListener {
 
     @Override
     public void positionChangee(FormeListener FL) {
-        //System.out.println("public class CircleDrawable extends FormDrawable");
-
         this.setPosition(((Shape) FL).getPosition().getPoint());
         this.color = ((Shape) FL).getColor();
-
         set_Forme(((Shape) FL).getForme());
-
         // on fait un repaint de tt la vue et c est moche ! ! !
         Vue.repaint();
     }
 
     public void set_Forme(ShapeForme forme) {
-        Vue.removeDrawable(this);
         switch (forme) {
             case CIRCLE:
                 this.gShape = new graphicsShapeCIRCLE();
@@ -108,7 +103,6 @@ public class VueForme extends FormDrawable implements FormeListener {
                 System.out.println("VueForme:public VueForme(Shape forme,int type) pas d'objet graphiqueShape initialis�e !");
                 break;
         }
-        Vue.addDrawable(this);
     }
 
     static public void set(JCanvas nVue) {
