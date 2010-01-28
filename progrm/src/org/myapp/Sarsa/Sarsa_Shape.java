@@ -47,14 +47,11 @@ public class Sarsa_Shape extends Shape {
     @Override
     public void run() {
         int nbr_iteration = 0, Max_iteration = 10;
-        politique.affiche_politique();
+        // politique.affiche_politique();
         while (nbr_iteration++ < Max_iteration) {
             try {
-
-
                 sleep(1000);
                 setState(politique.getNewState(this));
-
             } catch (InterruptedException ex) {
                 Logger.getLogger(Sarsa_Shape.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -107,5 +104,4 @@ public class Sarsa_Shape extends Shape {
     public Sarsa_State getSarsaState() {
         return state;
     }
-
 }

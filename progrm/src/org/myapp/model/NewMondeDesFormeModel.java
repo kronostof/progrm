@@ -27,13 +27,13 @@ public class NewMondeDesFormeModel {
 
 
         Sarsa_ShapeFactory.createShape(Sarsa_ShapeFactory.ShapeType.Gaze0, VueForme.ShapeForme.CURSOR);//.start();
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < 4; i++) {
 
             Sarsa_ShapeFactory.createShape(Sarsa_ShapeFactory.ShapeType.Approche1);//.start();
-//            Sarsa_ShapeFactory.createShape(Sarsa_ShapeFactory.ShapeType.Approche0);//.start();
-//            Sarsa_ShapeFactory.createShape(Sarsa_ShapeFactory.ShapeType.Type1);//.start();
-//            Sarsa_ShapeFactory.createShape(Sarsa_ShapeFactory.ShapeType.Type2);//.start();
-//            Sarsa_ShapeFactory.createShape(Sarsa_ShapeFactory.ShapeType.fuite0);//.start();
+            Sarsa_ShapeFactory.createShape(Sarsa_ShapeFactory.ShapeType.Approche0);//.start();
+            Sarsa_ShapeFactory.createShape(Sarsa_ShapeFactory.ShapeType.Type1);//.start();
+            Sarsa_ShapeFactory.createShape(Sarsa_ShapeFactory.ShapeType.Type2);//.start();
+            Sarsa_ShapeFactory.createShape(Sarsa_ShapeFactory.ShapeType.fuite0);//.start();
         }
     }
 //
