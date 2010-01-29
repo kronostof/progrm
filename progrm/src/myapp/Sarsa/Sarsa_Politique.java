@@ -3,6 +3,7 @@ package myapp.Sarsa;
 //package org.myapp.model;
 ////import java.util.HashMap;
 //
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
@@ -46,6 +47,10 @@ public class Sarsa_Politique {
         for (Sarsa_State a_State : HashQualityOfStates.keySet()) {
             System.out.println("|" + a_State + " \t| " + HashQualityOfStates.get(a_State) + "|");
         }
+
+        for (Sarsa_Action a_action : Sarsa_StateFactory.getListeDesActions()) {
+            System.out.println("|" + a_action);
+        }
     }
 
     /**
@@ -74,5 +79,36 @@ public class Sarsa_Politique {
 
 //        System.out.println(local_q + " " + good_state);
         return good_state;
+    }
+
+    /**
+     * Renvoi
+     * @param shape
+     * @return
+     */
+    public Sarsa_State getNextState(Sarsa_Shape shape) {
+        //on construit une liste des état accessible
+        ArrayList<Sarsa_State> liste = getArray_of_NextState(shape);
+        return liste.get((int) Math.rint(Math.random() * (liste.size()-1)));
+    }
+
+    /**
+     * Retourne une liste des états accesible parmit les état atteignable de l'état courant.
+     * @param shape
+     * @return
+     */
+    public ArrayList<Sarsa_State> getArray_of_NextState(Sarsa_Shape shape) {
+        //on construit une liste des état accessible
+
+        ArrayList<Sarsa_State> liste_etat = new ArrayList<Sarsa_State>();
+        //System.out.println("construction de la liste " + shape.getSarsaState());
+        for (Sarsa_Action action : Sarsa_StateFactory.getListeDesActions()) {
+            if (action.state_1 == shape.getSarsaState()) {
+                // on ajout a la liste
+                liste_etat.add(action.state_2);
+                //System.out.println("\t ajout a la liste " + action.state_2);
+            }
+        }
+        return liste_etat;
     }
 }

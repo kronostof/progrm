@@ -93,13 +93,7 @@ public class Sarsa_StateFactory {
                         if (test[0] != '$') {// On vire le champs dont la valeur commence par un $
                             //System.out.println("\t\t" + field1.getType().getSimpleName() + " | " + field1.getName());
                             // on construit les action posible pour chaque états.
-
-                            // System.out.println(sarsa_State);
                             temp = new Sarsa_State();
-
-//                            temp.setShapeColor(sarsa_State.getShapeColor());
-//                            temp.setShapeDist(sarsa_State.getShapeDist());
-//                            temp.setShapeType(sarsa_State.getShapeType());
 
                             if (field.getType().getSimpleName().compareTo("State_ShapeForme") == 0) {
                                 if (sarsa_State.getShapeType().toString().compareTo(field1.getName()) != 0) { // On vire le cas ou le champs est identique a celui de la forme
@@ -124,7 +118,7 @@ public class Sarsa_StateFactory {
                                     listeDesActions.add(temp_Sarsa_Action);
                                 }
                             }
-                            if (field.getType().getSimpleName().compareTo("shapeDist") == 0) {
+                            if (field.getType().getSimpleName().compareTo("ShapeDist") == 0) {
                                 if (sarsa_State.getShapeType().toString().compareTo(field1.getName()) != 0) { // On vire le cas ou le champs est identique a celui de la forme
                                     temp.setShapeColor(sarsa_State.getShapeColor());
                                     temp.setShapeType(sarsa_State.getShapeType());
@@ -146,7 +140,7 @@ public class Sarsa_StateFactory {
                                     listeDesActions.add(temp_Sarsa_Action);
                                 }
                             }
-                            if (field.getType().getSimpleName().compareTo("shapeColor") == 0) {
+                            if (field.getType().getSimpleName().compareTo("ShapeColor") == 0) {
                                 if (sarsa_State.getShapeType().toString().compareTo(field1.getName()) != 0) { // On vire le cas ou le champs est identique a celui de la forme
                                     temp.setShapeType(sarsa_State.getShapeType());
                                     temp.setShapeDist(sarsa_State.getShapeDist());
@@ -160,12 +154,19 @@ public class Sarsa_StateFactory {
                                             break;
                                         }
                                     }
-                                    temp_Sarsa_Action = new Sarsa_Action();
-                                    temp_Sarsa_Action.setChamps(field1);
-                                    temp_Sarsa_Action.setState_1(sarsa_State);
-                                    temp_Sarsa_Action.setState_2(temp);
 
-                                    listeDesActions.add(temp_Sarsa_Action);
+                                    if (sarsa_State != temp) {
+                                        if (temp == null) {
+                                            System.err.println("    public void Generer_toutes_les_action() => temp est null :");
+                                        } else {
+                                            temp_Sarsa_Action = new Sarsa_Action();
+                                            temp_Sarsa_Action.setChamps(field1);
+                                            temp_Sarsa_Action.setState_1(sarsa_State);
+                                            temp_Sarsa_Action.setState_2(temp);
+
+                                            listeDesActions.add(temp_Sarsa_Action);
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -195,7 +196,7 @@ public class Sarsa_StateFactory {
         //listeDesEtat.size renvoi un int
         int rnd = 0;
         do {
-            float random = ((float) Math.random()) * ((float)listeDesEtat.size());
+            float random = ((float) Math.random()) * ((float) listeDesEtat.size());
             float roundRandom = (float) Math.round(random);
             rnd = Math.round(roundRandom);
 //            System.out.println("rnd = " + rnd + " est ce que ça ira ?");
@@ -212,6 +213,4 @@ public class Sarsa_StateFactory {
     public static ArrayList<Sarsa_State> getListeDesEtat() {
         return listeDesEtat;
     }
-
-
 }

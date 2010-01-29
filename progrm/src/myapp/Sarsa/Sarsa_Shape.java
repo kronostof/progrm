@@ -10,11 +10,8 @@ package myapp.Sarsa;
 import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import myapp.model.*;
-import com.espertech.esper.client.EPServiceProvider;
+import myapp.model.Shape;
 import drawing.shape.VueForme.ShapeForme;
-import javax.swing.event.EventListenerList;
-import myapp.event.Position;
 
 
 /* Une shape dans le monde des formes est l'agent.
@@ -28,13 +25,16 @@ public class Sarsa_Shape extends Shape {
 
     private Sarsa_State state;
     private Sarsa_Politique politique = new Sarsa_Politique();
-    private Position position;	// la position dans le monde.
-    private EventListenerList listeners = new EventListenerList();
     //private MondeDesFormesMDP mdp = new MondeDesFormesMDP(0,1);
     //private LearningAlgorithm learningalgo = new Sarsa(mdp); // algo d'apprentissage
     //gestion du regard de l'utilisateur
-    EPServiceProvider epService;
 
+
+    /**
+     * Modifie l'état de la forme en l'unifiant a l'état passé en paramètre.
+     *
+     * @param state
+     */
     public void setState(Sarsa_State state) {
         this.state = state;
         fire_StateChanged();
@@ -47,60 +47,58 @@ public class Sarsa_Shape extends Shape {
     @Override
     public void run() {
         int nbr_iteration = 0, Max_iteration = 10;
-        // politique.affiche_politique();
+        try {
+            sleep(1000);    // TODO: uniquement par manque de sychro => a virrer en gérant la syncro.
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Sarsa_Shape.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        // TODO verbose => politique.affiche_politique();
+
         while (nbr_iteration++ < Max_iteration) {
             try {
                 sleep(1000);
-                setState(politique.getNewState(this));
+//                setState(politique.getNewState(this));
+                setState(politique.getNextState(this));
             } catch (InterruptedException ex) {
-                Logger.getLogger(Sarsa_Shape.class.getName()).log(Level.SEVERE, null, ex);
+                System.err.println("ERREUR dans Sarsa_Shape => " + ex);
             }
         }
     }
 
-//    public EventListenerList getListeners() {
-//        return listeners;
-//    }
-//
-//    public void setGaze(FluxPosition Gaze) {
-//        this.Gaze = Gaze;
-//    }
-//
-//    public EPServiceProvider getEpService() {
-//        return epService;
-//    }
-//
-//    public void setEpService(EPServiceProvider epService) {
-//        this.epService = epService;
-//    }
-//
-//    public void setListeners(EventListenerList listeners) {
-//        this.listeners = listeners;
-//    }
-//
-//    public void setNom(String nom) {
-//        this.nom = nom;
-//    }
-//
-//    public void setPosition(Position position) {
-//        this.position = position;
-//    }
+    /**
+     * A chaque modification de l'état de la shape, cette methode doit etre appellé.
+     */
     public void fire_StateChanged() {
+        // On modifie les attribut de l'instance afin de représenter les valeur de l'état.(donc en fonction de l'état).
         this.color = get_from_State_Color(state);
         setForme(get_from_State_Forme(state));
 
         firePositionChangee();
     }
 
+    /**
+     * récupérer la couleur de la shape associé a un état.
+     * @param state
+     * @return
+     */
     private Color get_from_State_Color(Sarsa_State state) {
         return state.getAWTShapeColor();
     }
 
+    /**
+     * * récupérer la forme de la shape associé a un état.
+     * @param state état a parti
+     * @return
+     */
     private ShapeForme get_from_State_Forme(Sarsa_State state) {
         return state.getShapeForme();
 
     }
 
+    /**
+     * retourne l'état de la shape.
+     * @return  état de la shape.
+     */
     public Sarsa_State getSarsaState() {
         return state;
     }
