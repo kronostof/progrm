@@ -73,7 +73,7 @@ public class VueForme extends FormDrawable implements FormeListener {
         Color c = g.getColor();
         g.setColor(color);
         gShape.draw(g, rect.x, rect.y, rect.width, rect.height);
-        g.setColor(c);
+        //g.setColor(c);
     }
 
     @Override

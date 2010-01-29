@@ -17,13 +17,15 @@ import drawing.shape.IDrawable;
  * @author ter Christophe Moncy
  */
 public class JCanvas extends JPanel {
+
     private static final long serialVersionUID = 4949577436530106152L;
     //liste d'élément à dessiner
     private List<IDrawable> drawables = new LinkedList<IDrawable>();
 
     public void addDrawable(IDrawable d) {
         drawables.add(d);
-        repaint();
+        //TODO: éclairssir le mystére
+        //repaint();
     }
 
     /**
@@ -32,13 +34,15 @@ public class JCanvas extends JPanel {
      */
     public void removeDrawable(IDrawable d) {
         drawables.remove(d);
-        repaint();
+        //TODO: éclairssir le mystére
+        //repaint();
     }
 
+    @Override
     public void paint(Graphics g) {
         super.paint(g);
-        for (Iterator<IDrawable> iter = drawables.iterator(); iter.hasNext();) {
-            ((IDrawable) iter.next()).draw(g);
+        for (IDrawable iDrawable : drawables) {
+            iDrawable.draw(g);
         }
     }
 
@@ -68,7 +72,7 @@ public class JCanvas extends JPanel {
         }
         return true;
     }
- 
+
     public boolean isAlone(IDrawable drawable) {
         Rectangle rect = drawable.getRectangle();
         for (Iterator<IDrawable> iter = drawables.iterator(); iter.hasNext();) {
@@ -82,5 +86,6 @@ public class JCanvas extends JPanel {
         return true;
     }
 
-    public void addControlleurListner(MondeDesFormeControllerListener Controller) {}
+    public void addControlleurListner(MondeDesFormeControllerListener Controller) {
+    }
 }

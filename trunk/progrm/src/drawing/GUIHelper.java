@@ -40,6 +40,7 @@ public class GUIHelper {
 			frame.setLocation(GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[1].getConfigurations()[1].getBounds().x,GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[1].getConfigurations()[1].getBounds().y);
 			device = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[1];
 			frame.setUndecorated(true);
+                        device.setFullScreenWindow(frame);
 		}		// si on a un seul écran
 		else
 		{
@@ -49,9 +50,6 @@ public class GUIHelper {
 		}
 
 		//frame.setIgnoreRepaint(true);
-
-
-		device.setFullScreenWindow(frame);
 		if (device.isDisplayChangeSupported()) {
             chooseBestDisplayMode(device);
         }
