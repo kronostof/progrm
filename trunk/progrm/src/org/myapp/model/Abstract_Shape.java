@@ -2,7 +2,7 @@ package org.myapp.model;
 
 import javax.swing.event.EventListenerList;
 
-import org.FormeListener;
+import drawing.shape.FormeListener;
 import org.myapp.event.Position;
 import org.myapp.factory.ShapeFactory.ShapeType;
 import org.myapp.flux.FluxPosition;

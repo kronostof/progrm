@@ -1,4 +1,4 @@
-package org;
+package drawing.shape;
 
 import java.awt.Point;
 import java.util.EventListener;

@@ -5,7 +5,7 @@ import java.awt.Point;
 
 import javax.swing.event.EventListenerList;
 
-import org.FormeListener;
+import drawing.shape.FormeListener;
 import org.myapp.Lecteur;
 import org.myapp.event.Position;
 import org.myapp.factory.ShapeFactory.ShapeType;
@@ -15,7 +15,7 @@ import drawing.shape.VueForme.ShapeForme;
 /**
  * model de l'objet forme.
  */
-public class Shape extends Abstract_Shape implements FormeListener {
+public class Shape extends Abstract_Shape{
 
     private EventListenerList listeners = new EventListenerList();
     protected String nom;			// Un identifiant- utilis� pour la sortie console.
