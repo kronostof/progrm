@@ -23,7 +23,7 @@ public class moduleFixationCentre  extends module<FluxFixation ,FluxBool > imple
 
 		setFluxEntrant(fluxe);
         setFluxSortant(fluxs);
-        expression =  new String("select posX,posY from org.myapp.module.moduleFixationCentre.win:time(30 sec) "+
+        expression =  new String("select posX,posY from myapp.module.moduleFixationCentre.win:time(30 sec) "+
         						" where posX < 1248 and posX > 212 and posY< 492 and posY>105");
 	}
 

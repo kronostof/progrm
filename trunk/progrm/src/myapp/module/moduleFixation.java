@@ -39,7 +39,7 @@ public class moduleFixation extends module<FluxPosition, FluxFixation> implement
         lastpos = new Position();
         setFluxEntrant(new FluxPosition());
         setFluxSortant(new FluxFixation());
-        expression = "select name,posX,posY,lastposX,lastposY from org.myapp.module.moduleFixation.win:time(5 sec) "
+        expression = "select name,posX,posY,lastposX,lastposY from myapp.module.moduleFixation.win:time(5 sec) "
                 + "where posX < (lastposX+3) and  posX > (lastposX-3)"
                 + " and  posY < (lastposY+3) and posY > (lastposY-3)";
         init_module();

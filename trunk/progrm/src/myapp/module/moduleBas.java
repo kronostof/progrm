@@ -31,7 +31,7 @@ public class moduleBas  extends module<FluxPosition ,FluxBool > implements Updat
 		setFluxEntrant(fluxe);
         setFluxSortant(fluxs);
         
-        expression =  new String("select posY from org.myapp.module.moduleBas "+
+        expression =  new String("select posY from myapp.module.moduleBas "+
         						" where posY>500");
     }
 
@@ -62,7 +62,7 @@ public class moduleBas  extends module<FluxPosition ,FluxBool > implements Updat
 	 * @return
 	 */
 	public int setup(int borneSup) {
-		expression =  new String("select posY from org.myapp.module.moduleBas"+
+		expression =  new String("select posY from myapp.module.moduleBas"+
 								 " where posY>"+borneSup
 								);
 		return 0;		

@@ -42,7 +42,7 @@ public class moduleChangerCouleur   extends module<FluxPosition ,FluxBool> imple
 		alternativeColor = new Color(type);
 		setFluxEntrant(new FluxPosition());
 		setFluxSortant(new FluxBool());
-        expression =  "select name,posX from org.myapp.module.action.moduleChangerCouleur ";
+        expression =  "select name,posX from myapp.module.action.moduleChangerCouleur ";
     	
         init_module();
 		start();

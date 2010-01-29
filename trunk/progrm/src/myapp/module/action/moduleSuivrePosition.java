@@ -26,7 +26,7 @@ public class moduleSuivrePosition   extends module<FluxPosition ,FluxBool> imple
 		paramPas = i;
 		
 		setFluxSortant(new FluxBool());
-		expression =  "select name,distance from org.myapp.module.action.moduleSuivrePosition where distance>100";
+		expression =  "select name,distance from myapp.module.action.moduleSuivrePosition where distance>100";
 		
 		init_module();
 		start();

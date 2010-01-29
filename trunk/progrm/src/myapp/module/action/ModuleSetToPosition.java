@@ -24,7 +24,7 @@
 			this.setFluxEntrant(fluxEntrant);
 			
 			setFluxSortant(new FluxBool());
-			expression =  "select name,distance from org.myapp.module.action.ModuleSetToPosition where distance>5";
+			expression =  "select name,distance from myapp.module.action.ModuleSetToPosition where distance>5";
 			
 			init_module();
 			start();
