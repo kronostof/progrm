@@ -6,8 +6,8 @@ import java.awt.Graphics;
 import java.awt.Point;
 import drawing.JCanvas;
 import drawing.shape.type.*;
-import org.myapp.Sarsa.Sarsa_Shape;
-import org.myapp.model.Shape;
+import myapp.Sarsa.Sarsa_Shape;
+
 
 public class NewVueForme extends FormDrawable implements FormeListener {
 

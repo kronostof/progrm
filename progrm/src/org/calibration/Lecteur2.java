@@ -1,7 +1,7 @@
 package org.calibration;
 
-import org.myapp.event.Position;
-import org.myapp.flux.FluxPosition;
+import myapp.event.Position;
+import myapp.flux.FluxPosition;
 
 public class Lecteur2 {
 

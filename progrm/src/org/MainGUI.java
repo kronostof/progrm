@@ -1,10 +1,9 @@
 package org;
 
-import org.myapp.controle.NewMondeDesFormeController;
+import myapp.controle.NewMondeDesFormeController;
 import drawing.JCanvas;
-//import drawing.shape.NewVueForme;
 import drawing.shape.VueForme;
-import org.myapp.model.NewMondeDesFormeModel;
+import myapp.model.NewMondeDesFormeModel;
 
 /**
  *

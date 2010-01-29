@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 
-import org.myapp.Lecteur;
-import org.myapp.event.Position;
-import org.myapp.flux.FluxPosition;
+import myapp.Lecteur;
+import myapp.event.Position;
+import myapp.flux.FluxPosition;
 
 public class RecevoirData extends Thread {
 	FluxPosition fluxposition;
