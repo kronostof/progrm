@@ -9,7 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JPanel;
 
-import org.myapp.controle.MondeDesFormeControllerListener;
+import myapp.controle.MondeDesFormeControllerListener;
 import drawing.shape.IDrawable;
 
 /* surface sur laquelle tout s'affiche

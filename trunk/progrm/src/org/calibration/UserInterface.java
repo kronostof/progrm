@@ -10,8 +10,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import org.myapp.controle.MondeDesFormeController;
-import org.myapp.model.MondeDesFormeModel;
+import myapp.controle.MondeDesFormeController;
+import myapp.model.MondeDesFormeModel;
 
 //import drawing.CircleDrawable;
 import drawing.JCanvas;

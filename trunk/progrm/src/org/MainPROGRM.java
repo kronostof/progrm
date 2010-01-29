@@ -6,11 +6,11 @@ Suppression du constructeur à 2 param NewVueForme(NewShape forme,int nulll) (on
  */
 package org;
 
-import org.myapp.controle.MondeDesFormeController;
+import myapp.controle.MondeDesFormeController;
 import drawing.JCanvas;
 import drawing.shape.VueForme;
-import org.myapp.communicationSocket.CommunicationSMI;
-import org.myapp.model.MondeDesFormeModel;
+import myapp.communicationSocket.CommunicationSMI;
+import myapp.model.MondeDesFormeModel;
 
 public class MainPROGRM {
 

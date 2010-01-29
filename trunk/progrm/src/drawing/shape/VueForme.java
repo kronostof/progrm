@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
-import org.myapp.model.Shape;
+import myapp.model.Shape;
 import drawing.JCanvas;
 import drawing.shape.type.*;
 
