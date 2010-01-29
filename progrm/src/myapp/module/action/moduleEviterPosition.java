@@ -34,7 +34,7 @@ public class moduleEviterPosition   extends module<FluxPosition ,FluxBool> imple
 		position = shape.getPosition();
 		setFluxEntrant(new FluxPosition());
 		setFluxSortant(new FluxBool());
-        expression =  "select name,posX from org.myapp.module.action.moduleEviterPosition";
+        expression =  "select name,posX from myapp.module.action.moduleEviterPosition";
         
 		init_module();
 		start();
@@ -47,7 +47,7 @@ public class moduleEviterPosition   extends module<FluxPosition ,FluxBool> imple
 		this.position = position;
 		setFluxEntrant(fluxEntrant);
 		setFluxSortant(new FluxBool());
-        expression =  "select name,posX from org.myapp.module.action.moduleEviterPosition";
+        expression =  "select name,posX from myapp.module.action.moduleEviterPosition";
         
 		init_module();
 		start();

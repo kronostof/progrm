@@ -33,7 +33,7 @@ public class moduleRegion extends module<FluxPosition ,FluxBool> implements Upda
 		this.nom = string;
 		this.setFluxEntrant(fluxEntrant);
         this.setFluxSortant(fluxSortant);
-        expression =  new String("select posX from org.myapp.module.moduleRegion where posX<850 and posX>50 and posY<850 and posY>50");
+        expression =  new String("select posX from myapp.module.moduleRegion where posX<850 and posX>50 and posY<850 and posY>50");
 	}
 
 

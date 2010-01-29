@@ -39,7 +39,7 @@ public class modulePosition  extends module<FluxPosition ,FluxPosition> implemen
 		this.setFluxEntrant(new FluxPosition());
 		this.setFluxSortant(new FluxPosition());
 		
-        expression =  new String("select name,posX,posY,gposX,gposY from org.myapp.module.modulePosition where "+
+        expression =  new String("select name,posX,posY,gposX,gposY from myapp.module.modulePosition where "+
         						"(gposX - "+20+" ) < posX and posX < (gposX + "+20+" ) and "+
         						"(gposY - "+20+" ) < posY and posY < (gposY + "+20+" )");
 	
