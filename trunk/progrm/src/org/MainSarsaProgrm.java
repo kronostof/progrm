@@ -9,7 +9,7 @@ import myapp.model.NewMondeDesFormeModel;
  *
  * @author ter Vincent Bonnier
  */
-public class MainGUI {
+public class MainSarsaProgrm {
 
     public static void main(String[] args) {
         JCanvas vue = new JCanvas();
