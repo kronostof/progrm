@@ -9,7 +9,7 @@ import drawing.shape.IMovableDrawable;
 
 /**
  * @author duj
- * 
+ *
  */
 public class MoveDrawableMouseListener extends JCanvasMouseAdapter {
 
@@ -24,7 +24,7 @@ public class MoveDrawableMouseListener extends JCanvasMouseAdapter {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.awt.event.MouseMotionListener#mouseDragged(java.awt.event.MouseEvent)
 	 */
 	public void mouseDragged(MouseEvent e) {
@@ -36,7 +36,7 @@ public class MoveDrawableMouseListener extends JCanvasMouseAdapter {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.awt.event.MouseListener#mousePressed(java.awt.event.MouseEvent)
 	 */
 	public void mousePressed(MouseEvent e) {
@@ -49,7 +49,7 @@ public class MoveDrawableMouseListener extends JCanvasMouseAdapter {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.awt.event.MouseListener#mouseReleased(java.awt.event.MouseEvent)
 	 */
 	public void mouseReleased(MouseEvent e) {
