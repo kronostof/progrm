@@ -5,7 +5,7 @@ import drawing.GUIHelper;
 import drawing.JCanvas;
 //import drawing.shape.VueForme;
 
-import org.FormeListener;
+import drawing.shape.FormeListener;
 //import org.myapp.model.Shape;
 import org.myapp.model.MondeDesFormeModel;
 //import org.myapp.module.moduleFixation;
