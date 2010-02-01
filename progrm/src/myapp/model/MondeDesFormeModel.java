@@ -11,7 +11,6 @@ public class MondeDesFormeModel {
     public MondeDesFormeModel() {
         // Lecteur est un thread Singloton. Cette instruction est nécéssaire.
         new Lecteur();
-
     }
 
     /**
