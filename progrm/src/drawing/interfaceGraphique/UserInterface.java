@@ -16,10 +16,10 @@ import myapp.model.MondeDesFormeModel;
 //import drawing.CircleDrawable;
 import drawing.JCanvas;
 import drawing.shape.VueForme;
+import myapp.model.NewMondeDesFormeModel;
 
 public class UserInterface extends JFrame implements ActionListener {
 
-    
     private JPanel container;
     JButton calibration;
     private JButton recalibration;
@@ -30,14 +30,12 @@ public class UserInterface extends JFrame implements ActionListener {
     private FlowLayout layout = null;
     Calibration m;
 
-
-
     public UserInterface() {
         super();
         build();
     }
 
-       /**
+    /**
      * Construction de l'interface utilisateur
      */
     private void build() {
@@ -82,12 +80,13 @@ public class UserInterface extends JFrame implements ActionListener {
         }
 
 
-   if (e.getSource() == mondeForme) {
+        if (e.getSource() == mondeForme) {
             JCanvas Vue = new JCanvas();
             VueForme.set(Vue);
-            MondeDesFormeModel model = new MondeDesFormeModel();
+            NewMondeDesFormeModel model = new NewMondeDesFormeModel();
             MondeDesFormeController Controleur = new MondeDesFormeController(model, Vue);
             model.build(Controleur);
+            new FenetreDeStatistique();
         }
         if (e.getSource() == exit) {
             System.exit(0);
