@@ -9,6 +9,7 @@ import myapp.module.manager.*;
 
 import drawing.shape.VueForme;
 import drawing.shape.VueForme.ShapeForme;
+import java.util.ArrayList;
 
 /**
  *
@@ -18,9 +19,13 @@ public class Sarsa_ShapeFactory extends ShapeFactory {
 
     //SarsaState Factory nécessaire pour créer des newShape
     static public Sarsa_StateFactory stateFactory = null;
+    static ArrayList<Sarsa_Shape> liste_de_shape = new ArrayList<Sarsa_Shape>();
 
     public Sarsa_ShapeFactory() {
         stateFactory = new Sarsa_StateFactory();
+
+//        stateFactory.affichage_listeDesEtat();
+//        stateFactory.affichage_listeDesAction();
     }
 
 
@@ -32,7 +37,7 @@ public class Sarsa_ShapeFactory extends ShapeFactory {
      */
     public static Sarsa_Shape createShape(ShapeType type, ShapeForme forme) {
 
-        Sarsa_Shape nwShape = new Sarsa_Shape("nom" + System.currentTimeMillis());
+        Sarsa_Shape nwShape = new Sarsa_Shape("Shape " + System.currentTimeMillis());
 
         nwShape.setType(type);
         nwShape.setForme(forme);
@@ -65,6 +70,7 @@ public class Sarsa_ShapeFactory extends ShapeFactory {
         VueForme nwVueForme = new VueForme(nwShape);
         nwShape.addFormeListener(nwVueForme);
         nwShape.poolModule = nwModuleManager;
+        liste_de_shape.add(nwShape);
         return nwShape;
     }
 
@@ -75,7 +81,7 @@ public class Sarsa_ShapeFactory extends ShapeFactory {
      */
      public static Sarsa_Shape createShape(ShapeType type) {
 
-        Sarsa_Shape nwShape = new Sarsa_Shape("nom" + System.currentTimeMillis());
+        Sarsa_Shape nwShape = new Sarsa_Shape("Shape " + System.currentTimeMillis());
 
         nwShape.setType(type);
 
@@ -107,7 +113,12 @@ public class Sarsa_ShapeFactory extends ShapeFactory {
         VueForme nwVueForme = new VueForme(nwShape);
         nwShape.addFormeListener(nwVueForme);
         nwShape.poolModule = nwModuleManager;
+        liste_de_shape.add(nwShape);
         return nwShape;
+    }
+
+    public static ArrayList<Sarsa_Shape> getListe_de_shape() {
+        return liste_de_shape;
     }
 
 }
