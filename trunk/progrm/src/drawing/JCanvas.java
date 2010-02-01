@@ -12,16 +12,17 @@ import javax.swing.JPanel;
 import myapp.controle.MondeDesFormeControllerListener;
 import drawing.shape.IDrawable;
 
-/* surface sur laquelle tout s'affiche
+/* surface sur laquelle les forme s'affichent
  * possède une liste d'objet qu'elle dessine
- * @author ter Christophe Moncy
+ * @author Moncy Christophe 10304320
  */
 public class JCanvas extends JPanel {
 
     private static final long serialVersionUID = 4949577436530106152L;
-    //liste d'élément à dessiner
+    /**liste d'élément à dessiner*/
     private List<IDrawable> drawables = new LinkedList<IDrawable>();
 
+    /** ajouter un élémnt a dessiner */
     public void addDrawable(IDrawable d) {
         drawables.add(d);
         //TODO: éclairssir le mystére
@@ -29,7 +30,8 @@ public class JCanvas extends JPanel {
     }
 
     /**
-     * @pre:d!= null
+     * Enlever un des élément de la liste de dessin de celle-ci.
+     * @pre:  d!= null
      * @post: d est retiré de this
      */
     public void removeDrawable(IDrawable d) {
@@ -46,6 +48,9 @@ public class JCanvas extends JPanel {
         }
     }
 
+    /**
+     * Enlever tous les éléments de la liste de dessin.
+     */
     public void clear() {
         drawables.clear();
         repaint();
@@ -62,6 +67,11 @@ public class JCanvas extends JPanel {
         return l;
     }
 
+    /**
+     * Determine si il y a collision entre deux rectangle.
+     * @param rect
+     * @return
+     */
     public boolean isFree(Rectangle rect) {
         for (Iterator<IDrawable> iter = drawables.iterator(); iter.hasNext();) {
             IDrawable element = (IDrawable) iter.next();
@@ -73,6 +83,11 @@ public class JCanvas extends JPanel {
         return true;
     }
 
+    /**
+     * Determine si il y a collision entre deux élément a dessiner.
+     * @param rect
+     * @return
+     */
     public boolean isAlone(IDrawable drawable) {
         Rectangle rect = drawable.getRectangle();
         for (Iterator<IDrawable> iter = drawables.iterator(); iter.hasNext();) {

@@ -25,7 +25,7 @@ public class Shape extends Abstract_Shape{
     //private int forme;
     private Position position;	// la position dans le monde.
     private ShapeType shapeType;
-    private ShapeForme shapeForme;
+    protected ShapeForme shapeForme;
 
     public Shape(String nom) {
         this.nom = nom;

@@ -30,7 +30,6 @@ public class Sarsa_Shape extends Shape implements IRepresanteble_pour_stat {
     //private LearningAlgorithm learningalgo = new Sarsa(mdp); // algo d'apprentissage
     //gestion du regard de l'utilisateur
 
-
     /**
      * Modifie l'état de la forme en l'unifiant a l'état passé en paramètre.
      *
@@ -41,13 +40,23 @@ public class Sarsa_Shape extends Shape implements IRepresanteble_pour_stat {
         fire_StateChanged();
     }
 
+    public void setState() {
+        for (Sarsa_State object : Sarsa_StateFactory.getListeDesEtat()) {
+            if (object.getAWTShapeColor() == color
+                    && shapeForme == object.getShapeForme()) {
+                state = object;
+                System.out.println("etat trouvé " + state);
+            }
+        }
+    }
+
     public Sarsa_Shape(String nom) {
         super(nom);
     }
 
     @Override
     public void run() {
-        int nbr_iteration = 0, Max_iteration = 10;
+        int nbr_iteration = 0, Max_iteration = 1000;
         try {
             sleep(1000);    // TODO: uniquement par manque de sychro => a virrer en gérant la syncro.
         } catch (InterruptedException ex) {
@@ -57,7 +66,7 @@ public class Sarsa_Shape extends Shape implements IRepresanteble_pour_stat {
 
         while (nbr_iteration++ < Max_iteration) {
             try {
-                sleep(1000);
+                sleep(10);
 //                setState(politique.getNewState(this));
                 setState(politique.getNextState(this));
                 politique.modifieQuality(politique.getEtatCourant());
@@ -103,10 +112,6 @@ public class Sarsa_Shape extends Shape implements IRepresanteble_pour_stat {
      */
     public Sarsa_State getSarsaState() {
         return state;
-    }
-
-    public String getdata() {
-        return state.toString();
     }
 
     public Sarsa_Politique getpolicy() {

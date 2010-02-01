@@ -4,7 +4,6 @@
  */
 package drawing.interfaceGraphique;
 
-import drawing.shape.IDrawable;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,14 +12,11 @@ import java.util.Collection;
 import java.util.Observable;
 import javax.swing.*;
 import java.util.Observer;
-import myapp.Lecteur;
-import myapp.Sarsa.Sarsa_Action;
 import myapp.Sarsa.Sarsa_Politique;
 import myapp.Sarsa.Sarsa_Shape;
 import myapp.Sarsa.Sarsa_State;
-import myapp.Sarsa.Sarsa_StateFactory;
+
 import myapp.factory.Sarsa_ShapeFactory;
-//import logo2.controleur.Controler;
 
 /**
  * représentation des donnée d'un objet implementant l'interface IRepresanteble_pour_stat.
@@ -31,14 +27,13 @@ import myapp.factory.Sarsa_ShapeFactory;
 public class FenetreDeStatistique implements Observer, ActionListener {
 
     private JPanel statLabel = null, statLabelC = null, statLabelSouth = null;
-    private JLabel texteStatLabel, texteStatLabelC,texteStatLabelSouth;
+    private JLabel texteStatLabel, texteStatLabelC, texteStatLabelSouth;
     String texte = null;
     /**
      * liste d'élement dessinable.
      */
     private Collection<IRepresanteble_pour_stat> list_irepresanteble_pour_stat = new ArrayList<IRepresanteble_pour_stat>();
-    private Sarsa_Politique observableStat = null;
-
+    private Sarsa_Politique politiqueObservé = null;
 
     public FenetreDeStatistique() {
         //<XXX
@@ -59,7 +54,7 @@ public class FenetreDeStatistique implements Observer, ActionListener {
 
 
         FrameStat.getContentPane().removeAll();
-        FrameStat.getContentPane().setLayout(new BorderLayout(1, 1));
+        FrameStat.getContentPane().setLayout(new BorderLayout(2, 1));
 
         JPanel panel = new JPanel(new GridLayout(0, 2));
 
@@ -92,17 +87,17 @@ public class FenetreDeStatistique implements Observer, ActionListener {
     }
 
     public void update(Observable o, Object arg) {
-        if (observableStat != null) {
+        if (politiqueObservé != null) {
 
 
 
             texte = "<html>";
-            for (Sarsa_State a_State : observableStat.getHashQualityOfStates().keySet()) {
-                texte +=  a_State;
-                if (observableStat.getEtatCourant() == a_State) {
+            for (Sarsa_State a_State : politiqueObservé.getHashQualityOfStates().keySet()) {
+                texte += a_State;
+                if (politiqueObservé.getEtatCourant() == a_State) {
                     texte += "X<br>";
-                }else{
-                texte += "<br>";
+                } else {
+                    texte += "<br>";
                 }
             }
             texteStatLabel.setText(texte + "</html>");
@@ -110,23 +105,41 @@ public class FenetreDeStatistique implements Observer, ActionListener {
 
 
             texte = "<html>";
-            for (Sarsa_State a_State : observableStat.getHashQualityOfStates().keySet()) {
-                texte += observableStat.getHashQualityOfStates().get(a_State) + "<br>";
+            for (Sarsa_State a_State : politiqueObservé.getHashQualityOfStates().keySet()) {
+                texte += politiqueObservé.getHashQualityOfStates().get(a_State) + "<br>";
             }
-            texte += observableStat.getEtatCourant().toString();
+            texte += politiqueObservé.getEtatCourant().toString();
             texteStatLabelC.setText(texte + "</html>");
 
 
 
-            texte = "<html>";
-            for (Sarsa_State a_State : observableStat.getListe_état()) {
-                texte +=  a_State;
-                if (observableStat.getEtatCourant() == a_State) {
-                    texte += "X " + observableStat.getHashQualityOfStates().get(a_State) + "<br>";
-                }else{
-                texte += observableStat.getHashQualityOfStates().get(a_State) + "<br>";
+            texte = "<html>"
+                    + "<TABLE BORDER=\"1\"> "
+                    + "<CAPTION> Voici le titre du tableau </CAPTION>"
+                    + "<TR>"
+                    + "<TH> Titre A1 </TH>"
+                    + "<TH> Titre A2 </TH>"
+                    + "<TH> Titre A3 </TH>"
+                    + "  </TR>"
+                    + "<TR>"
+                    + "<TH> Titre B1 </TH>"
+                    + "<TD>";
+
+            for (Sarsa_State a_State : politiqueObservé.getListe_état()) {
+                texte += a_State;
+                if (politiqueObservé.getEtatCourant() == a_State) {
+                    texte += "X " + politiqueObservé.getHashQualityOfStates().get(a_State) + "<br>";
+                } else {
+                    texte += politiqueObservé.getHashQualityOfStates().get(a_State) + "<br>";
                 }
             }
+            texte += "</TD>"
+                    + "<TD> " + politiqueObservé.get_liste_état_toString() + "</TD>"
+                    + "  </TR>"
+                    + "</TABLE>"
+                    + " ";
+
+
             texteStatLabelSouth.setText(texte + "</html>");
 
 
@@ -139,9 +152,9 @@ public class FenetreDeStatistique implements Observer, ActionListener {
         Sarsa_Politique temp = null;
         for (IRepresanteble_pour_stat tmpEstDessinable : list_irepresanteble_pour_stat) {
             if (tmpEstDessinable.getNom().compareTo(c) == 0) {
-                if (observableStat != null) {
-                    observableStat.deleteObserver(this);
-                    observableStat = null;
+                if (politiqueObservé != null) {
+                    politiqueObservé.deleteObserver(this);
+                    politiqueObservé = null;
                 }
 //                observableStat.setObserverFenetreStat(false);
 
@@ -150,8 +163,8 @@ public class FenetreDeStatistique implements Observer, ActionListener {
                 break;
             }
         }
-        observableStat = temp;
-        observableStat.addObserver(this);
+        politiqueObservé = temp;
+        politiqueObservé.addObserver(this);
         //this.update(null, c);
         // texteStatLabel.setText("<html>" + c + "</html>");
     }

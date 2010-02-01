@@ -66,9 +66,11 @@ public class Sarsa_ShapeFactory extends ShapeFactory {
                 nwModuleManager = new ModuleManagerType1(nwShape, Color.RED.getRGB());
                 break;
         }
-        //nwShape.setState(stateFactory.get_Sarsa_State_aleatoire());
+        
         VueForme nwVueForme = new VueForme(nwShape);
         nwShape.addFormeListener(nwVueForme);
+        nwShape.setState(stateFactory.get_Sarsa_State_aleatoire());
+        nwShape.setState();
         nwShape.poolModule = nwModuleManager;
         liste_de_shape.add(nwShape);
         return nwShape;

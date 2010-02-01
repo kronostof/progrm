@@ -13,9 +13,8 @@ import javax.swing.JFrame;
 import org.Verbose;
 
 /**
- * @author duj
- *
- *
+ * Classe gérant le multi écrant et le mode plein écrant avec accéleration matériel.
+ * @author Christophe Moncy 10304320
  */
 public class GUIHelper {
 
@@ -28,7 +27,11 @@ public class GUIHelper {
 	    };
 
 
-
+/**
+ * Tester la présence de plusieur écran. et agir en consequence.
+ * @param component
+ * @param frameName
+ */
 	public static void showOnFrame(JComponent component, String frameName) {
 		JFrame frame = new JFrame(frameName);
 		GraphicsDevice device = null;

@@ -11,22 +11,23 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import myapp.controle.MondeDesFormeController;
-import myapp.model.MondeDesFormeModel;
-
-//import drawing.CircleDrawable;
 import drawing.JCanvas;
 import drawing.shape.VueForme;
 import myapp.model.NewMondeDesFormeModel;
 
+/**
+ * Cette classe construit la permiere interface que l'utilisateur rencontre.
+ *
+ * elle permet de lancer le progremme, de lancer une calibration, et de le quitter.
+ *
+ * @author Christophe Moncy 10304320
+ */
 public class UserInterface extends JFrame implements ActionListener {
 
     private JPanel container;
     JButton calibration;
-    private JButton recalibration;
     private JButton mondeForme;
-    private JButton start;
     private JButton exit;
-    private Send send;
     private FlowLayout layout = null;
     Calibration m;
 
@@ -95,6 +96,9 @@ public class UserInterface extends JFrame implements ActionListener {
 
     }
 
+    /**
+     * Effectue une calibration.
+     */
     private void Execute_calibration() {
         System.err.println("PAS VRAIMENT IMPLEMENTE");
 //        try {
