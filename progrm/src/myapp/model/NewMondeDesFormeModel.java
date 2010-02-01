@@ -1,7 +1,6 @@
 package myapp.model;
 
-import drawing.JCanvas;
-import myapp.Lecteur;
+import drawing.shape.VueForme;
 import myapp.controle.MondeDesFormeController;
 import myapp.factory.Sarsa_ShapeFactory;
 
@@ -23,14 +22,14 @@ public class NewMondeDesFormeModel extends MondeDesFormeModel {
     public void build(MondeDesFormeController Controleur) {
 
 
-        //Sarsa_ShapeFactory.createShape(Sarsa_ShapeFactory.ShapeType.Gaze0, VueForme.ShapeForme.CURSOR);//.start();
+   //     Sarsa_ShapeFactory.createShape(Sarsa_ShapeFactory.ShapeType.Gaze0, VueForme.ShapeForme.CURSOR);//.start();
         for (int i = 0; i < 1; i++) {
 
             Sarsa_ShapeFactory.createShape(Sarsa_ShapeFactory.ShapeType.Approche1);//.start();
-//            Sarsa_ShapeFactory.createShape(Sarsa_ShapeFactory.ShapeType.Approche0);//.start();
-//            Sarsa_ShapeFactory.createShape(Sarsa_ShapeFactory.ShapeType.Type1);//.start();
-//            Sarsa_ShapeFactory.createShape(Sarsa_ShapeFactory.ShapeType.Type2);//.start();
-//            Sarsa_ShapeFactory.createShape(Sarsa_ShapeFactory.ShapeType.fuite0);//.start();
+            Sarsa_ShapeFactory.createShape(Sarsa_ShapeFactory.ShapeType.Approche0);//.start();
+            Sarsa_ShapeFactory.createShape(Sarsa_ShapeFactory.ShapeType.Type1);//.start();
+            Sarsa_ShapeFactory.createShape(Sarsa_ShapeFactory.ShapeType.Type2);//.start();
+            Sarsa_ShapeFactory.createShape(Sarsa_ShapeFactory.ShapeType.fuite0);//.start();
         }
     }
 //

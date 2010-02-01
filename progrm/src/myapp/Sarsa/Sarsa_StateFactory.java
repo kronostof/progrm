@@ -60,8 +60,6 @@ public class Sarsa_StateFactory {
         }
     }
 
-    
-
     /**
      * Cette methode doit etre appellé une unique fois;
      */
@@ -180,26 +178,25 @@ public class Sarsa_StateFactory {
         }
     }
 
-
     public void affichage_listeDesEtat() {
 
         if (bool_Generer_tout_les_etats == false) {
             System.err.println("package org.myapp.factory;\npublic class StateFactory \nLa methode public void Generer_tout_les_etats() n'a pas encore été appellé");
         } else {
 
-            System.out.println("il y a " + listeDesEtat.size()+ " états possible");
+            System.out.println("il y a " + listeDesEtat.size() + " états possible");
             for (Sarsa_State sarsa_State : listeDesEtat) {
                 System.out.println(sarsa_State);
             }
         }
     }
-    
+
     public void affichage_listeDesAction() {
 
         if (bool_Generer_tout_les_action == false) {
             System.err.println("package org.myapp.factory;\npublic class StateFactory \nLa methode public void actions() n'a pas encore été appellé");
         } else {
-            System.out.println("il y a " + listeDesActions.size()+ " action possible");
+            System.out.println("il y a " + listeDesActions.size() + " action possible");
             for (Sarsa_Action sarsa_Action : listeDesActions) {
                 System.out.println(sarsa_Action);
             }
@@ -222,6 +219,8 @@ public class Sarsa_StateFactory {
 
 //        System.out.println("on demande dans listeDesEtat l'index : " +rnd);
         return listeDesEtat.get(rnd);
+
+//        return listeDesEtat.get(Math.round((float) Math.random() * listeDesEtat.size()));
     }
 
     public static ArrayList<Sarsa_Action> getListeDesActions() {
