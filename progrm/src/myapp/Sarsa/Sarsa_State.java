@@ -2,12 +2,13 @@ package myapp.Sarsa;
 
 import drawing.shape.VueForme.ShapeForme;
 import java.awt.Color;
+import java.util.Observable;
 
 /**
  *
  * @author christophe Moncy p0304320
  */
-public class Sarsa_State {
+public class Sarsa_State extends Observable{
 
     // ShapeColor couleur (bleue, rouge, jaune)
     public enum ShapeColor {

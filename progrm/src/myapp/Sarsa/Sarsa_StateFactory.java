@@ -25,7 +25,7 @@ public class Sarsa_StateFactory {
     //chk action
     private Sarsa_State temp;
     //private Sarsa_Action[] temp_liste_action = null;
-    private int TAILLE_MAX_LISTE_ACTION = 4;
+    //private int TAILLE_MAX_LISTE_ACTION = 4;
     private Sarsa_Action temp_Sarsa_Action;
 
     public Sarsa_StateFactory() {
@@ -60,16 +60,7 @@ public class Sarsa_StateFactory {
         }
     }
 
-    public void affichage_listeDesEtat() {
-
-        if (bool_Generer_tout_les_etats == false) {
-            System.err.println("package org.myapp.factory;\npublic class StateFactory \nLa methode public void Generer_tout_les_etats() n'a pas encore été appellé");
-        } else {
-            for (Sarsa_State sarsa_State : listeDesEtat) {
-                System.out.println(sarsa_State);
-            }
-        }
-    }
+    
 
     /**
      * Cette methode doit etre appellé une unique fois;
@@ -109,13 +100,18 @@ public class Sarsa_StateFactory {
                                             break;
                                         }
                                     }
-                                    //System.out.println("\t\t\tnouvelle action :\n\t\t\tetat sur lequel cette action agit => (" + sarsa_State + ") vers (" + temp + ") contient ? => " + listeDesEtat.contains(temp));
-                                    temp_Sarsa_Action = new Sarsa_Action();
-                                    temp_Sarsa_Action.setChamps(field1);
-                                    temp_Sarsa_Action.setState_1(sarsa_State);
-                                    temp_Sarsa_Action.setState_2(temp);
+                                    if (sarsa_State != temp) {
+                                        if (temp == null) {
+                                            System.err.println("    public void Generer_toutes_les_action() => temp est null :");
+                                        } else {
+                                            temp_Sarsa_Action = new Sarsa_Action();
+                                            temp_Sarsa_Action.setChamps(field1);
+                                            temp_Sarsa_Action.setState_1(sarsa_State);
+                                            temp_Sarsa_Action.setState_2(temp);
 
-                                    listeDesActions.add(temp_Sarsa_Action);
+                                            listeDesActions.add(temp_Sarsa_Action);
+                                        }
+                                    }
                                 }
                             }
                             if (field.getType().getSimpleName().compareTo("ShapeDist") == 0) {
@@ -132,12 +128,18 @@ public class Sarsa_StateFactory {
                                             break;
                                         }
                                     }
-                                    temp_Sarsa_Action = new Sarsa_Action();
-                                    temp_Sarsa_Action.setChamps(field1);
-                                    temp_Sarsa_Action.setState_1(sarsa_State);
-                                    temp_Sarsa_Action.setState_2(temp);
+                                    if (sarsa_State != temp) {
+                                        if (temp == null) {
+                                            System.err.println("    public void Generer_toutes_les_action() => temp est null :");
+                                        } else {
+                                            temp_Sarsa_Action = new Sarsa_Action();
+                                            temp_Sarsa_Action.setChamps(field1);
+                                            temp_Sarsa_Action.setState_1(sarsa_State);
+                                            temp_Sarsa_Action.setState_2(temp);
 
-                                    listeDesActions.add(temp_Sarsa_Action);
+                                            listeDesActions.add(temp_Sarsa_Action);
+                                        }
+                                    }
                                 }
                             }
                             if (field.getType().getSimpleName().compareTo("ShapeColor") == 0) {
@@ -169,6 +171,8 @@ public class Sarsa_StateFactory {
                                     }
                                 }
                             }
+
+
                         }
                     }
                 }
@@ -176,12 +180,26 @@ public class Sarsa_StateFactory {
         }
     }
 
+
+    public void affichage_listeDesEtat() {
+
+        if (bool_Generer_tout_les_etats == false) {
+            System.err.println("package org.myapp.factory;\npublic class StateFactory \nLa methode public void Generer_tout_les_etats() n'a pas encore été appellé");
+        } else {
+
+            System.out.println("il y a " + listeDesEtat.size()+ " états possible");
+            for (Sarsa_State sarsa_State : listeDesEtat) {
+                System.out.println(sarsa_State);
+            }
+        }
+    }
+    
     public void affichage_listeDesAction() {
 
         if (bool_Generer_tout_les_action == false) {
             System.err.println("package org.myapp.factory;\npublic class StateFactory \nLa methode public void actions() n'a pas encore été appellé");
         } else {
-
+            System.out.println("il y a " + listeDesActions.size()+ " action possible");
             for (Sarsa_Action sarsa_Action : listeDesActions) {
                 System.out.println(sarsa_Action);
             }

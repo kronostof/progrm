@@ -7,6 +7,7 @@
  */
 package myapp.Sarsa;
 
+import drawing.interfaceGraphique.IRepresanteble_pour_stat;
 import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,7 +22,7 @@ import drawing.shape.VueForme.ShapeForme;
  * Il a également un algorithme d'apprentissage.
  *
  */
-public class Sarsa_Shape extends Shape {
+public class Sarsa_Shape extends Shape implements IRepresanteble_pour_stat {
 
     private Sarsa_State state;
     private Sarsa_Politique politique = new Sarsa_Politique();
@@ -59,6 +60,7 @@ public class Sarsa_Shape extends Shape {
                 sleep(1000);
 //                setState(politique.getNewState(this));
                 setState(politique.getNextState(this));
+                politique.modifieQuality(politique.getEtatCourant());
             } catch (InterruptedException ex) {
                 System.err.println("ERREUR dans Sarsa_Shape => " + ex);
             }
@@ -101,5 +103,13 @@ public class Sarsa_Shape extends Shape {
      */
     public Sarsa_State getSarsaState() {
         return state;
+    }
+
+    public String getdata() {
+        return state.toString();
+    }
+
+    public Sarsa_Politique getpolicy() {
+        return politique;
     }
 }
