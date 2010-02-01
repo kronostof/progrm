@@ -1,6 +1,6 @@
 package org;
 
-import myapp.controle.NewMondeDesFormeController;
+import myapp.controle.MondeDesFormeController;
 import drawing.JCanvas;
 import drawing.shape.VueForme;
 import myapp.model.NewMondeDesFormeModel;
@@ -15,7 +15,7 @@ public class MainSarsaProgrm {
         JCanvas vue = new JCanvas();
         VueForme.set(vue);
         NewMondeDesFormeModel model = new NewMondeDesFormeModel();
-        NewMondeDesFormeController Controleur = new NewMondeDesFormeController(model, vue);
-        model.build(Controleur, vue);
+        MondeDesFormeController Controleur = new MondeDesFormeController(model, vue);
+        model.build(Controleur);
     }
 }
