@@ -30,4 +30,10 @@ public class Verbose {
 			System.out.println(c);
 		}
 	}
+
+        // AFFICHAGE
+
+    // GETTER
+
+    // SETTER
 }
