@@ -10,11 +10,11 @@ import drawing.shape.FormeListener;
 import myapp.model.MondeDesFormeModel;
 //import org.myapp.module.moduleFixation;
 
+
 public class MondeDesFormeController implements MondeDesFormeControllerListener{
 
 	public MondeDesFormeModel model;
 	//private JCanvas Vue;
-	
 	public MondeDesFormeController(MondeDesFormeModel model,JCanvas Vue) {
 		//super(Vue);
 		this.model = model;

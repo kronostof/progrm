@@ -2,35 +2,32 @@ package myapp.model;
 
 import drawing.JCanvas;
 import myapp.Lecteur;
-import myapp.controle.NewMondeDesFormeController;
+import myapp.controle.MondeDesFormeController;
 import myapp.factory.Sarsa_ShapeFactory;
 
-import drawing.shape.VueForme;
 /*
  * @author ter Vincent Bonnier
  */
-
-public class NewMondeDesFormeModel {
+public class NewMondeDesFormeModel extends MondeDesFormeModel {
 
     public NewMondeDesFormeModel() {
         // Lecteur est un thread Singloton. Cette instruction est nécéssaire.
-        new Lecteur();
         new Sarsa_ShapeFactory();
-
     }
 
     /**
      * Construction de l'état du monde de départ
      * @param Controleur
      */
-    public void build(NewMondeDesFormeController Controleur, JCanvas vue) {
+    @Override
+    public void build(MondeDesFormeController Controleur) {
 
 
         //Sarsa_ShapeFactory.createShape(Sarsa_ShapeFactory.ShapeType.Gaze0, VueForme.ShapeForme.CURSOR);//.start();
         for (int i = 0; i < 1; i++) {
 
             Sarsa_ShapeFactory.createShape(Sarsa_ShapeFactory.ShapeType.Approche1);//.start();
-            Sarsa_ShapeFactory.createShape(Sarsa_ShapeFactory.ShapeType.Approche0);//.start();
+//            Sarsa_ShapeFactory.createShape(Sarsa_ShapeFactory.ShapeType.Approche0);//.start();
 //            Sarsa_ShapeFactory.createShape(Sarsa_ShapeFactory.ShapeType.Type1);//.start();
 //            Sarsa_ShapeFactory.createShape(Sarsa_ShapeFactory.ShapeType.Type2);//.start();
 //            Sarsa_ShapeFactory.createShape(Sarsa_ShapeFactory.ShapeType.fuite0);//.start();
