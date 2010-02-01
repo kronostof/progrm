@@ -33,6 +33,7 @@ public class Lecteur extends Thread {
     }
 
     public Lecteur() {
+        
         new CommunicationSMI();
         if (CommunicationSMI.getFlux() == null) {
             System.out.println("le flux recupérer par le systeme smi est initialisé a null.");

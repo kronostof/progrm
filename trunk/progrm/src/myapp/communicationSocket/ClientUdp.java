@@ -146,17 +146,20 @@ public class ClientUdp extends DatagramSocket implements Runnable {
         try {
             dataSent = new DatagramPacket(message.getBytes(), message.length(), InetAddress.getByName("192.168.0.1"), 4444);
         } catch (UnknownHostException ex) {
+            System.err.println("Erreur: tentative d'envoi message " + message + " " + ex);
             Logger.getLogger(ClientUdp.class.getName()).log(Level.SEVERE, null, ex);
         }
         DatagramSocket socket = null;
         try {
             socket = new DatagramSocket();
         } catch (SocketException ex) {
+            System.err.println("Erreur: tentative d'envoi message " + message + " " + ex);
             Logger.getLogger(ClientUdp.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
             socket.send(dataSent);
         } catch (IOException ex) {
+            System.err.println("Erreur: tentative d'envoi message " + message + " " + ex);
             Logger.getLogger(ClientUdp.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
