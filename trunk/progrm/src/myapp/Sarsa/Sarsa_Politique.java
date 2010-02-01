@@ -1,47 +1,40 @@
 package myapp.Sarsa;
 
-//package org.myapp.model;
-////import java.util.HashMap;
-//
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
+import java.util.Observable;
+import java.util.Stack;
+import java.util.concurrent.ArrayBlockingQueue;
 import myapp.factory.Sarsa_ShapeFactory;
-//
-//
-///*
-// * @author ter Vincent Bonnier
-// */
-public class Sarsa_Politique {
 
-//    //int size ;
-//    //int[] elements =  {10,11,12,13,20,21,22,23,30,31,32,33};
-//    //double[] quality;
-    Map<Sarsa_State, Sarsa_Quality> HashQualityOfStates = new HashMap<Sarsa_State, Sarsa_Quality>();
-//
-//    int[][] QualityOfStates;
-//
 
+/*
+ * @author ter Vincent Bonnier
+ */
+public class Sarsa_Politique extends Observable {
+
+    Map<Sarsa_State, Sarsa_Quality> HashQualityOfStates = null;
+    private Sarsa_State etatCourant = null;
+    private int TAILLE_MAX_PILE_ETAT = 5;
+    /** liste des dernier état atteint.    */
+    private ArrayBlockingQueue<Sarsa_State> liste_état = new ArrayBlockingQueue<Sarsa_State>(TAILLE_MAX_PILE_ETAT);
+
+    /**
+     * Constructeur
+     */
     public Sarsa_Politique() {
-//        //on cré la hashTable qui contiendra les quality
-        HashQualityOfStates = new Hashtable(Sarsa_StateFactory.getListeDesEtat().size());
 
-
+        HashQualityOfStates = new Hashtable();                                  //  On crée la hashTable qui contiendra les qualité
         for (Sarsa_State state : Sarsa_StateFactory.getListeDesEtat()) {
-            HashQualityOfStates.put(state, new Sarsa_Quality(Math.random()));
+            HashQualityOfStates.put(state, new Sarsa_Quality(0.5));
         }
     }
 
-//    public double getQualityOfState(SARSA_State a_state) {
-//        a_state.getState();
-//    }
-    public void setQualityOfState(Sarsa_State a_state, double q) {
-        HashQualityOfStates.get(a_state).quality = q;
-    }
-    //public SARSA_State getBestState(SARSA_State currentState) {}
-
-    /* fonction debug affiche les qualité des états dans le terminal */
+    // AFFICHAGE
+    /**
+     * fonction debug affiche les qualité des états dans le terminal
+     */
     public void affiche_politique() {
         System.out.println("Affichage de la table de la politique");
         for (Sarsa_State a_State : HashQualityOfStates.keySet()) {
@@ -53,13 +46,41 @@ public class Sarsa_Politique {
         }
     }
 
+    // GETTER
     /**
-     * retourne un nouvelle l'état
+     * renvoi l'état courant.
+     * @return
+     */
+    public Sarsa_State getEtatCourant() {
+        return etatCourant;
+    }
+
+    /**
+     * retourne la qualité d'un état passe en paramètre.
+     * 
+     * @param a_state
+     * @return
+     */
+    public double getQualityOfState(Sarsa_State a_state) {
+        return HashQualityOfStates.get(a_state).quality;
+    }
+
+    /**
+     * 
+     * @return
+     */
+    public Map<Sarsa_State, Sarsa_Quality> getHashQualityOfStates() {
+        return HashQualityOfStates;
+    }
+
+    /**
+     * retourne un nouvelle l'état independament de la liste de état accessible.
      * @param shape
      * @return
      */
-    public Sarsa_State getNewState(Sarsa_Shape shape) {
-        return Sarsa_ShapeFactory.stateFactory.get_Sarsa_State_aleatoire();
+    public Sarsa_State getNewState() {
+        setEtatCourant(Sarsa_ShapeFactory.stateFactory.get_Sarsa_State_aleatoire());
+        return getEtatCourant();
     }
 
     /**
@@ -76,25 +97,43 @@ public class Sarsa_Politique {
                 good_state = a_state;
             }
         }
-
-//        System.out.println(local_q + " " + good_state);
-        return good_state;
+        setEtatCourant(good_state);
+        return getEtatCourant();
     }
 
     /**
-     * Renvoi
+     * Renvoi un état suivant parmit les état accessible.
      * @param shape
      * @return
      */
     public Sarsa_State getNextState(Sarsa_Shape shape) {
-        //on construit une liste des état accessible
-        ArrayList<Sarsa_State> liste = getArray_of_NextState(shape);
-        return liste.get((int) Math.rint(Math.random() * (liste.size()-1)));
+        ArrayList<Sarsa_State> _liste = getArray_of_NextState(shape);
+        setEtatCourant(_liste.get((int) Math.rint(Math.random() * (_liste.size() - 1))));
+        return getEtatCourant();
     }
 
     /**
-     * Retourne une liste des états accesible parmit les état atteignable de l'état courant.
+     * Retourne le meilleur état atteingnable a partir de l'état passé en paramètre.
      * @param shape
+     * @return
+     */
+    public Sarsa_State getNextBetterState(Sarsa_Shape shape) {
+        double q = 0;
+        Sarsa_State bestState = getEtatCourant();
+
+        for (Sarsa_State sarsa_State : getArray_of_NextState(shape)) {
+            if (HashQualityOfStates.get(sarsa_State).quality > q) {
+                bestState = sarsa_State;
+            }
+        }
+        setEtatCourant(bestState);
+        return getEtatCourant();
+    }
+
+    /**
+     * Retourne une liste de tous les états accesible parmit les états atteignable de l'état passé en argument.
+     *
+     * @param shape état a partir duquel on construit la liste d'état.
      * @return
      */
     public ArrayList<Sarsa_State> getArray_of_NextState(Sarsa_Shape shape) {
@@ -110,5 +149,52 @@ public class Sarsa_Politique {
             }
         }
         return liste_etat;
+    }
+
+    public ArrayBlockingQueue<Sarsa_State> getListe_état() {
+        return liste_état;
+    }
+
+    // SETTER
+    /**
+     * fixe la qualité de l'état passé en paramètre.
+     * @param a_state
+     * @param q
+     */
+    public void setQualityOfState(Sarsa_State a_state, double q) {
+        HashQualityOfStates.get(a_state).quality = q;
+    }
+
+    /**
+     * Effectuer un changement d'état.<p>
+     * 
+     * Le changement d'état doit passer par cette méthode.
+     * Afin que les notifications soit faites au observeur.
+     * Afin que la liste des états soit mise a jour.
+     * @param etatCourant
+     */
+    public void setEtatCourant(Sarsa_State etatCourant) {
+        this.etatCourant = etatCourant;
+        if (liste_état.size() >= TAILLE_MAX_PILE_ETAT) {
+            liste_état.poll();
+        }
+        liste_état.add(etatCourant);
+        System.out.println(liste_état.toString());
+        setChanged();
+        notifyObservers();
+    }
+
+    /**
+     * nom temporaire
+     * si l état atteint est rond rouge on augment la qualitéé et c est cool.
+     * @param state
+     */
+    void modifieQuality(Sarsa_State state) {
+        if (Sarsa_State.ShapeColor.JAUNE == state.getShapeColor()
+                && Sarsa_State.State_ShapeForme.ROND == state.getShapeType()) {
+            for (Sarsa_State sarsa_State : liste_état) {
+                HashQualityOfStates.get(sarsa_State).quality += 0.05;
+            }
+        }
     }
 }
