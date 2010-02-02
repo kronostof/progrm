@@ -17,7 +17,7 @@ import drawing.shape.VueForme.ShapeForme;
  */
 public class Shape extends Abstract_Shape{
 
-    private EventListenerList listeners = new EventListenerList();
+    public EventListenerList listeners = new EventListenerList();
     protected String nom;			// Un identifiant- utilis� pour la sortie console.
     /**
      * Identidiant de la forme associé a l'instance
@@ -46,7 +46,6 @@ public class Shape extends Abstract_Shape{
 
     public FormeListener[] getFormeListeners() {
         return listeners.getListeners(FormeListener.class);
-
     }
 
     /**

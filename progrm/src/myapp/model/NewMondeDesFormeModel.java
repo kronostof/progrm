@@ -23,7 +23,7 @@ public class NewMondeDesFormeModel extends MondeDesFormeModel {
 
 
    //     Sarsa_ShapeFactory.createShape(Sarsa_ShapeFactory.ShapeType.Gaze0, VueForme.ShapeForme.CURSOR);//.start();
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < 2; i++) {
 
             Sarsa_ShapeFactory.createShape(Sarsa_ShapeFactory.ShapeType.Approche1);//.start();
             Sarsa_ShapeFactory.createShape(Sarsa_ShapeFactory.ShapeType.Approche0);//.start();

@@ -7,43 +7,22 @@ import java.awt.Point;
 import myapp.model.Shape;
 import drawing.JCanvas;
 import drawing.shape.type.*;
+import java.util.ArrayList;
 
 public class VueForme extends FormDrawable implements FormeListener {
 
     static public JCanvas Vue;
     private graphicsShape gShape;
+    static private ArrayList<VueForme> arrayListeOfAllVueForme = new ArrayList<VueForme>();
 
     public enum ShapeForme {
 
         CIRCLE, CURSOR, SQUARE, TRIANGLE;
     }
 
-//    public VueForme(Shape forme) {
-//        super(forme.color, forme.getPoint(), new Dimension(40, 40));
-//
-//        switch (forme.getForme2()) {
-//            case CIRCLE:
-//                this.gShape = new graphicsShapeCIRCLE();
-//                break;
-//            case CURSOR:
-//                this.gShape = new graphicsShapeCURSOR();
-//                break;
-//            case SQUARE:
-//                this.gShape = new graphicsShapeSQUARE();
-//                break;
-//            case TRIANGLE:
-//                this.gShape = new graphicsShapeTRIANGLE();
-//                break;
-//
-//            default:
-//                System.out.println("VueForme:public VueForme(Shape forme,int type) pas d'objet graphiqueShape initialis�e !");
-//                break;
-//        }
-//        Vue.addDrawable(this);
-//    }
     public VueForme(Shape shape) {
         super(shape.color, shape.getPoint(), new Dimension(40, 40));
-
+        arrayListeOfAllVueForme.add(this);
         switch (shape.getForme()) {
             case CIRCLE:
                 this.gShape = new graphicsShapeCIRCLE();
@@ -63,6 +42,10 @@ public class VueForme extends FormDrawable implements FormeListener {
                 break;
         }
         Vue.addDrawable(this);
+    }
+
+    public static ArrayList<VueForme> getArrayListeOfAllVueForme() {
+        return arrayListeOfAllVueForme;
     }
 
     /* (non-Javadoc)
