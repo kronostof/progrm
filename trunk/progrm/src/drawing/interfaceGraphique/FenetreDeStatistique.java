@@ -4,6 +4,10 @@
  */
 package drawing.interfaceGraphique;
 
+import drawing.JCanvas;
+import drawing.shape.FormDrawable;
+import drawing.shape.IDrawable;
+import drawing.shape.VueForme;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -57,7 +61,7 @@ public class FenetreDeStatistique implements Observer, ActionListener {
 
         }
         for (Sarsa_State _state : Sarsa_StateFactory.listeDesEtat) {
-            arrayOf_progressBar.add(new JProgressBar());
+            arrayOf_progressBar.add(new JProgressBar(0, 100));
         }
         //XXX<
 
@@ -78,10 +82,19 @@ public class FenetreDeStatistique implements Observer, ActionListener {
 
         // bouton vers chaque shape
 
-        JPanel panel = new JPanel(new GridLayout(0, 2));
+        JPanel panel = new JPanel(new GridLayout(0, 1));
+        JPanel _conteneur;
+        JCanvas _canevas ;
         //panel.setSize(new Dimension(50, 100));
+        
         for (IRepresanteble_pour_stat tempEstRepresantable : list_irepresanteble_pour_stat) {
-            addButton(panel, tempEstRepresantable.getNom(), "test", "test");
+            _conteneur = new JPanel(new FlowLayout());
+            addButton(_conteneur, tempEstRepresantable.getNom(), "test", "test");
+            _canevas = new JCanvas();
+            System.out.println((((Sarsa_Shape)tempEstRepresantable).getFormeListeners()[0].getPoint()));
+            _canevas.addDrawable((VueForme)(((Sarsa_Shape)tempEstRepresantable).getFormeListeners()[0]));
+            _conteneur.add(_canevas);
+             panel.add(_conteneur);
         }
         FrameStat.add(panel, BorderLayout.EAST);
 
@@ -92,63 +105,12 @@ public class FenetreDeStatistique implements Observer, ActionListener {
 
         _i = 0;
         for (Sarsa_State a_State : Sarsa_StateFactory.getListeDesEtat()) {
-            JPanel _conteneur = new JPanel(new GridLayout(1, 2));
+            _conteneur = new JPanel(new GridLayout(1, 2));
             _conteneur.add(new JLabel(a_State.toString()));
             _conteneur.add(arrayOf_progressBar.get(_i++));
             statLabelCenter.add(_conteneur);
         }
         FrameStat.add(statLabelCenter, BorderLayout.CENTER);
-//
-//
-//        texteStatLabelWEST = new JLabel();
-//
-//
-//
-//        texte = "<html>";
-//        for (Sarsa_State a_State : Sarsa_StateFactory.getListeDesEtat()) {
-//            texte += a_State + "<br>";
-//        }
-//        texteStatLabelWEST.setText(texte + "</html>");
-//
-//        statLabel = new JPanel(new GridLayout(0,1));
-//        for (JProgressBar jProgressBar : arrayOf_progressBar) {
-//            statLabel.add(jProgressBar);
-//        }
-//
-//
-//        statLabelWest.add(texteStatLabelWEST);
-//        statLabelWest.add(statLabel);
-//        FrameStat.add(statLabelWest, BorderLayout.WEST);
-//
-
-
-
-
-
-//        statLabel = new JPanel();//new FlowLayout());
-//        FrameStat.add(statLabel, BorderLayout.CENTER);
-//        texteStatLabel = new JLabel();
-//        statLabel.add(texteStatLabel);
-
-//        statLabelEst = new JPanel();//new FlowLayout());
-//        FrameStat.add(statLabelEst, BorderLayout.EAST);
-//        texteStatLabelEST = new JLabel();
-//        statLabelEst.add(texteStatLabelEST);
-//
-//        statLabelSouth = new JPanel();//new FlowLayout());
-//        FrameStat.add(statLabelSouth, BorderLayout.SOUTH);
-//        texteStatLabelSouth = new JLabel();
-//        statLabelSouth.add(texteStatLabelSouth);
-//
-//
-//        statLabel = new JPanel();//new FlowLayout());
-//        FrameStat.add(statLabel, BorderLayout.CENTER);
-//        for (JProgressBar jProgressBar : arrayOf_progressBar) {
-//            statLabel.add(jProgressBar);
-//        }
-
-
-
 
         FrameStat.pack();
         FrameStat.setVisible(true);

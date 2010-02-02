@@ -32,7 +32,8 @@ public class Sarsa_Politique extends Observable {
 
         HashQualityOfStates = new Hashtable(Sarsa_StateFactory.getListeDesEtat().size());                                  //  On crée la hashTable qui contiendra les qualité
         for (Sarsa_State state : Sarsa_StateFactory.getListeDesEtat()) {
-            HashQualityOfStates.put(state, new Sarsa_Quality(0.5));
+            //HashQualityOfStates.put(state, new Sarsa_Quality(0.5));
+            HashQualityOfStates.put(state, new Sarsa_Quality(Math.random()/2));
         }
     }
 
@@ -89,7 +90,7 @@ public class Sarsa_Politique extends Observable {
     }
 
     /**
-     * retourne l'état dont la qualité est la meilleur
+     * retourne l'état dont la qualité est la meilleur parmi tout les états.
      * @param shape
      * @return
      */
@@ -136,7 +137,7 @@ public class Sarsa_Politique extends Observable {
     }
 
     /**
-     * Retourne le meilleur état atteingnable a partir de l'état passé en paramètre.
+     * Retourne le meilleur état atteingnable parmis une liste d'état passe en paramètre à partir de l'état passé en paramètre.
      * @param shape
      * @return
      */
@@ -159,40 +160,25 @@ public class Sarsa_Politique extends Observable {
      * @param shape état a partir duquel on construit la liste d'état.
      * @return
      */
+    //TODO: Construire une liste une fois pour toutes de toute les états atteignable pour chaque état.
     public ArrayList<Sarsa_State> getArray_of_NextState(Sarsa_Shape shape) {
-        //on construit une liste des état accessible
-
         ArrayList<Sarsa_State> liste_etat = new ArrayList<Sarsa_State>();
-        //System.out.println("construction de la liste " + shape.getSarsaState());
-        if (Sarsa_StateFactory.getListeDesActions().size() == 0) {
-
-            System.err.println("fjieozjhfaioezhfauezafe");
-        }
         for (Sarsa_Action action : Sarsa_StateFactory.getListeDesActions()) {
             if (action.state_1 == shape.getSarsaState()) {
-                // on ajout a la liste
                 liste_etat.add(action.state_2);
-                //System.out.println("\t ajout a la liste " + action.state_2);
             }
         }
         return liste_etat;
     }
 
     /**
-     * Retourne une liste de tous les états accesible parmit les états atteignable de l'état passé en argument.
+     * Retourne une liste de tous les états accesible de meilleur qualité parmis les états atteignables de l'état passé en argument.
      *
      * @param shape état a partir duquel on construit la liste d'état.
      * @return
      */
     public ArrayList<Sarsa_State> getArray_of_NextBetterState(Sarsa_Shape shape) {
-        //on construit une liste des état accessible
-
         ArrayList<Sarsa_State> liste_etat = new ArrayList<Sarsa_State>();
-        //System.out.println("construction de la liste " + shape.getSarsaState());
-        if (Sarsa_StateFactory.getListeDesActions().size() == 0) {
-
-            System.err.println("fjieozjhfaioezhfauezafe");
-        }
         for (Sarsa_Action action : Sarsa_StateFactory.getListeDesActions()) {
             if (action.state_1 == shape.getSarsaState()
                     && HashQualityOfStates.get(getEtatCourant()).quality < HashQualityOfStates.get(action.state_2).quality) {
@@ -202,7 +188,7 @@ public class Sarsa_Politique extends Observable {
         return liste_etat;
     }
 
-    public ArrayBlockingQueue<Sarsa_State> getListe_état() {
+    public ArrayBlockingQueue<Sarsa_State> getListe_état_récent() {
         return liste_état_récents;
     }
 
@@ -246,14 +232,13 @@ public class Sarsa_Politique extends Observable {
                 && state.shapeDist == Sarsa_State.ShapeDist.NEUTRE) {
             _x = 0.001;
             for (Sarsa_State sarsa_State : liste_état_récents) {
-                HashQualityOfStates.get(sarsa_State).quality += _x;
-                System.out.println(sarsa_State + " " + HashQualityOfStates.get(sarsa_State).quality);
+                HashQualityOfStates.get(sarsa_State).augmenter(_x);
+             //   System.out.println(sarsa_State + " " + HashQualityOfStates.get(sarsa_State).quality);
                 _x += 0.001;
             }
-            System.out.println("_____________________");
+           // System.out.println("_____________________");
             for (Sarsa_State sarsa_State : HashQualityOfStates.keySet()) {
-                HashQualityOfStates.get(sarsa_State).quality -= 0.001;
-                _x -= 0.001;
+                HashQualityOfStates.get(sarsa_State).diminuer(0.001);
             }
         }
     }

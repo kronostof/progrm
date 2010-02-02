@@ -72,8 +72,6 @@ public class Sarsa_StateFactory {
             Field[] fields = Sarsa_State.class.getDeclaredFields();
 
             for (Sarsa_State sarsa_State : listeDesEtat) {// Pour chaque état
-                //System.out.println("états : " + sarsa_State);
-                // nouvelle liste d'action
                 //temp_liste_action = new Sarsa_Action[TAILLE_MAX_LISTE_ACTION];
                 for (Field field : fields) {// pour chaque champ de la forme
                     //System.out.println("\tTraitement du champ " + field.getType().getSimpleName() + " | " + field.getName());
@@ -203,30 +201,33 @@ public class Sarsa_StateFactory {
         }
     }
 
+    /**
+     *  Renvoi un états complètement aléatoire.
+     * @return
+     */
     public static Sarsa_State get_Sarsa_State_aleatoire() {
-        //System.out.println(listeDesEtat.size());
-        //Math.round demande un float
-        //Math.round drenvoi un int
-        //Math.random renvoi un double
-        //listeDesEtat.size renvoi un int
         int rnd = 0;
         do {
             float random = ((float) Math.random()) * ((float) listeDesEtat.size());
             float roundRandom = (float) Math.round(random);
             rnd = Math.round(roundRandom);
-//            System.out.println("rnd = " + rnd + " est ce que ça ira ?");
         } while (rnd >= listeDesEtat.size());
-
-//        System.out.println("on demande dans listeDesEtat l'index : " +rnd);
         return listeDesEtat.get(rnd);
-
 //        return listeDesEtat.get(Math.round((float) Math.random() * listeDesEtat.size()));
     }
 
+    /**
+     * La liste de toutes les actions.
+     * @return
+     */
     public static ArrayList<Sarsa_Action> getListeDesActions() {
         return listeDesActions;
     }
 
+    /**
+     * La liste de tous les états.
+     * @return
+     */
     public static ArrayList<Sarsa_State> getListeDesEtat() {
         return listeDesEtat;
     }

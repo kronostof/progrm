@@ -13,7 +13,7 @@ public class Sarsa_State extends Observable{
     // ShapeColor couleur (bleue, rouge, jaune)
     public enum ShapeColor {
 
-        BLEUE, ROUGE, JAUNE
+        BLEUE, ROUGE, JAUNE 
     }
     // ShapeDist distance au regard (proche, eloigné , neutre)
 
