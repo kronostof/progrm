@@ -17,14 +17,20 @@ public class Sarsa_Politique extends Observable {
     private Sarsa_State etatCourant = null;
     private int TAILLE_MAX_PILE_ETAT = 5;
     /** liste des dernier état atteint.    */
-    public ArrayBlockingQueue<Sarsa_State> liste_état = new ArrayBlockingQueue<Sarsa_State>(TAILLE_MAX_PILE_ETAT);
+    public ArrayBlockingQueue<Sarsa_State> liste_état_récents = new ArrayBlockingQueue<Sarsa_State>(TAILLE_MAX_PILE_ETAT);
+    /**
+     * variable mega temporaire ! ! !
+     */
+    private double _x = 0;
+    private double local_q;
+    private int _i;
 
     /**
      * Constructeur
      */
     public Sarsa_Politique() {
 
-        HashQualityOfStates = new Hashtable();                                  //  On crée la hashTable qui contiendra les qualité
+        HashQualityOfStates = new Hashtable(Sarsa_StateFactory.getListeDesEtat().size());                                  //  On crée la hashTable qui contiendra les qualité
         for (Sarsa_State state : Sarsa_StateFactory.getListeDesEtat()) {
             HashQualityOfStates.put(state, new Sarsa_Quality(0.5));
         }
@@ -88,8 +94,8 @@ public class Sarsa_Politique extends Observable {
      * @return
      */
     public Sarsa_State getBestState(Sarsa_Shape shape) {
-        Sarsa_State good_state = shape.getSarsaState();
-        double local_q = HashQualityOfStates.get(good_state).quality;
+        Sarsa_State good_state = getEtatCourant();
+        local_q = HashQualityOfStates.get(good_state).quality;
 
         for (Sarsa_State a_state : Sarsa_StateFactory.getListeDesEtat()) {
             if (local_q < HashQualityOfStates.get(a_state).quality) {
@@ -107,9 +113,6 @@ public class Sarsa_Politique extends Observable {
      */
     public Sarsa_State getNextState(Sarsa_Shape shape) {
         ArrayList<Sarsa_State> _liste = getArray_of_NextState(shape);
-        if (_liste.size() == 0) {
-            System.err.println("fjredzihfuirezhiufrezfhiuzanhfiezafhjueizlhijufezl");
-        }
         setEtatCourant(_liste.get((int) Math.rint(Math.random() * (_liste.size() - 1))));
         return getEtatCourant();
     }
@@ -120,16 +123,34 @@ public class Sarsa_Politique extends Observable {
      * @return
      */
     public Sarsa_State getNextBetterState(Sarsa_Shape shape) {
-        double q = 0;
-        Sarsa_State bestState = getEtatCourant();
+        ArrayList<Sarsa_State> _liste = getArray_of_NextBetterState(shape);
+        if (_liste.size() > 0) {
 
-        for (Sarsa_State sarsa_State : getArray_of_NextState(shape)) {
+
+            do {
+                _i = (int) (Math.random() * _liste.size());
+            } while (HashQualityOfStates.get(_liste.get(_i)).quality < HashQualityOfStates.get(getEtatCourant()).quality);
+            setEtatCourant(_liste.get(_i));
+        }
+        return getEtatCourant();
+    }
+
+    /**
+     * Retourne le meilleur état atteingnable a partir de l'état passé en paramètre.
+     * @param shape
+     * @return
+     */
+    public Sarsa_State getNextBetterState(Sarsa_Shape shape, ArrayList<Sarsa_State> liste_de_state) {
+        double q = 0;
+        Sarsa_State bestState = liste_de_state.get(0);
+
+        for (Sarsa_State sarsa_State : liste_de_state) {
             if (HashQualityOfStates.get(sarsa_State).quality > q) {
                 bestState = sarsa_State;
+                q = HashQualityOfStates.get(bestState).quality;
             }
         }
-        setEtatCourant(bestState);
-        return getEtatCourant();
+        return bestState;
     }
 
     /**
@@ -157,8 +178,32 @@ public class Sarsa_Politique extends Observable {
         return liste_etat;
     }
 
+    /**
+     * Retourne une liste de tous les états accesible parmit les états atteignable de l'état passé en argument.
+     *
+     * @param shape état a partir duquel on construit la liste d'état.
+     * @return
+     */
+    public ArrayList<Sarsa_State> getArray_of_NextBetterState(Sarsa_Shape shape) {
+        //on construit une liste des état accessible
+
+        ArrayList<Sarsa_State> liste_etat = new ArrayList<Sarsa_State>();
+        //System.out.println("construction de la liste " + shape.getSarsaState());
+        if (Sarsa_StateFactory.getListeDesActions().size() == 0) {
+
+            System.err.println("fjieozjhfaioezhfauezafe");
+        }
+        for (Sarsa_Action action : Sarsa_StateFactory.getListeDesActions()) {
+            if (action.state_1 == shape.getSarsaState()
+                    && HashQualityOfStates.get(getEtatCourant()).quality < HashQualityOfStates.get(action.state_2).quality) {
+                liste_etat.add(action.state_2);
+            }
+        }
+        return liste_etat;
+    }
+
     public ArrayBlockingQueue<Sarsa_State> getListe_état() {
-        return liste_état;
+        return liste_état_récents;
     }
 
     // SETTER
@@ -181,10 +226,10 @@ public class Sarsa_Politique extends Observable {
      */
     public void setEtatCourant(Sarsa_State etatCourant) {
         this.etatCourant = etatCourant;
-        if (liste_état.size() >= TAILLE_MAX_PILE_ETAT) {
-            liste_état.poll();
+        if (liste_état_récents.size() >= TAILLE_MAX_PILE_ETAT) {
+            liste_état_récents.poll();
         }
-        liste_état.add(etatCourant);
+        liste_état_récents.add(etatCourant);
         //System.out.println(liste_état.toString());
         setChanged();
         notifyObservers();
@@ -197,17 +242,25 @@ public class Sarsa_Politique extends Observable {
      */
     void modifieQuality(Sarsa_State state) {
         if (Sarsa_State.ShapeColor.JAUNE == state.getShapeColor()
-                && Sarsa_State.State_ShapeForme.ROND == state.getShapeType()) {
-            for (Sarsa_State sarsa_State : liste_état) {
-                HashQualityOfStates.get(sarsa_State).quality += 0.05;
+                && Sarsa_State.State_ShapeForme.ROND == state.getShapeType()
+                && state.shapeDist == Sarsa_State.ShapeDist.NEUTRE) {
+            _x = 0.001;
+            for (Sarsa_State sarsa_State : liste_état_récents) {
+                HashQualityOfStates.get(sarsa_State).quality += _x;
+                System.out.println(sarsa_State + " " + HashQualityOfStates.get(sarsa_State).quality);
+                _x += 0.001;
+            }
+            System.out.println("_____________________");
+            for (Sarsa_State sarsa_State : HashQualityOfStates.keySet()) {
+                HashQualityOfStates.get(sarsa_State).quality -= 0.001;
+                _x -= 0.001;
             }
         }
     }
 
-
     public String get_liste_état_toString() {
         String _chaine = new String();
-        for (Sarsa_State sarsa_State : liste_état) {
+        for (Sarsa_State sarsa_State : liste_état_récents) {
             _chaine += sarsa_State + "<br>";
         }
         return _chaine;

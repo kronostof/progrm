@@ -9,12 +9,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.Observable;
 import javax.swing.*;
 import java.util.Observer;
 import myapp.Sarsa.Sarsa_Politique;
+import myapp.Sarsa.Sarsa_Quality;
 import myapp.Sarsa.Sarsa_Shape;
 import myapp.Sarsa.Sarsa_State;
+import myapp.Sarsa.Sarsa_StateFactory;
 
 import myapp.factory.Sarsa_ShapeFactory;
 
@@ -26,9 +29,21 @@ import myapp.factory.Sarsa_ShapeFactory;
  */
 public class FenetreDeStatistique implements Observer, ActionListener {
 
-    private JPanel statLabel = null, statLabelC = null, statLabelSouth = null;
-    private JLabel texteStatLabel, texteStatLabelC, texteStatLabelSouth;
-    String texte = null;
+    int _i = 0;
+    private JPanel statLabel = null,
+            statLabelCenter = null,
+            statLabelNorth = null,
+            statLabelSouth = null,
+            statLabelWest = null,
+            statLabelEst = null;
+    private JLabel texteStatLabel,
+            texteStatLabelCenter,
+            texteStatLabelNORTH,
+            texteStatLabelWEST,
+            texteStatLabelEST,
+            texteStatLabelSouth;
+    String texte = null, texte2 = null;
+    ArrayList<JProgressBar> arrayOf_progressBar = new ArrayList<JProgressBar>(Sarsa_StateFactory.listeDesEtat.size());
     /**
      * liste d'élement dessinable.
      */
@@ -39,6 +54,10 @@ public class FenetreDeStatistique implements Observer, ActionListener {
         //<XXX
         for (Sarsa_Shape shape : Sarsa_ShapeFactory.getListe_de_shape()) {
             list_irepresanteble_pour_stat.add(shape);
+
+        }
+        for (Sarsa_State _state : Sarsa_StateFactory.listeDesEtat) {
+            arrayOf_progressBar.add(new JProgressBar());
         }
         //XXX<
 
@@ -54,32 +73,82 @@ public class FenetreDeStatistique implements Observer, ActionListener {
 
 
         FrameStat.getContentPane().removeAll();
-        FrameStat.getContentPane().setLayout(new BorderLayout(2, 1));
+        FrameStat.getContentPane().setLayout(new BorderLayout());
+
+
+        // bouton vers chaque shape
 
         JPanel panel = new JPanel(new GridLayout(0, 2));
-
+        //panel.setSize(new Dimension(50, 100));
         for (IRepresanteble_pour_stat tempEstRepresantable : list_irepresanteble_pour_stat) {
             addButton(panel, tempEstRepresantable.getNom(), "test", "test");
         }
         FrameStat.add(panel, BorderLayout.EAST);
 
 
-        statLabel = new JPanel();//new FlowLayout());
-        FrameStat.add(statLabel, BorderLayout.CENTER);
-        texteStatLabel = new JLabel();
-        statLabel.add(texteStatLabel);
+        // liste de tout les états
+
+        statLabelCenter = new JPanel(new GridLayout(0, 1));
+
+        _i = 0;
+        for (Sarsa_State a_State : Sarsa_StateFactory.getListeDesEtat()) {
+            JPanel _conteneur = new JPanel(new GridLayout(1, 2));
+            _conteneur.add(new JLabel(a_State.toString()));
+            _conteneur.add(arrayOf_progressBar.get(_i++));
+            statLabelCenter.add(_conteneur);
+        }
+        FrameStat.add(statLabelCenter, BorderLayout.CENTER);
+//
+//
+//        texteStatLabelWEST = new JLabel();
+//
+//
+//
+//        texte = "<html>";
+//        for (Sarsa_State a_State : Sarsa_StateFactory.getListeDesEtat()) {
+//            texte += a_State + "<br>";
+//        }
+//        texteStatLabelWEST.setText(texte + "</html>");
+//
+//        statLabel = new JPanel(new GridLayout(0,1));
+//        for (JProgressBar jProgressBar : arrayOf_progressBar) {
+//            statLabel.add(jProgressBar);
+//        }
+//
+//
+//        statLabelWest.add(texteStatLabelWEST);
+//        statLabelWest.add(statLabel);
+//        FrameStat.add(statLabelWest, BorderLayout.WEST);
+//
 
 
 
-        statLabelC = new JPanel();//new FlowLayout());
-        FrameStat.add(statLabelC, BorderLayout.WEST);
-        texteStatLabelC = new JLabel();
-        statLabelC.add(texteStatLabelC);
 
-        statLabelSouth = new JPanel();//new FlowLayout());
-        FrameStat.add(statLabelSouth, BorderLayout.SOUTH);
-        texteStatLabelSouth = new JLabel();
-        statLabelSouth.add(texteStatLabelSouth);
+
+//        statLabel = new JPanel();//new FlowLayout());
+//        FrameStat.add(statLabel, BorderLayout.CENTER);
+//        texteStatLabel = new JLabel();
+//        statLabel.add(texteStatLabel);
+
+//        statLabelEst = new JPanel();//new FlowLayout());
+//        FrameStat.add(statLabelEst, BorderLayout.EAST);
+//        texteStatLabelEST = new JLabel();
+//        statLabelEst.add(texteStatLabelEST);
+//
+//        statLabelSouth = new JPanel();//new FlowLayout());
+//        FrameStat.add(statLabelSouth, BorderLayout.SOUTH);
+//        texteStatLabelSouth = new JLabel();
+//        statLabelSouth.add(texteStatLabelSouth);
+//
+//
+//        statLabel = new JPanel();//new FlowLayout());
+//        FrameStat.add(statLabel, BorderLayout.CENTER);
+//        for (JProgressBar jProgressBar : arrayOf_progressBar) {
+//            statLabel.add(jProgressBar);
+//        }
+
+
+
 
         FrameStat.pack();
         FrameStat.setVisible(true);
@@ -88,62 +157,10 @@ public class FenetreDeStatistique implements Observer, ActionListener {
 
     public void update(Observable o, Object arg) {
         if (politiqueObservé != null) {
-
-
-
-            texte = "<html>";
-            for (Sarsa_State a_State : politiqueObservé.getHashQualityOfStates().keySet()) {
-                texte += a_State;
-                if (politiqueObservé.getEtatCourant() == a_State) {
-                    texte += "X<br>";
-                } else {
-                    texte += "<br>";
-                }
+            _i = 0;
+            for (Sarsa_State a_State : Sarsa_StateFactory.getListeDesEtat()) {
+                arrayOf_progressBar.get(_i++).setValue((int) (politiqueObservé.getHashQualityOfStates().get(a_State).quality * 100));
             }
-            texteStatLabel.setText(texte + "</html>");
-
-
-
-            texte = "<html>";
-            for (Sarsa_State a_State : politiqueObservé.getHashQualityOfStates().keySet()) {
-                texte += politiqueObservé.getHashQualityOfStates().get(a_State) + "<br>";
-            }
-            texte += politiqueObservé.getEtatCourant().toString();
-            texteStatLabelC.setText(texte + "</html>");
-
-
-
-            texte = "<html>"
-                    + "<TABLE BORDER=\"1\"> "
-                    + "<CAPTION> Voici le titre du tableau </CAPTION>"
-                    + "<TR>"
-                    + "<TH> Titre A1 </TH>"
-                    + "<TH> Titre A2 </TH>"
-                    + "<TH> Titre A3 </TH>"
-                    + "  </TR>"
-                    + "<TR>"
-                    + "<TH> Titre B1 </TH>"
-                    + "<TD>";
-
-            for (Sarsa_State a_State : politiqueObservé.getListe_état()) {
-                texte += a_State;
-                if (politiqueObservé.getEtatCourant() == a_State) {
-                    texte += "X " + politiqueObservé.getHashQualityOfStates().get(a_State) + "<br>";
-                } else {
-                    texte += politiqueObservé.getHashQualityOfStates().get(a_State) + "<br>";
-                }
-            }
-            texte += "</TD>"
-                    + "<TD> " + politiqueObservé.get_liste_état_toString() + "</TD>"
-                    + "  </TR>"
-                    + "</TABLE>"
-                    + " ";
-
-
-            texteStatLabelSouth.setText(texte + "</html>");
-
-
-
         }
     }
 
@@ -165,7 +182,7 @@ public class FenetreDeStatistique implements Observer, ActionListener {
         }
         politiqueObservé = temp;
         politiqueObservé.addObserver(this);
-        //this.update(null, c);
+        this.update(null, c);
         // texteStatLabel.setText("<html>" + c + "</html>");
     }
 

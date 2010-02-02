@@ -203,7 +203,7 @@ public class Sarsa_StateFactory {
         }
     }
 
-    public Sarsa_State get_Sarsa_State_aleatoire() {
+    public static Sarsa_State get_Sarsa_State_aleatoire() {
         //System.out.println(listeDesEtat.size());
         //Math.round demande un float
         //Math.round drenvoi un int

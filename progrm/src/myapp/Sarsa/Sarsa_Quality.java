@@ -13,7 +13,7 @@ package myapp.Sarsa;
  * Classe representant la qualité d'un état et proposant des méthode permetant de les manipulé
  * @author Christophe Moncy 10304320
  */
-class Sarsa_Quality {
+public class Sarsa_Quality {
 
     public double quality = 0;
 
