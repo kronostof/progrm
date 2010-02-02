@@ -26,6 +26,7 @@ public class Sarsa_Shape extends Shape implements IRepresanteble_pour_stat {
 
     private Sarsa_State state;
     private Sarsa_Politique politique = new Sarsa_Politique();
+    private double alpha = 0.8;
     //private MondeDesFormesMDP mdp = new MondeDesFormesMDP(0,1);
     //private LearningAlgorithm learningalgo = new Sarsa(mdp); // algo d'apprentissage
     //gestion du regard de l'utilisateur
@@ -36,8 +37,10 @@ public class Sarsa_Shape extends Shape implements IRepresanteble_pour_stat {
      * @param state
      */
     public void setState(Sarsa_State state) {
-        this.state = state;
-        fire_StateChanged();
+        if (state != null) {
+            this.state = state;
+            fire_StateChanged();
+        }
     }
 
     public void setState() {
@@ -56,19 +59,27 @@ public class Sarsa_Shape extends Shape implements IRepresanteble_pour_stat {
 
     @Override
     public void run() {
-        int nbr_iteration = 0, Max_iteration = 1000;
+        int nbr_iteration = 0, Max_iteration = 100000;
         try {
             sleep(1000);    // TODO: uniquement par manque de sychro => a virrer en gérant la syncro.
         } catch (InterruptedException ex) {
             Logger.getLogger(Sarsa_Shape.class.getName()).log(Level.SEVERE, null, ex);
         }
+        setState(politique.getNextState(this));
         // TODO verbose => politique.affiche_politique();
 
         while (nbr_iteration++ < Max_iteration) {
             try {
-                sleep(10);
+                sleep(20);
 //                setState(politique.getNewState(this));
+
+                // ballance entre UN état suivant et LE meilleur etat suivant
+                if (Math.random() > alpha) {
                 setState(politique.getNextState(this));
+                } else {
+                setState(politique.getNextBetterState(this));
+                }
+
                 politique.modifieQuality(politique.getEtatCourant());
             } catch (InterruptedException ex) {
                 System.err.println("ERREUR dans Sarsa_Shape => " + ex);
