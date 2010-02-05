@@ -131,13 +131,11 @@ public class fenetre extends JFrame implements ActionListener,MouseMotionListene
 			try {
 				send = new Send("ET_CAL" +"\n" + "\r", socket);
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			try {
 				send.sending();
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			}
@@ -145,13 +143,11 @@ public class fenetre extends JFrame implements ActionListener,MouseMotionListene
 			try {
 				send = new Send("ET_BRK" +"\n" + "\r", socket);
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			try {
 				send.sending();
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			}
@@ -159,13 +155,11 @@ public class fenetre extends JFrame implements ActionListener,MouseMotionListene
 			try {
 				send = new Send("ET_REC" +"\n" + "\r", socket);
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			try {
 				send.sending();
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			}
@@ -173,13 +167,11 @@ public class fenetre extends JFrame implements ActionListener,MouseMotionListene
 			try {
 				send = new Send("ET_STP" +"\n" + "\r", socket);
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			try {
 				send.sending();
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		
@@ -189,13 +181,11 @@ public class fenetre extends JFrame implements ActionListener,MouseMotionListene
 				send = new Send("ET_STR" +"\n" + "\r", socket);
 				
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			try {
 				send.sending();
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 						
@@ -206,13 +196,11 @@ public class fenetre extends JFrame implements ActionListener,MouseMotionListene
 			try {
 				send = new Send("ET_EST" +"\n" + "\r", socket);				
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			try {
 				send.sending();
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			
@@ -222,13 +210,11 @@ public class fenetre extends JFrame implements ActionListener,MouseMotionListene
 			try {
 				send = new Send("ET_FRM \"#%SX#%SY\"" +"\n" + "\r", socket);
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			try {
 				send.sending();
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			
@@ -239,13 +225,11 @@ public class fenetre extends JFrame implements ActionListener,MouseMotionListene
  			try {
  				send = new Send("ET_PNT 3 1216	51" +"\n" + "\r", socket);
  			} catch (IOException e1) {
- 				// TODO Auto-generated catch block
  				e1.printStackTrace();
  			}
  			try {
  				send.sending();
  			} catch (IOException e1) {
- 				// TODO Auto-generated catch block
  				e1.printStackTrace();
  			}
  			

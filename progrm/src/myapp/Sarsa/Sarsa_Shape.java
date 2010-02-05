@@ -48,7 +48,7 @@ public class Sarsa_Shape extends Shape implements IRepresanteble_pour_stat {
             if (object.getAWTShapeColor() == color
                     && shapeForme == object.getShapeForme()) {
                 state = object;
-                System.out.println("etat trouvé " + state);
+                //System.out.println("etat trouvé " + state.toString());
             }
         }
     }
@@ -60,24 +60,28 @@ public class Sarsa_Shape extends Shape implements IRepresanteble_pour_stat {
     @Override
     public void run() {
         int nbr_iteration = 0, Max_iteration = 100000;
-        try {
-            sleep(1000);    // TODO: uniquement par manque de sychro => a virrer en gérant la syncro.
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Sarsa_Shape.class.getName()).log(Level.SEVERE, null, ex);
+
+        //TODO il faut faire remonter cette partie au moins à la methode construisant les shape.
+        while (Sarsa_StateFactory.goodToGo != 1 || state == null) {
+            try {
+                sleep(100);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Sarsa_Shape.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-        setState(politique.getNextState(this));
-        // TODO verbose => politique.affiche_politique();
+
+        politique.setEtatCourant(state);
 
         while (nbr_iteration++ < Max_iteration) {
             try {
-                sleep(20);
+                sleep(40);
 //                setState(politique.getNewState(this));
 
                 // ballance entre UN état suivant et LE meilleur etat suivant
                 if (Math.random() > alpha) {
-                setState(politique.getNextState(this));
+                    setState(politique.getNextState(this));
                 } else {
-                setState(politique.getNextBetterState(this));
+                    setState(politique.getNextBetterState(this));
                 }
 
                 politique.modifieQuality(politique.getEtatCourant());

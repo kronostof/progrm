@@ -9,8 +9,8 @@ public class GenerationState {
     public static void main(String[] args) {
         Sarsa_StateFactory sta = new Sarsa_StateFactory();
 
-        System.out.println(Sarsa_StateFactory.listeDesEtat.size());
-        System.out.println(Sarsa_StateFactory.listeDesActions.size());
+        System.out.println(Sarsa_StateFactory.Ensemble_Des_Etats.size());
+        System.out.println(Sarsa_StateFactory.Ensemble_Des_Ensemble_D_Actions.size());
 
         sta.affichage_listeDesEtat();
         sta.affichage_listeDesAction();

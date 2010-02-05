@@ -4,22 +4,31 @@
  */
 package myapp.Sarsa;
 
+import drawing.shape.VueForme.ShapeForme;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import myapp.Sarsa.Sarsa_State.*;
 
 /**
- *
+ * L'implementation se base en partie sur le Document <p>
+ * Formulaire d’apprentissage par renforcement
+ * Rémi Coulom
+ * 14 novembre 2008
+ * On s'attachera a implementé les élément en suivant la même terminologie.
+
  * @author Christophe Moncy 10304320
  */
 public class Sarsa_StateFactory {
 
-//    private static int bidon = init();
-    static public ArrayList<Sarsa_State> listeDesEtat = new ArrayList<Sarsa_State>();
-    static public ArrayList<Sarsa_Action> listeDesActions = new ArrayList<Sarsa_Action>();
+    static public ArrayList<Sarsa_State> Ensemble_Des_Etats = new ArrayList<Sarsa_State>();
+    static public ArrayList<Sarsa_Action> Ensemble_Des_Ensemble_D_Actions = new ArrayList<Sarsa_Action>();
+    //static public
+    
+    static double goodToGo = 0;
     private boolean bool_Generer_tout_les_etats = false;
     private boolean bool_Generer_tout_les_action = false;
-    State_ShapeForme shapeType;
+    
+    ShapeForme shapeForme;
     ShapeDist shapeDist;
     ShapeColor shapeColor;
     //chk action
@@ -31,6 +40,7 @@ public class Sarsa_StateFactory {
     public Sarsa_StateFactory() {
         Generer_tout_les_etats();
         Generer_toutes_les_action();
+        goodToGo = 1;
     }
 
     /**
@@ -43,20 +53,19 @@ public class Sarsa_StateFactory {
             bool_Generer_tout_les_etats = true;
             int id = 0;
             Sarsa_State etat_temp;
-            for (State_ShapeForme Shape_t : State_ShapeForme.values()) {
-                for (ShapeDist Shape_d : ShapeDist.values()) {
-                    for (ShapeColor Shape_c : ShapeColor.values()) {
+            for (ShapeColor Shape_c : ShapeColor.values()) {
+                for (ShapeForme Shape_t : ShapeForme.values()) {
+                    for (ShapeDist Shape_d : ShapeDist.values()) {
                         etat_temp = new Sarsa_State();
                         // On affecte les valeur de l'état que l'on va ajouter
                         etat_temp.setShapeColor(Shape_c);
                         etat_temp.setShapeDist(Shape_d);
                         etat_temp.setShapeType(Shape_t);
 
-                        listeDesEtat.add(etat_temp);
+                        Ensemble_Des_Etats.add(etat_temp);
                     }
                 }
             }
-
         }
     }
 
@@ -71,7 +80,7 @@ public class Sarsa_StateFactory {
             bool_Generer_tout_les_action = true;
             Field[] fields = Sarsa_State.class.getDeclaredFields();
 
-            for (Sarsa_State sarsa_State : listeDesEtat) {// Pour chaque état
+            for (Sarsa_State sarsa_State : Ensemble_Des_Etats) {// Pour chaque état
                 //temp_liste_action = new Sarsa_Action[TAILLE_MAX_LISTE_ACTION];
                 for (Field field : fields) {// pour chaque champ de la forme
                     //System.out.println("\tTraitement du champ " + field.getType().getSimpleName() + " | " + field.getName());
@@ -82,13 +91,13 @@ public class Sarsa_StateFactory {
                             // on construit les action posible pour chaque états.
                             temp = new Sarsa_State();
 
-                            if (field.getType().getSimpleName().compareTo("State_ShapeForme") == 0) {
+                            if (field.getType().getSimpleName().compareTo("ShapeForme") == 0) {
                                 if (sarsa_State.getShapeType().toString().compareTo(field1.getName()) != 0) { // On vire le cas ou le champs est identique a celui de la forme
                                     temp.setShapeColor(sarsa_State.getShapeColor());
                                     temp.setShapeDist(sarsa_State.getShapeDist());
-                                    temp.setShapeType(sarsa_State.shapeType.valueOf(field1.getName()));
+                                    temp.setShapeType(sarsa_State.shapeForme.valueOf(field1.getName()));
                                     // on choppe l'état dont les champ corespondent.
-                                    for (Sarsa_State rch_state : listeDesEtat) {
+                                    for (Sarsa_State rch_state : Ensemble_Des_Etats) {
                                         if (temp.getShapeColor() == rch_state.getShapeColor()
                                                 && temp.getShapeDist() == rch_state.getShapeDist()
                                                 && temp.getShapeType() == rch_state.getShapeType()) {
@@ -105,7 +114,7 @@ public class Sarsa_StateFactory {
                                             temp_Sarsa_Action.setState_1(sarsa_State);
                                             temp_Sarsa_Action.setState_2(temp);
 
-                                            listeDesActions.add(temp_Sarsa_Action);
+                                            Ensemble_Des_Ensemble_D_Actions.add(temp_Sarsa_Action);
                                         }
                                     }
                                 }
@@ -116,7 +125,7 @@ public class Sarsa_StateFactory {
                                     temp.setShapeType(sarsa_State.getShapeType());
                                     temp.setShapeDist(sarsa_State.shapeDist.valueOf(field1.getName()));
                                     // on choppe l'état dont les champ corespondent.
-                                    for (Sarsa_State rch_state : listeDesEtat) {
+                                    for (Sarsa_State rch_state : Ensemble_Des_Etats) {
                                         if (temp.getShapeColor() == rch_state.getShapeColor()
                                                 && temp.getShapeDist() == rch_state.getShapeDist()
                                                 && temp.getShapeType() == rch_state.getShapeType()) {
@@ -133,7 +142,7 @@ public class Sarsa_StateFactory {
                                             temp_Sarsa_Action.setState_1(sarsa_State);
                                             temp_Sarsa_Action.setState_2(temp);
 
-                                            listeDesActions.add(temp_Sarsa_Action);
+                                            Ensemble_Des_Ensemble_D_Actions.add(temp_Sarsa_Action);
                                         }
                                     }
                                 }
@@ -144,7 +153,7 @@ public class Sarsa_StateFactory {
                                     temp.setShapeDist(sarsa_State.getShapeDist());
                                     temp.setShapeColor(sarsa_State.shapeColor.valueOf(field1.getName()));
                                     // on choppe l'état dont les champ corespondent.
-                                    for (Sarsa_State rch_state : listeDesEtat) {
+                                    for (Sarsa_State rch_state : Ensemble_Des_Etats) {
                                         if (temp.getShapeColor() == rch_state.getShapeColor()
                                                 && temp.getShapeDist() == rch_state.getShapeDist()
                                                 && temp.getShapeType() == rch_state.getShapeType()) {
@@ -162,7 +171,7 @@ public class Sarsa_StateFactory {
                                             temp_Sarsa_Action.setState_1(sarsa_State);
                                             temp_Sarsa_Action.setState_2(temp);
 
-                                            listeDesActions.add(temp_Sarsa_Action);
+                                            Ensemble_Des_Ensemble_D_Actions.add(temp_Sarsa_Action);
                                         }
                                     }
                                 }
@@ -182,8 +191,8 @@ public class Sarsa_StateFactory {
             System.err.println("package org.myapp.factory;\npublic class StateFactory \nLa methode public void Generer_tout_les_etats() n'a pas encore été appellé");
         } else {
 
-            System.out.println("il y a " + listeDesEtat.size() + " états possible");
-            for (Sarsa_State sarsa_State : listeDesEtat) {
+            System.out.println("il y a " + Ensemble_Des_Etats.size() + " états possible");
+            for (Sarsa_State sarsa_State : Ensemble_Des_Etats) {
                 System.out.println(sarsa_State);
             }
         }
@@ -194,8 +203,8 @@ public class Sarsa_StateFactory {
         if (bool_Generer_tout_les_action == false) {
             System.err.println("package org.myapp.factory;\npublic class StateFactory \nLa methode public void actions() n'a pas encore été appellé");
         } else {
-            System.out.println("il y a " + listeDesActions.size() + " action possible");
-            for (Sarsa_Action sarsa_Action : listeDesActions) {
+            System.out.println("il y a " + Ensemble_Des_Ensemble_D_Actions.size() + " action possible");
+            for (Sarsa_Action sarsa_Action : Ensemble_Des_Ensemble_D_Actions) {
                 System.out.println(sarsa_Action);
             }
         }
@@ -208,11 +217,11 @@ public class Sarsa_StateFactory {
     public static Sarsa_State get_Sarsa_State_aleatoire() {
         int rnd = 0;
         do {
-            float random = ((float) Math.random()) * ((float) listeDesEtat.size());
+            float random = ((float) Math.random()) * ((float) Ensemble_Des_Etats.size());
             float roundRandom = (float) Math.round(random);
             rnd = Math.round(roundRandom);
-        } while (rnd >= listeDesEtat.size());
-        return listeDesEtat.get(rnd);
+        } while (rnd >= Ensemble_Des_Etats.size());
+        return Ensemble_Des_Etats.get(rnd);
 //        return listeDesEtat.get(Math.round((float) Math.random() * listeDesEtat.size()));
     }
 
@@ -221,7 +230,7 @@ public class Sarsa_StateFactory {
      * @return
      */
     public static ArrayList<Sarsa_Action> getListeDesActions() {
-        return listeDesActions;
+        return Ensemble_Des_Ensemble_D_Actions;
     }
 
     /**
@@ -229,6 +238,10 @@ public class Sarsa_StateFactory {
      * @return
      */
     public static ArrayList<Sarsa_State> getListeDesEtat() {
-        return listeDesEtat;
+        return Ensemble_Des_Etats;
+    }
+
+    public static double isGoodToGo() {
+        return goodToGo;
     }
 }

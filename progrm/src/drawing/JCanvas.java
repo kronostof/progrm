@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 
 import myapp.controle.MondeDesFormeControllerListener;
@@ -18,15 +20,48 @@ import drawing.shape.IDrawable;
  */
 public class JCanvas extends JPanel {
 
+    public class Raffraichissement extends Thread {
+        private final JCanvas canvas;
+
+        private Raffraichissement(JCanvas aThis) {
+            canvas = aThis;
+            start();
+        }
+
+        @Override
+        public void run() {
+
+            while (true) {
+                try {
+                    sleep(10);
+                    canvas.repaint();
+
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(JCanvas.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
     private static final long serialVersionUID = 4949577436530106152L;
     /**liste d'élément à dessiner*/
     private List<IDrawable> drawables = new LinkedList<IDrawable>();
+    Raffraichissement refrech = new Raffraichissement(this);
+
+    public JCanvas() {
+        super();
+    }
+
+    public JCanvas(List<IDrawable> _drawables) {
+        drawables = new LinkedList<IDrawable>(_drawables);
+    }
+
+    public List<IDrawable> getDrawables() {
+        return drawables;
+    }
 
     /** ajouter un élémnt a dessiner */
     public void addDrawable(IDrawable d) {
         drawables.add(d);
-        //TODO: éclairssir le mystére
-        //repaint();
     }
 
     /**
@@ -36,8 +71,6 @@ public class JCanvas extends JPanel {
      */
     public void removeDrawable(IDrawable d) {
         drawables.remove(d);
-        //TODO: éclairssir le mystére
-        //repaint();
     }
 
     @Override
