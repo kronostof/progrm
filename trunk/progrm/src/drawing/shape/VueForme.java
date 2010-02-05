@@ -23,24 +23,7 @@ public class VueForme extends FormDrawable implements FormeListener {
     public VueForme(Shape shape) {
         super(shape.color, shape.getPoint(), new Dimension(40, 40));
         arrayListeOfAllVueForme.add(this);
-        switch (shape.getForme()) {
-            case CIRCLE:
-                this.gShape = new graphicsShapeCIRCLE();
-                break;
-            case CURSOR:
-                this.gShape = new graphicsShapeCURSOR();
-                break;
-            case SQUARE:
-                this.gShape = new graphicsShapeSQUARE();
-                break;
-            case TRIANGLE:
-                this.gShape = new graphicsShapeTRIANGLE();
-                break;
-
-            default:
-                System.out.println("VueForme:public VueForme(Shape forme,int type) pas d'objet graphiqueShape initialis�e !");
-                break;
-        }
+        this.gShape = GraphicsShape_Factory.getGraphicsShape(shape.getForme());
         Vue.addDrawable(this);
     }
 
@@ -64,27 +47,11 @@ public class VueForme extends FormDrawable implements FormeListener {
         this.color = ((Shape) FL).getColor();
         set_Forme(((Shape) FL).getForme());
         // on fait un repaint de tt la vue et c est moche ! ! !
-        Vue.repaint();
+        //Vue.repaint();
     }
 
     public void set_Forme(ShapeForme forme) {
-        switch (forme) {
-            case CIRCLE:
-                this.gShape = new graphicsShapeCIRCLE();
-                break;
-            case CURSOR:
-                this.gShape = new graphicsShapeCURSOR();
-                break;
-            case SQUARE:
-                this.gShape = new graphicsShapeSQUARE();
-                break;
-            case TRIANGLE:
-                this.gShape = new graphicsShapeTRIANGLE();
-                break;
-            default:
-                System.out.println("VueForme:public VueForme(Shape forme,int type) pas d'objet graphiqueShape initialis�e !");
-                break;
-        }
+        this.gShape = GraphicsShape_Factory.getGraphicsShape(forme);
     }
 
     static public void set(JCanvas nVue) {

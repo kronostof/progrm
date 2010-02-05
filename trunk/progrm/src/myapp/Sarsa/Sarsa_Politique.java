@@ -1,10 +1,12 @@
 package myapp.Sarsa;
 
+import drawing.shape.VueForme.ShapeForme;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Map;
 import java.util.Observable;
 import java.util.concurrent.ArrayBlockingQueue;
+import myapp.Sarsa.Sarsa_State.ShapeColor;
 import myapp.factory.Sarsa_ShapeFactory;
 
 
@@ -29,7 +31,9 @@ public class Sarsa_Politique extends Observable {
      * Constructeur
      */
     public Sarsa_Politique() {
-
+        if (Sarsa_StateFactory.goodToGo != 1) {
+            System.err.println("LA FACTORY N EST PAS COMPLETEMENT INITIALISEE");
+        }
         HashQualityOfStates = new Hashtable(Sarsa_StateFactory.getListeDesEtat().size());                                  //  On crée la hashTable qui contiendra les qualité
         for (Sarsa_State state : Sarsa_StateFactory.getListeDesEtat()) {
             //HashQualityOfStates.put(state, new Sarsa_Quality(0.5));
@@ -114,6 +118,9 @@ public class Sarsa_Politique extends Observable {
      */
     public Sarsa_State getNextState(Sarsa_Shape shape) {
         ArrayList<Sarsa_State> _liste = getArray_of_NextState(shape);
+        if (_liste.size() <1) {
+            System.err.println("La liste des état suivant possible est de taille nulle ! \t\t" + etatCourant);
+        }
         setEtatCourant(_liste.get((int) Math.rint(Math.random() * (_liste.size() - 1))));
         return getEtatCourant();
     }
@@ -227,8 +234,8 @@ public class Sarsa_Politique extends Observable {
      * @param state
      */
     void modifieQuality(Sarsa_State state) {
-        if (Sarsa_State.ShapeColor.JAUNE == state.getShapeColor()
-                && Sarsa_State.State_ShapeForme.ROND == state.getShapeType()
+        if (ShapeColor.YELLOW == state.getShapeColor()
+                && ShapeForme.CIRCLE == state.getShapeType()
                 && state.shapeDist == Sarsa_State.ShapeDist.NEUTRE) {
             _x = 0.001;
             for (Sarsa_State sarsa_State : liste_état_récents) {

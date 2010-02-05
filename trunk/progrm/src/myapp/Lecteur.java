@@ -50,8 +50,6 @@ public class Lecteur extends Thread {
      * @param flux_a_unifier
      */
     public static void accroche(FluxPosition flux_a_unifier) {
-        //TODO: verbose System.out.println("Lecteur:accroche");
-
         flux_a_unifier.data = fluxdata.data;
     }
 

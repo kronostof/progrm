@@ -104,13 +104,11 @@ public class UserInterface extends JFrame implements ActionListener {
 //        try {
 //            send = new Send("ET_CAL" + "\n" + "\r", socket);
 //        } catch (IOException e1) {
-//            // TODO Auto-generated catch block
 //            e1.printStackTrace();
 //        }
 //        try {
 //            send.sending();
 //        } catch (IOException e1) {
-//            // TODO Auto-generated catch block
 //            e1.printStackTrace();
 //        }
 //        m = new Calibration(socket);

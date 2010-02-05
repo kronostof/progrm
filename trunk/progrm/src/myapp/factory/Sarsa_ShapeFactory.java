@@ -20,6 +20,7 @@ public class Sarsa_ShapeFactory extends ShapeFactory {
     //SarsaState Factory nécessaire pour créer des newShape
     static public Sarsa_StateFactory stateFactory = null;
     static ArrayList<Sarsa_Shape> liste_de_shape = new ArrayList<Sarsa_Shape>();
+    private static int nbr_Shape = 0;
 
     public Sarsa_ShapeFactory() {
         stateFactory = new Sarsa_StateFactory();
@@ -37,7 +38,7 @@ public class Sarsa_ShapeFactory extends ShapeFactory {
      */
     public static Sarsa_Shape createShape(ShapeType type, ShapeForme forme) {
 
-        Sarsa_Shape nwShape = new Sarsa_Shape("Shape " + System.currentTimeMillis());
+        Sarsa_Shape nwShape = new Sarsa_Shape("Shape " + nbr_Shape++);
 
         nwShape.setType(type);
         nwShape.setForme(forme);
@@ -83,7 +84,7 @@ public class Sarsa_ShapeFactory extends ShapeFactory {
      */
      public static Sarsa_Shape createShape(ShapeType type) {
 
-        Sarsa_Shape nwShape = new Sarsa_Shape("Shape " + System.currentTimeMillis());
+        Sarsa_Shape nwShape = new Sarsa_Shape("Shape " + nbr_Shape++);
 
         nwShape.setType(type);
 
@@ -113,6 +114,7 @@ public class Sarsa_ShapeFactory extends ShapeFactory {
         }
         nwShape.setState(stateFactory.get_Sarsa_State_aleatoire());
         VueForme nwVueForme = new VueForme(nwShape);
+        nwShape.setState();
         nwShape.addFormeListener(nwVueForme);
         nwShape.poolModule = nwModuleManager;
         liste_de_shape.add(nwShape);
