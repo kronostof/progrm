@@ -78,11 +78,11 @@ public class Sarsa_Shape extends Shape implements IRepresanteble_pour_stat {
 //                setState(politique.getNewState(this));
 
                 // ballance entre UN état suivant et LE meilleur etat suivant
-                if (Math.random() > alpha) {
-                    setState(politique.getNextState(this));
-                } else {
-                    setState(politique.getNextBetterState(this));
-                }
+//                if (Math.random() > alpha) {
+//                    setState(politique.getNextState(this));
+//                } else {
+//                    setState(politique.getNextBetterState(this));
+//                }
 
                 politique.modifieQuality(politique.getEtatCourant());
             } catch (InterruptedException ex) {

@@ -10,7 +10,7 @@ public class GenerationState {
         Sarsa_StateFactory sta = new Sarsa_StateFactory();
 
         System.out.println(Sarsa_StateFactory.Ensemble_Des_Etats.size());
-        System.out.println(Sarsa_StateFactory.Ensemble_Des_Ensemble_D_Actions.size());
+        System.out.println(Sarsa_StateFactory.Ensemble_Des_Actions.size());
 
         sta.affichage_listeDesEtat();
         sta.affichage_listeDesAction();

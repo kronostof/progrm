@@ -14,9 +14,9 @@ public class ModuleManagerType1 extends ModuleManager{
 	public ModuleManagerType1(Shape shape,int type) {
 		super(shape);
 		//
-                chainnage(new moduleFixation("shape",1));
+                chainnage(new moduleFixation("shape",shape,1));
                 chainnage(new modulePosition(shape,1));
-                chainnage(new moduleChangerCouleur(shape,type));
+                //chainnage(new moduleChangerCouleur(shape,type));
 	}
 
 }

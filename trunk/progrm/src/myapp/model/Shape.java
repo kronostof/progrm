@@ -44,6 +44,11 @@ public class Shape extends Abstract_Shape{
         listeners.add(FormeListener.class, listener);
     }
 
+        public void removeFormeListener(FormeListener listener) {
+        listeners.remove(FormeListener.class, listener);
+    }
+
+
     public FormeListener[] getFormeListeners() {
         return listeners.getListeners(FormeListener.class);
     }

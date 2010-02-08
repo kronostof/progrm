@@ -22,8 +22,8 @@ class GraphicsShape_Factory {
             case CIRCLE:
                 return new graphicsShapeCIRCLE();
 
-            case CURSOR:
-                return new graphicsShapeCURSOR();
+//            case CURSOR:
+//                return new graphicsShapeCURSOR();
 
             case SQUARE:
                 return new graphicsShapeSQUARE();

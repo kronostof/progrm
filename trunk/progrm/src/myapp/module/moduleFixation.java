@@ -9,6 +9,8 @@ import myapp.flux.FluxFixation;
 import myapp.flux.FluxPosition;
 import com.espertech.esper.client.UpdateListener;
 import com.espertech.esper.event.EventBean;
+import myapp.model.Shape;
+
 
 public class moduleFixation extends module<FluxPosition, FluxFixation> implements UpdateListener {
 
@@ -29,12 +31,14 @@ public class moduleFixation extends module<FluxPosition, FluxFixation> implement
         // System.out.println("\t"+nom+"\t module Fixation FXE:=> "  + this.fluxEntrant.data.toString());
         // System.out.println("\t"+nom+"\t module Fixation FXS:=> "  + this.fluxSortant.data.toString());
         // System.out.println(" ICI " + this.getFluxEntrant().getPosX()+ " | " +this.getFluxEntrant().getPosY());
+        shape.firePositionChangee();
     }
 
     //public void init(EPServiceProvider epService){    	this.epService=Lecteur.getInstance();    }
-    public moduleFixation(String nom, int i) {
+    public moduleFixation(String nom,Shape shape2, int i) {
         super();
         this.nom = nom;
+        this.shape = shape2;
         pos = new Position();
         lastpos = new Position();
         setFluxEntrant(new FluxPosition());
