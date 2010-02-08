@@ -33,23 +33,29 @@ import myapp.factory.Sarsa_ShapeFactory;
 public class FenetreDeStatistique implements Observer, ActionListener {
 
     int _i = 0;
-    String texte = null, texte2 = null;
     ArrayList<JProgressBar> arrayOf_progressBar = new ArrayList<JProgressBar>(Sarsa_StateFactory.Ensemble_Des_Etats.size());
     /**
      * liste d'élement dessinable.
      */
     private Collection<IRepresanteble_pour_stat> list_irepresanteble_pour_stat = new ArrayList<IRepresanteble_pour_stat>();
+    Ornement ornement;
     private Sarsa_Politique politiqueObservé = null;
+    private IRepresanteble_pour_stat represanteble_pour_statObservé;
 
     public FenetreDeStatistique() {
         //<XXX
         for (Sarsa_Shape shape : Sarsa_ShapeFactory.getListe_de_shape()) {
             if (!list_irepresanteble_pour_stat.contains(shape)) {
                 list_irepresanteble_pour_stat.add(shape);
+                System.out.println(shape.getNom());
             }
         }
+        represanteble_pour_statObservé = Sarsa_ShapeFactory.getListe_de_shape().get(0);
+        politiqueObservé = represanteble_pour_statObservé.getpolicy();
+        politiqueObservé.addObserver(this);
+
         System.out.println(list_irepresanteble_pour_stat.size());
-        for (Sarsa_State _state : Sarsa_StateFactory.Ensemble_Des_Etats) {
+        for (_i = 0 ; _i< Sarsa_StateFactory.Ensemble_Des_Etats.size();_i++) {
             arrayOf_progressBar.add(new JProgressBar(0, 100));
         }
         //XXX<
@@ -68,7 +74,7 @@ public class FenetreDeStatistique implements Observer, ActionListener {
 
         // LES TROIS PANEL QUI SERONT DANS LES TABED PANE.
         JPanel statLabelCenter = new JPanel(new BorderLayout());
-        JPanel mdfLabelCenter = new JCanvas(MondeDesFormeController.getVue().getDrawables());
+        JCanvas mdfLabelCenter = new JCanvas(MondeDesFormeController.getVue().getDrawables());
         JPanel paramLabelCenter = new JPanel(new FlowLayout());
 
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
@@ -96,26 +102,26 @@ public class FenetreDeStatistique implements Observer, ActionListener {
 
         JMenu menu = new JMenu("A Menu");
         menu.setMnemonic(KeyEvent.VK_A);
-        menu.getAccessibleContext().setAccessibleDescription("The only menu in this program that has menu items");
+        menu.getAccessibleContext().setAccessibleDescription("Menu principal");
         menuBar.add(menu);
 
-        JMenuItem menuItem = new JMenuItem("(Re)Démarrer l'experience", KeyEvent.VK_T);
+        JMenuItem menuItem = new JMenuItem("(Re)Démarrer l'experience", KeyEvent.VK_R);
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F2, ActionEvent.ALT_MASK));
         menuItem.getAccessibleContext().setAccessibleDescription("This doesn't really do anything");
         menu.add(menuItem);
 
-        menuItem = new JMenuItem("Effectuer une calibration", KeyEvent.VK_T);
+        menuItem = new JMenuItem("Lancer la Calibration", KeyEvent.VK_C);
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F3, ActionEvent.ALT_MASK));
         menuItem.getAccessibleContext().setAccessibleDescription("This doesn't really do anything");
         menu.add(menuItem);
 
-        menuItem = new JMenuItem("Enregistrer les données générées", KeyEvent.VK_T);
+        menuItem = new JMenuItem("Enregistrer les données générées", KeyEvent.VK_E);
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
         menuItem.getAccessibleContext().setAccessibleDescription("This doesn't really do anything");
         menu.add(menuItem);
 
 
-        menuItem = new JMenuItem("Quiter", KeyEvent.VK_T);
+        menuItem = new JMenuItem("Quiter", KeyEvent.VK_Q);
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4, ActionEvent.ALT_MASK));
         menuItem.getAccessibleContext().setAccessibleDescription("This doesn't really do anything");
         menu.add(menuItem);
@@ -140,6 +146,12 @@ public class FenetreDeStatistique implements Observer, ActionListener {
             panelDeBouton.add(_conteneur);
         }
         panel.add(panelDeBouton);
+        // DES TRUC A NOTRE PETIT JCANEVAS
+        ornement = new Ornement();
+        ((Sarsa_Shape) represanteble_pour_statObservé).addFormeListener(ornement);
+        mdfLabelCenter.addDrawable(ornement);
+
+
 
 
         // ACCES AU PARAMETRE DE L'ALGORITHME.
@@ -164,8 +176,6 @@ public class FenetreDeStatistique implements Observer, ActionListener {
 
 
         // LISTE DE TOUS LES ETATS
-
-
         panel = new JPanel(new GridLayout(Sarsa_StateFactory.getListeDesEtat().size() / 3, Sarsa_StateFactory.getListeDesEtat().size() % 10));
         JScrollPane scrollpan = new JScrollPane(panel);
         _i = 0;
@@ -205,28 +215,20 @@ public class FenetreDeStatistique implements Observer, ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         String c = e.getActionCommand();
-        Sarsa_Politique temp = null;
         for (IRepresanteble_pour_stat tmpEstDessinable : list_irepresanteble_pour_stat) {
-            if (tmpEstDessinable.getNom().compareTo(c) == 0) {
-                if (politiqueObservé != null) {
-                    politiqueObservé.deleteObserver(this);
-                    politiqueObservé = null;
-                }
-//                observableStat.setObserverFenetreStat(false);
+            if (tmpEstDessinable.getNom().compareTo(c) == 0
+                    && represanteble_pour_statObservé != tmpEstDessinable) {
+                politiqueObservé.deleteObserver(this);
+                politiqueObservé = tmpEstDessinable.getpolicy();
+                politiqueObservé.addObserver(this);
 
-                temp = tmpEstDessinable.getpolicy();
-//                observableStat.setObserverFenetreStat(true);
-                break;
+                ((Sarsa_Shape) represanteble_pour_statObservé).removeFormeListener(ornement);
+                represanteble_pour_statObservé = tmpEstDessinable;
+                ((Sarsa_Shape) represanteble_pour_statObservé).addFormeListener(ornement);
+                //System.out.println(represanteble_pour_statObservé.getNom() + " " + ((Sarsa_Shape) represanteble_pour_statObservé).getType());
             }
         }
-        if (temp != null) {
-            politiqueObservé = temp;
-            politiqueObservé.addObserver(this);
-            this.update(null, c);
-        } else {
-            System.out.println("modifier l'affichage !");
-        }
-        // texteStatLabel.setText("<html>" + c + "</html>");
+        this.update(null, c);
     }
 
     void addButton(JComponent p, String name, String tooltiptext, String imageName) {

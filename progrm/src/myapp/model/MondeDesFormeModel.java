@@ -18,7 +18,7 @@ public class MondeDesFormeModel {
      * @param Controleur
      */
     public void build(MondeDesFormeController Controleur) {
-        ShapeFactory.createShape(ShapeFactory.ShapeType.Gaze0, VueForme.ShapeForme.CURSOR);
+     //   ShapeFactory.createShape(ShapeFactory.ShapeType.Gaze0, VueForme.ShapeForme.CURSOR);
         for (int i = 0; i < 2; i++) {
 
             ShapeFactory.createShape(ShapeFactory.ShapeType.Approche1, VueForme.ShapeForme.CIRCLE);

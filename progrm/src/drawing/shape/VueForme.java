@@ -17,7 +17,7 @@ public class VueForme extends FormDrawable implements FormeListener {
 
     public enum ShapeForme {
 
-        CIRCLE, CURSOR, SQUARE, TRIANGLE;
+        CIRCLE,  SQUARE, TRIANGLE,//CURSOR,
     }
 
     public VueForme(Shape shape) {

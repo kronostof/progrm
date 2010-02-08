@@ -8,7 +8,7 @@ public class ModuleManagerType2 extends ModuleManager{
 	
 	public ModuleManagerType2(Shape shape,int type) {
 		super(shape);
-		chainnage(new moduleFixation(shape.getNom(),1));
+		chainnage(new moduleFixation(shape.getNom(),shape,1));
 		chainnage(new moduleChangerCouleur(shape,type));
 	}
 

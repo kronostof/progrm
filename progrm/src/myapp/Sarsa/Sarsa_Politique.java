@@ -2,6 +2,7 @@ package myapp.Sarsa;
 
 import drawing.shape.VueForme.ShapeForme;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
 import java.util.Observable;
@@ -16,6 +17,7 @@ import myapp.factory.Sarsa_ShapeFactory;
 public class Sarsa_Politique extends Observable {
 
     Map<Sarsa_State, Sarsa_Quality> HashQualityOfStates = null;
+    Map<Sarsa_CoupleStateAction, Sarsa_Quality> HashQualityOfCoupleStatesAction = null;
     private Sarsa_State etatCourant = null;
     private int TAILLE_MAX_PILE_ETAT = 5;
     /** liste des dernier état atteint.    */
@@ -34,11 +36,19 @@ public class Sarsa_Politique extends Observable {
         if (Sarsa_StateFactory.goodToGo != 1) {
             System.err.println("LA FACTORY N EST PAS COMPLETEMENT INITIALISEE");
         }
+// INITIALISATION : HashQualityOfStates
         HashQualityOfStates = new Hashtable(Sarsa_StateFactory.getListeDesEtat().size());                                  //  On crée la hashTable qui contiendra les qualité
         for (Sarsa_State state : Sarsa_StateFactory.getListeDesEtat()) {
-            //HashQualityOfStates.put(state, new Sarsa_Quality(0.5));
-            HashQualityOfStates.put(state, new Sarsa_Quality(Math.random()/2));
+            HashQualityOfStates.put(state, new Sarsa_Quality(0.5));
+//toggle            HashQualityOfStates.put(state, new Sarsa_Quality(Math.random()/2));
+
+// INITIALISATION : HashQualityOfCoupleStatesAction
+            HashQualityOfCoupleStatesAction = new Hashtable();
+            for (Sarsa_Action action : Sarsa_StateFactory.CoupleStateActions.get(state)) {
+                HashQualityOfCoupleStatesAction.put(new Sarsa_CoupleStateAction(state, action), new Sarsa_Quality(0.5));
+            }
         }
+        affiche_politique();
     }
 
     // AFFICHAGE
@@ -46,10 +56,17 @@ public class Sarsa_Politique extends Observable {
      * fonction debug affiche les qualité des états dans le terminal
      */
     public void affiche_politique() {
-        System.out.println("Affichage de la table de la politique");
+        System.out.println("Affichage de la table HashQualityOfStates");
         for (Sarsa_State a_State : HashQualityOfStates.keySet()) {
             System.out.println("|" + a_State + " \t| " + HashQualityOfStates.get(a_State) + "|");
         }
+
+        System.out.println("Affichage de la table HashQualityOfCoupleStatesAction");
+        for (Sarsa_CoupleStateAction couple_StateAction : HashQualityOfCoupleStatesAction.keySet()) {
+            System.out.println("|" + couple_StateAction + " \t| " + HashQualityOfStates.get(couple_StateAction) + "|");
+        }
+
+
 
         for (Sarsa_Action a_action : Sarsa_StateFactory.getListeDesActions()) {
             System.out.println("|" + a_action);
@@ -118,7 +135,7 @@ public class Sarsa_Politique extends Observable {
      */
     public Sarsa_State getNextState(Sarsa_Shape shape) {
         ArrayList<Sarsa_State> _liste = getArray_of_NextState(shape);
-        if (_liste.size() <1) {
+        if (_liste.size() < 1) {
             System.err.println("La liste des état suivant possible est de taille nulle ! \t\t" + etatCourant);
         }
         setEtatCourant(_liste.get((int) Math.rint(Math.random() * (_liste.size() - 1))));
@@ -240,10 +257,10 @@ public class Sarsa_Politique extends Observable {
             _x = 0.001;
             for (Sarsa_State sarsa_State : liste_état_récents) {
                 HashQualityOfStates.get(sarsa_State).augmenter(_x);
-             //   System.out.println(sarsa_State + " " + HashQualityOfStates.get(sarsa_State).quality);
+                //   System.out.println(sarsa_State + " " + HashQualityOfStates.get(sarsa_State).quality);
                 _x += 0.001;
             }
-           // System.out.println("_____________________");
+            // System.out.println("_____________________");
             for (Sarsa_State sarsa_State : HashQualityOfStates.keySet()) {
                 HashQualityOfStates.get(sarsa_State).diminuer(0.001);
             }

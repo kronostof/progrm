@@ -24,7 +24,6 @@ public abstract class FormDrawable implements IMovableDrawable {
         this.color = color;
         this.rect = new Rectangle(dim);
         setPosition(pos);
-
     }
 
     public abstract void draw(Graphics g);

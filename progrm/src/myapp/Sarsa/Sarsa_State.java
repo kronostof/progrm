@@ -13,7 +13,7 @@ public class Sarsa_State extends Observable {
     // ShapeColor couleur (bleue, rouge, jaune)
     public enum ShapeColor {
 
-        BLUE, RED, YELLOW , WHITE,  GREEN
+        BLUE, RED, YELLOW,// WHITE, GREEN
     }
     // ShapeDist distance au regard (proche, eloigné , neutre)
 
@@ -34,6 +34,15 @@ public class Sarsa_State extends Observable {
     ShapeForme shapeForme;
     ShapeDist shapeDist;
     ShapeColor shapeColor;
+
+    public Sarsa_State() {
+    }
+
+    public Sarsa_State(ShapeForme shapeForme, ShapeDist shapeDist, ShapeColor shapeColor) {
+        this.shapeForme = shapeForme;
+        this.shapeDist = shapeDist;
+        this.shapeColor = shapeColor;
+    }
 
     public void setShapeColor(ShapeColor shapeColor) {
         this.shapeColor = shapeColor;
@@ -59,8 +68,15 @@ public class Sarsa_State extends Observable {
             case YELLOW:
                 couleurOfShape = Color.YELLOW;
                 break;
+//            case GREEN:
+//                couleurOfShape = Color.GREEN;
+//                break;
+//            case WHITE:
+//                couleurOfShape = Color.WHITE;
+//                break;
             default:
-                couleurOfShape = Color.BLACK;
+                couleurOfShape = Color.YELLOW;
+                System.out.println(shapeColor);
         }
         return couleurOfShape;
     }

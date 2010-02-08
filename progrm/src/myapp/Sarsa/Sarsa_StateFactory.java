@@ -7,6 +7,7 @@ package myapp.Sarsa;
 import drawing.shape.VueForme.ShapeForme;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashMap;
 import myapp.Sarsa.Sarsa_State.*;
 
 /**
@@ -21,21 +22,16 @@ import myapp.Sarsa.Sarsa_State.*;
 public class Sarsa_StateFactory {
 
     static public ArrayList<Sarsa_State> Ensemble_Des_Etats = new ArrayList<Sarsa_State>();
-    static public ArrayList<Sarsa_Action> Ensemble_Des_Ensemble_D_Actions = new ArrayList<Sarsa_Action>();
-    //static public
-    
+    static public ArrayList<Sarsa_Action> Ensemble_Des_Actions = new ArrayList<Sarsa_Action>();
+    //static public ArrayList<ArrayList<Sarsa_Action>> Ensemble_Des_Ensemble_D_Actions_NEW = new ArrayList<ArrayList<Sarsa_Action>>();
+    static public HashMap<Sarsa_State,ArrayList<Sarsa_Action>> CoupleStateActions = new HashMap<Sarsa_State, ArrayList<Sarsa_Action>>();
+
     static double goodToGo = 0;
     private boolean bool_Generer_tout_les_etats = false;
     private boolean bool_Generer_tout_les_action = false;
-    
     ShapeForme shapeForme;
     ShapeDist shapeDist;
     ShapeColor shapeColor;
-    //chk action
-    private Sarsa_State temp;
-    //private Sarsa_Action[] temp_liste_action = null;
-    //private int TAILLE_MAX_LISTE_ACTION = 4;
-    private Sarsa_Action temp_Sarsa_Action;
 
     public Sarsa_StateFactory() {
         Generer_tout_les_etats();
@@ -50,22 +46,15 @@ public class Sarsa_StateFactory {
         if (bool_Generer_tout_les_etats == true) {
             System.err.println("package org.myapp.factory;\npublic class StateFactory \nLa methode public void Generer_tout_les_etats() doit être appelle une unique fois");
         } else {
-            bool_Generer_tout_les_etats = true;
-            int id = 0;
-            Sarsa_State etat_temp;
+
             for (ShapeColor Shape_c : ShapeColor.values()) {
                 for (ShapeForme Shape_t : ShapeForme.values()) {
                     for (ShapeDist Shape_d : ShapeDist.values()) {
-                        etat_temp = new Sarsa_State();
-                        // On affecte les valeur de l'état que l'on va ajouter
-                        etat_temp.setShapeColor(Shape_c);
-                        etat_temp.setShapeDist(Shape_d);
-                        etat_temp.setShapeType(Shape_t);
-
-                        Ensemble_Des_Etats.add(etat_temp);
+                        Ensemble_Des_Etats.add(new Sarsa_State(Shape_t, Shape_d, Shape_c));
                     }
                 }
             }
+            bool_Generer_tout_les_etats = true;
         }
     }
 
@@ -74,113 +63,37 @@ public class Sarsa_StateFactory {
      */
     public void Generer_toutes_les_action() {
         char[] test = new char[1];
+        ArrayList<Sarsa_Action> _liste_d_action_par_etat;
+        Sarsa_State temp = null;
         if (bool_Generer_tout_les_action == true) {
             System.err.println("package org.myapp.factory;\npublic class StateFactory \nLa methode public void Generer_toutes_les_action() doit être appelle une unique fois");
         } else {
             bool_Generer_tout_les_action = true;
             Field[] fields = Sarsa_State.class.getDeclaredFields();
 
-            for (Sarsa_State sarsa_State : Ensemble_Des_Etats) {// Pour chaque état
-                //temp_liste_action = new Sarsa_Action[TAILLE_MAX_LISTE_ACTION];
-                for (Field field : fields) {// pour chaque champ de la forme
-                    //System.out.println("\tTraitement du champ " + field.getType().getSimpleName() + " | " + field.getName());
+            for (Sarsa_State sarsa_State : Ensemble_Des_Etats) {
+                _liste_d_action_par_etat = new ArrayList<Sarsa_Action>();
+                for (Field field : fields) {
                     for (Field field1 : field.getType().getDeclaredFields()) {
                         field1.getName().getChars(0, 1, test, 0);
-                        if (test[0] != '$') {// On vire le champs dont la valeur commence par un $
-                            //System.out.println("\t\t" + field1.getType().getSimpleName() + " | " + field1.getName());
+                        if (test[0] != '$') {
                             // on construit les action posible pour chaque états.
-                            temp = new Sarsa_State();
-
                             if (field.getType().getSimpleName().compareTo("ShapeForme") == 0) {
-                                if (sarsa_State.getShapeType().toString().compareTo(field1.getName()) != 0) { // On vire le cas ou le champs est identique a celui de la forme
-                                    temp.setShapeColor(sarsa_State.getShapeColor());
-                                    temp.setShapeDist(sarsa_State.getShapeDist());
-                                    temp.setShapeType(sarsa_State.shapeForme.valueOf(field1.getName()));
-                                    // on choppe l'état dont les champ corespondent.
-                                    for (Sarsa_State rch_state : Ensemble_Des_Etats) {
-                                        if (temp.getShapeColor() == rch_state.getShapeColor()
-                                                && temp.getShapeDist() == rch_state.getShapeDist()
-                                                && temp.getShapeType() == rch_state.getShapeType()) {
-                                            temp = rch_state;
-                                            break;
-                                        }
-                                    }
-                                    if (sarsa_State != temp) {
-                                        if (temp == null) {
-                                            System.err.println("    public void Generer_toutes_les_action() => temp est null :");
-                                        } else {
-                                            temp_Sarsa_Action = new Sarsa_Action();
-                                            temp_Sarsa_Action.setChamps(field1);
-                                            temp_Sarsa_Action.setState_1(sarsa_State);
-                                            temp_Sarsa_Action.setState_2(temp);
-
-                                            Ensemble_Des_Ensemble_D_Actions.add(temp_Sarsa_Action);
-                                        }
-                                    }
-                                }
+                                temp = trouverEtat(sarsa_State.shapeForme.valueOf(field1.getName()), sarsa_State.getShapeDist(), sarsa_State.getShapeColor());
+                            } else if (field.getType().getSimpleName().compareTo("ShapeDist") == 0) {
+                                temp = trouverEtat(sarsa_State.getShapeType(), sarsa_State.shapeDist.valueOf(field1.getName()), sarsa_State.getShapeColor());
+                            } else if (field.getType().getSimpleName().compareTo("ShapeColor") == 0) {
+                                temp = trouverEtat(sarsa_State.getShapeType(), sarsa_State.getShapeDist(), sarsa_State.shapeColor.valueOf(field1.getName()));
                             }
-                            if (field.getType().getSimpleName().compareTo("ShapeDist") == 0) {
-                                if (sarsa_State.getShapeType().toString().compareTo(field1.getName()) != 0) { // On vire le cas ou le champs est identique a celui de la forme
-                                    temp.setShapeColor(sarsa_State.getShapeColor());
-                                    temp.setShapeType(sarsa_State.getShapeType());
-                                    temp.setShapeDist(sarsa_State.shapeDist.valueOf(field1.getName()));
-                                    // on choppe l'état dont les champ corespondent.
-                                    for (Sarsa_State rch_state : Ensemble_Des_Etats) {
-                                        if (temp.getShapeColor() == rch_state.getShapeColor()
-                                                && temp.getShapeDist() == rch_state.getShapeDist()
-                                                && temp.getShapeType() == rch_state.getShapeType()) {
-                                            temp = rch_state;
-                                            break;
-                                        }
-                                    }
-                                    if (sarsa_State != temp) {
-                                        if (temp == null) {
-                                            System.err.println("    public void Generer_toutes_les_action() => temp est null :");
-                                        } else {
-                                            temp_Sarsa_Action = new Sarsa_Action();
-                                            temp_Sarsa_Action.setChamps(field1);
-                                            temp_Sarsa_Action.setState_1(sarsa_State);
-                                            temp_Sarsa_Action.setState_2(temp);
-
-                                            Ensemble_Des_Ensemble_D_Actions.add(temp_Sarsa_Action);
-                                        }
-                                    }
-                                }
+                            if (sarsa_State != temp && temp != null) {
+                                Ensemble_Des_Actions.add(new Sarsa_Action(field1, sarsa_State, temp));
+                                _liste_d_action_par_etat.add(Ensemble_Des_Actions.get(Ensemble_Des_Actions.size() - 1));
                             }
-                            if (field.getType().getSimpleName().compareTo("ShapeColor") == 0) {
-                                if (sarsa_State.getShapeType().toString().compareTo(field1.getName()) != 0) { // On vire le cas ou le champs est identique a celui de la forme
-                                    temp.setShapeType(sarsa_State.getShapeType());
-                                    temp.setShapeDist(sarsa_State.getShapeDist());
-                                    temp.setShapeColor(sarsa_State.shapeColor.valueOf(field1.getName()));
-                                    // on choppe l'état dont les champ corespondent.
-                                    for (Sarsa_State rch_state : Ensemble_Des_Etats) {
-                                        if (temp.getShapeColor() == rch_state.getShapeColor()
-                                                && temp.getShapeDist() == rch_state.getShapeDist()
-                                                && temp.getShapeType() == rch_state.getShapeType()) {
-                                            temp = rch_state;
-                                            break;
-                                        }
-                                    }
-
-                                    if (sarsa_State != temp) {
-                                        if (temp == null) {
-                                            System.err.println("    public void Generer_toutes_les_action() => temp est null :");
-                                        } else {
-                                            temp_Sarsa_Action = new Sarsa_Action();
-                                            temp_Sarsa_Action.setChamps(field1);
-                                            temp_Sarsa_Action.setState_1(sarsa_State);
-                                            temp_Sarsa_Action.setState_2(temp);
-
-                                            Ensemble_Des_Ensemble_D_Actions.add(temp_Sarsa_Action);
-                                        }
-                                    }
-                                }
-                            }
-
-
                         }
                     }
                 }
+               
+                CoupleStateActions.put(sarsa_State, _liste_d_action_par_etat);
             }
         }
     }
@@ -203,8 +116,8 @@ public class Sarsa_StateFactory {
         if (bool_Generer_tout_les_action == false) {
             System.err.println("package org.myapp.factory;\npublic class StateFactory \nLa methode public void actions() n'a pas encore été appellé");
         } else {
-            System.out.println("il y a " + Ensemble_Des_Ensemble_D_Actions.size() + " action possible");
-            for (Sarsa_Action sarsa_Action : Ensemble_Des_Ensemble_D_Actions) {
+            System.out.println("il y a " + Ensemble_Des_Actions.size() + " action possible");
+            for (Sarsa_Action sarsa_Action : Ensemble_Des_Actions) {
                 System.out.println(sarsa_Action);
             }
         }
@@ -230,7 +143,7 @@ public class Sarsa_StateFactory {
      * @return
      */
     public static ArrayList<Sarsa_Action> getListeDesActions() {
-        return Ensemble_Des_Ensemble_D_Actions;
+        return Ensemble_Des_Actions;
     }
 
     /**
@@ -243,5 +156,17 @@ public class Sarsa_StateFactory {
 
     public static double isGoodToGo() {
         return goodToGo;
+    }
+
+    private Sarsa_State trouverEtat(ShapeForme shapeForme, ShapeDist shapeDist, ShapeColor shapeColor) {
+        for (Sarsa_State rch_state : Ensemble_Des_Etats) {
+            if (shapeColor == rch_state.getShapeColor()
+                    && shapeDist == rch_state.getShapeDist()
+                    && shapeForme == rch_state.getShapeType()) {
+                return rch_state;
+            }
+        }
+        System.err.println("ON NE DREVRAI JAMAIS PASSER PAR LA !");
+        return null;
     }
 }

@@ -19,6 +19,12 @@ public class Sarsa_Action {
     Sarsa_State state_1 = null;
     Sarsa_State state_2 = null;
 
+    Sarsa_Action(Field field1, Sarsa_State sarsa_State, Sarsa_State temp) {
+        champs = field1;
+        state_1 = sarsa_State;
+        state_2 = temp;
+    }
+
     public Field getChamps() {
         return champs;
     }
@@ -45,6 +51,6 @@ public class Sarsa_Action {
 
     @Override
     public String toString() {
-        return " De " + state_1 + " a " + state_2 + "";
+        return " De " + state_1 + " a <" + state_2 + ">";
     }
 }
