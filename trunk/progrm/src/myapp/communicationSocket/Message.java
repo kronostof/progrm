@@ -1,6 +1,5 @@
 package myapp.communicationSocket;
 
-
 /**
  *  Cette classe conserve le  dernier message lu.<p>
  * Attention, une lecture du message par la methode read detruit celui-ci.<br>
@@ -24,11 +23,15 @@ public class Message {
      */
     public enum Type_de_message {
 
+        ET_CAL,
         ET_CHG,
         ET_CSZ,
         ET_FRM,
         ET_PNT,
-        ET_SPL;
+        ET_SPL,
+        ET_STR,
+        ET_FIN,
+        ET_INF, ET_ACC; // fin de la calibration.
     }
 
     public Message() {

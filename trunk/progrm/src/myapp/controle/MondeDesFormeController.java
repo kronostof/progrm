@@ -3,17 +3,21 @@ package myapp.controle;
 import java.awt.Color;
 import drawing.GUIHelper;
 import drawing.JCanvas;
-//import drawing.shape.VueForme;
 
 import drawing.shape.FormeListener;
-//import org.myapp.model.Shape;
+import drawing.shape.VueForme;
+import myapp.communicationSocket.CommunicationSMI;
+import myapp.event.Position;
+
 import myapp.model.MondeDesFormeModel;
-//import org.myapp.module.moduleFixation;
 
 public class MondeDesFormeController implements MondeDesFormeControllerListener {
 
-    public MondeDesFormeModel model;
-    static private JCanvas Vue;
+    static public MondeDesFormeModel model;
+    static private JCanvas Vue = null;
+
+    private static boolean ENCALIBRATION = false;
+
 
     public MondeDesFormeController(MondeDesFormeModel model, JCanvas Vue) {
         //super(Vue);
@@ -57,4 +61,29 @@ public class MondeDesFormeController implements MondeDesFormeControllerListener 
     nf.addFormeListener(c);
     }
      */
+
+    public static void DemarrerCalibration(int n) {
+
+        if (!ENCALIBRATION) {
+            ENCALIBRATION = true;
+            Vue.notifieCalibrationEnCour();
+            model.notifieCalibrationEnCour();
+            CommunicationSMI.startCalibration();
+        } else {
+            System.err.println("DEJA EN CALIBRATION");
+        }
+
+    }
+
+
+
+    public static void stopCalibration() {
+        if (ENCALIBRATION) {
+            ENCALIBRATION =false;
+            Vue.notifieCalibrationEnCour();
+            model.notifieCalibrationEnCour();
+        }
+    }
+
+
 }

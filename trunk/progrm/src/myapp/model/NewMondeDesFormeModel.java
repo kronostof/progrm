@@ -1,6 +1,8 @@
 package myapp.model;
 
 import drawing.shape.VueForme;
+import java.util.ArrayList;
+import myapp.Sarsa.Sarsa_Shape;
 import myapp.controle.MondeDesFormeController;
 import myapp.factory.Sarsa_ShapeFactory;
 
@@ -9,8 +11,9 @@ import myapp.factory.Sarsa_ShapeFactory;
  */
 public class NewMondeDesFormeModel extends MondeDesFormeModel {
 
+
     public NewMondeDesFormeModel() {
-        new Sarsa_ShapeFactory();
+        new Sarsa_ShapeFactory(listeDeShape);
     }
 
     /**
@@ -19,8 +22,9 @@ public class NewMondeDesFormeModel extends MondeDesFormeModel {
      */
     @Override
     public void build(MondeDesFormeController Controleur) {
-        //     Sarsa_ShapeFactory.createShape(Sarsa_ShapeFactory.ShapeType.Gaze0, VueForme.ShapeForme.CURSOR);//.start();
-        for (int i = 0; i < 2; i++) {
+        
+             Sarsa_ShapeFactory.createShape(Sarsa_ShapeFactory.ShapeType.Gaze0, VueForme.ShapeForme.CIRCLE);//.start();
+        for (int i = 1; i < 2; i++) {
             Sarsa_ShapeFactory.createShape(Sarsa_ShapeFactory.ShapeType.Approche1);//.start();
             Sarsa_ShapeFactory.createShape(Sarsa_ShapeFactory.ShapeType.Approche0);//.start();
             Sarsa_ShapeFactory.createShape(Sarsa_ShapeFactory.ShapeType.Type1);//.start();

@@ -1,6 +1,8 @@
 package myapp.module;
 
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import myapp.event.Information;
 import myapp.event.Position;
@@ -10,7 +12,6 @@ import myapp.flux.FluxPosition;
 import com.espertech.esper.client.UpdateListener;
 import com.espertech.esper.event.EventBean;
 import myapp.model.Shape;
-
 
 public class moduleFixation extends module<FluxPosition, FluxFixation> implements UpdateListener {
 
@@ -35,7 +36,7 @@ public class moduleFixation extends module<FluxPosition, FluxFixation> implement
     }
 
     //public void init(EPServiceProvider epService){    	this.epService=Lecteur.getInstance();    }
-    public moduleFixation(String nom,Shape shape2, int i) {
+    public moduleFixation(String nom, Shape shape2, int i) {
         super();
         this.nom = nom;
         this.shape = shape2;
@@ -95,6 +96,7 @@ public class moduleFixation extends module<FluxPosition, FluxFixation> implement
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            sleepNow();
         }
     }
 

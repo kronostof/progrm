@@ -23,9 +23,9 @@ public class Shape extends Abstract_Shape{
      * Identidiant de la forme associé a l'instance
      */
     //private int forme;
-    private Position position;	// la position dans le monde.
-    private ShapeType shapeType;
-    protected ShapeForme shapeForme;
+//    private Position position;	// la position dans le monde.
+//    private ShapeType shapeType;
+//    protected ShapeForme shapeForme;
 
     public Shape(String nom) {
         this.nom = nom;
@@ -39,6 +39,12 @@ public class Shape extends Abstract_Shape{
     public Position getPosition() {
         return position;
     }
+
+    public void setPosition(Position _p) {
+        position.set(_p);
+        firePositionChangee();
+    }
+
 
     public void addFormeListener(FormeListener listener) {
         listeners.add(FormeListener.class, listener);

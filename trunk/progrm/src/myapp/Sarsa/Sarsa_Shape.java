@@ -13,7 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import myapp.model.Shape;
 import drawing.shape.VueForme.ShapeForme;
-
+import myapp.communicationSocket.CommunicationSMI;
 
 /* Une shape dans le monde des formes est l'agent.
  * C'est lui qui doit apprendre des interactions avec le regard de l'utilsateur
@@ -23,6 +23,7 @@ import drawing.shape.VueForme.ShapeForme;
  *
  */
 public class Sarsa_Shape extends Shape implements IRepresanteble_pour_stat {
+
 
     private Sarsa_State state;
     private Sarsa_Politique politique = new Sarsa_Politique();
@@ -72,24 +73,37 @@ public class Sarsa_Shape extends Shape implements IRepresanteble_pour_stat {
 
         politique.setEtatCourant(state);
 
-        while (nbr_iteration++ < Max_iteration) {
-            try {
-                sleep(40);
+        while (true) {
+            while (!ASLEEP) {
+
+
+                try {
+                    sleep(40);
 //                setState(politique.getNewState(this));
 
-                // ballance entre UN état suivant et LE meilleur etat suivant
+                    // ballance entre UN état suivant et LE meilleur etat suivant
 //                if (Math.random() > alpha) {
 //                    setState(politique.getNextState(this));
 //                } else {
 //                    setState(politique.getNextBetterState(this));
 //                }
 
-                politique.modifieQuality(politique.getEtatCourant());
-            } catch (InterruptedException ex) {
-                System.err.println("ERREUR dans Sarsa_Shape => " + ex);
+                    politique.modifieQuality(politique.getEtatCourant());
+                } catch (InterruptedException ex) {
+                    System.err.println("ERREUR dans Sarsa_Shape => " + ex);
+                }
             }
+            while (ASLEEP) {
+                try {
+                    sleep(100);
+                } catch (InterruptedException ex) {
+                    System.err.println("ERREUR dans Sarsa_Shape => " + ex);
+                }
+            }
+
         }
     }
+
 
     /**
      * A chaque modification de l'état de la shape, cette methode doit etre appellé.

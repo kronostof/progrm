@@ -12,7 +12,7 @@ public class testSocket {
 
     public static void main(String[] args) {
 
-        CommunicationSMI smi = new CommunicationSMI();
+        //CommunicationSMI smi = new CommunicationSMI();
 
         
         while (true) {

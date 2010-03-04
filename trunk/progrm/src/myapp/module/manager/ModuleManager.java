@@ -1,6 +1,8 @@
 package myapp.module.manager;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import myapp.event.Information;
 import myapp.flux.Flux;
 import myapp.model.Shape;
@@ -38,4 +40,12 @@ public class ModuleManager {
 		FLXS = m.getFluxSortant();
 		this.arrayListModule.add(m);
 	}
+
+    public synchronized void pause() {
+        for (module<?, ?> _module : arrayListModule) {
+                 _module.pause();
+
+        }
+        
+    }
 }

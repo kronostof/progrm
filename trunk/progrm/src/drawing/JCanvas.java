@@ -21,6 +21,7 @@ import drawing.shape.IDrawable;
 public class JCanvas extends JPanel {
 
     public class Raffraichissement extends Thread {
+
         private final JCanvas canvas;
 
         private Raffraichissement(JCanvas aThis) {
@@ -45,6 +46,7 @@ public class JCanvas extends JPanel {
     private static final long serialVersionUID = 4949577436530106152L;
     /**liste d'élément à dessiner*/
     private List<IDrawable> drawables = new LinkedList<IDrawable>();
+    private List<IDrawable> drawables2 = new LinkedList<IDrawable>();
     Raffraichissement refrech = new Raffraichissement(this);
 
     public JCanvas() {
@@ -132,6 +134,18 @@ public class JCanvas extends JPanel {
             }
         }
         return true;
+    }
+
+    public void echangeListeDrawable() {
+        List<IDrawable> drawables_temp;
+        drawables_temp = drawables;
+        drawables = drawables2;
+        drawables2 = drawables_temp;
+    }
+
+    public void notifieCalibrationEnCour() {
+        System.out.println(" preparer le canevas pour notre utilisation.");
+        echangeListeDrawable();
     }
 
     public void addControlleurListner(MondeDesFormeControllerListener Controller) {
