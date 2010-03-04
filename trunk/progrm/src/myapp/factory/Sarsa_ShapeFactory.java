@@ -4,6 +4,7 @@ import myapp.Sarsa.Sarsa_Shape;
 import myapp.Sarsa.Sarsa_StateFactory;
 
 import java.awt.Color;
+import myapp.model.Shape;
 import myapp.module.manager.*;
 
 
@@ -19,7 +20,6 @@ public class Sarsa_ShapeFactory extends ShapeFactory {
 
     //SarsaState Factory nécessaire pour créer des newShape
     static public Sarsa_StateFactory stateFactory = null;
-    static ArrayList<Sarsa_Shape> liste_de_shape = new ArrayList<Sarsa_Shape>();
     private static int nbr_Shape = 0;
 
     public Sarsa_ShapeFactory() {
@@ -29,6 +29,10 @@ public class Sarsa_ShapeFactory extends ShapeFactory {
 //        stateFactory.affichage_listeDesAction();
     }
 
+    public Sarsa_ShapeFactory(ArrayList<Shape> _listeDeShape) {
+        stateFactory = new Sarsa_StateFactory();
+        this.listeDeShape = _listeDeShape;
+    }
 
     /**
      * On cree des forme en fonction de parametre. en choisissant leur forme, leur comportement et leur couleur
@@ -67,13 +71,13 @@ public class Sarsa_ShapeFactory extends ShapeFactory {
                 nwModuleManager = new ModuleManagerType1(nwShape, Color.RED.getRGB());
                 break;
         }
-        
+
         VueForme nwVueForme = new VueForme(nwShape);
         nwShape.addFormeListener(nwVueForme);
         nwShape.setState(stateFactory.get_Sarsa_State_aleatoire());
         nwShape.setState();
         nwShape.poolModule = nwModuleManager;
-        liste_de_shape.add(nwShape);
+        listeDeShape.add(nwShape);
         return nwShape;
     }
 
@@ -82,7 +86,7 @@ public class Sarsa_ShapeFactory extends ShapeFactory {
      * @param type
      * @return
      */
-     public static Sarsa_Shape createShape(ShapeType type) {
+    public static Sarsa_Shape createShape(ShapeType type) {
 
         Sarsa_Shape nwShape = new Sarsa_Shape("Shape " + nbr_Shape++);
 
@@ -111,19 +115,20 @@ public class Sarsa_ShapeFactory extends ShapeFactory {
             case Type2:
                 nwModuleManager = new ModuleManagerType1(nwShape, Color.RED.getRGB());
                 break;
+            case STAND:
+                break;
         }
         nwShape.setState(stateFactory.get_Sarsa_State_aleatoire());
         VueForme nwVueForme = new VueForme(nwShape);
         nwShape.setState();
         nwShape.addFormeListener(nwVueForme);
         nwShape.poolModule = nwModuleManager;
-        liste_de_shape.add(nwShape);
+        listeDeShape.add(nwShape);
         return nwShape;
     }
 
-    public static ArrayList<Sarsa_Shape> getListe_de_shape() {
-        return liste_de_shape;
+    public static ArrayList<Shape> getListe_de_shape() {
+        return listeDeShape;
     }
-
 }
 
