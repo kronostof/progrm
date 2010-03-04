@@ -1,6 +1,7 @@
 package myapp.factory;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import myapp.model.Shape;
 import myapp.module.manager.ModuleManager;
 import myapp.module.manager.ModuleManagerApproche;
@@ -21,23 +22,29 @@ import drawing.shape.VueForme.ShapeForme;
 public class ShapeFactory {// extends AbstractShapeFactory{
 
     static protected ModuleManager nwModuleManager;
-    public static ShapeFactory instance = new ShapeFactory();
+    //public static ShapeFactory instance = new ShapeFactory();
+    public static ArrayList<Shape> listeDeShape = null;
+
+    public ShapeFactory(ArrayList<Shape> _listeDeShape) {
+        listeDeShape = _listeDeShape;
+    }
 
     public enum ShapeType {
 
         Gaze0,
         Type1, Type2,
         fuite0, Fuite1,
-        Approche0, Approche1
+        Approche0, Approche1,
+                STAND
     }
 
     public ShapeFactory() {
         nwModuleManager = null;
     }
 
-    public final synchronized static ShapeFactory getInstance() {
-        return instance;
-    }
+//    public final synchronized static ShapeFactory getInstance() {
+//        return instance;
+//    }
 
     /**
      * Creation des forme <p>
@@ -85,11 +92,13 @@ public class ShapeFactory {// extends AbstractShapeFactory{
         VueForme nwVueForme = new VueForme(nwShape);
         nwShape.addFormeListener(nwVueForme);
         nwShape.poolModule = nwModuleManager;
+        listeDeShape.add(nwShape);
+        System.out.println("bla" + listeDeShape.size());
         return nwShape;
     }
 
     public static Shape createShape(ShapeType type, ShapeForme forme) {
-
+        
         Shape nwShape = new Shape("nom" + System.currentTimeMillis());
 
         nwShape.setType(type);
@@ -131,6 +140,7 @@ public class ShapeFactory {// extends AbstractShapeFactory{
         VueForme nwVueForme = new VueForme(nwShape);
         nwShape.addFormeListener(nwVueForme);
         nwShape.poolModule = nwModuleManager;
+        listeDeShape.add(nwShape);
         return nwShape;
     }
 }
