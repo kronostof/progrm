@@ -44,18 +44,19 @@ public class FenetreDeStatistique implements Observer, ActionListener {
 
     public FenetreDeStatistique() {
         //<XXX
-        for (Sarsa_Shape shape : Sarsa_ShapeFactory.getListe_de_shape()) {
+        for (myapp.model.Shape shape : Sarsa_ShapeFactory.getListe_de_shape()) {
             if (!list_irepresanteble_pour_stat.contains(shape)) {
-                list_irepresanteble_pour_stat.add(shape);
+                list_irepresanteble_pour_stat.add((Sarsa_Shape)shape);
                 System.out.println(shape.getNom());
             }
         }
-        represanteble_pour_statObservé = Sarsa_ShapeFactory.getListe_de_shape().get(0);
+        represanteble_pour_statObservé = (Sarsa_Shape)Sarsa_ShapeFactory.getListe_de_shape().get(0);
         politiqueObservé = represanteble_pour_statObservé.getpolicy();
         politiqueObservé.addObserver(this);
 
         System.out.println(list_irepresanteble_pour_stat.size());
-        for (_i = 0 ; _i< Sarsa_StateFactory.Ensemble_Des_Etats.size();_i++) {
+        for (Sarsa_State a_State : Sarsa_StateFactory.getListeDesEtat()) {
+        //for (_i = 0 ; _i< Sarsa_StateFactory.Ensemble_Des_Etats.size();_i++) {
             arrayOf_progressBar.add(new JProgressBar(0, 100));
         }
         //XXX<

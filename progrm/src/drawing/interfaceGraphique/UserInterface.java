@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import myapp.controle.MondeDesFormeController;
 import drawing.JCanvas;
 import drawing.shape.VueForme;
+import myapp.calibration.Calibration;
 import myapp.model.NewMondeDesFormeModel;
 
 /**
@@ -30,6 +31,9 @@ public class UserInterface extends JFrame implements ActionListener {
     private JButton exit;
     private FlowLayout layout = null;
     Calibration m;
+    NewMondeDesFormeModel model;
+    MondeDesFormeController Controleur;
+    JCanvas Vue;
 
     public UserInterface() {
         super();
@@ -46,6 +50,11 @@ public class UserInterface extends JFrame implements ActionListener {
         this.setContentPane(getContainer());
         pack();
         setVisible(true);
+
+        Vue = new JCanvas();
+        VueForme.set(Vue);
+        model = new NewMondeDesFormeModel();
+        Controleur = new MondeDesFormeController(model, Vue);
     }
 
     public JPanel getContainer() {
@@ -82,10 +91,10 @@ public class UserInterface extends JFrame implements ActionListener {
 
 
         if (e.getSource() == mondeForme) {
-            JCanvas Vue = new JCanvas();
-            VueForme.set(Vue);
-            NewMondeDesFormeModel model = new NewMondeDesFormeModel();
-            MondeDesFormeController Controleur = new MondeDesFormeController(model, Vue);
+//            JCanvas Vue = new JCanvas();
+//            VueForme.set(Vue);
+//            NewMondeDesFormeModel model = new NewMondeDesFormeModel();
+//            MondeDesFormeController Controleur = new MondeDesFormeController(model, Vue);
             model.build(Controleur);
             new FenetreDeStatistique();
         }
@@ -100,7 +109,8 @@ public class UserInterface extends JFrame implements ActionListener {
      * Effectue une calibration.
      */
     private void Execute_calibration() {
-        System.err.println("PAS VRAIMENT IMPLEMENTE");
+        System.err.println("test de calibration");
+        new Calibration();
 //        try {
 //            send = new Send("ET_CAL" + "\n" + "\r", socket);
 //        } catch (IOException e1) {

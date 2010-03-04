@@ -35,6 +35,7 @@ public class Lecteur extends Thread {
     public Lecteur() {
         
         new CommunicationSMI();
+        CommunicationSMI.setMode("ENRECEPTION");
         if (CommunicationSMI.getFlux() == null) {
             System.out.println("le flux recupérer par le systeme smi est initialisé a null.");
             boolEchecSocket = true;
@@ -42,6 +43,7 @@ public class Lecteur extends Thread {
             this.start();
         } else {
             fluxdata = CommunicationSMI.getFlux();
+
         }
     }
 

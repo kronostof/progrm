@@ -48,7 +48,7 @@ public class Sarsa_Politique extends Observable {
                 HashQualityOfCoupleStatesAction.put(new Sarsa_CoupleStateAction(state, action), new Sarsa_Quality(0.5));
             }
         }
-        affiche_politique();
+        //affiche_politique();
     }
 
     // AFFICHAGE
