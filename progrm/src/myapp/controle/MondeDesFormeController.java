@@ -80,8 +80,10 @@ public class MondeDesFormeController implements MondeDesFormeControllerListener 
     public static void stopCalibration() {
         if (ENCALIBRATION) {
             ENCALIBRATION =false;
-            Vue.notifieCalibrationEnCour();
+            CommunicationSMI.stopCalibration();
             model.notifieCalibrationEnCour();
+            Vue.notifieCalibrationEnCour();
+            
         }
     }
 

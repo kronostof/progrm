@@ -1,15 +1,12 @@
 package myapp.communicationSocket;
 
-import java.awt.Point;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import myapp.controle.MondeDesFormeController;
-import myapp.event.Position;
 import myapp.flux.FluxPosition;
 import myapp.model.Shape;
-import myapp.factory.ShapeFactory;
 import myapp.factory.Sarsa_ShapeFactory;
 
 /**
@@ -38,20 +35,19 @@ public class CommunicationSMI extends Thread {
     static int nombre_instance_en_cours = 0;
     static private ClientUdp client = null;
     // faire passer la valeur de cette variable entre vrai et faux règle pas mal de probleme
-    static boolean ERREUR_COMMUNICATION_SMI = false;
+    static public boolean ERREUR_COMMUNICATION_SMI = false;
     private static boolean BRK = false;
     public static MODE mode;
     public static String chaine;
     private static Shape cursor;
 
-    public static String getMessageCalibration() {
-        return client.messageCalibration.toString() + "";
-    }
-
-    public static String getMessage() {
-        return client.message.toString();
-    }
-
+//    public static String getMessageCalibration() {
+//        return client.messageCalibration.toString() + "";
+//    }
+//
+//    public static String getMessage() {
+//        return client.message.toString();
+//    }
     public static void setMode(String str_mode) {
         inti_SMI();
         mode = MODE.valueOf(str_mode);
@@ -86,11 +82,11 @@ public class CommunicationSMI extends Thread {
 
             }
         } catch (SocketException ex) {
-            System.err.println("package org.myapp.communicationSocket\n|public CommunicationSMI()\n : Erreur de soquet");
+            System.err.println("package org.myapp.communicationSocket  =>  static init_SMI() \n : une instance de ce  programme est en cour d'execution ?");
             ERREUR_COMMUNICATION_SMI = true;
-        } catch (UnknownHostException ex) {
-            System.err.println("package org.myapp.communicationSocket\n|public CommunicationSMI()\n : Erreur : l'adresse de l'hote est inconu du systeme");
-            ERREUR_COMMUNICATION_SMI = true;
+//        } catch (UnknownHostException ex) {
+//            System.err.println("package org.myapp.communicationSocket\n|public CommunicationSMI()\n : Erreur : l'adresse de l'hote est inconu du systeme");
+//            ERREUR_COMMUNICATION_SMI = true;
         }
         mode = MODE.NONE;
     }
@@ -115,49 +111,15 @@ public class CommunicationSMI extends Thread {
                 switch (mode) {
                     case ENCALIBRATION:
                         System.out.println("MODE ENCALIBRATION");
-
-
                         client.write(new String("ET_CAL" + "\n\r"));
                         //client.receive();
                         //client.write(new String("ET_EST" + "\n\r"));
                         System.out.println("STREAMM OFFFFFFFFFFFFFFFFFFFFFFFFFFFn");
-
-
-
-//                        try {
-//                            synchronized (this) {
-//                                wait();
-//                            }
-//                            System.out.println("hello COMMUNICATIONSMI" );
-//                        } catch (InterruptedException ex) {
-//                            System.err.println("ERREUR good night" + ex);
-//                        }
                         while (mode == MODE.ENCALIBRATION) {
                             client.receive();
-//                            System.out.println(">> " + client.chaine_reçut);
-//                            System.out.println(">> " + client.getCalPointPosition());
                             cursor.setPosition(client.getCalPointPosition());
                         }
-//                        System.out.println(">> est t elle dac");
-//
-//                        // si on choisis une cal simple
-//
-//                        // si elle est dac, elle envoi sa configuration de calibration
-//                        while (ASLEEP) {
-//                            client.receive();
-//                            System.out.println(">> " + client.chaine_reçut);
-//                            System.out.println("|| position calibration" + client.getCalPoint());
-//                            //cursor.setPosition(new Position(client., CommunicationSMI.getCAL_Point().y));
-//                            if (BRK) {
-//                                BRK = false;
-//                                break;
-//                            }
-//                        }
-
-
-
                         System.out.println("STREAMM ONNNNNNNNNNNNNNNNNNNNNNNn");
-                        //client.write(new String("ET_STR" + "\n\r"));
                         MondeDesFormeController.stopCalibration();
 
                         break;
@@ -212,5 +174,11 @@ public class CommunicationSMI extends Thread {
         }
         setENCALIBRATION(true);
         BRK = true;
+    }
+
+    public static void stopCalibration() {
+        setENCALIBRATION(false);
+        mode = MODE.ENRECEPTION;
+
     }
 }
